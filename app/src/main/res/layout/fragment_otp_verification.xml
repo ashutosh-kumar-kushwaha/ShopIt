@@ -291,6 +291,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/resendOtpLL" />
 
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_138"
+                    android:layout_marginEnd="@dimen/dp_138"
+                    android:src="@drawable/shopit_black"
+                    android:layout_marginTop="@dimen/dp_119"
+                    android:layout_marginBottom="@dimen/dp_21"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/continueBtn"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
