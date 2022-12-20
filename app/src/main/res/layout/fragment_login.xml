@@ -11,12 +11,12 @@
             type="ashutosh.shopit.ui.auth.login.LoginViewModel" />
     </data>
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
 
-        <androidx.core.widget.NestedScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white">
@@ -250,20 +250,19 @@
 
                 </LinearLayout>
 
-
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.core.widget.NestedScrollView>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="@dimen/dp_31"
+                android:scaleType="fitStart"
+                android:src="@drawable/background_element" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="@dimen/dp_31"
-            android:scaleType="fitStart"
-            android:src="@drawable/background_element" />
-    </RelativeLayout>
+        </RelativeLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
 </layout>

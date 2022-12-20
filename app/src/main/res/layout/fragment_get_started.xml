@@ -176,12 +176,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/continueBtn" />
 
                 <TextView
-                    android:id="@+id/RegisterBtn"
+                    android:id="@+id/loginBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_4"
                     android:fontFamily="@font/montserrat"
-                    android:text="Register"
+                    android:text="Login"
                     android:textColor="@color/black"
                     android:textFontWeight="600"
                     android:textSize="@dimen/sp_12"

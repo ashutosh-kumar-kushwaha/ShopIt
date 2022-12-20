@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -34,11 +36,20 @@ class LoginFragment : Fragment() {
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestIdToken("1084765789984-87pi66fb0jaur5gphrf7tnck4p53pue6.apps.googleusercontent.com").build()
         gsc = GoogleSignIn.getClient(requireActivity(), gso)
 
         binding.googleBtn.setOnClickListener {
             signInWithGoogle()
+        }
+
+        binding.forgotPasswordBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+        }
+
+        binding.RegisterBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_getStartedFragment)
         }
 
         gsc.signOut()
