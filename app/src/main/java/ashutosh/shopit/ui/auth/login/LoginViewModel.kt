@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ashutosh.shopit.di.NetworkResult
 import ashutosh.shopit.models.LoginResponse
-import ashutosh.shopit.models.LoginUnsuccessfulResponse
 import ashutosh.shopit.repository.LoginRepository
 
 class LoginViewModel : ViewModel() {

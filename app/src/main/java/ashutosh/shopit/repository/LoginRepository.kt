@@ -7,35 +7,35 @@ import ashutosh.shopit.api.ServiceBuilder
 import ashutosh.shopit.di.NetworkResult
 import ashutosh.shopit.models.LoginRequest
 import ashutosh.shopit.models.LoginResponse
-import ashutosh.shopit.models.LoginUnsuccessfulResponse
 
 class LoginRepository {
     private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
 
     private val _loginResponseLiveData = MutableLiveData<NetworkResult<LoginResponse>>()
-    val loginResponseLiveData : LiveData<NetworkResult<LoginResponse>> get() = _loginResponseLiveData
+    val loginResponseLiveData: LiveData<NetworkResult<LoginResponse>> get() = _loginResponseLiveData
 
-    suspend fun login(email : String, password : String){
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> get() = _errorMessage
+
+    suspend fun login(email: String, password: String) {
         _loginResponseLiveData.postValue(NetworkResult.Loading())
-        try{
+        try {
             val response = retrofitAPI.login(LoginRequest(email, password))
-            if(response.code() == 200 && response.body() != null){
-                _loginResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
+            when (response.code()) {
+                200 -> {
+                    if(response.body()!=null){
+                        _loginResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
+                    }
+                }
+                404 -> _loginResponseLiveData.postValue(NetworkResult.Error("Invalid Email"))
+
+                400 -> _loginResponseLiveData.postValue(NetworkResult.Error("Invalid Format of email or password"))
+
+                401 -> _loginResponseLiveData.postValue(NetworkResult.Error("Wrong Password"))
+
+                else -> _loginResponseLiveData.postValue(NetworkResult.Error(response.code().toString()))
             }
-            else if(response.code() == 404 && response.errorBody() != null){
-                _loginResponseLiveData.postValue(NetworkResult.Error("Invalid Email"))
-            }
-            else if(response.code() == 400 && response.errorBody() != null){
-                _loginResponseLiveData.postValue(NetworkResult.Error("Invalid Format of email or password"))
-            }
-            else if(response.code() == 401 && response.errorBody() != null){
-                _loginResponseLiveData.postValue(NetworkResult.Error("Wrong Password"))
-            }
-            else{
-                _loginResponseLiveData.postValue(NetworkResult.Error("Something went wrong!!"))
-            }
-        }
-        catch(e : Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
 

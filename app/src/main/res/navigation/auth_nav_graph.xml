@@ -33,4 +33,8 @@
         android:name="ashutosh.shopit.ui.auth.forgotPassword.ForgotPasswordFragment"
         android:label="fragment_get_started"
         tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/otpVerificationFragment"
+        android:name="ashutosh.shopit.ui.auth.forgotPasswordOtpVerification.ForgotPasswordOtpVerificationFragment"
+        android:label="OtpVerificationFragment" />
 </navigation>

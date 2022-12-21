@@ -1,6 +1,6 @@
 package ashutosh.shopit.models
 
-data class LoginUnsuccessfulResponse(
+data class SignUpResponse(
     val message: String,
     val success: Boolean
 )

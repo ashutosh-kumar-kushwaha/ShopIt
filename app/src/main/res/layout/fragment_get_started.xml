@@ -113,6 +113,7 @@
                     android:background="@drawable/textbox_background"
                     android:paddingStart="@dimen/dp_11"
                     android:paddingEnd="@dimen/dp_11"
+                    android:text="@={viewModel.emailLiveData}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/signUpTxtVw" />
@@ -243,10 +244,8 @@
                 </LinearLayout>
                 
                 <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_138"
-                    android:layout_marginEnd="@dimen/dp_138"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_14"
                     android:src="@drawable/shopit_black"
                     android:layout_marginTop="@dimen/dp_14"
                     android:layout_marginBottom="@dimen/dp_21"
