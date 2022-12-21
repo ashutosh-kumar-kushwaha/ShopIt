@@ -14,9 +14,6 @@ class LoginRepository {
     private val _loginResponseLiveData = MutableLiveData<NetworkResult<LoginResponse>>()
     val loginResponseLiveData: LiveData<NetworkResult<LoginResponse>> get() = _loginResponseLiveData
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String> get() = _errorMessage
-
     suspend fun login(email: String, password: String) {
         _loginResponseLiveData.postValue(NetworkResult.Loading())
         try {
@@ -36,7 +33,7 @@ class LoginRepository {
                 else -> _loginResponseLiveData.postValue(NetworkResult.Error(response.code().toString()))
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            _loginResponseLiveData.value = NetworkResult.Error(e.message)
         }
 
     }

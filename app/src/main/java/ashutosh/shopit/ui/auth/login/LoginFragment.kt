@@ -129,6 +129,10 @@ class LoginFragment : Fragment() {
             }
         })
 
+        loginViewModel.errorMessage.observe(viewLifecycleOwner, Observer{
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        })
+
     }
 
     private fun getDialogueProgressBar(): AlertDialog.Builder {

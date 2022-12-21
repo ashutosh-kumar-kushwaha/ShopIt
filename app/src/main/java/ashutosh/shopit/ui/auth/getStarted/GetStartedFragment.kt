@@ -14,10 +14,12 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentGetStartedBinding
 import ashutosh.shopit.di.NetworkResult
+import kotlinx.coroutines.launch
 
 class GetStartedFragment : Fragment() {
 
@@ -45,6 +47,12 @@ class GetStartedFragment : Fragment() {
 
         binding.loginBtn.setOnClickListener {
             findNavController().navigate(R.id.action_getStartedFragment_to_loginFragment)
+        }
+
+        binding.continueBtn.setOnClickListener {
+            lifecycleScope.launch {
+                getStartedViewModel.signUpEmail()
+            }
         }
 
         return binding.root

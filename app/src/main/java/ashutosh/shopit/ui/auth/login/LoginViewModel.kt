@@ -13,6 +13,9 @@ class LoginViewModel : ViewModel() {
 
     val loginResponseLiveData : LiveData<NetworkResult<LoginResponse>> get() = loginRepository.loginResponseLiveData
 
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> get() = _errorMessage
+
     val emailLiveData = MutableLiveData("")
 
     val passwordLiveData = MutableLiveData("")

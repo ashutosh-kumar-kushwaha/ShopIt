@@ -14,9 +14,6 @@ class GetStartedRepository {
     private val _signUpEmailResponseLiveData = MutableLiveData<NetworkResult<SignUpResponse>>()
     val signUpEmailResponseLiveData : LiveData<NetworkResult<SignUpResponse>> get() = _signUpEmailResponseLiveData
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage : LiveData<String> get()= _errorMessage
-
     suspend fun signUpEmail(email : String){
         _signUpEmailResponseLiveData.value = NetworkResult.Loading()
         try{
@@ -33,7 +30,7 @@ class GetStartedRepository {
             }
         }
         catch (e : Exception){
-            _errorMessage.value = e.message
+            _signUpEmailResponseLiveData.value = NetworkResult.Error(e.message)
         }
     }
 
