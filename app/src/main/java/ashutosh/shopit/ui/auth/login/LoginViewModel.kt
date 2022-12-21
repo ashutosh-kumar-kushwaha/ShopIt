@@ -14,9 +14,9 @@ class LoginViewModel : ViewModel() {
 
     val loginResponseLiveData : LiveData<NetworkResult<LoginResponse>> get() = loginRepository.loginResponseLiveData
 
-    val emailLiveData = MutableLiveData<String>()
+    val emailLiveData = MutableLiveData("")
 
-    val passwordLiveData = MutableLiveData<String>()
+    val passwordLiveData = MutableLiveData("")
 
     suspend fun login(){
         loginRepository.login(emailLiveData.value!!, passwordLiveData.value!!)
