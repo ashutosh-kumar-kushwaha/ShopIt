@@ -1,18 +1,27 @@
 package ashutosh.shopit.ui.auth.login
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentLoginBinding
+import ashutosh.shopit.di.NetworkResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -20,14 +29,21 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
     private var _binding : FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
+    private val loginViewModel by viewModels<LoginViewModel>()
+
     private lateinit var gso : GoogleSignInOptions
     private lateinit var gsc : GoogleSignInClient
+
+    private lateinit var progressBar: AlertDialog
+    private var builder: AlertDialog.Builder? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +52,13 @@ class LoginFragment : Fragment() {
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        binding.viewModel = loginViewModel
+
+        progressBar = getDialogueProgressBar().create()
+        progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressBar.setCanceledOnTouchOutside(false)
 
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestIdToken("1084765789984-87pi66fb0jaur5gphrf7tnck4p53pue6.apps.googleusercontent.com").build()
         gsc = GoogleSignIn.getClient(requireActivity(), gso)
@@ -53,6 +76,12 @@ class LoginFragment : Fragment() {
         }
 
         gsc.signOut()
+
+        binding.continueBtn.setOnClickListener {
+            lifecycleScope.launch{
+                loginViewModel.login()
+            }
+        }
 
         return binding.root
     }
@@ -73,22 +102,6 @@ class LoginFragment : Fragment() {
                 val account = GoogleSignIn.getLastSignedInAccount(requireContext())
 
                 Toast.makeText(requireContext(), account?.givenName, Toast.LENGTH_SHORT).show()
-                val token = account?.idToken
-                val id = account?.id
-
-                if (token != null) {
-                    Log.d("Ashu", token)
-                }
-                else{
-                    Log.d("Ashu", "null")
-                }
-
-                if (id != null) {
-                    Log.d("Ashu", id)
-                }
-                else{
-                    Log.d("Ashu", "null")
-                }
 
             }
             catch (e : Exception){
@@ -101,9 +114,46 @@ class LoginFragment : Fragment() {
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        loginViewModel.loginResponseLiveData.observe(viewLifecycleOwner, Observer{
+            when(it){
+                is NetworkResult.Success -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), "Hello ${it.data?.firstname}", Toast.LENGTH_SHORT).show()
+                }
+
+                is NetworkResult.Error -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+
+                is NetworkResult.Loading -> {
+                    progressBar.show()
+                }
+            }
+        })
+
+    }
+
+    private fun getDialogueProgressBar(): AlertDialog.Builder {
+        if (builder == null) {
+            builder = AlertDialog.Builder(binding.root.context)
+            val progressBar = ProgressBar(binding.root.context)
+            val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            progressBar.layoutParams = lp
+            builder!!.setView(progressBar)
+        }
+        return builder as AlertDialog.Builder
+    }
 
 
-    override fun onDestroyView() {
+
+        override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
