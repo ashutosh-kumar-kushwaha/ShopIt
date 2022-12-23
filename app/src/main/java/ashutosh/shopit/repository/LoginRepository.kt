@@ -1,5 +1,6 @@
 package ashutosh.shopit.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ashutosh.shopit.api.RetrofitAPI
@@ -24,7 +25,7 @@ class LoginRepository {
                         _loginResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
                     }
                 }
-                404 -> _loginResponseLiveData.postValue(NetworkResult.Error("Invalid Email"))
+                404 -> _loginResponseLiveData.postValue(NetworkResult.Error("User does not exist"))
 
                 400 -> _loginResponseLiveData.postValue(NetworkResult.Error("Invalid Format of email or password"))
 

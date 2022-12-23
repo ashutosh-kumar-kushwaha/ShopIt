@@ -1,6 +1,7 @@
 package ashutosh.shopit.ui.auth.forgotPassword
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -14,7 +15,9 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import ashutosh.shopit.databinding.FragmentForgotPasswordBinding
+import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.ui.auth.AuthenticationActivity
 
 class ForgotPasswordFragment : Fragment() {
 
@@ -23,8 +26,9 @@ class ForgotPasswordFragment : Fragment() {
 
     private val forgotPasswordViewModel by viewModels<ForgotPasswordViewModel>()
 
-    private lateinit var progressBar: AlertDialog
-    private var builder: AlertDialog.Builder? = null
+    private lateinit var progressBar: Dialog
+    private var _progressBarBinding : ProgressBarBinding? = null
+    private val progressBarBinding get() = _progressBarBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,25 +40,13 @@ class ForgotPasswordFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = forgotPasswordViewModel
 
-        progressBar = getDialogueProgressBar().create()
+        _progressBarBinding = ProgressBarBinding.inflate(layoutInflater)
+        progressBar = Dialog(binding.root.context)
+        progressBar.setContentView(progressBarBinding.root)
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
 
         return binding.root
-    }
-
-    private fun getDialogueProgressBar(): AlertDialog.Builder {
-        if (builder == null) {
-            builder = AlertDialog.Builder(binding.root.context)
-            val progressBar = ProgressBar(binding.root.context)
-            val lp = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            progressBar.layoutParams = lp
-            builder!!.setView(progressBar)
-        }
-        return builder as AlertDialog.Builder
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,5 +75,6 @@ class ForgotPasswordFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        _progressBarBinding = null
     }
 }

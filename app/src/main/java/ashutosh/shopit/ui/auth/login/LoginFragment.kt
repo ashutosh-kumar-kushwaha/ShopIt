@@ -2,6 +2,7 @@ package ashutosh.shopit.ui.auth.login
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -19,6 +20,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentLoginBinding
+import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.di.NetworkResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -36,8 +38,9 @@ class LoginFragment : Fragment() {
     private lateinit var gso : GoogleSignInOptions
     private lateinit var gsc : GoogleSignInClient
 
-    private lateinit var progressBar: AlertDialog
-    private var builder: AlertDialog.Builder? = null
+    private lateinit var progressBar: Dialog
+    private var _progressBarBinding : ProgressBarBinding? = null
+    private val progressBarBinding get() = _progressBarBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,10 +50,11 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = viewLifecycleOwner
-
         binding.viewModel = loginViewModel
 
-        progressBar = getDialogueProgressBar().create()
+        _progressBarBinding = ProgressBarBinding.inflate(layoutInflater)
+        progressBar = Dialog(binding.root.context)
+        progressBar.setContentView(progressBarBinding.root)
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
 
@@ -135,25 +139,10 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun getDialogueProgressBar(): AlertDialog.Builder {
-        if (builder == null) {
-            builder = AlertDialog.Builder(binding.root.context)
-            val progressBar = ProgressBar(binding.root.context)
-            val lp = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            progressBar.layoutParams = lp
-            builder!!.setView(progressBar)
-        }
-        return builder as AlertDialog.Builder
-    }
-
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        _progressBarBinding = null
     }
 
 

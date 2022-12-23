@@ -52,7 +52,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/shopItLogo" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailETxt"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_47"
@@ -66,7 +66,9 @@
                     android:background="@drawable/textbox_background"
                     android:paddingStart="@dimen/dp_11"
                     android:paddingEnd="@dimen/dp_11"
+                    android:textCursorDrawable="@null"
                     android:text="@={viewModel.emailLiveData}"
+                    android:maxLines="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/letsSignInTxtVw" />
@@ -77,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_7"
                     android:fontFamily="@font/montserrat"
-                    android:text="Email/Phone No."
+                    android:text="Email"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     app:layout_constraintBottom_toTopOf="@+id/emailETxt"
@@ -108,11 +110,15 @@
                         android:inputType="textPassword"
                         android:gravity="center_vertical"
                         android:fontFamily="@font/montserrat"
+                        android:paddingBottom="0dp"
+                        android:paddingTop="0dp"
                         android:textSize="@dimen/sp_12"
                         android:text="@={viewModel.passwordLiveData}"
+                        android:textCursorDrawable="@null"
                         android:background="@drawable/textbox_background"
                         android:paddingStart="@dimen/dp_11"
-                        android:paddingEnd="@dimen/dp_11" />
+                        android:paddingEnd="@dimen/dp_11"
+                        android:maxLines="1"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
