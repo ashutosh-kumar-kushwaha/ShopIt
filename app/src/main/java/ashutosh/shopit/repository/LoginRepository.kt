@@ -31,7 +31,7 @@ class LoginRepository {
 
                 401 -> _loginResponseLiveData.postValue(NetworkResult.Error("Wrong Password"))
 
-                else -> _loginResponseLiveData.postValue(NetworkResult.Error(response.code().toString()))
+                else -> _loginResponseLiveData.postValue(NetworkResult.Error("Something went wrong\nError code : ${response.code()}"))
             }
         } catch (e: Exception) {
             _loginResponseLiveData.value = NetworkResult.Error(e.message)

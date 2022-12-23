@@ -105,11 +105,7 @@ class LoginFragment : Fragment() {
             catch (e : Exception){
                 Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
             }
-
-
         }
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -32,9 +32,21 @@
         android:id="@+id/forgotPasswordFragment"
         android:name="ashutosh.shopit.ui.auth.forgotPassword.ForgotPasswordFragment"
         android:label="fragment_get_started"
-        tools:layout="@layout/fragment_forgot_password" />
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_forgotPasswordOtpVerificationFragment"
+            app:destination="@id/forgotPasswordOtpVerificationFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/otpVerificationFragment"
+        android:id="@+id/forgotPasswordOtpVerificationFragment"
         android:name="ashutosh.shopit.ui.auth.forgotPasswordOtpVerification.ForgotPasswordOtpVerificationFragment"
+        android:label="OtpVerificationFragment" >
+        <action
+            android:id="@+id/action_forgotPasswordOtpVerificationFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="ashutosh.shopit.ui.auth.resetPassword.ResetPasswordFragment"
         android:label="OtpVerificationFragment" />
 </navigation>

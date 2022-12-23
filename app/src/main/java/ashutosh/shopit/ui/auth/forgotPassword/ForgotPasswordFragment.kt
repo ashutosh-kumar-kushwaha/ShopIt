@@ -14,10 +14,14 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentForgotPasswordBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.di.NetworkResult
 import ashutosh.shopit.ui.auth.AuthenticationActivity
+import kotlinx.coroutines.launch
 
 class ForgotPasswordFragment : Fragment() {
 
@@ -46,6 +50,12 @@ class ForgotPasswordFragment : Fragment() {
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
 
+        binding.continueBtn.setOnClickListener {
+            lifecycleScope.launch {
+                forgotPasswordViewModel.forgotPassword()
+            }
+        }
+
         return binding.root
     }
 
@@ -56,7 +66,9 @@ class ForgotPasswordFragment : Fragment() {
             when(it){
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
-                    //navigate to next fragment
+                    val bundle = Bundle()
+                    bundle.putString("email", forgotPasswordViewModel.emailLiveData.value!!)
+                    findNavController().navigate(R.id.action_forgotPasswordFragment_to_forgotPasswordOtpVerificationFragment, bundle)
                 }
                 is NetworkResult.Error -> {
                     progressBar.dismiss()

@@ -8,6 +8,10 @@ import ashutosh.shopit.R
 import ashutosh.shopit.ui.auth.login.LoginFragment
 
 class AuthenticationActivity : AppCompatActivity() {
+
+    var email = ""
+    var otp = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authentication)

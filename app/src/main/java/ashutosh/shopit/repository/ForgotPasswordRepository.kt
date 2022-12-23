@@ -6,13 +6,13 @@ import ashutosh.shopit.api.RetrofitAPI
 import ashutosh.shopit.api.ServiceBuilder
 import ashutosh.shopit.di.NetworkResult
 import ashutosh.shopit.models.Email
-import ashutosh.shopit.models.SignUpResponse
+import ashutosh.shopit.models.DefaultResponse
 
 class ForgotPasswordRepository {
     private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
 
-    private val _forgotPasswordResponseLiveData = MutableLiveData<NetworkResult<SignUpResponse>>()
-    val forgotPasswordResponseLiveData : LiveData<NetworkResult<SignUpResponse>> get() = _forgotPasswordResponseLiveData
+    private val _forgotPasswordResponseLiveData = MutableLiveData<NetworkResult<DefaultResponse>>()
+    val forgotPasswordResponseLiveData : LiveData<NetworkResult<DefaultResponse>> get() = _forgotPasswordResponseLiveData
 
     suspend fun forgotPassword(email : String){
         _forgotPasswordResponseLiveData.value = NetworkResult.Loading()
@@ -24,9 +24,9 @@ class ForgotPasswordRepository {
                         _forgotPasswordResponseLiveData.value = NetworkResult.Success(response.body()!!)
                     }
                 }
+                400 -> _forgotPasswordResponseLiveData.value = NetworkResult.Error("Invalid Action")
                 404 -> _forgotPasswordResponseLiveData.value = NetworkResult.Error("No user with this email is found")
-
-                else -> _forgotPasswordResponseLiveData.value = NetworkResult.Error("Something went wrong\nError code : "+ response.code().toString())
+                else -> _forgotPasswordResponseLiveData.value = NetworkResult.Error("Something went wrong\nError code : ${response.code()}")
             }
         }
         catch (e : Exception){

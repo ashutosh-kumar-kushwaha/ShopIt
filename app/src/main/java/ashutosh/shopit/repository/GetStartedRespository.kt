@@ -6,13 +6,13 @@ import ashutosh.shopit.api.RetrofitAPI
 import ashutosh.shopit.api.ServiceBuilder
 import ashutosh.shopit.di.NetworkResult
 import ashutosh.shopit.models.Email
-import ashutosh.shopit.models.SignUpResponse
+import ashutosh.shopit.models.DefaultResponse
 
 class GetStartedRepository {
     private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
 
-    private val _signUpEmailResponseLiveData = MutableLiveData<NetworkResult<SignUpResponse>>()
-    val signUpEmailResponseLiveData : LiveData<NetworkResult<SignUpResponse>> get() = _signUpEmailResponseLiveData
+    private val _signUpEmailResponseLiveData = MutableLiveData<NetworkResult<DefaultResponse>>()
+    val signUpEmailResponseLiveData : LiveData<NetworkResult<DefaultResponse>> get() = _signUpEmailResponseLiveData
 
     suspend fun signUpEmail(email : String){
         _signUpEmailResponseLiveData.value = NetworkResult.Loading()
@@ -26,7 +26,8 @@ class GetStartedRepository {
                 }
                 400 -> _signUpEmailResponseLiveData.value = NetworkResult.Error("Email a valid email")
                 409 -> _signUpEmailResponseLiveData.value = NetworkResult.Error("User Already Exist")
-                else -> _signUpEmailResponseLiveData.value = NetworkResult.Error(response.code().toString())
+                503 -> _signUpEmailResponseLiveData.value = NetworkResult.Error("Unable to make your request")
+                else -> _signUpEmailResponseLiveData.value = NetworkResult.Error("Something went wrong\nError code: ${response.code()}")
             }
         }
         catch (e : Exception){
