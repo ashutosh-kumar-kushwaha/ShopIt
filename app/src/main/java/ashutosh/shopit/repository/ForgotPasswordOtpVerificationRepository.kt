@@ -1,5 +1,6 @@
 package ashutosh.shopit.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ashutosh.shopit.api.RetrofitAPI
@@ -24,7 +25,8 @@ class ForgotPasswordOtpVerificationRepository {
                         _responseLiveData.value = NetworkResult.Success(response.body()!!)
                     }
                 }
-                400 -> _responseLiveData.value = NetworkResult.Error("Wrong OTP")
+                400 -> _responseLiveData.value = NetworkResult.Error("Invalid Action")
+                406 -> _responseLiveData.value = NetworkResult.Error("Wrong OTP")
                 408 -> _responseLiveData.value = NetworkResult.Error("Session Time-out\nPlease Try Again")
                 else -> _responseLiveData.value = NetworkResult.Error("Something went wrong\nError code: ${response.code()}")
             }

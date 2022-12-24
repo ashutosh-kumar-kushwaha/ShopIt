@@ -2,7 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="ashutosh.shopit.ui.auth.signUp.SignUpViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView

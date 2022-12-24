@@ -17,9 +17,9 @@ class AuthenticationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authentication)
 
-        val fm = supportFragmentManager
-        val ft = fm.beginTransaction()
-        ft.add(R.id.fragmentContainer, ForgotPasswordOtpVerificationFragment())
-        ft.commit()
+//        val fm = supportFragmentManager
+//        val ft = fm.beginTransaction()
+//        ft.add(R.id.fragmentContainer, ForgotPasswordOtpVerificationFragment())
+//        ft.commit()
     }
 }

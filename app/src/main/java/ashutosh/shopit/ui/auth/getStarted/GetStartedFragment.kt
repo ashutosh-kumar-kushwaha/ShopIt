@@ -70,7 +70,9 @@ class GetStartedFragment : Fragment() {
             when(it){
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
-                    //Navigate to otp verification
+                    val bundle = Bundle()
+                    bundle.putString("email", getStartedViewModel.emailLiveData.value)
+                    findNavController().navigate(R.id.action_getStartedFragment_to_signUpOtpVerificationFragment, bundle)
                 }
                 is NetworkResult.Error -> {
                     progressBar.dismiss()
