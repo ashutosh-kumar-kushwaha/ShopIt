@@ -48,7 +48,11 @@ class ForgotPasswordOtpVerificationFragment : Fragment() {
 
         _binding = FragmentForgotPasswordOtpVerificationBinding.inflate(inflater, container, false)
 
-        _forgotPasswordOtpVerificationViewModel = ViewModelProvider(viewModelStore, FPOtpVerifyViewModelFactory(""))[ForgotPasswordOtpVerificationViewModel::class.java]
+        if(arguments?.getString("email") != null){
+            email = arguments?.getString("email")!!
+        }
+
+        _forgotPasswordOtpVerificationViewModel = ViewModelProvider(viewModelStore, FPOtpVerifyViewModelFactory(email))[ForgotPasswordOtpVerificationViewModel::class.java]
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = forgotPasswordOtpVerificationViewModel
@@ -61,7 +65,7 @@ class ForgotPasswordOtpVerificationFragment : Fragment() {
 
         binding.continueBtn.setOnClickListener {
             lifecycleScope.launch {
-                forgotPasswordOtpVerificationViewModel.verifyForgotPasswordOtp(email)
+                forgotPasswordOtpVerificationViewModel.verifyForgotPasswordOtp()
             }
         }
 
@@ -71,16 +75,12 @@ class ForgotPasswordOtpVerificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(arguments?.getString("email") != null){
-            email = arguments?.getString("email")!!
-        }
-
         forgotPasswordOtpVerificationViewModel.responseLiveData.observe(viewLifecycleOwner, Observer {
             when(it){
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
                     val bundle = Bundle()
-                    bundle.putString("email", email)
+                    bundle.putString("email", forgotPasswordOtpVerificationViewModel.email)
                     bundle.putString("otp", forgotPasswordOtpVerificationViewModel.otp)
                     findNavController().navigate(R.id.action_forgotPasswordOtpVerificationFragment_to_resetPasswordFragment, bundle)
                 }

@@ -16,8 +16,8 @@ class ForgotPasswordRepository {
 
     suspend fun forgotPassword(email : String){
         _forgotPasswordResponseLiveData.value = NetworkResult.Loading()
-        val response = retrofitAPI.forgotPassword(Email(email))
         try{
+            val response = retrofitAPI.forgotPassword(Email(email))
             when(response.code()){
                 200 -> {
                     if(response.body() != null){

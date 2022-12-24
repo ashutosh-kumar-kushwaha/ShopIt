@@ -17,4 +17,7 @@ interface RetrofitAPI {
 
     @POST("api/auth/verifyPassOtp")
     suspend fun verifyForgotPasswordOtp(@Body verifyForgotPasswordOtpRequest: VerifyForgotPasswordOtpRequest) : Response<DefaultResponse>
+
+    @POST("api/auth/resetpass")
+    suspend fun resetPassword(@Body resetPasswordRequest: ResetPasswordRequest) : Response<DefaultResponse>
  }

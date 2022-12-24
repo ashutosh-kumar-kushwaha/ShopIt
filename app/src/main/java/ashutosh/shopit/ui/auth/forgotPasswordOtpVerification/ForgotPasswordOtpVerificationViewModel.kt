@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ashutosh.shopit.repository.ForgotPasswordOtpVerificationRepository
 
-class ForgotPasswordOtpVerificationViewModel : ViewModel() {
+class ForgotPasswordOtpVerificationViewModel(val email : String) : ViewModel() {
 
     private val forgotPasswordOtpVerificationRepository = ForgotPasswordOtpVerificationRepository()
 
@@ -23,7 +23,7 @@ class ForgotPasswordOtpVerificationViewModel : ViewModel() {
 
     var otp : String = ""
 
-    suspend fun verifyForgotPasswordOtp(email : String){
+    suspend fun verifyForgotPasswordOtp(){
         otp = "${otp1LiveData.value}${otp2LiveData.value}${otp3LiveData.value}${otp4LiveData.value}${otp5LiveData.value}${otp6LiveData.value}"
         forgotPasswordOtpVerificationRepository.verifyForgetPasswordOtp(email, otp)
     }

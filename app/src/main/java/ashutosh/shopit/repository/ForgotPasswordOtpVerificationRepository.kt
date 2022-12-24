@@ -16,8 +16,8 @@ class ForgotPasswordOtpVerificationRepository {
 
     suspend fun verifyForgetPasswordOtp(email : String, otp : String){
         _responseLiveData.value = NetworkResult.Loading()
-        val response = retrofitAPI.verifyForgotPasswordOtp(VerifyForgotPasswordOtpRequest(email, otp))
         try{
+            val response = retrofitAPI.verifyForgotPasswordOtp(VerifyForgotPasswordOtpRequest(email, otp))
             when(response.code()){
                 200 -> {
                     if(response.body() != null){
