@@ -49,6 +49,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/selectGenderTxtVw">
 
                     <ImageView
+                        android:id="@+id/manImgVw"
                         android:layout_width="wrap_content"
                         android:adjustViewBounds="true"
                         android:layout_height="@dimen/dp_140"
@@ -60,6 +61,7 @@
                         android:layout_weight="1"/>
 
                     <ImageView
+                        android:id="@+id/womanImgVw"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_140"
                         android:adjustViewBounds="true"
@@ -117,6 +119,7 @@
                     android:textColor="@color/color2"
                     android:textSize="@dimen/sp_12"
                     android:hint="First name"
+                    android:text="@={viewModel.firstNameLiveData}"
                     android:paddingStart="@dimen/dp_11"
                     android:textCursorDrawable="@null"
                     android:paddingEnd="@dimen/dp_11"
@@ -131,6 +134,7 @@
                         android:textColor="@color/color2"
                         android:textSize="@dimen/sp_12"
                         android:hint="Last name"
+                        android:text="@={viewModel.lastNameLiveData}"
                         android:paddingStart="@dimen/dp_11"
                         android:layout_marginStart="@dimen/dp_12"
                         android:textCursorDrawable="@null"
@@ -180,6 +184,7 @@
                     android:textSize="@dimen/sp_12"
                     android:textColor="@color/color2"
                     android:hint="Password"
+                    android:text="@={viewModel.password1LiveData}"
                     android:paddingStart="@dimen/dp_14"
                     android:drawablePadding="@dimen/dp_14"
                     app:layout_constraintStart_toStartOf="parent"
@@ -199,6 +204,7 @@
                     android:textSize="@dimen/sp_12"
                     android:textColor="@color/color2"
                     android:hint="Confirm Password"
+                    android:text="@{viewModel.password2LiveData}"
                     android:paddingStart="@dimen/dp_14"
                     android:drawablePadding="@dimen/dp_14"
                     app:layout_constraintStart_toStartOf="parent"

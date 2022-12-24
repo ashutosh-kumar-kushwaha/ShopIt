@@ -8,11 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentSignUpBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
+import ashutosh.shopit.di.NetworkResult
 import ashutosh.shopit.ui.auth.getStarted.GetStartedViewModel
 
 class SignUpFragment : Fragment() {
@@ -59,6 +62,47 @@ class SignUpFragment : Fragment() {
 //        signUpViewModel.email = arguments?.getString("email")
 //        signUpViewModel.otp = arguments?.getString("otp")
 
+        binding.manImgVw.setOnClickListener {
+            signUpViewModel.gender = "m"
+            it.setBackgroundResource(R.drawable.man_selected)
+            binding.womanImgVw.setBackgroundResource(R.drawable.woman)
+        }
+
+        binding.womanImgVw.setOnClickListener {
+            signUpViewModel.gender = "f"
+            it.setBackgroundResource(R.drawable.women_selected)
+            binding.manImgVw.setBackgroundResource(R.drawable.man)
+        }
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        signUpViewModel.signUpResponseLiveData.observe(viewLifecycleOwner, Observer{
+            when(it){
+                is NetworkResult.Success -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Error -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> {
+                    progressBar.show()
+                }
+            }
+        })
+
+        signUpViewModel.errorMessage.observe(viewLifecycleOwner, Observer{
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+        _progressBarBinding = null
     }
 }
