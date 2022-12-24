@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import ashutosh.shopit.GenericTextWatcher
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentForgotPasswordOtpVerificationBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
@@ -68,6 +69,14 @@ class ForgotPasswordOtpVerificationFragment : Fragment() {
                 forgotPasswordOtpVerificationViewModel.verifyForgotPasswordOtp()
             }
         }
+
+        binding.otpETxt1.addTextChangedListener(GenericTextWatcher(binding.otpETxt1, null, binding.otpETxt2))
+        binding.otpETxt2.addTextChangedListener(GenericTextWatcher(binding.otpETxt2, binding.otpETxt1, binding.otpETxt3))
+        binding.otpETxt3.addTextChangedListener(GenericTextWatcher(binding.otpETxt3, binding.otpETxt2, binding.otpETxt4))
+        binding.otpETxt4.addTextChangedListener(GenericTextWatcher(binding.otpETxt4, binding.otpETxt3, binding.otpETxt5))
+        binding.otpETxt5.addTextChangedListener(GenericTextWatcher(binding.otpETxt5, binding.otpETxt4, binding.otpETxt6))
+        binding.otpETxt6.addTextChangedListener(GenericTextWatcher(binding.otpETxt6, binding.otpETxt5, null))
+
 
         return binding.root
     }
