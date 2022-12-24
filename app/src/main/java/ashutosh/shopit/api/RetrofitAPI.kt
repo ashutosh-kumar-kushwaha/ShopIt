@@ -23,4 +23,7 @@ interface RetrofitAPI {
 
     @POST("api/auth/verifyotp")
     suspend fun verifySignUpOtp(@Body verifySignUpOtpRequest: VerifyOtpRequest) : Response<DefaultResponse>
+
+    @POST("api/auth/signupUser/user")
+    suspend fun signUp(@Body signUpRequest: SignUpRequest) : Response<DefaultResponse>
  }

@@ -40,8 +40,7 @@ class ResetPasswordFragment : Fragment() {
     ): View? {
         
         _binding = FragmentResetPasswordBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = resetPasswordViewModel
+
 
         if(arguments?.getString("email") != null){
             email = arguments?.getString("email")!!
@@ -51,6 +50,9 @@ class ResetPasswordFragment : Fragment() {
         }
 
         _resetPasswordViewModel = ViewModelProvider(viewModelStore, ResetPasswordViewModelFactory(email, otp))[ResetPasswordViewModel::class.java]
+
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = resetPasswordViewModel
 
         _progressBarBinding = ProgressBarBinding.inflate(layoutInflater)
         progressBar = Dialog(binding.root.context)

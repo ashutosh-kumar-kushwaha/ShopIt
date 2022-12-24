@@ -12,11 +12,13 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentSignUpBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.di.NetworkResult
 import ashutosh.shopit.ui.auth.getStarted.GetStartedViewModel
+import kotlinx.coroutines.launch
 
 class SignUpFragment : Fragment() {
 
@@ -74,6 +76,12 @@ class SignUpFragment : Fragment() {
             binding.manImgVw.setBackgroundResource(R.drawable.man)
         }
 
+        binding.createAccountBtn.setOnClickListener{
+            lifecycleScope.launch {
+                signUpViewModel.signUp()
+            }
+        }
+
         return binding.root
     }
 
@@ -83,7 +91,7 @@ class SignUpFragment : Fragment() {
             when(it){
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_SHORT).show()
                 }
                 is NetworkResult.Error -> {
                     progressBar.dismiss()
