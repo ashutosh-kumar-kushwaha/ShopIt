@@ -27,6 +27,9 @@
             app:popUpToInclusive="true"
             app:popUpTo="@id/loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_getStartedFragment_to_signUpOtpVerificationFragment"
+            app:destination="@id/signUpOtpVerificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -40,7 +43,8 @@
     <fragment
         android:id="@+id/forgotPasswordOtpVerificationFragment"
         android:name="ashutosh.shopit.ui.auth.forgotPasswordOtpVerification.ForgotPasswordOtpVerificationFragment"
-        android:label="OtpVerificationFragment" >
+        tools:layout="@layout/fragment_forgot_password_otp_verification"
+        android:label="ForgotPasswordOtpVerificationFragment">
         <action
             android:id="@+id/action_forgotPasswordOtpVerificationFragment_to_resetPasswordFragment"
             app:destination="@id/resetPasswordFragment" />
@@ -48,5 +52,20 @@
     <fragment
         android:id="@+id/resetPasswordFragment"
         android:name="ashutosh.shopit.ui.auth.resetPassword.ResetPasswordFragment"
-        android:label="OtpVerificationFragment" />
+        tools:layout="@layout/fragment_reset_password"
+        android:label="ResetPasswordFragment" />
+    <fragment
+        android:id="@+id/signUpOtpVerificationFragment"
+        android:name="ashutosh.shopit.ui.auth.signUpOtpVerification.SignUpOtpVerificationFragment"
+        tools:layout="@layout/fragment_sign_up_otp_verification"
+        android:label="SignUpOtpVerificationFragment" >
+        <action
+            android:id="@+id/action_signUpOtpVerificationFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="ashutosh.shopit.ui.auth.signUp.SignUpFragment"
+        tools:layout="@layout/fragment_sign_up"
+        android:label="SignUpFragment" />
 </navigation>

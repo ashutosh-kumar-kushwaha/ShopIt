@@ -1,6 +1,5 @@
-package ashutosh.shopit.ui.auth.forgotPasswordOtpVerification
+package ashutosh.shopit.ui.auth.signUpOtpVerification
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,31 +8,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentForgotPasswordOtpVerificationBinding
+import ashutosh.shopit.databinding.FragmentSignUpOtpVerificationBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.di.NetworkResult
-import ashutosh.shopit.ui.auth.AuthenticationActivity
+import ashutosh.shopit.ui.auth.forgotPasswordOtpVerification.ForgotPasswordOtpVerificationViewModel
 import kotlinx.coroutines.launch
 
-class ForgotPasswordOtpVerificationFragment : Fragment() {
+class SignUpOtpVerificationFragment : Fragment() {
 
-    private var _binding : FragmentForgotPasswordOtpVerificationBinding? = null
-    private val binding : FragmentForgotPasswordOtpVerificationBinding get() = _binding!!
+    private var _binding : FragmentSignUpOtpVerificationBinding? = null
+    private val binding : FragmentSignUpOtpVerificationBinding get() = _binding!!
 
-//    private val forgotPasswordOtpVerificationViewModel by viewModels<ForgotPasswordOtpVerificationViewModel>()
-    private var _forgotPasswordOtpVerificationViewModel : ForgotPasswordOtpVerificationViewModel? = null
-    private val forgotPasswordOtpVerificationViewModel : ForgotPasswordOtpVerificationViewModel get() = _forgotPasswordOtpVerificationViewModel!!
-
+    private var _signUpOtpVerificationViewModel : SignUpOtpVerificationViewModel? = null
+    private val signUpOtpVerificationViewModel : SignUpOtpVerificationViewModel get() = _signUpOtpVerificationViewModel!!
 
     private lateinit var progressBar: Dialog
     private var _progressBarBinding : ProgressBarBinding? = null
@@ -46,16 +40,16 @@ class ForgotPasswordOtpVerificationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentForgotPasswordOtpVerificationBinding.inflate(inflater, container, false)
+        _binding = FragmentSignUpOtpVerificationBinding.inflate(inflater, container, false)
 
         if(arguments?.getString("email") != null){
             email = arguments?.getString("email")!!
         }
 
-        _forgotPasswordOtpVerificationViewModel = ViewModelProvider(viewModelStore, FPOtpVerifyViewModelFactory(email))[ForgotPasswordOtpVerificationViewModel::class.java]
+        _signUpOtpVerificationViewModel = ViewModelProvider(viewModelStore, SignUpOtpVerificationViewModelFactory(email))[SignUpOtpVerificationViewModel::class.java]
 
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = forgotPasswordOtpVerificationViewModel
+        binding.viewModel = signUpOtpVerificationViewModel
 
         _progressBarBinding = ProgressBarBinding.inflate(layoutInflater)
         progressBar = Dialog(binding.root.context)
@@ -65,7 +59,7 @@ class ForgotPasswordOtpVerificationFragment : Fragment() {
 
         binding.continueBtn.setOnClickListener {
             lifecycleScope.launch {
-                forgotPasswordOtpVerificationViewModel.verifyForgotPasswordOtp()
+                signUpOtpVerificationViewModel.verifySignUpOtp()
             }
         }
 
@@ -75,14 +69,14 @@ class ForgotPasswordOtpVerificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        forgotPasswordOtpVerificationViewModel.responseLiveData.observe(viewLifecycleOwner, Observer {
+        signUpOtpVerificationViewModel.responseLiveData.observe(viewLifecycleOwner, Observer {
             when(it){
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
                     val bundle = Bundle()
-                    bundle.putString("email", forgotPasswordOtpVerificationViewModel.email)
-                    bundle.putString("otp", forgotPasswordOtpVerificationViewModel.otp)
-                    findNavController().navigate(R.id.action_forgotPasswordOtpVerificationFragment_to_resetPasswordFragment, bundle)
+                    bundle.putString("email", signUpOtpVerificationViewModel.email)
+                    bundle.putString("otp", signUpOtpVerificationViewModel.otp)
+                    findNavController().navigate(R.id.action_signUpOtpVerificationFragment_to_signUpFragment, bundle)
                 }
                 is NetworkResult.Error -> {
                     progressBar.dismiss()
@@ -94,7 +88,7 @@ class ForgotPasswordOtpVerificationFragment : Fragment() {
             }
         })
 
-        forgotPasswordOtpVerificationViewModel.errorMessage.observe(viewLifecycleOwner, Observer{
+        signUpOtpVerificationViewModel.errorMessage.observe(viewLifecycleOwner, Observer{
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
     }

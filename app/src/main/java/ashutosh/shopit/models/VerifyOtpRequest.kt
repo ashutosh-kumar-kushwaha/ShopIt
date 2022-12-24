@@ -1,6 +1,6 @@
 package ashutosh.shopit.models
 
-data class VerifyForgotPasswordOtpRequest(
+data class VerifyOtpRequest(
     val email: String,
     val oneTimePassword: String
 )
