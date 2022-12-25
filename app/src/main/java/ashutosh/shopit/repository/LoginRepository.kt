@@ -54,7 +54,7 @@ class LoginRepository {
             }
         }
         catch (e: Exception){
-            _loginResponseLiveData.value = NetworkResult.Error(e.message)s
+            _loginResponseLiveData.value = NetworkResult.Error(e.message)
         }
     }
 }

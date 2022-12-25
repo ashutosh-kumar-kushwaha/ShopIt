@@ -1,7 +1,9 @@
 package ashutosh.shopit.ui.auth.getStarted
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -21,6 +23,10 @@ import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentGetStartedBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.di.NetworkResult
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import kotlinx.coroutines.launch
 
 class GetStartedFragment : Fragment() {
@@ -33,6 +39,9 @@ class GetStartedFragment : Fragment() {
     private val progressBarBinding get() = _progressBarBinding!!
 
     private val getStartedViewModel by viewModels<GetStartedViewModel>()
+
+    private lateinit var gso : GoogleSignInOptions
+    private lateinit var gsc : GoogleSignInClient
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +69,43 @@ class GetStartedFragment : Fragment() {
             }
         }
 
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestIdToken("1084765789984-87pi66fb0jaur5gphrf7tnck4p53pue6.apps.googleusercontent.com").build()
+        gsc = GoogleSignIn.getClient(requireActivity(), gso)
+
+        binding.googleBtn.setOnClickListener {
+            signInWithGoogle()
+        }
+
+        gsc.signOut()
+
         return binding.root
+    }
+
+    private fun signInWithGoogle() {
+        val signInWithGoogleIntent = gsc.signInIntent
+        startActivityForResult(signInWithGoogleIntent, 1000)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == 1000 && resultCode == Activity.RESULT_OK){
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+
+            try{
+                task.getResult(ApiException::class.java)
+                val account = GoogleSignIn.getLastSignedInAccount(requireContext())
+
+                if(account?.idToken != null) {
+                    lifecycleScope.launch {
+                        getStartedViewModel.googleSignIn(account.idToken!!)
+                    }
+                }
+            }
+            catch (e : Exception){
+                Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,6 +123,24 @@ class GetStartedFragment : Fragment() {
                     progressBar.dismiss()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
+                is NetworkResult.Loading -> {
+                    progressBar.show()
+                }
+            }
+        })
+
+        getStartedViewModel.loginResponseLiveData.observe(viewLifecycleOwner, Observer{
+            when(it){
+                is NetworkResult.Success -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), "Hello ${it.data?.firstname}", Toast.LENGTH_SHORT).show()
+                }
+
+                is NetworkResult.Error -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+
                 is NetworkResult.Loading -> {
                     progressBar.show()
                 }
