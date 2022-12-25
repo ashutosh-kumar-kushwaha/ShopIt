@@ -115,6 +115,7 @@
                     android:paddingEnd="@dimen/dp_11"
                     android:text="@={viewModel.emailLiveData}"
                     android:maxLines="1"
+                    android:inputType="text"
                     android:textCursorDrawable="@null"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

@@ -69,6 +69,7 @@
                     android:textCursorDrawable="@null"
                     android:text="@={viewModel.emailLiveData}"
                     android:maxLines="1"
+                    android:inputType="text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/letsSignInTxtVw" />
@@ -118,7 +119,7 @@
                         android:background="@drawable/textbox_background"
                         android:paddingStart="@dimen/dp_11"
                         android:paddingEnd="@dimen/dp_11"
-                        android:maxLines="1"/>
+                        android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView

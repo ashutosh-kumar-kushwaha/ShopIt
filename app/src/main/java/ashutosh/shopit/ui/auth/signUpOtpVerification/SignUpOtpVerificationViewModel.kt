@@ -10,7 +10,7 @@ class SignUpOtpVerificationViewModel(var email: String) : ViewModel() {
 
     val responseLiveData get() = signUpOtpVerificationRepository.responseLiveData
 
-    private val _errorMessage = MutableLiveData("")
+    private val _errorMessage = MutableLiveData<String>()
     val errorMessage : LiveData<String> get() = _errorMessage
 
     val otp1LiveData = MutableLiveData("")

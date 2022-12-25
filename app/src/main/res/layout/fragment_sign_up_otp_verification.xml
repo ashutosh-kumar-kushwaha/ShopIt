@@ -81,6 +81,7 @@
                         android:textSize="@dimen/sp_21"
                         android:text="@={viewModel.otp1LiveData}"
                         android:maxLines="1"
+                        android:inputType="number"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/otpSentTxtVw" />
@@ -98,6 +99,7 @@
                         android:layout_marginStart="@dimen/dp_4"
                         android:text="@={viewModel.otp2LiveData}"
                         android:maxLines="1"
+                        android:inputType="number"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/otpSentTxtVw" />
@@ -115,6 +117,7 @@
                         android:layout_marginStart="@dimen/dp_4"
                         android:text="@={viewModel.otp3LiveData}"
                         android:maxLines="1"
+                        android:inputType="number"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/otpSentTxtVw" />
@@ -132,6 +135,7 @@
                         android:layout_marginStart="@dimen/dp_4"
                         android:text="@={viewModel.otp4LiveData}"
                         android:maxLines="1"
+                        android:inputType="number"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/otpSentTxtVw" />
@@ -149,6 +153,7 @@
                         android:layout_marginStart="@dimen/dp_4"
                         android:text="@={viewModel.otp5LiveData}"
                         android:maxLines="1"
+                        android:inputType="number"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/otpSentTxtVw" />
@@ -166,6 +171,7 @@
                         android:layout_marginStart="@dimen/dp_4"
                         android:text="@={viewModel.otp6LiveData}"
                         android:maxLines="1"
+                        android:inputType="number"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/otpSentTxtVw" />
@@ -200,6 +206,7 @@
 
                     <TextView
                         android:id="@+id/resendOtpTxtVw"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -213,6 +220,7 @@
 
                     <TextView
                         android:id="@+id/resendOtpTimeTxtVw"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -227,6 +235,7 @@
 
                     <TextView
                         android:id="@+id/secondsTxtVw"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/color2"

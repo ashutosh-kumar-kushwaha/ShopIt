@@ -117,6 +117,7 @@ class GetStartedFragment : Fragment() {
                     progressBar.dismiss()
                     val bundle = Bundle()
                     bundle.putString("email", getStartedViewModel.emailLiveData.value)
+                    Log.d("Ashu", "Navigate to OTP")
                     findNavController().navigate(R.id.action_getStartedFragment_to_signUpOtpVerificationFragment, bundle)
                 }
                 is NetworkResult.Error -> {
