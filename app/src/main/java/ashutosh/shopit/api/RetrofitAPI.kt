@@ -1,9 +1,11 @@
 package ashutosh.shopit.api
 
 import ashutosh.shopit.models.*
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable.Param
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface RetrofitAPI {
     @POST("api/auth/login")
@@ -26,4 +28,7 @@ interface RetrofitAPI {
 
     @POST("api/auth/signupUser/user")
     suspend fun signUp(@Body signUpRequest: SignUpRequest) : Response<DefaultResponse>
+
+    @POST("api/auth/signGoogle")
+    suspend fun signGoogle(@Query("TokenG") token : String) : Response<LoginResponse>
  }

@@ -35,8 +35,8 @@ class LoginViewModel : ViewModel() {
         }
     }
 
-    suspend fun googleSignIn(){
-
+    suspend fun googleSignIn(token : String){
+        loginRepository.signGoogle(token)
     }
 
 }

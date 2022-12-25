@@ -99,9 +99,11 @@ class LoginFragment : Fragment() {
                 task.getResult(ApiException::class.java)
                 val account = GoogleSignIn.getLastSignedInAccount(requireContext())
 
-
-                Toast.makeText(requireContext(), account?.givenName, Toast.LENGTH_SHORT).show()
-
+                if(account?.idToken != null) {
+                    lifecycleScope.launch {
+                        loginViewModel.googleSignIn(account.idToken!!)
+                    }
+                }
             }
             catch (e : Exception){
                 Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()

@@ -36,6 +36,25 @@ class LoginRepository {
         } catch (e: Exception) {
             _loginResponseLiveData.value = NetworkResult.Error(e.message)
         }
+    }
 
+    suspend fun signGoogle(token : String){
+        _loginResponseLiveData.value = NetworkResult.Loading()
+        try{
+            val response = retrofitAPI.signGoogle(token)
+            when(response.code()){
+                200 -> {
+                    if(response.body() != null){
+                        _loginResponseLiveData.value = NetworkResult.Success(response.body()!!)
+                    }
+                }
+                400 -> _loginResponseLiveData.value = NetworkResult.Error("Invalid token")
+                403 -> _loginResponseLiveData.value = NetworkResult.Error("Either the token is expired or the token is not authorized")
+                else -> _loginResponseLiveData.value = NetworkResult.Error("Something went wrong\nError code : ${response.code()}")
+            }
+        }
+        catch (e: Exception){
+            _loginResponseLiveData.value = NetworkResult.Error(e.message)s
+        }
     }
 }
