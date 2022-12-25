@@ -1,5 +1,6 @@
 package ashutosh.shopit.ui.auth.forgotPassword
 
+import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,8 +18,11 @@ class ForgotPasswordViewModel : ViewModel() {
     val emailLiveData = MutableLiveData("")
 
     suspend fun forgotPassword(){
-        if(emailLiveData.value != null){
+        if(emailLiveData.value != null && Patterns.EMAIL_ADDRESS.matcher(emailLiveData.value.toString()).matches()){
             forgotPasswordRepository.forgotPassword(emailLiveData.value!!)
+        }
+        else{
+            _errorMessage.value = "Enter a valid email"
         }
     }
 

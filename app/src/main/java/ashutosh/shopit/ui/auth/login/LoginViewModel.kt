@@ -1,5 +1,6 @@
 package ashutosh.shopit.ui.auth.login
 
+import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,7 +22,21 @@ class LoginViewModel : ViewModel() {
     val passwordLiveData = MutableLiveData("")
 
     suspend fun login(){
-        loginRepository.login(emailLiveData.value!!, passwordLiveData.value!!)
+        if(emailLiveData.value != null && Patterns.EMAIL_ADDRESS.matcher(emailLiveData.value.toString()).matches()){
+            if(passwordLiveData.value!!.matches(Regex("^(?=.[a-z])(?=.[A-Z])(?=.\\\\d)(?=.[@\$!%?&])[A-Za-z\\\\d@\$!%?&]{8,}\$"))){
+                loginRepository.login(emailLiveData.value!!, passwordLiveData.value!!)
+            }
+            else{
+                _errorMessage.value = "Wrong format of password"
+            }
+        }
+        else{
+            _errorMessage.value = "Invalid Email"
+        }
+    }
+
+    suspend fun googleSignIn(){
+
     }
 
 }

@@ -99,6 +99,7 @@ class LoginFragment : Fragment() {
                 task.getResult(ApiException::class.java)
                 val account = GoogleSignIn.getLastSignedInAccount(requireContext())
 
+
                 Toast.makeText(requireContext(), account?.givenName, Toast.LENGTH_SHORT).show()
 
             }

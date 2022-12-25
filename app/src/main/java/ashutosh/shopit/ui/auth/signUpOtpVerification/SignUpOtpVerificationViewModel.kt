@@ -23,7 +23,12 @@ class SignUpOtpVerificationViewModel(var email: String) : ViewModel() {
     var otp : String = ""
 
     suspend fun verifySignUpOtp(){
-        otp = "${otp1LiveData.value}${otp2LiveData.value}${otp3LiveData.value}${otp4LiveData.value}${otp5LiveData.value}${otp6LiveData.value}"
-        signUpOtpVerificationRepository.verifySignUpOtp(email, otp)
+        if(otp1LiveData.value.isNullOrEmpty() || otp2LiveData.value.isNullOrEmpty() || otp3LiveData.value.isNullOrEmpty() || otp4LiveData.value.isNullOrEmpty() || otp5LiveData.value.isNullOrEmpty() || otp6LiveData.value.isNullOrEmpty()){
+            _errorMessage.value = "Enter a valid OTP"
+        }
+        else{
+            otp = "${otp1LiveData.value}${otp2LiveData.value}${otp3LiveData.value}${otp4LiveData.value}${otp5LiveData.value}${otp6LiveData.value}"
+            signUpOtpVerificationRepository.verifySignUpOtp(email, otp)
+        }
     }
 }
