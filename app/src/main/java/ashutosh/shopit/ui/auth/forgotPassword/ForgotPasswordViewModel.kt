@@ -1,9 +1,10 @@
 package ashutosh.shopit.ui.auth.forgotPassword
 
+import android.os.CountDownTimer
 import android.util.Patterns
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.repository.ForgotPasswordRepository
 
 class ForgotPasswordViewModel : ViewModel() {
@@ -12,8 +13,7 @@ class ForgotPasswordViewModel : ViewModel() {
 
     val forgotPasswordResponseLiveData get() = forgotPasswordRepository.forgotPasswordResponseLiveData
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String> get() = _errorMessage
+    val errorMessage = SingleLiveEvent<String>()
 
     val emailLiveData = MutableLiveData("")
 
@@ -22,7 +22,7 @@ class ForgotPasswordViewModel : ViewModel() {
             forgotPasswordRepository.forgotPassword(emailLiveData.value!!)
         }
         else{
-            _errorMessage.value = "Enter a valid email"
+            errorMessage.value = "Enter a valid email"
         }
     }
 

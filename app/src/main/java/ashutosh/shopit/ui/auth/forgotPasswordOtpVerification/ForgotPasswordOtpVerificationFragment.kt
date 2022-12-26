@@ -1,6 +1,5 @@
 package ashutosh.shopit.ui.auth.forgotPasswordOtpVerification
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,12 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -23,7 +18,6 @@ import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentForgotPasswordOtpVerificationBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.di.NetworkResult
-import ashutosh.shopit.ui.auth.AuthenticationActivity
 import kotlinx.coroutines.launch
 
 class ForgotPasswordOtpVerificationFragment : Fragment() {
@@ -77,6 +71,13 @@ class ForgotPasswordOtpVerificationFragment : Fragment() {
         binding.otpETxt5.addTextChangedListener(GenericTextWatcher(binding.otpETxt5, binding.otpETxt4, binding.otpETxt6))
         binding.otpETxt6.addTextChangedListener(GenericTextWatcher(binding.otpETxt6, binding.otpETxt5, null))
 
+        binding.resendOtpTxtVw.setOnClickListener {
+            lifecycleScope.launch {
+                forgotPasswordOtpVerificationViewModel.resendOtp()
+            }
+        }
+
+        forgotPasswordOtpVerificationViewModel.timer.start()
 
         return binding.root
     }
@@ -84,7 +85,7 @@ class ForgotPasswordOtpVerificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        forgotPasswordOtpVerificationViewModel.responseLiveData.observe(viewLifecycleOwner, Observer {
+        forgotPasswordOtpVerificationViewModel.otpVerifyResponseLiveData.observe(viewLifecycleOwner, Observer {
             when(it){
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
@@ -105,6 +106,40 @@ class ForgotPasswordOtpVerificationFragment : Fragment() {
 
         forgotPasswordOtpVerificationViewModel.errorMessage.observe(viewLifecycleOwner, Observer{
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        })
+
+        forgotPasswordOtpVerificationViewModel.resendOtpResponseLiveData.observe(viewLifecycleOwner, Observer{
+            when(it){
+                is NetworkResult.Success -> {
+                    progressBar.hide()
+                    forgotPasswordOtpVerificationViewModel.canResend.value = false
+                    Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Error -> {
+                    progressBar.hide()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> {
+                    progressBar.show()
+                }
+            }
+        })
+
+        forgotPasswordOtpVerificationViewModel.canResend.observe(viewLifecycleOwner, Observer{
+            if(it){
+                binding.resendOtpTxtVw.text = "Resend OTP"
+                binding.resendOtpTimeTxtVw.visibility = View.GONE
+                binding.secondsTxtVw.visibility = View.GONE
+            }
+            else{
+                binding.resendOtpTxtVw.text = "Resend OTP in"
+                binding.resendOtpTimeTxtVw.visibility = View.VISIBLE
+                binding.secondsTxtVw.visibility = View.VISIBLE
+            }
+        })
+
+        forgotPasswordOtpVerificationViewModel.timeLiveData.observe(viewLifecycleOwner, Observer{
+            binding.resendOtpTimeTxtVw.text = it
         })
     }
 
