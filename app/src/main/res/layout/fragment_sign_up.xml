@@ -125,7 +125,7 @@
                         android:text="@={viewModel.firstNameLiveData}"
                         android:textColor="@color/color2"
                         android:textColorHint="@color/color2"
-                        android:textCursorDrawable="@null"
+                        android:textCursorDrawable="@drawable/cursor_2"
                         android:textSize="@dimen/sp_12" />
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -143,7 +143,7 @@
                         android:text="@={viewModel.lastNameLiveData}"
                         android:textColor="@color/color2"
                         android:textColorHint="@color/color2"
-                        android:textCursorDrawable="@null"
+                        android:textCursorDrawable="@drawable/cursor_2"
                         android:textSize="@dimen/sp_12" />
 
                 </LinearLayout>
@@ -210,7 +210,8 @@
                         android:textColor="@color/color2"
                         android:textSize="@dimen/sp_12"
                         android:paddingTop="0dp"
-                        android:paddingBottom="0dp"/>
+                        android:paddingBottom="0dp"
+                        android:textCursorDrawable="@drawable/cursor_2"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -247,7 +248,8 @@
                         android:textColor="@color/color2"
                         android:textSize="@dimen/sp_12"
                         android:paddingTop="0dp"
-                        android:paddingBottom="0dp"/>
+                        android:paddingBottom="0dp"
+                        android:textCursorDrawable="@drawable/cursor_2"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
