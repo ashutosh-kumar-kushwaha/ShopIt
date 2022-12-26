@@ -12,12 +12,14 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import androidx.lifecycle.lifecycleScope
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentLoginBinding
 import ashutosh.shopit.databinding.FragmentResetPasswordBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.di.NetworkResult
 import ashutosh.shopit.ui.auth.forgotPasswordOtpVerification.ForgotPasswordOtpVerificationViewModel
+import kotlinx.coroutines.launch
 
 class ResetPasswordFragment : Fragment() {
 
@@ -59,6 +61,12 @@ class ResetPasswordFragment : Fragment() {
         progressBar.setContentView(progressBarBinding.root)
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
+
+        binding.resetPasswordBtn.setOnClickListener {
+            lifecycleScope.launch {
+                resetPasswordViewModel.resetPassword()
+            }
+        }
 
         return binding.root
     }
