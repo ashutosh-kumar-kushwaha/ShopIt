@@ -1,11 +1,9 @@
 package ashutosh.shopit.ui.auth.getStarted
 
 import android.util.Patterns
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ashutosh.shopit.di.NetworkResult
-import ashutosh.shopit.models.LoginResponse
+import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.repository.GetStartedRepository
 
 class GetStartedViewModel : ViewModel() {
@@ -14,10 +12,9 @@ class GetStartedViewModel : ViewModel() {
 
     val signUpEmailResponseLiveData get() = getStartedRepository.signUpEmailResponseLiveData
 
-    val loginResponseLiveData : LiveData<NetworkResult<LoginResponse>> get() = getStartedRepository.loginResponseLiveData
+    val loginResponseLiveData get() = getStartedRepository.loginResponseLiveData
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage : LiveData<String> get()= _errorMessage
+    val errorMessage = SingleLiveEvent<String>()
 
     val emailLiveData = MutableLiveData("")
 
@@ -26,7 +23,7 @@ class GetStartedViewModel : ViewModel() {
             getStartedRepository.signUpEmail(emailLiveData.value!!)
         }
         else{
-            _errorMessage.value = "Invalid email"
+            errorMessage.value = "Invalid email"
         }
     }
 

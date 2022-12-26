@@ -1,8 +1,8 @@
 package ashutosh.shopit.ui.auth.forgotPasswordOtpVerification
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.repository.ForgotPasswordOtpVerificationRepository
 
 class ForgotPasswordOtpVerificationViewModel(val email : String) : ViewModel() {
@@ -11,8 +11,7 @@ class ForgotPasswordOtpVerificationViewModel(val email : String) : ViewModel() {
 
     val responseLiveData get() = forgotPasswordOtpVerificationRepository.responseLiveData
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage : LiveData<String> get() = _errorMessage
+    val errorMessage = SingleLiveEvent<String>()
 
     val otp1LiveData = MutableLiveData("")
     val otp2LiveData = MutableLiveData("")
@@ -25,7 +24,7 @@ class ForgotPasswordOtpVerificationViewModel(val email : String) : ViewModel() {
 
     suspend fun verifyForgotPasswordOtp(){
         if(otp1LiveData.value.isNullOrEmpty() || otp2LiveData.value.isNullOrEmpty() || otp3LiveData.value.isNullOrEmpty() || otp4LiveData.value.isNullOrEmpty() || otp5LiveData.value.isNullOrEmpty() || otp6LiveData.value.isNullOrEmpty()){
-            _errorMessage.value = "Enter a valid OTP"
+            errorMessage.value = "Enter a valid OTP"
         }
         else{
             otp = "${otp1LiveData.value}${otp2LiveData.value}${otp3LiveData.value}${otp4LiveData.value}${otp5LiveData.value}${otp6LiveData.value}"

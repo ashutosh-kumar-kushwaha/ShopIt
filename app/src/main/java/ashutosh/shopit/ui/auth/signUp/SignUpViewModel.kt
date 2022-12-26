@@ -1,9 +1,9 @@
 package ashutosh.shopit.ui.auth.signUp
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.repository.SignUpRepository
 
 class SignUpViewModel(val email: String, val otp: String) : ViewModel() {
@@ -14,8 +14,7 @@ class SignUpViewModel(val email: String, val otp: String) : ViewModel() {
     val password1LiveData = MutableLiveData<String>("")
     val password2LiveData = MutableLiveData<String>("")
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String> get() = _errorMessage
+    val errorMessage = SingleLiveEvent<String>()
 
     val signUpResponseLiveData get() = signUpRepository.signUpResponseLiveData
 
@@ -35,25 +34,25 @@ class SignUpViewModel(val email: String, val otp: String) : ViewModel() {
                                     password1LiveData.value!!
                                 )
                             } else {
-                                _errorMessage.value =
+                                errorMessage.value =
                                     "Password must contain at least one uppercase letter, one lowercase letter, one numeric character, one special character and no spaces and must have at least 8 characters"
                             }
                         } else {
-                            _errorMessage.value = "Enter same passwords in both fields"
+                            errorMessage.value = "Enter same passwords in both fields"
                             Log.d("Ashu", password1LiveData.value!!)
                             Log.d("Ashu", password2LiveData.value!!)
                         }
                     } else {
-                        _errorMessage.value = "Enter passwords in both fields"
+                        errorMessage.value = "Enter passwords in both fields"
                     }
                 } else {
-                    _errorMessage.value = "Enter a last name"
+                    errorMessage.value = "Enter a last name"
                 }
             } else {
-                _errorMessage.value = "Enter a first name"
+                errorMessage.value = "Enter a first name"
             }
         } else {
-            _errorMessage.value = "Select a gender"
+            errorMessage.value = "Select a gender"
         }
     }
 }

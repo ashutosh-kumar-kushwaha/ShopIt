@@ -1,9 +1,9 @@
 package ashutosh.shopit.ui.auth.login
 
 import android.util.Patterns
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.di.NetworkResult
 import ashutosh.shopit.models.LoginResponse
 import ashutosh.shopit.repository.LoginRepository
@@ -12,10 +12,9 @@ class LoginViewModel : ViewModel() {
 
     private val loginRepository = LoginRepository()
 
-    val loginResponseLiveData : LiveData<NetworkResult<LoginResponse>> get() = loginRepository.loginResponseLiveData
+     val loginResponseLiveData : SingleLiveEvent<NetworkResult<LoginResponse>> get() = loginRepository.loginResponseLiveData
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String> get() = _errorMessage
+     val errorMessage = SingleLiveEvent<String>()
 
     val emailLiveData = MutableLiveData("")
 
@@ -27,11 +26,11 @@ class LoginViewModel : ViewModel() {
                 loginRepository.login(emailLiveData.value!!, passwordLiveData.value!!)
             }
             else{
-                _errorMessage.value = "Wrong format of password"
+                errorMessage.value = "Wrong format of password"
             }
         }
         else{
-            _errorMessage.value = "Invalid Email"
+            errorMessage.value = "Invalid Email"
         }
     }
 

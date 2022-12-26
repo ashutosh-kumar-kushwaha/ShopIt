@@ -1,8 +1,8 @@
 package ashutosh.shopit.ui.auth.resetPassword
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.repository.ResetPasswordRepository
 
 class ResetPasswordViewModel(val email : String, val otp : String) : ViewModel() {
@@ -10,8 +10,7 @@ class ResetPasswordViewModel(val email : String, val otp : String) : ViewModel()
 
     val resetPasswordResponseLiveData get() = resetPasswordRepository.resetPasswordResponseLiveData
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String> get() = _errorMessage
+    val errorMessage = SingleLiveEvent<String>()
 
     val password1LiveData = MutableLiveData("")
     val password2LiveData = MutableLiveData("")
@@ -24,19 +23,19 @@ class ResetPasswordViewModel(val email : String, val otp : String) : ViewModel()
                         resetPasswordRepository.resetPassword(email, otp, password1LiveData.value!!)
                     }
                     else{
-                        _errorMessage.value = "Password must contain at least one uppercase letter, one lowercase letter, one numeric character, one special character and no spaces"
+                        errorMessage.value = "Password must contain at least one uppercase letter, one lowercase letter, one numeric character, one special character and no spaces"
                     }
                 }
                 else{
-                    _errorMessage.value = "Password must contain at least 8 characters"
+                    errorMessage.value = "Password must contain at least 8 characters"
                 }
             }
             else{
-                _errorMessage.value = "Enter same passwords in both fields"
+                errorMessage.value = "Enter same passwords in both fields"
             }
         }
         else{
-            _errorMessage.value = "Enter passwords in both fields"
+            errorMessage.value = "Enter passwords in both fields"
         }
     }
 
