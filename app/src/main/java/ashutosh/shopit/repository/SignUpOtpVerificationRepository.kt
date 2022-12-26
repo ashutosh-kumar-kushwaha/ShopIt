@@ -5,6 +5,7 @@ import ashutosh.shopit.api.RetrofitAPI
 import ashutosh.shopit.api.ServiceBuilder
 import ashutosh.shopit.di.NetworkResult
 import ashutosh.shopit.models.DefaultResponse
+import ashutosh.shopit.models.Email
 import ashutosh.shopit.models.VerifyOtpRequest
 
 class SignUpOtpVerificationRepository {
@@ -12,6 +13,8 @@ class SignUpOtpVerificationRepository {
 
     val responseLiveData =
         SingleLiveEvent<NetworkResult<DefaultResponse>>()
+
+    val resendOtpResponseLiveData = SingleLiveEvent<NetworkResult<DefaultResponse>>()
 
     suspend fun verifySignUpOtp(email : String, otp : String){
         responseLiveData.value = NetworkResult.Loading()
@@ -30,6 +33,27 @@ class SignUpOtpVerificationRepository {
         }
         catch (e : Exception){
             responseLiveData.value = NetworkResult.Error(e.message)
+        }
+    }
+
+    suspend fun resendOtp(email : String){
+        resendOtpResponseLiveData.value = NetworkResult.Loading()
+        try{
+            val response = retrofitAPI.signUpEmail(Email(email))
+            when(response.code()){
+                200 -> {
+                    if(response.body()!=null){
+                        resendOtpResponseLiveData.value = NetworkResult.Success(response.body()!!)
+                    }
+                }
+                400 -> resendOtpResponseLiveData.value = NetworkResult.Error("Email a valid email")
+                409 -> resendOtpResponseLiveData.value = NetworkResult.Error("User Already Exist")
+                503 -> resendOtpResponseLiveData.value = NetworkResult.Error("Unable to make your request")
+                else -> resendOtpResponseLiveData.value = NetworkResult.Error("Something went wrong\nError code: ${response.code()}")
+            }
+        }
+        catch (e : Exception){
+            resendOtpResponseLiveData.value = NetworkResult.Error(e.message)
         }
     }
 }

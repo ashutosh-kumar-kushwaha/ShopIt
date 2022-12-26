@@ -1,6 +1,5 @@
 package ashutosh.shopit.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI

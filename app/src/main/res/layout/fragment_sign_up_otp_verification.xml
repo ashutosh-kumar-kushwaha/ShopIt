@@ -206,7 +206,6 @@
 
                     <TextView
                         android:id="@+id/resendOtpTxtVw"
-                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -220,7 +219,6 @@
 
                     <TextView
                         android:id="@+id/resendOtpTimeTxtVw"
-                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -235,7 +233,6 @@
 
                     <TextView
                         android:id="@+id/secondsTxtVw"
-                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/color2"

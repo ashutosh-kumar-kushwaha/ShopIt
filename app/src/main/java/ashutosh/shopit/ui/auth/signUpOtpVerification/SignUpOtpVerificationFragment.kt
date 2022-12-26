@@ -21,6 +21,7 @@ import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.di.NetworkResult
 import ashutosh.shopit.ui.auth.forgotPasswordOtpVerification.ForgotPasswordOtpVerificationViewModel
 import kotlinx.coroutines.launch
+import kotlin.math.sign
 
 class SignUpOtpVerificationFragment : Fragment() {
 
@@ -71,6 +72,14 @@ class SignUpOtpVerificationFragment : Fragment() {
         binding.otpETxt5.addTextChangedListener(GenericTextWatcher(binding.otpETxt5, binding.otpETxt4, binding.otpETxt6))
         binding.otpETxt6.addTextChangedListener(GenericTextWatcher(binding.otpETxt6, binding.otpETxt5, null))
 
+        binding.resendOtpTxtVw.setOnClickListener {
+            lifecycleScope.launch {
+                signUpOtpVerificationViewModel.resendOtp()
+            }
+        }
+
+        signUpOtpVerificationViewModel.timer.start()
+
         return binding.root
     }
 
@@ -98,6 +107,40 @@ class SignUpOtpVerificationFragment : Fragment() {
 
         signUpOtpVerificationViewModel.errorMessage.observe(viewLifecycleOwner, Observer{
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        })
+
+        signUpOtpVerificationViewModel.resendOtpResponseLiveData.observe(viewLifecycleOwner, Observer{
+            when(it){
+                is NetworkResult.Success -> {
+                    progressBar.hide()
+                    signUpOtpVerificationViewModel.canResend.value = false
+                    Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Error -> {
+                    progressBar.hide()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> {
+                    progressBar.show()
+                }
+            }
+        })
+
+        signUpOtpVerificationViewModel.canResend.observe(viewLifecycleOwner, Observer{
+            if(it){
+                binding.resendOtpTxtVw.text = "Resend OTP"
+                binding.resendOtpTimeTxtVw.visibility = View.GONE
+                binding.secondsTxtVw.visibility = View.GONE
+            }
+            else{
+                binding.resendOtpTxtVw.text = "Resend OTP in"
+                binding.resendOtpTimeTxtVw.visibility = View.VISIBLE
+                binding.secondsTxtVw.visibility = View.VISIBLE
+            }
+        })
+
+        signUpOtpVerificationViewModel.timeLiveData.observe(viewLifecycleOwner, Observer{
+            binding.resendOtpTimeTxtVw.text = it
         })
     }
 
