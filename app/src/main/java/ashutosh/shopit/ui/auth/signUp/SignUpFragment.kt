@@ -1,6 +1,7 @@
 package ashutosh.shopit.ui.auth.signUp
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -9,15 +10,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentSignUpBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
+import ashutosh.shopit.datastore.DataStoreManager
 import ashutosh.shopit.di.NetworkResult
-import ashutosh.shopit.ui.auth.getStarted.GetStartedViewModel
+import ashutosh.shopit.models.LogInInfo
+import ashutosh.shopit.ui.home.MainActivity
 import kotlinx.coroutines.launch
 
 class SignUpFragment : Fragment() {
@@ -91,7 +93,16 @@ class SignUpFragment : Fragment() {
             when(it){
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
-                    Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_SHORT).show()
+                    lifecycleScope.launch {
+                        val job = lifecycleScope.launch {
+                            val dataStoreManager = DataStoreManager(requireContext())
+                            dataStoreManager.storeLogInInfo(LogInInfo(it.data?.accessToken, it.data?.refreshToken, true, it.data?.firstname, it.data?.lastname, it.data?.roles?.get(0)?.name))
+                        }
+                        job.join()
+                    }
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
                 }
                 is NetworkResult.Error -> {
                     progressBar.dismiss()

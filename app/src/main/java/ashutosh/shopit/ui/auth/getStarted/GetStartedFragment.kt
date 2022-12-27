@@ -1,19 +1,15 @@
 package ashutosh.shopit.ui.auth.getStarted
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -22,7 +18,10 @@ import androidx.navigation.fragment.findNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentGetStartedBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
+import ashutosh.shopit.datastore.DataStoreManager
 import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.models.LogInInfo
+import ashutosh.shopit.ui.home.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -133,7 +132,16 @@ class GetStartedFragment : Fragment() {
             when(it){
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
-                    Toast.makeText(requireContext(), "Hello ${it.data?.firstname}", Toast.LENGTH_SHORT).show()
+                    lifecycleScope.launch {
+                        val job = lifecycleScope.launch {
+                            val dataStoreManager = DataStoreManager(requireContext())
+                            dataStoreManager.storeLogInInfo(LogInInfo(it.data?.accessToken, it.data?.refreshToken, true, it.data?.firstname, it.data?.lastname, it.data?.roles?.get(0)?.name))
+                        }
+                        job.join()
+                    }
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
                 }
 
                 is NetworkResult.Error -> {

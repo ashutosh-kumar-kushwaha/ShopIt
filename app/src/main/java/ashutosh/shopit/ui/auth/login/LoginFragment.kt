@@ -18,7 +18,10 @@ import androidx.navigation.fragment.findNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentLoginBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
+import ashutosh.shopit.datastore.DataStoreManager
 import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.models.LogInInfo
+import ashutosh.shopit.ui.home.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -115,7 +118,16 @@ class LoginFragment : Fragment() {
             when(it){
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
-                    Toast.makeText(requireContext(), "Hello ${it.data?.firstname}", Toast.LENGTH_SHORT).show()
+                    lifecycleScope.launch {
+                        val job = lifecycleScope.launch {
+                            val dataStoreManager = DataStoreManager(requireContext())
+                            dataStoreManager.storeLogInInfo(LogInInfo(it.data?.accessToken, it.data?.refreshToken, true, it.data?.firstname, it.data?.lastname, it.data?.roles?.get(0)?.name))
+                        }
+                        job.join()
+                    }
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
                 }
 
                 is NetworkResult.Error -> {
