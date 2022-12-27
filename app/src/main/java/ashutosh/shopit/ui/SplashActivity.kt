@@ -9,9 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import ashutosh.shopit.R
 import ashutosh.shopit.datastore.DataStoreManager
 import ashutosh.shopit.ui.auth.AuthenticationActivity
-import ashutosh.shopit.ui.home.MainActivity
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class SplashActivity : AppCompatActivity() {

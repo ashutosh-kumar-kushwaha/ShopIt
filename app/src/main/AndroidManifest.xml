@@ -42,7 +42,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".ui.home.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="false">
 
             <meta-data

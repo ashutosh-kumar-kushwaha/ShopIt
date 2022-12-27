@@ -19,7 +19,7 @@ import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.datastore.DataStoreManager
 import ashutosh.shopit.di.NetworkResult
 import ashutosh.shopit.models.LogInInfo
-import ashutosh.shopit.ui.home.MainActivity
+import ashutosh.shopit.ui.MainActivity
 import kotlinx.coroutines.launch
 
 class SignUpFragment : Fragment() {
