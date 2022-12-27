@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import ashutosh.shopit.R
 import ashutosh.shopit.datastore.DataStoreManager
 import ashutosh.shopit.ui.auth.AuthenticationActivity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SplashActivity : AppCompatActivity() {
@@ -21,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
 //            intent = getNextActivity()
 //        }
 
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             val dataStoreManager = DataStoreManager(this@SplashActivity)
             dataStoreManager.getLogInInfo().collect{
                 intent = if(it.logInState){
