@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="@dimen/dp_14"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home"/>
+        android:layout_height="@dimen/dp_35">
 
-</FrameLayout>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:iconifiedByDefault="false"
+            app:defaultQueryHint="Search Here"
+            android:foregroundTint="@null"
+            android:backgroundTint="@null"
+            android:background="@drawable/search_view_bg"
+            android:searchIcon="@drawable/ic_search_icon"/>
+
+        <ImageView
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_hamburger"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_gravity="center"
+
+            android:scaleType="fitXY"/>
+    </LinearLayout>
+</LinearLayout>
