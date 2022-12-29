@@ -7,16 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import ashutosh.shopit.R
+import ashutosh.shopit.adapters.ProductSpacingItemDecoration
 import ashutosh.shopit.adapters.ProductsAdapter
 import ashutosh.shopit.databinding.FragmentHomeBinding
 import ashutosh.shopit.models.Product
@@ -60,6 +59,7 @@ class HomeFragment : Fragment() {
         val adapter = ProductsAdapter()
         adapter.submitList(listOf(Product(1, R.drawable.iphone, "Apple Iphone 14 128GB (Product) RED", "4.5", 1335, "₹ 77,490", "₹ 77,490"), Product(2, R.drawable.iphone, "Apple Iphone 14 128GB (Product) RED", "4.5", 1335, "₹ 77,490", "₹ 77,490"), Product(3, R.drawable.iphone, "Apple Iphone 14 128GB (Product) RED", "4.5", 1335, "₹ 77,490", "₹ 77,490"), Product(4, R.drawable.iphone, "Apple Iphone 14 128GB (Product) RED", "4.5", 1335, "₹ 77,490", "₹ 77,490"), Product(5, R.drawable.iphone, "Apple Iphone 14 128GB (Product) RED", "4.5", 1335, "₹ 77,490", "₹ 77,490"), Product(6, R.drawable.iphone, "Apple Iphone 14 128GB (Product) RED", "4.5", 1335, "₹ 77,490", "₹ 77,490"), Product(7, R.drawable.iphone, "Apple Iphone 14 128GB (Product) RED", "4.5", 1335, "₹ 77,490", "₹ 77,490"), Product(8, R.drawable.iphone, "Apple Iphone 14 128GB (Product) RED", "4.5", 1335, "₹ 77,490", "₹ 77,490"), Product(9, R.drawable.iphone, "Apple Iphone 14 128GB (Product) RED", "4.5", 1335, "₹ 77,490", "₹ 77,490"), Product(10, R.drawable.iphone, "Apple Iphone 14 128GB (Product) RED", "4.5", 1335, "₹ 77,490", "₹ 77,490")))
         binding.itemRecyclerView.adapter = adapter
+        binding.itemRecyclerView.addItemDecoration(ProductSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.dp_21), resources.getDimensionPixelSize(R.dimen.dp_8)))
 
 
         return binding.root
