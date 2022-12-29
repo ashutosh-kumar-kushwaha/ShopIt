@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import ashutosh.shopit.databinding.ItemCardBinding
 import ashutosh.shopit.models.Product
 
-class ProductsAdapter(private val list : List<Product>) : ListAdapter<Product, ProductsAdapter.ViewHolder>(DiffUtil()) {
-    class ViewHolder(private val binding : ItemCardBinding): RecyclerView.ViewHolder(binding.root) {
+class ProductsAdapter : ListAdapter<Product, ProductsAdapter.ViewHolder>(DiffUtil()) {
+    inner class ViewHolder(private val binding : ItemCardBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product){
             binding.productImgVw.setImageResource(product.image)
             binding.discountedPriceTxtVw.text = product.discountedPrice
@@ -28,7 +28,6 @@ class ProductsAdapter(private val list : List<Product>) : ListAdapter<Product, P
         override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem == newItem
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,6 +36,6 @@ class ProductsAdapter(private val list : List<Product>) : ListAdapter<Product, P
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(getItem(position))
     }
 }

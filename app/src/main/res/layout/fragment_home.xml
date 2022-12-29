@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/white"
+        android:orientation="vertical"
         android:padding="@dimen/dp_14"
         tools:context=".ui.home.HomeFragment">
 
         <LinearLayout
             android:id="@+id/toolbar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/dp_35"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.SearchView
@@ -28,216 +28,229 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:iconifiedByDefault="false"
-                app:defaultQueryHint="Search Here"
-                android:foregroundTint="@null"
-                android:backgroundTint="@null"
                 android:background="@drawable/search_view_bg"
-                android:searchIcon="@drawable/ic_search_icon" />
+                android:backgroundTint="@null"
+                android:foregroundTint="@null"
+                android:searchIcon="@drawable/ic_search_icon"
+                app:defaultQueryHint="Search Here"
+                app:iconifiedByDefault="false" />
 
             <ImageView
                 android:layout_width="@dimen/dp_16"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@drawable/ic_hamburger"
-                android:layout_marginStart="@dimen/dp_10"
                 android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp_10"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
 
-                android:scaleType="fitXY" />
+                android:src="@drawable/ic_hamburger" />
         </LinearLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/offersViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_96"
-            android:layout_marginTop="@dimen/dp_11"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-        <LinearLayout
-            android:id="@+id/viewpager_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/offersViewPager">
-
-            <ImageView
-                android:layout_width="@dimen/dp_16"
-                android:layout_height="@dimen/dp_5"
-                android:src="@drawable/viewpager_selected" />
-
-            <ImageView
-                android:layout_width="@dimen/dp_5"
-                android:layout_height="@dimen/dp_5"
-                android:layout_marginStart="@dimen/dp_2"
-                android:src="@drawable/viewpager_not_selected" />
-
-            <ImageView
-                android:layout_width="@dimen/dp_5"
-                android:layout_height="@dimen/dp_5"
-                android:layout_marginStart="@dimen/dp_2"
-                android:src="@drawable/viewpager_not_selected" />
-
-            <ImageView
-                android:layout_width="@dimen/dp_5"
-                android:layout_height="@dimen/dp_5"
-                android:layout_marginStart="@dimen/dp_2"
-                android:src="@drawable/viewpager_not_selected" />
-
-            <ImageView
-                android:layout_width="@dimen/dp_5"
-                android:layout_height="@dimen/dp_5"
-                android:layout_marginStart="@dimen/dp_2"
-                android:src="@drawable/viewpager_not_selected" />
-
-            <ImageView
-                android:layout_width="@dimen/dp_5"
-                android:layout_height="@dimen/dp_5"
-                android:layout_marginStart="@dimen/dp_2"
-                android:src="@drawable/viewpager_not_selected" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/categoriesTxtVw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_11"
-            android:text="Categories"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/black"
-            android:textFontWeight="600"
-            android:textSize="@dimen/sp_14"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/viewpager_details" />
-
-        <TextView
-            android:id="@+id/seeAllTxtVw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_11"
-            android:text="See All"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/black"
-            android:textFontWeight="600"
-            android:textSize="@dimen/sp_14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/viewpager_details" />
-
-        <HorizontalScrollView
-            android:id="@+id/categoriesScrollView"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_25"
-            android:layout_marginTop="@dimen/dp_11"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/categoriesTxtVw">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="@dimen/sp_14"
-                    android:textColor="@color/white"
-                    android:paddingStart="@dimen/dp_14"
-                    android:paddingEnd="@dimen/dp_14"
-                    android:gravity="center"
-                    android:text="All"
-                    android:background="@drawable/category_selected" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="@dimen/sp_14"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:paddingStart="@dimen/dp_14"
-                    android:paddingEnd="@dimen/dp_14"
-                    android:gravity="center"
-                    android:text="All"
-                    android:background="@drawable/categories_not_selected" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="@dimen/sp_14"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:paddingStart="@dimen/dp_14"
-                    android:paddingEnd="@dimen/dp_14"
-                    android:gravity="center"
-                    android:text="All"
-                    android:background="@drawable/categories_not_selected" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="@dimen/sp_14"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:paddingStart="@dimen/dp_14"
-                    android:paddingEnd="@dimen/dp_14"
-                    android:gravity="center"
-                    android:text="All"
-                    android:background="@drawable/categories_not_selected" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="@dimen/sp_14"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:paddingStart="@dimen/dp_14"
-                    android:paddingEnd="@dimen/dp_14"
-                    android:gravity="center"
-                    android:text="All"
-                    android:background="@drawable/categories_not_selected" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="@dimen/sp_14"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:paddingStart="@dimen/dp_14"
-                    android:paddingEnd="@dimen/dp_14"
-                    android:gravity="center"
-                    android:text="All"
-                    android:background="@drawable/categories_not_selected" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/montserrat"
-                    android:textSize="@dimen/sp_14"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:paddingStart="@dimen/dp_14"
-                    android:paddingEnd="@dimen/dp_14"
-                    android:gravity="center"
-                    android:text="All"
-                    android:background="@drawable/categories_not_selected" />
-            </LinearLayout>
-        </HorizontalScrollView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/itemRecyclerView"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_17"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/categoriesScrollView" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginTop="@dimen/dp_11">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/offersViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_96"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <LinearLayout
+                    android:id="@+id/viewpager_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/offersViewPager">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_16"
+                        android:layout_height="@dimen/dp_5"
+                        android:src="@drawable/viewpager_selected" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_5"
+                        android:layout_height="@dimen/dp_5"
+                        android:layout_marginStart="@dimen/dp_2"
+                        android:src="@drawable/viewpager_not_selected" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_5"
+                        android:layout_height="@dimen/dp_5"
+                        android:layout_marginStart="@dimen/dp_2"
+                        android:src="@drawable/viewpager_not_selected" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_5"
+                        android:layout_height="@dimen/dp_5"
+                        android:layout_marginStart="@dimen/dp_2"
+                        android:src="@drawable/viewpager_not_selected" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_5"
+                        android:layout_height="@dimen/dp_5"
+                        android:layout_marginStart="@dimen/dp_2"
+                        android:src="@drawable/viewpager_not_selected" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_5"
+                        android:layout_height="@dimen/dp_5"
+                        android:layout_marginStart="@dimen/dp_2"
+                        android:src="@drawable/viewpager_not_selected" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/categoriesTxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_11"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Categories"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewpager_details" />
+
+                <TextView
+                    android:id="@+id/seeAllTxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_11"
+                    android:fontFamily="@font/montserrat"
+                    android:text="See All"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewpager_details" />
+
+                <HorizontalScrollView
+                    android:id="@+id/categoriesScrollView"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_25"
+                    android:layout_marginTop="@dimen/dp_11"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/categoriesTxtVw">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/category_selected"
+                            android:fontFamily="@font/montserrat"
+                            android:gravity="center"
+                            android:paddingStart="@dimen/dp_14"
+                            android:paddingEnd="@dimen/dp_14"
+                            android:text="All"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp_14" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/dp_10"
+                            android:background="@drawable/categories_not_selected"
+                            android:fontFamily="@font/montserrat"
+                            android:gravity="center"
+                            android:paddingStart="@dimen/dp_14"
+                            android:paddingEnd="@dimen/dp_14"
+                            android:text="All"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/dp_10"
+                            android:background="@drawable/categories_not_selected"
+                            android:fontFamily="@font/montserrat"
+                            android:gravity="center"
+                            android:paddingStart="@dimen/dp_14"
+                            android:paddingEnd="@dimen/dp_14"
+                            android:text="All"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/dp_10"
+                            android:background="@drawable/categories_not_selected"
+                            android:fontFamily="@font/montserrat"
+                            android:gravity="center"
+                            android:paddingStart="@dimen/dp_14"
+                            android:paddingEnd="@dimen/dp_14"
+                            android:text="All"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/dp_10"
+                            android:background="@drawable/categories_not_selected"
+                            android:fontFamily="@font/montserrat"
+                            android:gravity="center"
+                            android:paddingStart="@dimen/dp_14"
+                            android:paddingEnd="@dimen/dp_14"
+                            android:text="All"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/dp_10"
+                            android:background="@drawable/categories_not_selected"
+                            android:fontFamily="@font/montserrat"
+                            android:gravity="center"
+                            android:paddingStart="@dimen/dp_14"
+                            android:paddingEnd="@dimen/dp_14"
+                            android:text="All"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/dp_10"
+                            android:background="@drawable/categories_not_selected"
+                            android:fontFamily="@font/montserrat"
+                            android:gravity="center"
+                            android:paddingStart="@dimen/dp_14"
+                            android:paddingEnd="@dimen/dp_14"
+                            android:text="All"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/itemRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_17"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/categoriesScrollView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
 </layout>
