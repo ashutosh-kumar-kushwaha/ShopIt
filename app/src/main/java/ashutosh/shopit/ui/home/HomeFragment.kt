@@ -13,6 +13,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import ashutosh.shopit.R
 import ashutosh.shopit.adapters.OffersAdapter
@@ -20,12 +21,16 @@ import ashutosh.shopit.adapters.ProductSpacingItemDecoration
 import ashutosh.shopit.adapters.ProductsAdapter
 import ashutosh.shopit.databinding.FragmentHomeBinding
 import ashutosh.shopit.models.Product
+import ashutosh.shopit.ui.auth.getStarted.GetStartedViewModel
 import java.lang.reflect.Field
 
 class HomeFragment : Fragment() {
 
     private var _binding : FragmentHomeBinding? = null
     private val binding : FragmentHomeBinding get() = _binding!!
+
+    private val homeViewModel by viewModels<HomeViewModel>()
+
 
     @SuppressLint("DiscouragedPrivateApi")
     override fun onCreateView(
