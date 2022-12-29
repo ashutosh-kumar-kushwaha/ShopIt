@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="ashutosh.shopit.ui.home.HomeViewModel" />
     </data>
 
     <LinearLayout
@@ -73,35 +75,42 @@
                     app:layout_constraintTop_toBottomOf="@+id/offersViewPager">
 
                     <ImageView
+                        android:id="@+id/circle1"
                         android:layout_width="@dimen/dp_16"
                         android:layout_height="@dimen/dp_5"
+                        android:layout_marginStart="@dimen/dp_2"
                         android:src="@drawable/viewpager_selected" />
 
                     <ImageView
+                        android:id="@+id/circle2"
                         android:layout_width="@dimen/dp_5"
                         android:layout_height="@dimen/dp_5"
                         android:layout_marginStart="@dimen/dp_2"
                         android:src="@drawable/viewpager_not_selected" />
 
                     <ImageView
+                        android:id="@+id/circle3"
                         android:layout_width="@dimen/dp_5"
                         android:layout_height="@dimen/dp_5"
                         android:layout_marginStart="@dimen/dp_2"
                         android:src="@drawable/viewpager_not_selected" />
 
                     <ImageView
+                        android:id="@+id/circle4"
                         android:layout_width="@dimen/dp_5"
                         android:layout_height="@dimen/dp_5"
                         android:layout_marginStart="@dimen/dp_2"
                         android:src="@drawable/viewpager_not_selected" />
 
                     <ImageView
+                        android:id="@+id/circle5"
                         android:layout_width="@dimen/dp_5"
                         android:layout_height="@dimen/dp_5"
                         android:layout_marginStart="@dimen/dp_2"
                         android:src="@drawable/viewpager_not_selected" />
 
                     <ImageView
+                        android:id="@+id/circle6"
                         android:layout_width="@dimen/dp_5"
                         android:layout_height="@dimen/dp_5"
                         android:layout_marginStart="@dimen/dp_2"
