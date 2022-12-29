@@ -15,6 +15,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import ashutosh.shopit.R
+import ashutosh.shopit.adapters.OffersAdapter
 import ashutosh.shopit.adapters.ProductSpacingItemDecoration
 import ashutosh.shopit.adapters.ProductsAdapter
 import ashutosh.shopit.databinding.FragmentHomeBinding
@@ -54,6 +55,8 @@ class HomeFragment : Fragment() {
 
         val icon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
         icon.setImageResource(R.drawable.ic_search_icon)
+
+        binding.offersViewPager.adapter = OffersAdapter(listOf(R.drawable.offer, R.drawable.offer, R.drawable.offer, R.drawable.offer, R.drawable.offer, R.drawable.offer))
 
         binding.itemRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         val adapter = ProductsAdapter()
