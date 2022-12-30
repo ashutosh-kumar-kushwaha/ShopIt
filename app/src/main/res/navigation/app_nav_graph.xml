@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="ashutosh.shopit.ui.CategoriesFragment"
+        android:name="ashutosh.shopit.ui.category.CategoriesFragment"
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories" />
 </navigation>

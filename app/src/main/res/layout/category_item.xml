@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:id="@+id/categoriesTxtVw"
+        android:text="Category"
+        android:fontFamily="@font/montserrat"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/category_bg"
+        android:layout_marginBottom="@dimen/dp_14"/>
+</layout>

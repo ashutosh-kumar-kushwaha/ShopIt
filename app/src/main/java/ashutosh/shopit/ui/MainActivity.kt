@@ -2,11 +2,13 @@ package ashutosh.shopit.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.ActivityMainBinding
+import ashutosh.shopit.ui.category.CategoriesFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
         
-//        findViewById<Button>(R.id.signOutBtn).setOnClickListener {
+//        findViewById<Button>(R.id.signOutBtn).setOnClickListener {C
 //            lifecycleScope.launch {
 //                val dataStoreManager = DataStoreManager(this@MainActivity)
 //                dataStoreManager.storeLogInInfo(LogInInfo("", "", false, "", "", ""))
@@ -29,10 +31,14 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        val navController = navHostFragment.navController
+//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = binding.fragmentContainerView.getFragment<NavHostFragment>().navController
         binding.bottomNavigationBar.setupWithNavController(navController)
 
+//        val fm = supportFragmentManager
+//        val ft = fm.beginTransaction()
+//        ft.add(R.id.fragmentContainerView, CategoriesFragment())
+//        ft.commit()
 
 
     }

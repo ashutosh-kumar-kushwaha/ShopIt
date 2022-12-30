@@ -14,13 +14,13 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        android:padding="@dimen/dp_14"
         tools:context=".ui.home.HomeFragment">
 
         <LinearLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_35"
+            android:layout_margin="@dimen/dp_14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -44,14 +44,19 @@
                 android:layout_marginStart="@dimen/dp_10"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-
                 android:src="@drawable/ic_hamburger" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/color2"/>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_11">
+            android:layout_marginStart="@dimen/dp_14"
+            android:layout_marginEnd="@dimen/dp_14">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -61,6 +66,7 @@
                     android:id="@+id/offersViewPager"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_96"
+                    android:layout_marginTop="@dimen/dp_11"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
@@ -135,12 +141,12 @@
                     android:id="@+id/seeAllTxtVw"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_11"
+                    android:layout_marginTop="@dimen/dp_12"
                     android:fontFamily="@font/montserrat"
                     android:text="See All"
                     android:textColor="@color/black"
                     android:textFontWeight="600"
-                    android:textSize="@dimen/sp_14"
+                    android:textSize="@dimen/sp_11"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/viewpager_details" />
 
