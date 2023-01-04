@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_86"
+        android:paddingStart="@dimen/dp_13"
+        android:paddingTop="@dimen/dp_11"
+        android:paddingEnd="@dimen/dp_13"
+        android:paddingBottom="@dimen/dp_7"
+        android:layout_marginBottom="@dimen/dp_11">
+
+        <ImageView
+            android:id="@+id/notificationIconImgVw"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_notification"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/productImgVw"
+            android:layout_width="@dimen/dp_59"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/iphone"
+            android:foregroundGravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/textLL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/notificationIconImgVw"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/productImgVw"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_8">
+
+            <TextView
+                android:id="@+id/titleTxtVw"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="Order Delivered!"
+                android:fontFamily="@font/poppins"
+                android:textSize="@dimen/sp_11"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textFontWeight="600"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/timeTxtVw"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="8 days ago"
+                android:fontFamily="@font/poppins"
+                android:textSize="@dimen/sp_7" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/removeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remove"
+            android:fontFamily="@font/poppins"
+            android:textSize="@dimen/sp_11"
+            android:textColor="@color/color9"
+            android:textFontWeight="600"
+            app:layout_constraintStart_toStartOf="@id/textLL"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/messageTxtVw"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/poppins"
+            android:textSize="@dimen/sp_7"
+            android:textFontWeight="700"
+            android:textColor="@color/color2"
+            android:text="Your shopit order containing Apple Iphone 14 128GB (Product) RED  has been delivered."
+            android:layout_marginTop="@dimen/dp_3"
+            android:layout_marginBottom="@dimen/dp_3"
+            android:layout_marginEnd="@dimen/dp_8"
+            app:layout_constraintStart_toStartOf="@id/textLL"
+            app:layout_constraintEnd_toStartOf="@id/productImgVw"
+            app:layout_constraintTop_toBottomOf="@id/textLL"
+            app:layout_constraintBottom_toTopOf="@id/removeBtn" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
