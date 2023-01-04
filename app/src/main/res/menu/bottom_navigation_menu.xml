@@ -9,6 +9,10 @@
         android:title="Categories"
         android:icon="@drawable/ic_categories"/>
     <item
+        android:id="@+id/notificationFragment"
+        android:title="Notifications"
+        android:icon="@drawable/ic_notifications"/>
+    <item
         android:id="@+id/accountFragment"
         android:title="Account"
         android:icon="@drawable/ic_profile"/>

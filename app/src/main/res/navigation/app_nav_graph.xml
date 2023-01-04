@@ -20,4 +20,8 @@
         android:name="ashutosh.shopit.ui.account.AccountFragment"
         android:label="Account"
         tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="ashutosh.shopit.ui.notification.NotificationFragment"
+        android:label="NotificationFragment" />
 </navigation>
