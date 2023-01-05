@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:layout_width="@dimen/dp_133"
+        android:layout_width="match_parent"
         android:orientation="vertical"
         android:foreground="@drawable/item_card_bg"
         android:layout_height="wrap_content">
@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/productTitleTxtVw"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/montserrat"
             android:textFontWeight="600"
