@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ServiceBuilder {
-    private const val URL = "http://shopit-env-1.eba-kjhuufsq.ap-south-1.elasticbeanstalk.com/"
+    private const val URL = "https://shopitanywhere.up.railway.app/"
 
     private val okHttp = OkHttpClient.Builder()
 

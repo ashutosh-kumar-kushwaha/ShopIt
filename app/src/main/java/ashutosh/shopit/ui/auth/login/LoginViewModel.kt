@@ -22,11 +22,11 @@ class LoginViewModel : ViewModel() {
 
     suspend fun login(){
         if(emailLiveData.value != null && Patterns.EMAIL_ADDRESS.matcher(emailLiveData.value.toString()).matches()){
-            if(passwordLiveData.value!!.matches(Regex("^(?=.[a-z])(?=.[A-Z])(?=.\\\\d)(?=.[@\$!%?&])[A-Za-z\\\\d@\$!%?&]{8,}\$"))){
+            if(passwordLiveData.value!!.matches(Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"))){
                 loginRepository.login(emailLiveData.value!!, passwordLiveData.value!!)
             }
             else{
-                errorMessage.value = "Wrong format of password"
+                errorMessage.value = "Password must contain at least one uppercase letter, one lowercase letter, one numeric character, one special character and no spaces"
             }
         }
         else{
