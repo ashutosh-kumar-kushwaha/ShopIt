@@ -74,6 +74,7 @@ class HomeFragment : Fragment() {
         binding.itemRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         binding.itemRecyclerView.adapter = productsAdapter
+        productsAdapter.submitList(homeViewModel.productsList.value)
         binding.itemRecyclerView.addItemDecoration(ProductSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.dp_21), resources.getDimensionPixelSize(R.dimen.dp_8)))
 
         circles =  listOf(binding.circle1, binding.circle2, binding.circle3, binding.circle4, binding.circle5, binding.circle6)
