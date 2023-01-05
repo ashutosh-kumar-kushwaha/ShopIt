@@ -19,7 +19,7 @@ class ResetPasswordViewModel(val email : String, val otp : String) : ViewModel()
         if(password1LiveData.value != null && password2LiveData.value != null){
             if(password1LiveData.value == password2LiveData.value){
                 if(password1LiveData.value!!.length < 8){
-                    if(password1LiveData.value!!.matches(Regex("^(?=.[a-z])(?=.[A-Z])(?=.\\\\d)(?=.[@\$!%?&])[A-Za-z\\\\d@\$!%?&]{8,}\$"))){
+                    if(password1LiveData.value!!.matches(Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"))){
                         resetPasswordRepository.resetPassword(email, otp, password1LiveData.value!!)
                     }
                     else{

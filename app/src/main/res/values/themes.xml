@@ -12,6 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">#999999</item>
         <!-- Customize your theme here. -->
+        <item name="android:fontFamily">@font/montserrat</item>
+
     </style>
     
     <style name="SearchViewTheme" parent="Widget.AppCompat.SearchView">
@@ -19,5 +21,15 @@
         <item name="android:background">@drawable/search_view_bg</item>
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:iconifiedByDefault">false</item>
+    </style>
+    <style name="ChipTheme" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="android:fontFamily">@font/chip_font</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+    <style name="ChipText" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textFontWeight">600</item>
+        <item name="android:gravity">center</item>
     </style>
 </resources>
