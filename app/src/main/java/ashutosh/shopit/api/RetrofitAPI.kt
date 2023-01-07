@@ -1,13 +1,16 @@
 package ashutosh.shopit.api
 
 import ashutosh.shopit.models.*
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable.Param
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RetrofitAPI {
+
+    //auth
     @POST("api/auth/login")
     suspend fun login(@Body loginRequest: LoginRequest) : Response<LoginResponse>
 
@@ -31,4 +34,10 @@ interface RetrofitAPI {
 
     @POST("api/auth/signGoogle")
     suspend fun signGoogle(@Query("TokenG") token : String) : Response<LoginResponse>
+
+    //Product
+
+    @GET("products/getProductsByCategory/{categoryId}")
+    suspend fun getProductsByCategory(@Path("categoryId") categoryId : Int) : Response<ProductsResponse>
+
  }
