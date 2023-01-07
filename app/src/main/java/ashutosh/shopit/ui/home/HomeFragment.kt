@@ -1,16 +1,12 @@
 package ashutosh.shopit.ui.home
 
 import android.annotation.SuppressLint
-import android.media.Image
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -24,6 +20,7 @@ import ashutosh.shopit.adapters.OffersAdapter
 import ashutosh.shopit.adapters.ProductSpacingItemDecoration
 import ashutosh.shopit.adapters.ProductsAdapter
 import ashutosh.shopit.databinding.FragmentHomeBinding
+import ashutosh.shopit.di.NetworkResult
 import java.lang.reflect.Field
 
 class HomeFragment : Fragment() {
@@ -69,15 +66,13 @@ class HomeFragment : Fragment() {
         val icon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
         icon.setImageResource(R.drawable.ic_search_icon)
 
-        binding.offersViewPager.adapter = OffersAdapter(homeViewModel.offersList.value!!)
+//        binding.offersViewPager.adapter = OffersAdapter(homeViewModel.offersList.value!!)
 
         binding.itemRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         binding.itemRecyclerView.adapter = productsAdapter
-        productsAdapter.submitList(homeViewModel.productsList.value)
-        binding.itemRecyclerView.addItemDecoration(ProductSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.dp_21), resources.getDimensionPixelSize(R.dimen.dp_8)))
 
-        binding.itemRecyclerVwShimmer.startShimmerAnimation()
+        binding.itemRecyclerView.addItemDecoration(ProductSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.dp_21), resources.getDimensionPixelSize(R.dimen.dp_8)))
 
         circles =  listOf(binding.circle1, binding.circle2, binding.circle3, binding.circle4, binding.circle5, binding.circle6)
 
@@ -93,6 +88,49 @@ class HomeFragment : Fragment() {
 
             }
         })
+
+
+        binding.categoryAllChip.setOnClickListener {
+            homeViewModel.getAllProducts()
+        }
+        binding.categoryChip1.setOnClickListener {
+            homeViewModel.categoriesLiveData.value?.data?.content?.get(0)?.categoryId?.let { it1 ->
+                homeViewModel.getProductsByCategory(
+                    it1
+                )
+            }
+        }
+        binding.categoryChip2.setOnClickListener {
+            homeViewModel.categoriesLiveData.value?.data?.content?.get(1)?.categoryId?.let { it1 ->
+                homeViewModel.getProductsByCategory(
+                    it1
+                )
+            }
+        }
+        binding.categoryChip3.setOnClickListener {
+            homeViewModel.categoriesLiveData.value?.data?.content?.get(2)?.categoryId?.let { it1 ->
+                homeViewModel.getProductsByCategory(
+                    it1
+                )
+            }
+        }
+        binding.categoryChip4.setOnClickListener {
+            homeViewModel.categoriesLiveData.value?.data?.content?.get(3)?.categoryId?.let { it1 ->
+                homeViewModel.getProductsByCategory(
+                    it1
+                )
+            }
+        }
+        binding.categoryChip5.setOnClickListener {
+            homeViewModel.categoriesLiveData.value?.data?.content?.get(4)?.categoryId?.let { it1 ->
+                homeViewModel.getProductsByCategory(
+                    it1
+                )
+            }
+        }
+
+        homeViewModel.getCategories()
+        homeViewModel.getAllProducts()
 
         return binding.root
     }
@@ -124,13 +162,46 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeViewModel.productsList.observe(viewLifecycleOwner, Observer{
-            productsAdapter.submitList(it)
-        })
+        homeViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkResult.Loading -> {
 
-        homeViewModel.offersList.observe(viewLifecycleOwner, Observer{
+                }
+                is NetworkResult.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Success -> {
+                    binding.categoryChip1.text = it.data?.content?.get(0)?.categoryName
+                    binding.categoryChip2.text = it.data?.content?.get(1)?.categoryName
+                    binding.categoryChip3.text = it.data?.content?.get(2)?.categoryName
+                    binding.categoryChip4.text = it.data?.content?.get(3)?.categoryName
+                    binding.categoryChip5.text = it.data?.content?.get(4)?.categoryName
+                }
+            }
+        }
+
+        homeViewModel.productsLiveData.observe(viewLifecycleOwner){
+            when(it){
+                is NetworkResult.Success -> {
+                    binding.itemRecyclerView.visibility = View.VISIBLE
+                    binding.itemRecyclerVwShimmer.visibility = View.GONE
+                    productsAdapter.submitList(it.data?.content)
+                    binding.itemRecyclerVwShimmer.stopShimmerAnimation()
+                }
+
+                is NetworkResult.Loading -> {
+                    binding.itemRecyclerVwShimmer.visibility = View.VISIBLE
+                    binding.itemRecyclerView.visibility = View.GONE
+                    binding.itemRecyclerVwShimmer.startShimmerAnimation()
+                }
+
+                is NetworkResult.Error -> Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        homeViewModel.offersList.observe(viewLifecycleOwner) {
             binding.offersViewPager.adapter = OffersAdapter(it)
-        })
+        }
 
     }
 

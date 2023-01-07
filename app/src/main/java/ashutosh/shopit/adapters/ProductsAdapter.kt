@@ -1,31 +1,40 @@
 package ashutosh.shopit.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ashutosh.shopit.databinding.ItemCardBinding
-import ashutosh.shopit.models.Product
+import ashutosh.shopit.models.ProductsContent
+import coil.load
+import kotlin.math.roundToInt
 
-class ProductsAdapter : ListAdapter<Product, ProductsAdapter.ViewHolder>(DiffUtil()) {
+class ProductsAdapter : ListAdapter<ProductsContent, ProductsAdapter.ViewHolder>(DiffUtil()) {
     inner class ViewHolder(private val binding : ItemCardBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: Product){
-            binding.productImgVw.setImageResource(product.image)
-            binding.discountedPriceTxtVw.text = product.discountedPrice
-            binding.ratingTxtVw.text = product.rating
-            binding.soldTxtVw.text = product.sold.toString()
-            binding.productTitleTxtVw.text = product.name
-            binding.originalPriceTxtVw.text = product.originalPrice
+        fun bind(product: ProductsContent){
+            binding.productImgVw.load(product.imageUrls.imageUrl)
+//            if(product.image == null){
+//                Log.d("Ashu", "NULL")
+//            }
+            val discountedPrice = "₹${(product.originalPrice-(product.offerPercentage/100)*product.originalPrice).roundToInt()}"
+            binding.discountedPriceTxtVw.text = discountedPrice
+            binding.ratingTxtVw.text = product.rating.toString()
+            val soldText = "${product.noOfOrders} sold"
+            binding.soldTxtVw.text = soldText
+            binding.productTitleTxtVw.text = product.productName
+            val originalPrice = "₹${product.originalPrice.roundToInt()}"
+            binding.originalPriceTxtVw.text = originalPrice
         }
     }
 
-    class DiffUtil: ItemCallback<Product>(){
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.id == newItem.id
+    class DiffUtil: ItemCallback<ProductsContent>(){
+        override fun areItemsTheSame(oldItem: ProductsContent, newItem: ProductsContent): Boolean {
+            return oldItem.productId == newItem.productId
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: ProductsContent, newItem: ProductsContent): Boolean {
             return oldItem == newItem
         }
     }

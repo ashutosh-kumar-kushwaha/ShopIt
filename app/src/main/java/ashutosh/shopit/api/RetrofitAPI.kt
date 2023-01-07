@@ -40,4 +40,11 @@ interface RetrofitAPI {
     @GET("products/getProductsByCategory/{categoryId}")
     suspend fun getProductsByCategory(@Path("categoryId") categoryId : Int) : Response<ProductsResponse>
 
- }
+    @GET("products/get")
+    suspend fun getAllProducts() : Response<ProductsResponse>
+
+    //Category
+
+    @GET("category/get?pageSize=5")
+    suspend fun getCategory() : Response<CategoryResponse>
+}

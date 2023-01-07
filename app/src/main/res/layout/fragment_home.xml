@@ -161,11 +161,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/categoriesTxtVw">
 
                     <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/categoriesChipGroup"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         app:chipSpacingHorizontal="@dimen/dp_11">
 
                         <com.google.android.material.chip.Chip
+                            android:id="@+id/categoryAllChip"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -183,6 +185,7 @@
                             app:closeIconEnabled="false" />
 
                         <com.google.android.material.chip.Chip
+                            android:id="@+id/categoryChip1"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -202,6 +205,7 @@
                             app:closeIconEnabled="false" />
 
                         <com.google.android.material.chip.Chip
+                            android:id="@+id/categoryChip2"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -221,6 +225,7 @@
                             app:closeIconEnabled="false" />
 
                         <com.google.android.material.chip.Chip
+                            android:id="@+id/categoryChip3"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -240,6 +245,7 @@
                             app:closeIconEnabled="false" />
 
                         <com.google.android.material.chip.Chip
+                            android:id="@+id/categoryChip4"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -259,6 +265,7 @@
                             app:closeIconEnabled="false" />
 
                         <com.google.android.material.chip.Chip
+                            android:id="@+id/categoryChip5"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -276,83 +283,6 @@
                             app:chipStrokeColor="@color/black"
                             app:chipStrokeWidth="@dimen/dp_1"
                             app:closeIconEnabled="false" />
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/montserrat"
-                            android:gravity="center"
-                            android:text="All"
-                            android:textAppearance="@style/ChipText"
-                            android:textColor="@color/black"
-                            app:checkedIconEnabled="false"
-                            app:chipBackgroundColor="@color/white"
-                            app:chipEndPadding="@dimen/dp_9"
-                            app:chipIconEnabled="false"
-                            app:chipMinTouchTargetSize="0dp"
-                            app:chipStartPadding="@dimen/dp_9"
-                            app:chipStrokeColor="@color/black"
-                            app:chipStrokeWidth="@dimen/dp_1"
-                            app:closeIconEnabled="false" />
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/montserrat"
-                            android:gravity="center"
-                            android:text="All"
-                            android:textAppearance="@style/ChipText"
-                            android:textColor="@color/black"
-                            app:checkedIconEnabled="false"
-                            app:chipBackgroundColor="@color/white"
-                            app:chipEndPadding="@dimen/dp_9"
-                            app:chipIconEnabled="false"
-                            app:chipMinTouchTargetSize="0dp"
-                            app:chipStartPadding="@dimen/dp_9"
-                            app:chipStrokeColor="@color/black"
-                            app:chipStrokeWidth="@dimen/dp_1"
-                            app:closeIconEnabled="false" />
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/montserrat"
-                            android:gravity="center"
-                            android:text="All"
-                            android:textAppearance="@style/ChipText"
-                            android:textColor="@color/black"
-                            app:checkedIconEnabled="false"
-                            app:chipBackgroundColor="@color/white"
-                            app:chipEndPadding="@dimen/dp_9"
-                            app:chipIconEnabled="false"
-                            app:chipMinTouchTargetSize="0dp"
-                            app:chipStartPadding="@dimen/dp_9"
-                            app:chipStrokeColor="@color/black"
-                            app:chipStrokeWidth="@dimen/dp_1"
-                            app:closeIconEnabled="false" />
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.MaterialComponents.Chip.Choice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/montserrat"
-                            android:gravity="center"
-                            android:text="All"
-                            android:textAppearance="@style/ChipText"
-                            android:textColor="@color/black"
-                            app:checkedIconEnabled="false"
-                            app:chipBackgroundColor="@color/white"
-                            app:chipEndPadding="@dimen/dp_9"
-                            app:chipIconEnabled="false"
-                            app:chipMinTouchTargetSize="0dp"
-                            app:chipStartPadding="@dimen/dp_9"
-                            app:chipStrokeColor="@color/black"
-                            app:chipStrokeWidth="@dimen/dp_1"
-                            app:closeIconEnabled="false" />
-
                     </com.google.android.material.chip.ChipGroup>
                 </HorizontalScrollView>
 
