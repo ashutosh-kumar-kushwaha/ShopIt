@@ -165,10 +165,13 @@ class HomeFragment : Fragment() {
         homeViewModel.categoriesLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is NetworkResult.Loading -> {
-
+                    binding.categoriesScrollView.visibility = View.INVISIBLE
+                    binding.categoriesShimmer.visibility = View.VISIBLE
+                    binding.categoriesShimmer.startShimmerAnimation()
                 }
                 is NetworkResult.Error -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    binding.categoriesShimmer.stopShimmerAnimation()
                 }
                 is NetworkResult.Success -> {
                     binding.categoryChip1.text = it.data?.content?.get(0)?.categoryName
@@ -176,6 +179,9 @@ class HomeFragment : Fragment() {
                     binding.categoryChip3.text = it.data?.content?.get(2)?.categoryName
                     binding.categoryChip4.text = it.data?.content?.get(3)?.categoryName
                     binding.categoryChip5.text = it.data?.content?.get(4)?.categoryName
+                    binding.categoriesShimmer.stopShimmerAnimation()
+                    binding.categoriesShimmer.visibility = View.GONE
+                    binding.categoriesScrollView.visibility = View.VISIBLE
                 }
             }
         }
@@ -183,19 +189,22 @@ class HomeFragment : Fragment() {
         homeViewModel.productsLiveData.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Success -> {
+                    binding.itemRecyclerVwShimmer.stopShimmerAnimation()
                     binding.itemRecyclerView.visibility = View.VISIBLE
                     binding.itemRecyclerVwShimmer.visibility = View.GONE
                     productsAdapter.submitList(it.data?.content)
-                    binding.itemRecyclerVwShimmer.stopShimmerAnimation()
                 }
 
                 is NetworkResult.Loading -> {
                     binding.itemRecyclerVwShimmer.visibility = View.VISIBLE
-                    binding.itemRecyclerView.visibility = View.GONE
+                    binding.itemRecyclerView.visibility = View.INVISIBLE
                     binding.itemRecyclerVwShimmer.startShimmerAnimation()
                 }
 
-                is NetworkResult.Error -> Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                is NetworkResult.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    binding.itemRecyclerVwShimmer.stopShimmerAnimation()
+                }
             }
         }
 

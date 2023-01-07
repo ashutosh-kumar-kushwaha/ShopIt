@@ -15,9 +15,6 @@ class ProductsAdapter : ListAdapter<ProductsContent, ProductsAdapter.ViewHolder>
     inner class ViewHolder(private val binding : ItemCardBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(product: ProductsContent){
             binding.productImgVw.load(product.imageUrls.imageUrl)
-//            if(product.image == null){
-//                Log.d("Ashu", "NULL")
-//            }
             val discountedPrice = "₹${(product.originalPrice-(product.offerPercentage/100)*product.originalPrice).roundToInt()}"
             binding.discountedPriceTxtVw.text = discountedPrice
             binding.ratingTxtVw.text = product.rating.toString()
