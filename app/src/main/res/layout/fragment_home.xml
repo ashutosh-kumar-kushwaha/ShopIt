@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="ashutosh.shopit.ui.home.HomeViewModel" />
@@ -232,6 +231,8 @@
                             app:chipIconEnabled="false"
                             app:chipMinTouchTargetSize="0dp"
                             app:chipStartPadding="@dimen/dp_9"
+                            app:chipStrokeColor="@color/black"
+                            app:chipStrokeWidth="@dimen/dp_1"
                             app:closeIconEnabled="false" />
 
                         <com.google.android.material.chip.Chip

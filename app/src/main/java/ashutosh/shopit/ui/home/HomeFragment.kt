@@ -1,6 +1,7 @@
 package ashutosh.shopit.ui.home
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import ashutosh.shopit.adapters.ProductSpacingItemDecoration
 import ashutosh.shopit.adapters.ProductsAdapter
 import ashutosh.shopit.databinding.FragmentHomeBinding
 import ashutosh.shopit.di.NetworkResult
+import com.google.android.material.chip.Chip
 import java.lang.reflect.Field
 
 class HomeFragment : Fragment() {
@@ -35,6 +37,8 @@ class HomeFragment : Fragment() {
     private var circles = mutableListOf<ImageView>()
     private var circleNumber = 0
 
+    private lateinit var categories : List<Chip>
+
     @SuppressLint("DiscouragedPrivateApi")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +49,8 @@ class HomeFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = homeViewModel
+
+        categories = listOf(binding.categoryAllChip, binding.categoryChip1, binding.categoryChip2, binding.categoryChip3, binding.categoryChip4, binding.categoryChip5)
 
         val searchText = binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
         val font = ResourcesCompat.getFont(requireContext(), R.font.montserrat)
@@ -66,8 +72,6 @@ class HomeFragment : Fragment() {
 
         val icon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
         icon.setImageResource(R.drawable.ic_search_icon)
-
-//        binding.offersViewPager.adapter = OffersAdapter(homeViewModel.offersList.value!!)
 
         binding.itemRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
@@ -103,37 +107,37 @@ class HomeFragment : Fragment() {
         }
         binding.categoryChip1.setOnClickListener {
             homeViewModel.categoriesLiveData.value?.data?.content?.get(0)?.categoryId?.let { it1 ->
-                homeViewModel.getProductsByCategory(
-                    it1
-                )
+                homeViewModel.getProductsByCategory(it1)
+                unselectAllCategories()
+                selectCategory(it as Chip)
             }
         }
         binding.categoryChip2.setOnClickListener {
             homeViewModel.categoriesLiveData.value?.data?.content?.get(1)?.categoryId?.let { it1 ->
-                homeViewModel.getProductsByCategory(
-                    it1
-                )
+                homeViewModel.getProductsByCategory(it1)
+                unselectAllCategories()
+                selectCategory(it as Chip)
             }
         }
         binding.categoryChip3.setOnClickListener {
             homeViewModel.categoriesLiveData.value?.data?.content?.get(2)?.categoryId?.let { it1 ->
-                homeViewModel.getProductsByCategory(
-                    it1
-                )
+                homeViewModel.getProductsByCategory(it1)
+                unselectAllCategories()
+                selectCategory(it as Chip)
             }
         }
         binding.categoryChip4.setOnClickListener {
             homeViewModel.categoriesLiveData.value?.data?.content?.get(3)?.categoryId?.let { it1 ->
-                homeViewModel.getProductsByCategory(
-                    it1
-                )
+                homeViewModel.getProductsByCategory(it1)
+                unselectAllCategories()
+                selectCategory(it as Chip)
             }
         }
         binding.categoryChip5.setOnClickListener {
             homeViewModel.categoriesLiveData.value?.data?.content?.get(4)?.categoryId?.let { it1 ->
-                homeViewModel.getProductsByCategory(
-                    it1
-                )
+                homeViewModel.getProductsByCategory(it1)
+                unselectAllCategories()
+                selectCategory(it as Chip)
             }
         }
 
@@ -160,6 +164,17 @@ class HomeFragment : Fragment() {
         imageView.layoutParams = lp
     }
 
+    private fun unselectAllCategories(){
+        for(chip in categories){
+            chip.setTextColor(Color.BLACK)
+            chip.setChipBackgroundColorResource(R.color.white)
+        }
+    }
+
+    private fun selectCategory(chip: Chip){
+        chip.setChipBackgroundColorResource(R.color.black)
+        chip.setTextColor(Color.WHITE)
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
