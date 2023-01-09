@@ -91,54 +91,29 @@
                 <LinearLayout
                     android:id="@+id/viewpager_details"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dp_5"
                     android:layout_marginTop="@dimen/dp_4"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/offersViewPager"
+                    android:orientation="horizontal">
+                </LinearLayout>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/viewpagerDetailsShimmer"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/offersViewPager">
-
-                    <ImageView
-                        android:id="@+id/circle1"
-                        android:layout_width="@dimen/dp_16"
-                        android:layout_height="@dimen/dp_5"
-                        android:layout_marginStart="@dimen/dp_2"
-                        android:src="@drawable/viewpager_selected" />
-
-                    <ImageView
-                        android:id="@+id/circle2"
-                        android:layout_width="@dimen/dp_5"
-                        android:layout_height="@dimen/dp_5"
-                        android:layout_marginStart="@dimen/dp_2"
-                        android:src="@drawable/viewpager_not_selected" />
-
-                    <ImageView
-                        android:id="@+id/circle3"
-                        android:layout_width="@dimen/dp_5"
-                        android:layout_height="@dimen/dp_5"
-                        android:layout_marginStart="@dimen/dp_2"
-                        android:src="@drawable/viewpager_not_selected" />
-
-                    <ImageView
-                        android:id="@+id/circle4"
-                        android:layout_width="@dimen/dp_5"
-                        android:layout_height="@dimen/dp_5"
-                        android:layout_marginStart="@dimen/dp_2"
-                        android:src="@drawable/viewpager_not_selected" />
-
-                    <ImageView
-                        android:id="@+id/circle5"
-                        android:layout_width="@dimen/dp_5"
-                        android:layout_height="@dimen/dp_5"
-                        android:layout_marginStart="@dimen/dp_2"
-                        android:src="@drawable/viewpager_not_selected" />
-
-                    <ImageView
-                        android:id="@+id/circle6"
-                        android:layout_width="@dimen/dp_5"
-                        android:layout_height="@dimen/dp_5"
-                        android:layout_marginStart="@dimen/dp_2"
-                        android:src="@drawable/viewpager_not_selected" />
-                </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/shimmer_color"/>
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
 
                 <TextView

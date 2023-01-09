@@ -32,7 +32,8 @@ class HomeFragment : Fragment() {
 
     private val productsAdapter = ProductsAdapter()
 
-    private lateinit var circles : List<ImageView>
+    private var circles = mutableListOf<ImageView>()
+    private var circleNumber = 0
 
     @SuppressLint("DiscouragedPrivateApi")
     override fun onCreateView(
@@ -74,7 +75,7 @@ class HomeFragment : Fragment() {
 
         binding.itemRecyclerView.addItemDecoration(ProductSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.dp_21), resources.getDimensionPixelSize(R.dimen.dp_8)))
 
-        circles =  listOf(binding.circle1, binding.circle2, binding.circle3, binding.circle4, binding.circle5, binding.circle6)
+//        circles =  listOf(binding.circle1, binding.circle2, binding.circle3, binding.circle4, binding.circle5, binding.circle6)
 
         binding.offersViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageScrollStateChanged(state: Int) {
@@ -85,6 +86,13 @@ class HomeFragment : Fragment() {
                 selectItem(currentItem)
                 unselectItem(currentItem-1)
                 unselectItem(currentItem+1)
+                if(currentItem >= 2*circleNumber){
+                    binding.offersViewPager.setCurrentItem(currentItem-circleNumber, false)
+                }
+
+                if(currentItem < circleNumber){
+                    binding.offersViewPager.setCurrentItem(currentItem+circleNumber, false)
+                }
 
             }
         })
@@ -136,22 +144,16 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    private fun selectItem(i: Int){
-        var index = i
-        if(index < 0) index+=6
-        if(index > 5) index-=6
-        val imageView = circles[index]
+    private fun selectItem(index: Int){
+        val imageView = circles[index%circleNumber]
         imageView.setImageResource(R.drawable.viewpager_selected)
         val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_16), resources.getDimensionPixelSize(R.dimen.dp_5))
         lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
         imageView.layoutParams = lp
     }
 
-    private fun unselectItem(i: Int){
-        var index = i
-        if(index < 0) index+=6
-        if(index > 5) index-=6
-        val imageView = circles[index]
+    private fun unselectItem(index: Int){
+        val imageView = circles[index%circleNumber]
         imageView.setImageResource(R.drawable.viewpager_not_selected)
         val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_5), resources.getDimensionPixelSize(R.dimen.dp_5))
         lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
@@ -213,19 +215,36 @@ class HomeFragment : Fragment() {
             when(it){
                 is NetworkResult.Success -> {
                     binding.offersShimmer.stopShimmerAnimation()
+                    binding.viewpagerDetailsShimmer.stopShimmerAnimation()
                     binding.offersShimmer.visibility = View.GONE
                     binding.offersViewPager.visibility = View.VISIBLE
-                    binding.offersViewPager.adapter = OffersAdapter(it.data?.images!!)
+                    binding.offersViewPager.adapter = OffersAdapter(it.data?.images!! + it.data.images + it.data.images)
+                    circleNumber = it.data.images.size
+                    binding.viewpagerDetails.visibility = View.VISIBLE
+                    binding.viewpagerDetailsShimmer.visibility = View.GONE
+                    for(i in 0 until circleNumber) {
+                        val imageView = ImageView(requireContext())
+                        val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_5), resources.getDimensionPixelSize(R.dimen.dp_5))
+                        imageView.layoutParams= lp
+                        lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
+                        imageView.setImageResource(R.drawable.viewpager_not_selected)
+                        binding.viewpagerDetails.addView(imageView)
+                        circles.add(imageView)
+                    }
+                    binding.offersViewPager.setCurrentItem(circleNumber, false)
+                    selectItem(0)
                 }
                 is NetworkResult.Loading -> {
                     binding.offersShimmer.visibility = View.VISIBLE
                     binding.offersViewPager.visibility = View.INVISIBLE
                     binding.offersShimmer.startShimmerAnimation()
+                    binding.viewpagerDetails.visibility = View.INVISIBLE
+                    binding.viewpagerDetailsShimmer.visibility = View.VISIBLE
+                    binding.viewpagerDetailsShimmer.startShimmerAnimation()
                 }
                 is NetworkResult.Error -> {
                     binding.offersShimmer.stopShimmerAnimation()
-                    binding.offersShimmer.visibility = View.GONE
-                    binding.offersViewPager.visibility = View.VISIBLE
+                    binding.viewpagerDetailsShimmer.stopShimmerAnimation()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
             }
