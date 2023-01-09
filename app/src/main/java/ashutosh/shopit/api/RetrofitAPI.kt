@@ -2,11 +2,7 @@ package ashutosh.shopit.api
 
 import ashutosh.shopit.models.*
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface RetrofitAPI {
 
@@ -47,4 +43,10 @@ interface RetrofitAPI {
 
     @GET("category/get?pageSize=5")
     suspend fun getCategory() : Response<CategoryResponse>
+
+
+    //Advertisement
+
+    @GET("sponsor/get/1")
+    suspend fun getAdvertisements(@Header("Authorization") token: String) : Response<AdvertisementResponse>
 }

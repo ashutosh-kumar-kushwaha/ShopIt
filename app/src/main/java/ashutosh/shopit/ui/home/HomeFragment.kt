@@ -131,6 +131,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.getCategories()
         homeViewModel.getAllProducts()
+        homeViewModel.getAdvertisements()
 
         return binding.root
     }
@@ -209,7 +210,25 @@ class HomeFragment : Fragment() {
         }
 
         homeViewModel.offersList.observe(viewLifecycleOwner) {
-            binding.offersViewPager.adapter = OffersAdapter(it)
+            when(it){
+                is NetworkResult.Success -> {
+                    binding.offersShimmer.stopShimmerAnimation()
+                    binding.offersShimmer.visibility = View.GONE
+                    binding.offersViewPager.visibility = View.VISIBLE
+                    binding.offersViewPager.adapter = OffersAdapter(it.data?.images!!)
+                }
+                is NetworkResult.Loading -> {
+                    binding.offersShimmer.visibility = View.VISIBLE
+                    binding.offersViewPager.visibility = View.INVISIBLE
+                    binding.offersShimmer.startShimmerAnimation()
+                }
+                is NetworkResult.Error -> {
+                    binding.offersShimmer.stopShimmerAnimation()
+                    binding.offersShimmer.visibility = View.GONE
+                    binding.offersViewPager.visibility = View.VISIBLE
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
     }

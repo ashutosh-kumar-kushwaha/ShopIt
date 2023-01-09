@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.models.AdvertisementResponse
 import ashutosh.shopit.models.CategoryResponse
 import ashutosh.shopit.models.ProductsResponse
 import ashutosh.shopit.repository.HomePageRepository
@@ -17,7 +18,7 @@ class HomeViewModel : ViewModel() {
 
     val categoriesLiveData : SingleLiveEvent<NetworkResult<CategoryResponse>> get() = homePageRepository.getCategoriesResponseLiveData
 
-    val offersList = SingleLiveEvent<List<Int>>()
+    val offersList : SingleLiveEvent<NetworkResult<AdvertisementResponse>> get()= homePageRepository.getAdvertisementResponseLiveData
 
 
     fun getProductsByCategory(categoryId : Int){
@@ -35,6 +36,12 @@ class HomeViewModel : ViewModel() {
     fun getAllProducts(){
         viewModelScope.launch {
             homePageRepository.getAllProducts()
+        }
+    }
+
+    fun getAdvertisements(){
+        viewModelScope.launch {
+            homePageRepository.getAdvertisements()
         }
     }
 

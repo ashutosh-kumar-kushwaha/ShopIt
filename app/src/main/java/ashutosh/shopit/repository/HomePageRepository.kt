@@ -4,6 +4,7 @@ import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
 import ashutosh.shopit.api.ServiceBuilder
 import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.models.AdvertisementResponse
 import ashutosh.shopit.models.CategoryResponse
 import ashutosh.shopit.models.ProductsResponse
 
@@ -11,7 +12,7 @@ class HomePageRepository {
     private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
     val getProductsResponseLiveData = SingleLiveEvent<NetworkResult<ProductsResponse>>()
     val getCategoriesResponseLiveData = SingleLiveEvent<NetworkResult<CategoryResponse>>()
-
+    val getAdvertisementResponseLiveData = SingleLiveEvent<NetworkResult<AdvertisementResponse>>()
 
     suspend fun getProductsByCategory(categoryId : Int){
         getProductsResponseLiveData.value = NetworkResult.Loading()
@@ -73,6 +74,29 @@ class HomePageRepository {
         }
         catch (e: Exception){
             getProductsResponseLiveData.value = NetworkResult.Error(e.message)
+        }
+    }
+
+    suspend fun getAdvertisements(){
+        getAdvertisementResponseLiveData.value = NetworkResult.Loading()
+        try{
+            val response = retrofitAPI.getAdvertisements("Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6InNob3BpdGFueXRoaW5nQGdtYWlsLmNvbSIsImlhdCI6MTY3MzI0MTUyNSwiZXhwIjoxNjczMzI3OTI1LCJqdGkiOiJkMjNlMmEzZS1jNzhiLTQ2YjktOWVhMi03NjIwYzhlYTJiNzIifQ._b5GVdz5LazFcVqjlQfd_jAr1CGmv3a3dosgkBRKGMuDtPuBOuK8XQihhkQCxRYVDnMZPlvBhL3eUFdS9IP7LQ")
+            when(response.code()){
+                200 -> {
+                    if(response.body()!=null){
+                        getAdvertisementResponseLiveData.value = NetworkResult.Success(response.body()!!)
+                    }
+                    else{
+                        getAdvertisementResponseLiveData.value = NetworkResult.Error("Something went wrong!\nResponse is null")
+                    }
+                }
+                else -> {
+                    getAdvertisementResponseLiveData.value = NetworkResult.Error("Something went wrong!\nError code: ${response.code()}")
+                }
+            }
+        }
+        catch(e: Exception){
+            getAdvertisementResponseLiveData.value = NetworkResult.Error(e.message)
         }
     }
 
