@@ -155,7 +155,8 @@
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:scrollbars="none">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -204,6 +205,7 @@
                     android:layout_height="@dimen/dp_25"
                     android:layout_marginTop="@dimen/dp_11"
                     android:visibility="invisible"
+                    android:scrollbars="none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/categoriesTxtVw">
