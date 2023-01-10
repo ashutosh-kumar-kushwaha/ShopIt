@@ -13,6 +13,7 @@
         <item name="android:statusBarColor">#999999</item>
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:letterSpacing">0.05</item>
 
     </style>
     

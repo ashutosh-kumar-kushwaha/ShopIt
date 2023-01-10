@@ -12,6 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">#999999</item>
         <!-- Customize your theme here. -->
+        <item name="android:letterSpacing">0.05</item>
+
     </style>
     <style name="SearchViewTheme" parent="Widget.AppCompat.SearchView">
         <item name="android:textColor">#999999</item>

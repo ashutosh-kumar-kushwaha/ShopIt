@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/productFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -24,4 +24,8 @@
         android:id="@+id/notificationFragment"
         android:name="ashutosh.shopit.ui.notification.NotificationFragment"
         android:label="NotificationFragment" />
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="ashutosh.shopit.ui.product.ProductFragment"
+        android:label="ProductFragment" />
 </navigation>
