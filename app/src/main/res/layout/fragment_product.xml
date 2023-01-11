@@ -228,6 +228,113 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/specificationTxtVw"/>
+            <TextView
+                android:id="@+id/warrantyTxtVw"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Warranty"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/dp_14"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/specificationRecyclerView"/>
+            <LinearLayout
+                android:id="@+id/warrantyLL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/warrantyTxtVw">
+                <TextView
+                    android:id="@+id/warrantySummaryTxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Warranty Summary"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="@dimen/sp_11"
+                    android:textColor="@color/color2"
+                    android:layout_weight="4"/>
+                <TextView
+                    android:id="@+id/warrantyDetailsTxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Brand Warranty for 1 Year"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="@dimen/sp_11"
+                    android:textColor="@color/color2"
+                    android:layout_marginStart="@dimen/dp_14"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/color8"
+                android:layout_marginTop="@dimen/dp_7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/warrantyLL"/>
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/reviewsLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:flexDirection="row"
+                app:justifyContent="space_between"
+                app:alignItems="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line2">
+                <TextView
+                    android:id="@+id/ratingsAndReviewTxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ratings &amp; Reviews"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rate Product"
+                    android:textSize="@dimen/sp_11"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat"
+                    android:paddingStart="@dimen/dp_14"
+                    android:paddingEnd="@dimen/dp_14"
+                    android:paddingTop="@dimen/dp_4"
+                    android:paddingBottom="@dimen/dp_4"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_marginBottom="@dimen/dp_4"
+                    android:background="@drawable/rate_this_product_bg"/>
+            </com.google.android.flexbox.FlexboxLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reviewsRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reviewsLayout"/>
+            <TextView
+                android:id="@+id/questionsAnswersTxtVw"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Questions &amp; Answers"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginTop="@dimen/dp_7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reviewsRecyclerView"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/questionsAnswersTxtVw"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

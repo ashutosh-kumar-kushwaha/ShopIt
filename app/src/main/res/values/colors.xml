@@ -17,5 +17,6 @@
     <color name="color8">#D9D9D9</color>
     <color name="color9">#FF3333</color>
     <color name="color10">#F2F2F2</color>
+    <color name="grey">#808080</color>
     <color name="shimmer_color">#BFBDBD</color>
 </resources>
