@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/nameTxtVw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/sp_11"
+            android:textFontWeight="600"
+            android:textColor="@color/color2"
+            android:layout_marginTop="@dimen/dp_5" />
+
+        <TextView
+            android:id="@+id/messageTxtVw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ullamcorper cursus turpis, quis feugiat nibh hendrerit sed. Curabitur risus tellus, cursus a "
+            android:layout_marginTop="@dimen/dp_3"
+            android:textColor="@color/color2"
+            android:fontFamily="@font/montserrat" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/imageLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            app:flexWrap="wrap" />
+    </LinearLayout>
+</layout>
