@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".ui.product.ProductFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -20,11 +21,13 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/white">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dp_14">
+            android:padding="@dimen/dp_14"
+            android:background="@color/white">
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/photosViewPager"
                 android:layout_width="0dp"
@@ -77,7 +80,8 @@
                 app:layout_constraintTop_toBottomOf="@id/productNameTxtVw">
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
                 <TextView
                     android:id="@+id/currentPriceTxtVw"
                     android:layout_width="wrap_content"
@@ -104,12 +108,14 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
                 <TextView
                     android:id="@+id/ratingTxtVw"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4.5"
+                    android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     android:fontFamily="@font/poppins"
@@ -329,6 +335,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/reviewsRecyclerView"/>
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/questionsAnswerRecyclerView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_7"
