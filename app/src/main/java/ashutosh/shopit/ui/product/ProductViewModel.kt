@@ -11,9 +11,11 @@ import kotlinx.coroutines.launch
 class ProductViewModel : ViewModel() {
     private val productRepository = ProductRepository()
 
+    var productId = -1
+
     val productDetailsResponse : SingleLiveEvent<NetworkResult<ProductDetailsResponse>> get() = productRepository.productDetailsResponse
 
-    suspend fun getProductDetails(productId: Int){
+    fun getProductDetails(){
         viewModelScope.launch {
             productRepository.getProductDetails(productId)
         }

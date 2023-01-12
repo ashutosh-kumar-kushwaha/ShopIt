@@ -1,6 +1,5 @@
 package ashutosh.shopit.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +32,10 @@ class ProductsAdapter(val productClickListener: ProductClickListener) : ListAdap
         }
 
         override fun onClick(v: View?) {
-            productClickListener.onProductClick(getItem(adapterPosition).productId)
+            val position = adapterPosition
+            if(position != RecyclerView.NO_POSITION){
+                productClickListener.onProductClick(getItem(adapterPosition).productId)
+            }
         }
     }
 
