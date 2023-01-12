@@ -56,7 +56,7 @@ class CategoriesFragment : Fragment() {
         val icon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
         icon.setImageResource(R.drawable.ic_search_icon)
 
-        categoriesAdapter.submitList(listOf(Category(1, "Mobile"), Category(2, "Mobile"), Category(3, "Mobile"), Category(4, "Mobile"), Category(5, "Mobile")))
+//        categoriesAdapter.submitList(listOf(Category(1, "Mobile"), Category(2, "Mobile"), Category(3, "Mobile"), Category(4, "Mobile"), Category(5, "Mobile")))
         binding.categoriesRecyclerView.adapter = categoriesAdapter
         binding.categoriesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 

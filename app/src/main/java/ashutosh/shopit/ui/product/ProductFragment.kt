@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.R
 import ashutosh.shopit.adapters.DescriptionAdapter
 import ashutosh.shopit.adapters.ProductImageAdapter
+import ashutosh.shopit.adapters.QuestionsAnswersAdapter
 import ashutosh.shopit.adapters.SpecsParentAdapter
 import ashutosh.shopit.databinding.FragmentProductBinding
 import ashutosh.shopit.di.NetworkResult
@@ -36,10 +38,11 @@ class ProductFragment : Fragment() {
         binding.viewModel = productViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        if(arguments?.getInt("productId")!=null){
+        if(arguments?.getInt("productId") != null){
             productViewModel.productId = arguments?.getInt("productId")!!
+//            Toast.makeText(requireContext(), productViewModel.productId, Toast.LENGTH_SHORT).show()
         }
-
+//        Toast.makeText(requireContext(), productViewModel.productId, Toast.LENGTH_SHORT).show()
         productViewModel.getProductDetails()
 
         return binding.root
@@ -54,7 +57,7 @@ class ProductFragment : Fragment() {
 
                 }
                 is NetworkResult.Error -> {
-
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
                 is NetworkResult.Success -> {
                     val product = it.data!!
@@ -80,7 +83,7 @@ class ProductFragment : Fragment() {
                     binding.specificationRecyclerView.adapter = SpecsParentAdapter(product.specification)
                     binding.specificationRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     binding.warrantyDetailsTxtVw.text = product.warranty
-                    binding.questionsAnswerRecyclerView.adapter =
+                    binding.questionsAnswerRecyclerView.adapter = QuestionsAnswersAdapter(product.questions)
                 }
             }
         }

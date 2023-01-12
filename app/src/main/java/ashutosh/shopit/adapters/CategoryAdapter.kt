@@ -11,13 +11,13 @@ import ashutosh.shopit.models.Category
 class CategoryAdapter : ListAdapter<Category, CategoryAdapter.ViewHolder>(DiffUtil()) {
     class ViewHolder(private val binding : CategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category){
-            binding.categoriesTxtVw.text = category.name
+            binding.categoriesTxtVw.text = category.categoryName
         }
     }
 
     class DiffUtil: ItemCallback<Category>() {
         override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.categoryId == newItem.categoryId
         }
 
         override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {

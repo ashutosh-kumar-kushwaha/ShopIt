@@ -17,7 +17,7 @@ class ProductRepository {
             val response = retrofitAPI.getProductDetails(productId)
             when(response.code()){
                 200 -> {
-                    if (response != null){
+                    if (response.body() != null){
                         productDetailsResponse.value = NetworkResult.Success(response.body()!!)
                     }
                     else{

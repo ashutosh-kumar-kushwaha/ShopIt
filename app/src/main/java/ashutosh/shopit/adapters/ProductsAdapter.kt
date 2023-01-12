@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ashutosh.shopit.`interface`.ProductClickListener
+import ashutosh.shopit.interfaces.ProductClickListener
 import ashutosh.shopit.databinding.ItemCardBinding
 import ashutosh.shopit.models.ProductsContent
 import coil.load

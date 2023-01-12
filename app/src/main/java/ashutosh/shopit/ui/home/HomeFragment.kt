@@ -13,12 +13,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import ashutosh.shopit.R
-import ashutosh.shopit.`interface`.ProductClickListener
+import ashutosh.shopit.interfaces.ProductClickListener
 import ashutosh.shopit.adapters.OffersAdapter
 import ashutosh.shopit.adapters.ProductSpacingItemDecoration
 import ashutosh.shopit.adapters.ProductsAdapter
@@ -274,6 +273,7 @@ class HomeFragment : Fragment(), ProductClickListener {
 
     override fun onProductClick(productId: Int) {
         val bundle = Bundle()
+        bundle.putInt("productId", productId)
         findNavController().navigate(R.id.action_homeFragment_to_productFragment, bundle)
     }
 }
