@@ -14,9 +14,11 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import ashutosh.shopit.R
+import ashutosh.shopit.`interface`.ProductClickListener
 import ashutosh.shopit.adapters.OffersAdapter
 import ashutosh.shopit.adapters.ProductSpacingItemDecoration
 import ashutosh.shopit.adapters.ProductsAdapter
@@ -25,14 +27,14 @@ import ashutosh.shopit.di.NetworkResult
 import com.google.android.material.chip.Chip
 import java.lang.reflect.Field
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), ProductClickListener {
 
     private var _binding : FragmentHomeBinding? = null
     private val binding : FragmentHomeBinding get() = _binding!!
 
     private val homeViewModel by viewModels<HomeViewModel>()
 
-    private val productsAdapter = ProductsAdapter()
+    private val productsAdapter = ProductsAdapter(this)
 
     private var circles = mutableListOf<ImageView>()
     private var circleNumber = 0
@@ -268,5 +270,10 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onProductClick(productId: Int) {
+        val bundle = Bundle()
+        findNavController().navigate(R.id.action_homeFragment_to_productFragment, bundle)
     }
 }
