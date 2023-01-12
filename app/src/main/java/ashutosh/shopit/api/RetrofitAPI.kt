@@ -3,6 +3,7 @@ package ashutosh.shopit.api
 import ashutosh.shopit.models.*
 import retrofit2.Response
 import retrofit2.http.*
+import retrofit2.http.Body
 
 interface RetrofitAPI {
 
@@ -38,6 +39,9 @@ interface RetrofitAPI {
 
     @GET("products/get")
     suspend fun getAllProducts() : Response<ProductsResponse>
+
+    @GET("products/get/{productId}")
+    suspend fun getProductDetails(@Path ("productId") productId : Int) : Response<ProductDetailsResponse>
 
     //Category
 
