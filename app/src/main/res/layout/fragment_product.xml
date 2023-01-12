@@ -221,13 +221,11 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/quantityLL" />
 
-                <TextView
-                    android:id="@+id/descriptionTxtVw"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/descriptionRecyclerView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_5"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ullamcorper cursus turpis, quis feugiat nibh hendrerit sed. Curabitur risus tellus, cursus a metus in, tristique porta est. Integer luctus elit eros, vel maximus eros congue sed. Nullam scelerisque, dui at consectetur pulvinar, dolor dui placerat nulla, vel tempor elit dolor et dui. Vivamus tempor tortor aliquet libero semper blandit. Nulla facilisi. Quisque scelerisque neque libero, vitae mollis nulla ."
-                    android:maxLines="5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/descriptionHeadingTxtVw" />
@@ -243,7 +241,7 @@
                     android:layout_marginTop="@dimen/dp_7"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/descriptionTxtVw" />
+                    app:layout_constraintTop_toBottomOf="@id/descriptionRecyclerView" />
 
                 <TextView
                     android:id="@+id/specificationTxtVw"

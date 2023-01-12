@@ -5,10 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import ashutosh.shopit.R
+import ashutosh.shopit.adapters.ProductImageAdapter
 import ashutosh.shopit.databinding.FragmentProductBinding
 import ashutosh.shopit.di.NetworkResult
+import kotlin.math.roundToInt
 
 class ProductFragment : Fragment() {
 
@@ -16,6 +20,9 @@ class ProductFragment : Fragment() {
     private val binding : FragmentProductBinding get() = _binding!!
 
     private val productViewModel by viewModels<ProductViewModel>()
+
+    private var circles = mutableListOf<ImageView>()
+    private var circleNumber = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +54,25 @@ class ProductFragment : Fragment() {
 
                 }
                 is NetworkResult.Success -> {
-                    
+                    val product = it.data!!
+                    binding.photosViewPager.adapter = ProductImageAdapter(product.imageUrls)
+                    circleNumber = product.imageUrls.size
+                    for(i in 0 until circleNumber) {
+                        val imageView = ImageView(requireContext())
+                        val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_5), resources.getDimensionPixelSize(R.dimen.dp_5))
+                        imageView.layoutParams= lp
+                        lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
+                        imageView.setImageResource(R.drawable.viewpager_not_selected)
+                        binding.photosViewPagerIndicator.addView(imageView)
+                        circles.add(imageView)
+                    }
+
+                    binding.productNameTxtVw.text = product.productName
+                    val currentPrice = "₹${(product.originalPrice-(product.offerPercentage/100)*product.originalPrice).roundToInt()}"
+                    binding.currentPriceTxtVw.text = currentPrice
+                    binding.originalPriceTxtVw.text = product.originalPrice.toString()
+                    binding.ratingTxtVw.text = product.rating.toString()
+                    binding.descriptionTxtVw.text = product.description
                 }
             }
         }
