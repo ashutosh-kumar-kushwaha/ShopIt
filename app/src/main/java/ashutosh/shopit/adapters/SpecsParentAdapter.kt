@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ashutosh.shopit.databinding.SpecsParentItemBinding
+import ashutosh.shopit.models.Specification
 import ashutosh.shopit.models.SpecsWithHeading
 
-class SpecsParentAdapter(private val specsList : List<SpecsWithHeading>) : RecyclerView.Adapter<SpecsParentAdapter.ViewHolder>() {
+class SpecsParentAdapter(private val specsList : List<Specification>) : RecyclerView.Adapter<SpecsParentAdapter.ViewHolder>() {
     class ViewHolder(val binding : SpecsParentItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(specsWithHeading: SpecsWithHeading){
-            binding.headingTxtVw.text = specsWithHeading.heading
-            binding.specsRecyclerView.adapter = SpecsChildAdapter(specsWithHeading.specs)
+        fun bind(specsWithHeading: Specification){
+            binding.headingTxtVw.text = specsWithHeading.head
+            binding.specsRecyclerView.adapter = SpecsChildAdapter(specsWithHeading.body)
             binding.specsRecyclerView.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
         }
     }

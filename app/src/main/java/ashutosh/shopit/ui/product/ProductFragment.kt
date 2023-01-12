@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.R
+import ashutosh.shopit.adapters.DescriptionAdapter
 import ashutosh.shopit.adapters.ProductImageAdapter
+import ashutosh.shopit.adapters.SpecsParentAdapter
 import ashutosh.shopit.databinding.FragmentProductBinding
 import ashutosh.shopit.di.NetworkResult
 import kotlin.math.roundToInt
@@ -72,7 +75,12 @@ class ProductFragment : Fragment() {
                     binding.currentPriceTxtVw.text = currentPrice
                     binding.originalPriceTxtVw.text = product.originalPrice.toString()
                     binding.ratingTxtVw.text = product.rating.toString()
-                    binding.descriptionTxtVw.text = product.description
+                    binding.descriptionRecyclerView.adapter = DescriptionAdapter(product.description)
+                    binding.descriptionRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                    binding.specificationRecyclerView.adapter = SpecsParentAdapter(product.specification)
+                    binding.specificationRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                    binding.warrantyDetailsTxtVw.text = product.warranty
+                    binding.questionsAnswerRecyclerView.adapter =
                 }
             }
         }

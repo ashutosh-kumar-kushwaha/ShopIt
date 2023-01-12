@@ -10,7 +10,7 @@ import ashutosh.shopit.databinding.ReviewItemBinding
 import ashutosh.shopit.models.Review
 import coil.load
 
-class ReviewsAdapter(val reviews: List<Review>) : RecyclerView.Adapter<ReviewsAdapter.ViewHolder>() {
+class ReviewsAdapter(private val reviews: List<Review>) : RecyclerView.Adapter<ReviewsAdapter.ViewHolder>() {
     class ViewHolder(val binding: ReviewItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(review: Review){
             binding.nameTxtVw.text = review.name

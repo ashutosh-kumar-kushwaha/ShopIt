@@ -4,14 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ashutosh.shopit.databinding.SpecsChildItemBinding
+import ashutosh.shopit.models.Body
 import ashutosh.shopit.models.Property
 
-class SpecsChildAdapter(private val propertiesList : List<Property>) : RecyclerView.Adapter<SpecsChildAdapter.ViewHolder>() {
+class SpecsChildAdapter(private val propertiesList : List<Body>) : RecyclerView.Adapter<SpecsChildAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: SpecsChildItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(property: Property){
-            binding.propertyNameTxtVw.text = property.propertyName
-            binding.propertyValueTxtVw.text = property.propertyValue
+        fun bind(body: Body){
+            binding.propertyNameTxtVw.text = body.head
+            binding.propertyValueTxtVw.text = body.body
         }
     }
 
