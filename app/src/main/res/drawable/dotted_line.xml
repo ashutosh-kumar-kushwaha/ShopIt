@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_enabled="true">
-        <shape android:shape="rectangle">
-            <solid android:color="@color/color10" />
-            <corners android:radius="@dimen/dp_4" />
+        <shape android:shape="line">
+            <stroke android:color="@color/grey" android:width="@dimen/dp_1" android:dashGap="@dimen/dp_2" android:dashWidth="@dimen/dp_2"/>
         </shape>
     </item>
 </selector>

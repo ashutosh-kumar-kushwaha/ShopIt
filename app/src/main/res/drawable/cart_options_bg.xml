@@ -1,0 +1,19 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item>
+        <shape>
+            <padding
+                android:top="@dimen/dp_2" />
+            <solid android:color="#40000000" />
+            <corners android:radius="@dimen/dp_8" />
+        </shape>
+    </item>
+
+    <!-- Background -->
+    <item>
+        <shape>
+            <solid android:color="@color/white" />
+            <corners android:radius="@dimen/dp_8" />
+        </shape>
+    </item>
+</layer-list>
