@@ -30,6 +30,11 @@
         android:label="NotificationFragment"
         tools:layout="@layout/fragment_notification"/>
     <fragment
+        android:id="@+id/cartFragment"
+        android:name="ashutosh.shopit.ui.cart.CartFragment"
+        android:label="Cart Fragment"
+        tools:layout="@layout/fragment_cart"/>
+    <fragment
         android:id="@+id/productFragment"
         android:name="ashutosh.shopit.ui.product.ProductFragment"
         android:label="ProductFragment"
