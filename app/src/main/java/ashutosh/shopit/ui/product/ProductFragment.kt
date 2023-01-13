@@ -84,6 +84,7 @@ class ProductFragment : Fragment() {
                     binding.specificationRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     binding.warrantyDetailsTxtVw.text = product.warranty
                     binding.questionsAnswerRecyclerView.adapter = QuestionsAnswersAdapter(product.questions)
+                    binding.questionsAnswerRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                 }
             }
         }

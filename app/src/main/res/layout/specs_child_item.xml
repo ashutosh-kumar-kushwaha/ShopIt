@@ -2,18 +2,26 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_7">
 
         <TextView
             android:id="@+id/propertyNameTxtVw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/color2"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/sp_11"
             android:layout_weight="4" />
 
         <TextView
             android:id="@+id/propertyValueTxtVw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5" />
+            android:textColor="@color/color2"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/sp_11"
+            android:layout_weight="5"
+            android:layout_marginStart="@dimen/dp_14"/>
     </LinearLayout>
 </layout>
