@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             android:text="Heading"
             android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/sp_11"
+            android:textSize="@dimen/sp_12"
             android:textColor="@color/black"
             android:textFontWeight="600"/>
 
@@ -19,6 +19,6 @@
             android:id="@+id/specsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_7" />
+            android:layout_marginTop="@dimen/dp_8" />
     </LinearLayout>
 </layout>

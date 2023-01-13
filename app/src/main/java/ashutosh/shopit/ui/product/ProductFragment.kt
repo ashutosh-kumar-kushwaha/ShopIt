@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import ashutosh.shopit.R
 import ashutosh.shopit.adapters.DescriptionAdapter
 import ashutosh.shopit.adapters.ProductImageAdapter
@@ -45,6 +46,28 @@ class ProductFragment : Fragment() {
 //        Toast.makeText(requireContext(), productViewModel.productId, Toast.LENGTH_SHORT).show()
         productViewModel.getProductDetails()
 
+        binding.photosViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+
+                val currentItem = binding.photosViewPager.currentItem
+
+                selectItem(currentItem)
+                if(currentItem!=0){
+                    unselectItem(currentItem-1)
+                }
+                unselectItem(currentItem+1)
+//                if(currentItem >= 2*circleNumber){
+//                    binding.photosViewPager.setCurrentItem(currentItem-circleNumber, false)
+//                }
+//
+//                if(currentItem < circleNumber){
+//                    binding.photosViewPager.setCurrentItem(currentItem+circleNumber, false)
+//                }
+
+            }
+        })
+
         return binding.root
     }
 
@@ -65,7 +88,7 @@ class ProductFragment : Fragment() {
                     circleNumber = product.imageUrls.size
                     for(i in 0 until circleNumber) {
                         val imageView = ImageView(requireContext())
-                        val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_5), resources.getDimensionPixelSize(R.dimen.dp_5))
+                        val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_6), resources.getDimensionPixelSize(R.dimen.dp_6))
                         imageView.layoutParams= lp
                         lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
                         imageView.setImageResource(R.drawable.viewpager_not_selected)
@@ -85,9 +108,37 @@ class ProductFragment : Fragment() {
                     binding.warrantyDetailsTxtVw.text = product.warranty
                     binding.questionsAnswerRecyclerView.adapter = QuestionsAnswersAdapter(product.questions)
                     binding.questionsAnswerRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                    selectItem(0)
                 }
             }
         }
+    }
+
+    private fun selectItem(index: Int){
+        val imageView = circles[index%circleNumber]
+        imageView.setImageResource(R.drawable.viewpager_selected)
+        val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_18), resources.getDimensionPixelSize(R.dimen.dp_6))
+        lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
+        imageView.layoutParams = lp
+    }
+
+    private fun unselectItem(index: Int){
+        val imageView = circles[index%circleNumber]
+        imageView.setImageResource(R.drawable.viewpager_not_selected)
+        val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_6), resources.getDimensionPixelSize(R.dimen.dp_6))
+        lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
+        imageView.layoutParams = lp
+    }
+
+    private fun price(p : Int): String{
+        val str = StringBuilder(p.toString())
+        str.reverse()
+        for(i in str.indices){
+            if((i-1)%3 == 0){
+                str.insert(i, ',')
+            }
+        }
+        return str.reverse().toString()
     }
 
     override fun onDestroyView() {

@@ -10,18 +10,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textFontWeight="600"
-            android:textSize="@dimen/sp_12"
+            android:textSize="@dimen/sp_14"
             android:textColor="@color/color2"
             android:fontFamily="@font/montserrat"
-            android:layout_marginBottom="@dimen/dp_7" />
+            android:layout_marginBottom="@dimen/dp_8" />
 
         <TextView
             android:id="@+id/contentTxtVw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_12"
+            android:textSize="@dimen/sp_14"
             android:textColor="@color/color2"
             android:fontFamily="@font/montserrat"
-            android:layout_marginBottom="@dimen/dp_7" />
+            android:layout_marginBottom="@dimen/dp_8" />
     </LinearLayout>
 </layout>

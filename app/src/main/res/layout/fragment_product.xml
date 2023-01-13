@@ -18,12 +18,12 @@
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45"
+            android:layout_height="@dimen/dp_51"
             android:background="@drawable/toolbar_bg">
 
             <ImageView
-                android:layout_width="@dimen/dp_24"
-                android:layout_height="@dimen/dp_22"
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_24"
                 android:padding="@dimen/dp_5"
                 android:src="@drawable/ic_back" />
 
@@ -39,12 +39,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="@dimen/dp_14">
+                android:padding="@dimen/dp_16">
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/photosViewPager"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_245"
+                    android:layout_height="@dimen/dp_280"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -52,8 +52,9 @@
                 <LinearLayout
                     android:id="@+id/photosViewPagerIndicator"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_5"
-                    android:layout_marginTop="@dimen/dp_7"
+                    android:layout_height="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:gravity="center"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -63,8 +64,8 @@
 
                 <ImageView
                     android:id="@+id/likeBtn"
-                    android:layout_width="@dimen/dp_21"
-                    android:layout_height="@dimen/dp_21"
+                    android:layout_width="@dimen/dp_24"
+                    android:layout_height="@dimen/dp_24"
                     android:src="@drawable/heart"
                     app:layout_constraintBottom_toBottomOf="@id/productNameTxtVw"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -74,12 +75,12 @@
                     android:id="@+id/productNameTxtVw"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_14"
+                    android:layout_marginTop="@dimen/dp_16"
                     android:fontFamily="@font/poppins"
                     android:text="Apple Iphone 13"
                     android:textColor="@color/black"
                     android:textFontWeight="600"
-                    android:textSize="@dimen/sp_14"
+                    android:textSize="@dimen/sp_16"
                     app:layout_constraintEnd_toStartOf="@id/likeBtn"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/photosViewPagerIndicator" />
@@ -88,7 +89,7 @@
                     android:id="@+id/priceRatingLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_14"
+                    android:layout_marginTop="@dimen/dp_16"
                     app:flexDirection="row"
                     app:justifyContent="space_between"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -110,20 +111,20 @@
                             android:text="₹49,997"
                             android:textColor="@color/black"
                             android:textFontWeight="700"
-                            android:textSize="@dimen/sp_14" />
+                            android:textSize="@dimen/sp_16" />
 
                         <TextView
                             android:id="@+id/originalPriceTxtVw"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
-                            android:layout_marginStart="@dimen/dp_7"
+                            android:layout_marginStart="@dimen/dp_8"
                             android:background="@drawable/strike_through"
                             android:fontFamily="@font/poppins"
                             android:singleLine="true"
                             android:text="₹58,997"
                             android:textColor="@color/color2"
-                            android:textSize="@dimen/sp_14" />
+                            android:textSize="@dimen/sp_16" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -141,12 +142,12 @@
                             android:text="4.5"
                             android:textColor="@color/black"
                             android:textFontWeight="700"
-                            android:textSize="@dimen/sp_14" />
+                            android:textSize="@dimen/sp_16" />
 
                         <ImageView
-                            android:layout_width="@dimen/dp_18"
-                            android:layout_height="@dimen/dp_17"
-                            android:layout_marginStart="@dimen/dp_7"
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="@dimen/dp_19"
+                            android:layout_marginStart="@dimen/dp_8"
                             android:src="@drawable/star" />
                     </LinearLayout>
                 </com.google.android.flexbox.FlexboxLayout>
@@ -155,7 +156,7 @@
                     android:id="@+id/line1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_1"
-                    android:layout_marginTop="@dimen/dp_7"
+                    android:layout_marginTop="@dimen/dp_8"
                     android:background="@color/color8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -165,40 +166,40 @@
                     android:id="@+id/quantityTxtVw"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_17"
+                    android:layout_marginTop="@dimen/dp_19"
                     android:fontFamily="@font/montserrat"
                     android:text="Quantity"
                     android:textColor="@color/black"
                     android:textFontWeight="600"
-                    android:textSize="@dimen/sp_13"
+                    android:textSize="@dimen/sp_14"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/line1" />
 
                 <LinearLayout
                     android:id="@+id/quantityLL"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dp_35"
-                    android:layout_marginStart="@dimen/dp_10"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginStart="@dimen/dp_11"
                     android:background="@drawable/counter_bg"
                     android:gravity="center"
-                    android:paddingStart="@dimen/dp_15"
-                    android:paddingEnd="@dimen/dp_15"
+                    android:paddingStart="@dimen/dp_17"
+                    android:paddingEnd="@dimen/dp_17"
                     app:layout_constraintBottom_toBottomOf="@id/quantityTxtVw"
                     app:layout_constraintStart_toEndOf="@id/quantityTxtVw"
                     app:layout_constraintTop_toTopOf="@id/quantityTxtVw">
 
                     <ImageView
                         android:id="@+id/quantityPlusMinus"
-                        android:layout_width="@dimen/dp_12"
-                        android:layout_height="@dimen/dp_12"
+                        android:layout_width="@dimen/dp_14"
+                        android:layout_height="@dimen/dp_14"
                         android:src="@drawable/ic_minus" />
 
                     <TextView
                         android:id="@+id/quantityCountTxtVw"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_14"
-                        android:layout_marginEnd="@dimen/dp_14"
+                        android:layout_marginStart="@dimen/dp_16"
+                        android:layout_marginEnd="@dimen/dp_16"
                         android:fontFamily="@font/montserrat"
                         android:text="1"
                         android:textColor="@color/black"
@@ -206,8 +207,8 @@
 
                     <ImageView
                         android:id="@+id/quantityPlusBtn"
-                        android:layout_width="@dimen/dp_12"
-                        android:layout_height="@dimen/dp_12"
+                        android:layout_width="@dimen/dp_14"
+                        android:layout_height="@dimen/dp_14"
                         android:src="@drawable/ic_plus" />
                 </LinearLayout>
 
@@ -215,12 +216,12 @@
                     android:id="@+id/descriptionHeadingTxtVw"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_14"
+                    android:layout_marginTop="@dimen/dp_16"
                     android:fontFamily="@font/montserrat"
                     android:text="Description"
                     android:textColor="@color/black"
                     android:textFontWeight="600"
-                    android:textSize="@dimen/sp_13"
+                    android:textSize="@dimen/sp_14"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/quantityLL" />
@@ -229,7 +230,7 @@
                     android:id="@+id/descriptionRecyclerView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/descriptionHeadingTxtVw" />
@@ -238,13 +239,13 @@
                     android:id="@+id/offersTxtVw"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
+                    android:layout_marginTop="@dimen/dp_8"
                     android:background="@drawable/all_offers_bg"
                     android:fontFamily="@font/montserrat"
-                    android:padding="@dimen/dp_11"
+                    android:padding="@dimen/dp_12"
                     android:text="All Offers"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_13"
+                    android:textSize="@dimen/sp_14"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/descriptionRecyclerView" />
@@ -253,12 +254,12 @@
                     android:id="@+id/specificationTxtVw"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_14"
+                    android:layout_marginTop="@dimen/dp_16"
                     android:fontFamily="@font/montserrat"
                     android:text="Specification"
                     android:textColor="@color/black"
                     android:textFontWeight="600"
-                    android:textSize="@dimen/sp_13"
+                    android:textSize="@dimen/sp_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/offersTxtVw" />
@@ -267,7 +268,7 @@
                     android:id="@+id/specificationRecyclerView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_14"
+                    android:layout_marginTop="@dimen/dp_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/specificationTxtVw" />
@@ -276,10 +277,10 @@
                     android:id="@+id/warrantyTxtVw"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_14"
+                    android:layout_marginTop="@dimen/dp_16"
                     android:text="Warranty"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_13"
+                    android:textSize="@dimen/sp_14"
                     android:textFontWeight="600"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -289,7 +290,7 @@
                     android:id="@+id/warrantyLL"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
+                    android:layout_marginTop="@dimen/dp_8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/warrantyTxtVw">
@@ -302,25 +303,25 @@
                         android:fontFamily="@font/montserrat"
                         android:text="Warranty Summary"
                         android:textColor="@color/color2"
-                        android:textSize="@dimen/sp_13" />
+                        android:textSize="@dimen/sp_14" />
 
                     <TextView
                         android:id="@+id/warrantyDetailsTxtVw"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_14"
+                        android:layout_marginStart="@dimen/dp_16"
                         android:layout_weight="5"
                         android:fontFamily="@font/montserrat"
                         android:text="Brand Warranty for 1 Year"
                         android:textColor="@color/color2"
-                        android:textSize="@dimen/sp_11" />
+                        android:textSize="@dimen/sp_12" />
                 </LinearLayout>
 
                 <View
                     android:id="@+id/line2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_1"
-                    android:layout_marginTop="@dimen/dp_7"
+                    android:layout_marginTop="@dimen/dp_8"
                     android:background="@color/color8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -345,22 +346,22 @@
                         android:text="Ratings &amp; Reviews"
                         android:textColor="@color/black"
                         android:textFontWeight="600"
-                        android:textSize="@dimen/sp_13" />
+                        android:textSize="@dimen/sp_14" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_4"
-                        android:layout_marginBottom="@dimen/dp_4"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:layout_marginBottom="@dimen/dp_5"
                         android:background="@drawable/rate_this_product_bg"
                         android:fontFamily="@font/montserrat"
-                        android:paddingStart="@dimen/dp_14"
-                        android:paddingTop="@dimen/dp_4"
-                        android:paddingEnd="@dimen/dp_14"
-                        android:paddingBottom="@dimen/dp_4"
+                        android:paddingStart="@dimen/dp_16"
+                        android:paddingTop="@dimen/dp_5"
+                        android:paddingEnd="@dimen/dp_16"
+                        android:paddingBottom="@dimen/dp_5"
                         android:text="Rate Product"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_11" />
+                        android:textSize="@dimen/sp_12" />
                 </com.google.android.flexbox.FlexboxLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -384,12 +385,12 @@
                     android:id="@+id/questionsAnswersTxtVw"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
+                    android:layout_marginTop="@dimen/dp_8"
                     android:fontFamily="@font/montserrat"
                     android:text="Questions &amp; Answers"
                     android:textColor="@color/black"
                     android:textFontWeight="600"
-                    android:textSize="@dimen/sp_13"
+                    android:textSize="@dimen/sp_14"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/reviewsRecyclerView" />
@@ -398,43 +399,43 @@
                     android:id="@+id/questionsAnswerRecyclerView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
+                    android:layout_marginTop="@dimen/dp_8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/questionsAnswersTxtVw" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_14"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/questionsAnswerRecyclerView">
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/addToCartBtn"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/dp_49"
-                        android:layout_weight="1"
-                        android:textAllCaps="false"
-                        android:fontFamily="@font/montserrat"
-                        android:textSize="@dimen/sp_11"
-                        android:textColor="@color/black"
-                        app:backgroundTint="@null"
-                        android:background="@color/color10"
-                        android:text="Add to cart"/>
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/buyNowBtn"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:text="Buy Now"
-                        android:fontFamily="@font/montserrat"
-                        android:textSize="@dimen/sp_11"
-                        app:backgroundTint="@null"
-                        android:textColor="@color/white"
-                        android:textAllCaps="false"
-                        android:background="@color/color11"
-                        android:layout_height="@dimen/dp_49"/>
-                </LinearLayout>
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/dp_16"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/questionsAnswerRecyclerView">-->
+<!--                    <com.google.android.material.button.MaterialButton-->
+<!--                        android:id="@+id/addToCartBtn"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="@dimen/dp_54"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:fontFamily="@font/montserrat"-->
+<!--                        android:textSize="@dimen/sp_12"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        app:backgroundTint="@null"-->
+<!--                        android:background="@color/color10"-->
+<!--                        android:text="Add to cart"/>-->
+<!--                    <com.google.android.material.button.MaterialButton-->
+<!--                        android:id="@+id/buyNowBtn"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Buy Now"-->
+<!--                        android:fontFamily="@font/montserrat"-->
+<!--                        android:textSize="@dimen/sp_12"-->
+<!--                        app:backgroundTint="@null"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:background="@color/color11"-->
+<!--                        android:layout_height="@dimen/dp_54"/>-->
+<!--                </LinearLayout>-->
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
