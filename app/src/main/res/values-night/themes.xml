@@ -11,6 +11,8 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">#999999</item>
+        <item name="android:letterSpacing">0.05</item>
+
         <!-- Customize your theme here. -->
     </style>
     <style name="SearchViewTheme" parent="Widget.AppCompat.SearchView">
@@ -26,7 +28,20 @@
     <style name="ChipText" parent="TextAppearance.MaterialComponents.Chip">
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:textFontWeight">600</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">600</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="CustomCardView" parent="">
+        <item name="shapeAppearanceOverlay">@style/CustomCardViewShapeAppearance</item>
+    </style>
+
+    <style name="CustomCardViewShapeAppearance" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomLeft">@dimen/dp_21</item>
+        <item name="cornerSizeBottomRight">@dimen/dp_21</item>
+        <item name="android:background">@color/white</item>
     </style>
 </resources>
