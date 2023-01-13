@@ -9,8 +9,10 @@ import ashutosh.shopit.models.Question
 class QuestionsAnswersAdapter(private val questions: List<Question>): RecyclerView.Adapter<QuestionsAnswersAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding : QuestionAnswerItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(question: Question){
-            binding.questionTxtVw.text = question.question
-            binding.answerTxtVw.text = question.answer
+            val ques = "Q: ${question.question}"
+            val ans = "A: ${question.answer}"
+            binding.questionTxtVw.text = ques
+            binding.answerTxtVw.text = ans
         }
     }
 
