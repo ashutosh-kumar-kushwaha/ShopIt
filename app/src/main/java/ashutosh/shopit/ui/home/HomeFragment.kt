@@ -77,7 +77,7 @@ class HomeFragment : Fragment() {
 
         binding.itemRecyclerView.adapter = productsAdapter
 
-        binding.itemRecyclerView.addItemDecoration(ProductSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.dp_21), resources.getDimensionPixelSize(R.dimen.dp_8)))
+        binding.itemRecyclerView.addItemDecoration(ProductSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.dp_24), resources.getDimensionPixelSize(R.dimen.dp_9)))
 
         binding.offersViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageScrollStateChanged(state: Int) {
@@ -149,7 +149,7 @@ class HomeFragment : Fragment() {
     private fun selectItem(index: Int){
         val imageView = circles[index%circleNumber]
         imageView.setImageResource(R.drawable.viewpager_selected)
-        val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_16), resources.getDimensionPixelSize(R.dimen.dp_5))
+        val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_18), resources.getDimensionPixelSize(R.dimen.dp_6))
         lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
         imageView.layoutParams = lp
     }
@@ -157,7 +157,7 @@ class HomeFragment : Fragment() {
     private fun unselectItem(index: Int){
         val imageView = circles[index%circleNumber]
         imageView.setImageResource(R.drawable.viewpager_not_selected)
-        val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_5), resources.getDimensionPixelSize(R.dimen.dp_5))
+        val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_6), resources.getDimensionPixelSize(R.dimen.dp_6))
         lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
         imageView.layoutParams = lp
     }
@@ -237,7 +237,7 @@ class HomeFragment : Fragment() {
                     binding.viewpagerDetailsShimmer.visibility = View.GONE
                     for(i in 0 until circleNumber) {
                         val imageView = ImageView(requireContext())
-                        val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_5), resources.getDimensionPixelSize(R.dimen.dp_5))
+                        val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_6), resources.getDimensionPixelSize(R.dimen.dp_6))
                         imageView.layoutParams= lp
                         lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
                         imageView.setImageResource(R.drawable.viewpager_not_selected)
