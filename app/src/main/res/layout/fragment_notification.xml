@@ -16,11 +16,11 @@
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45">
+            android:layout_height="@dimen/dp_51">
 
             <ImageView
-                android:layout_width="@dimen/dp_24"
-                android:layout_height="@dimen/dp_22"
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_24"
                 android:padding="@dimen/dp_5"
                 android:src="@drawable/ic_back" />
 
@@ -29,10 +29,10 @@
                 android:layout_height="wrap_content"
                 android:text="Notifications"
                 android:fontFamily="@font/poppins"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/sp_18"
                 android:textFontWeight="600"
                 android:textColor="@color/black"
-                android:layout_marginStart="@dimen/dp_14" />
+                android:layout_marginStart="@dimen/dp_16" />
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.core.widget.NestedScrollView
@@ -47,10 +47,10 @@
                     android:id="@+id/notificationRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_14"
-                    android:layout_marginEnd="@dimen/dp_14"
-                    android:layout_marginTop="@dimen/dp_11"
-                    android:layout_marginBottom="@dimen/dp_11" />
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:layout_marginBottom="@dimen/dp_12" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
