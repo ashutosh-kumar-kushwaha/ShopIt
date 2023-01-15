@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.ActivityMainBinding
+import ashutosh.shopit.ui.product.ProductFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,5 +22,6 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bottomNavigationBar.setupWithNavController(navController)
+
     }
 }

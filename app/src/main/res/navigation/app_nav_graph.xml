@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="ashutosh.shopit.ui.home.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+    </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
         android:name="ashutosh.shopit.ui.category.CategoriesFragment"
@@ -28,6 +32,11 @@
     <fragment
         android:id="@+id/cartFragment"
         android:name="ashutosh.shopit.ui.cart.CartFragment"
-        android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        android:label="Cart Fragment"
+        tools:layout="@layout/fragment_cart"/>
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="ashutosh.shopit.ui.product.ProductFragment"
+        android:label="ProductFragment"
+        tools:layout="@layout/fragment_product"/>
 </navigation>

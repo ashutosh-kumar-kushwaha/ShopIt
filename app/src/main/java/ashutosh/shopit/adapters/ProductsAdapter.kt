@@ -1,18 +1,24 @@
 package ashutosh.shopit.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import ashutosh.shopit.interfaces.ProductClickListener
 import ashutosh.shopit.databinding.ItemCardBinding
 import ashutosh.shopit.models.ProductsContent
 import coil.load
 import kotlin.math.roundToInt
 
-class ProductsAdapter : ListAdapter<ProductsContent, ProductsAdapter.ViewHolder>(DiffUtil()) {
-    inner class ViewHolder(private val binding : ItemCardBinding): RecyclerView.ViewHolder(binding.root) {
+class ProductsAdapter(val productClickListener: ProductClickListener) : ListAdapter<ProductsContent, ProductsAdapter.ViewHolder>(DiffUtil()) {
+    inner class ViewHolder(private val binding : ItemCardBinding): RecyclerView.ViewHolder(binding.root), View.OnClickListener{
+
+        init {
+            binding.root.setOnClickListener(this)
+        }
+
         fun bind(product: ProductsContent){
             binding.productImgVw.load(product.imageUrls.imageUrl)
             val discountedPrice = "₹${(product.originalPrice-(product.offerPercentage/100)*product.originalPrice).roundToInt()}"
@@ -23,6 +29,13 @@ class ProductsAdapter : ListAdapter<ProductsContent, ProductsAdapter.ViewHolder>
             binding.productTitleTxtVw.text = product.productName
             val originalPrice = "₹${product.originalPrice.roundToInt()}"
             binding.originalPriceTxtVw.text = originalPrice
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if(position != RecyclerView.NO_POSITION){
+                productClickListener.onProductClick(getItem(adapterPosition).productId)
+            }
         }
     }
 
