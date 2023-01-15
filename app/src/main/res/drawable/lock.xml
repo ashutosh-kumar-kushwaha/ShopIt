@@ -2,6 +2,6 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:drawable="@drawable/lock2"
-        android:width="@dimen/dp_14"
-        android:height="@dimen/dp_18"/>
+        android:width="@dimen/dp_16"
+        android:height="@dimen/dp_20"/>
 </layer-list>
