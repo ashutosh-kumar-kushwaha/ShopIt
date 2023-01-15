@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_86"
-        android:paddingStart="@dimen/dp_13"
-        android:paddingTop="@dimen/dp_11"
-        android:paddingEnd="@dimen/dp_13"
-        android:paddingBottom="@dimen/dp_7"
+        android:layout_height="@dimen/dp_98"
+        android:paddingStart="@dimen/dp_14"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingEnd="@dimen/dp_14"
+        android:paddingBottom="@dimen/dp_8"
         android:background="@drawable/notification_bg"
-        android:layout_marginBottom="@dimen/dp_11">
+        android:layout_marginBottom="@dimen/dp_12">
 
         <ImageView
             android:id="@+id/notificationIconImgVw"
-            android:layout_width="@dimen/dp_16"
+            android:layout_width="@dimen/dp_18"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:src="@drawable/ic_notification"
@@ -22,7 +22,7 @@
 
         <ImageView
             android:id="@+id/productImgVw"
-            android:layout_width="@dimen/dp_59"
+            android:layout_width="@dimen/dp_64"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
             android:src="@drawable/iphone"
@@ -38,8 +38,8 @@
             app:layout_constraintStart_toEndOf="@id/notificationIconImgVw"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/productImgVw"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginEnd="@dimen/dp_8">
+            android:layout_marginStart="@dimen/dp_9"
+            android:layout_marginEnd="@dimen/dp_9">
 
             <TextView
                 android:id="@+id/titleTxtVw"
@@ -48,7 +48,7 @@
                 android:layout_weight="4"
                 android:text="Order Delivered!"
                 android:fontFamily="@font/poppins"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_12"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:textColor="@color/black"
@@ -65,7 +65,7 @@
                 android:singleLine="true"
                 android:text="8 days ago"
                 android:fontFamily="@font/poppins"
-                android:textSize="@dimen/sp_7" />
+                android:textSize="@dimen/sp_8" />
         </LinearLayout>
 
         <TextView
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:text="Remove"
             android:fontFamily="@font/poppins"
-            android:textSize="@dimen/sp_11"
+            android:textSize="@dimen/sp_12"
             android:textColor="@color/color9"
             android:textFontWeight="600"
             app:layout_constraintStart_toStartOf="@id/textLL"
@@ -85,12 +85,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fontFamily="@font/poppins"
-            android:textSize="@dimen/sp_7"
+            android:textSize="@dimen/sp_8"
             android:textFontWeight="700"
             android:textColor="@color/color2"
             android:text="Your shopit order containing Apple Iphone 14 128GB (Product) RED  has been delivered."
-            android:layout_marginTop="@dimen/dp_3"
-            android:layout_marginBottom="@dimen/dp_3"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginBottom="@dimen/dp_4"
             android:layout_marginEnd="@dimen/dp_8"
             app:layout_constraintStart_toStartOf="@id/textLL"
             app:layout_constraintEnd_toStartOf="@id/productImgVw"
