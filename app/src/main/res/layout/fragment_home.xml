@@ -19,8 +19,8 @@
         <LinearLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_35"
-            android:layout_margin="@dimen/dp_14"
+            android:layout_height="@dimen/dp_40"
+            android:layout_margin="@dimen/dp_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -38,10 +38,10 @@
                 app:iconifiedByDefault="false" />
 
             <ImageView
-                android:layout_width="@dimen/dp_16"
+                android:layout_width="@dimen/dp_18"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginStart="@dimen/dp_12"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_hamburger" />
@@ -55,8 +55,8 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_14"
-            android:layout_marginEnd="@dimen/dp_14">
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -65,8 +65,8 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/offersViewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_96"
-                    android:layout_marginTop="@dimen/dp_11"
+                    android:layout_height="@dimen/dp_110"
+                    android:layout_marginTop="@dimen/dp_12"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -75,8 +75,8 @@
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/offersShimmer"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_96"
-                    android:layout_marginTop="@dimen/dp_11"
+                    android:layout_height="@dimen/dp_110"
+                    android:layout_marginTop="@dimen/dp_12"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -91,18 +91,18 @@
                 <LinearLayout
                     android:id="@+id/viewpager_details"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dp_5"
+                    android:layout_height="@dimen/dp_6"
                     android:layout_marginTop="@dimen/dp_4"
                     android:orientation="horizontal"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/offersViewPager"></LinearLayout>
+                    app:layout_constraintTop_toBottomOf="@+id/offersViewPager"/>
 
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/viewpagerDetailsShimmer"
                     android:layout_width="@dimen/dp_100"
-                    android:layout_height="@dimen/dp_5"
+                    android:layout_height="@dimen/dp_6"
                     android:layout_marginTop="@dimen/dp_4"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -120,12 +120,12 @@
                     android:id="@+id/categoriesTxtVw"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_11"
+                    android:layout_marginTop="@dimen/dp_12"
                     android:fontFamily="@font/montserrat"
                     android:text="Categories"
                     android:textColor="@color/black"
                     android:textFontWeight="600"
-                    android:textSize="@dimen/sp_14"
+                    android:textSize="@dimen/sp_16"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/viewpager_details" />
 
@@ -133,20 +133,20 @@
                     android:id="@+id/seeAllTxtVw"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_12"
+                    android:layout_marginTop="@dimen/dp_14"
                     android:fontFamily="@font/montserrat"
                     android:text="See All"
                     android:textColor="@color/black"
                     android:textFontWeight="600"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_12"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/viewpager_details" />
 
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/categoriesShimmer"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_25"
-                    android:layout_marginTop="@dimen/dp_11"
+                    android:layout_height="@dimen/dp_28"
+                    android:layout_marginTop="@dimen/dp_12"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -165,35 +165,35 @@
                                 android:layout_width="@dimen/dp_60"
                                 android:layout_height="match_parent"
                                 app:cardBackgroundColor="@color/shimmer_color"
-                                app:cardCornerRadius="@dimen/dp_21" />
+                                app:cardCornerRadius="@dimen/dp_24" />
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="@dimen/dp_60"
                                 android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/dp_11"
+                                android:layout_marginStart="@dimen/dp_12"
                                 app:cardBackgroundColor="@color/shimmer_color"
-                                app:cardCornerRadius="@dimen/dp_21" />
+                                app:cardCornerRadius="@dimen/dp_24" />
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="@dimen/dp_60"
                                 android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/dp_11"
+                                android:layout_marginStart="@dimen/dp_12"
                                 app:cardBackgroundColor="@color/shimmer_color"
-                                app:cardCornerRadius="@dimen/dp_21" />
+                                app:cardCornerRadius="@dimen/dp_24" />
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="@dimen/dp_60"
                                 android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/dp_11"
+                                android:layout_marginStart="@dimen/dp_12"
                                 app:cardBackgroundColor="@color/shimmer_color"
-                                app:cardCornerRadius="@dimen/dp_21" />
+                                app:cardCornerRadius="@dimen/dp_24" />
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="@dimen/dp_60"
                                 android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/dp_11"
+                                android:layout_marginStart="@dimen/dp_12"
                                 app:cardBackgroundColor="@color/shimmer_color"
-                                app:cardCornerRadius="@dimen/dp_21" />
+                                app:cardCornerRadius="@dimen/dp_24" />
                         </LinearLayout>
                     </HorizontalScrollView>
                 </com.facebook.shimmer.ShimmerFrameLayout>
@@ -201,8 +201,8 @@
                 <HorizontalScrollView
                     android:id="@+id/categoriesScrollView"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_25"
-                    android:layout_marginTop="@dimen/dp_11"
+                    android:layout_height="@dimen/dp_28"
+                    android:layout_marginTop="@dimen/dp_12"
                     android:visibility="invisible"
                     android:scrollbars="none"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -213,7 +213,7 @@
                         android:id="@+id/categoriesChipGroup"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        app:chipSpacingHorizontal="@dimen/dp_11">
+                        app:chipSpacingHorizontal="@dimen/dp_12">
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/categoryAllChip"
@@ -227,10 +227,10 @@
                             android:textColor="@color/white"
                             app:checkedIconEnabled="false"
                             app:chipBackgroundColor="@color/black"
-                            app:chipEndPadding="@dimen/dp_9"
+                            app:chipEndPadding="@dimen/dp_10"
                             app:chipIconEnabled="false"
                             app:chipMinTouchTargetSize="0dp"
-                            app:chipStartPadding="@dimen/dp_9"
+                            app:chipStartPadding="@dimen/dp_10"
                             app:chipStrokeColor="@color/black"
                             app:chipStrokeWidth="@dimen/dp_1"
                             app:closeIconEnabled="false" />
@@ -247,10 +247,10 @@
                             android:textColor="@color/black"
                             app:checkedIconEnabled="false"
                             app:chipBackgroundColor="@color/white"
-                            app:chipEndPadding="@dimen/dp_9"
+                            app:chipEndPadding="@dimen/dp_10"
                             app:chipIconEnabled="false"
                             app:chipMinTouchTargetSize="0dp"
-                            app:chipStartPadding="@dimen/dp_9"
+                            app:chipStartPadding="@dimen/dp_10"
                             app:chipStrokeColor="@color/black"
                             app:chipStrokeWidth="@dimen/dp_1"
                             app:closeIconEnabled="false" />
@@ -267,10 +267,10 @@
                             android:textColor="@color/black"
                             app:checkedIconEnabled="false"
                             app:chipBackgroundColor="@color/white"
-                            app:chipEndPadding="@dimen/dp_9"
+                            app:chipEndPadding="@dimen/dp_10"
                             app:chipIconEnabled="false"
                             app:chipMinTouchTargetSize="0dp"
-                            app:chipStartPadding="@dimen/dp_9"
+                            app:chipStartPadding="@dimen/dp_10"
                             app:chipStrokeColor="@color/black"
                             app:chipStrokeWidth="@dimen/dp_1"
                             app:closeIconEnabled="false" />
@@ -287,10 +287,10 @@
                             android:textColor="@color/black"
                             app:checkedIconEnabled="false"
                             app:chipBackgroundColor="@color/white"
-                            app:chipEndPadding="@dimen/dp_9"
+                            app:chipEndPadding="@dimen/dp_10"
                             app:chipIconEnabled="false"
                             app:chipMinTouchTargetSize="0dp"
-                            app:chipStartPadding="@dimen/dp_9"
+                            app:chipStartPadding="@dimen/dp_10"
                             app:chipStrokeColor="@color/black"
                             app:chipStrokeWidth="@dimen/dp_1"
                             app:closeIconEnabled="false" />
@@ -307,10 +307,10 @@
                             android:textColor="@color/black"
                             app:checkedIconEnabled="false"
                             app:chipBackgroundColor="@color/white"
-                            app:chipEndPadding="@dimen/dp_9"
+                            app:chipEndPadding="@dimen/dp_10"
                             app:chipIconEnabled="false"
                             app:chipMinTouchTargetSize="0dp"
-                            app:chipStartPadding="@dimen/dp_9"
+                            app:chipStartPadding="@dimen/dp_10"
                             app:chipStrokeColor="@color/black"
                             app:chipStrokeWidth="@dimen/dp_1"
                             app:closeIconEnabled="false" />
@@ -327,10 +327,10 @@
                             android:textColor="@color/black"
                             app:checkedIconEnabled="false"
                             app:chipBackgroundColor="@color/white"
-                            app:chipEndPadding="@dimen/dp_9"
+                            app:chipEndPadding="@dimen/dp_10"
                             app:chipIconEnabled="false"
                             app:chipMinTouchTargetSize="0dp"
-                            app:chipStartPadding="@dimen/dp_9"
+                            app:chipStartPadding="@dimen/dp_10"
                             app:chipStrokeColor="@color/black"
                             app:chipStrokeWidth="@dimen/dp_1"
                             app:closeIconEnabled="false" />
@@ -341,7 +341,7 @@
                     android:id="@+id/itemRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_17"
+                    android:layout_marginTop="@dimen/dp_19"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -351,7 +351,7 @@
                     android:id="@+id/itemRecyclerVwShimmer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_17"
+                    android:layout_marginTop="@dimen/dp_19"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -376,14 +376,14 @@
                                 layout="@layout/item_card_shimmer"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/dp_21"
+                                android:layout_marginStart="@dimen/dp_24"
                                 android:layout_weight="1" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_8">
+                            android:layout_marginTop="@dimen/dp_9">
 
                             <include
                                 layout="@layout/item_card_shimmer"
@@ -395,14 +395,14 @@
                                 layout="@layout/item_card_shimmer"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/dp_21"
+                                android:layout_marginStart="@dimen/dp_24"
                                 android:layout_weight="1" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_8">
+                            android:layout_marginTop="@dimen/dp_9">
 
                             <include
                                 layout="@layout/item_card_shimmer"
@@ -414,7 +414,7 @@
                                 layout="@layout/item_card_shimmer"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/dp_21"
+                                android:layout_marginStart="@dimen/dp_24"
                                 android:layout_weight="1" />
                         </LinearLayout>
                     </LinearLayout>

@@ -2,6 +2,6 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:drawable="@drawable/ic_star"
-        android:width="@dimen/dp_8"
-        android:height="@dimen/dp_8"/>
+        android:width="@dimen/dp_10"
+        android:height="@dimen/dp_10"/>
 </layer-list>
