@@ -25,11 +25,11 @@
     </style>
     <style name="ChipTheme" parent="Widget.MaterialComponents.Chip.Entry">
         <item name="android:fontFamily">@font/chip_font</item>
-        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textSize">@dimen/sp_16</item>
     </style>
     <style name="ChipText" parent="TextAppearance.MaterialComponents.Chip">
         <item name="android:fontFamily">@font/montserrat</item>
-        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textSize">@dimen/sp_16</item>
         <item name="android:textFontWeight" tools:ignore="NewApi">600</item>
         <item name="android:gravity">center</item>
     </style>
@@ -42,8 +42,8 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">0dp</item>
         <item name="cornerSizeTopRight">0dp</item>
-        <item name="cornerSizeBottomLeft">@dimen/dp_21</item>
-        <item name="cornerSizeBottomRight">@dimen/dp_21</item>
+        <item name="cornerSizeBottomLeft">@dimen/dp_24</item>
+        <item name="cornerSizeBottomRight">@dimen/dp_24</item>
         <item name="android:background">@color/white</item>
     </style>
 </resources>

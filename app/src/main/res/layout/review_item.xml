@@ -21,6 +21,7 @@
             android:id="@+id/messageTxtVw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/dp_12"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ullamcorper cursus turpis, quis feugiat nibh hendrerit sed. Curabitur risus tellus, cursus a "
             android:layout_marginTop="@dimen/dp_4"
             android:textColor="@color/color2"
