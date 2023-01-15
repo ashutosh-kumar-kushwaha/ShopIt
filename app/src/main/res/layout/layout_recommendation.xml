@@ -2,14 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
-        android:layout_width="@dimen/dp_105"
+        android:layout_width="@dimen/dp_120"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginEnd="@dimen/dp_7">
+        android:layout_marginEnd="@dimen/dp_8">
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="@dimen/dp_105"
-            android:layout_height="@dimen/dp_91"
-            app:cardCornerRadius="@dimen/dp_7"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp_104"
+            app:cardCornerRadius="@dimen/dp_8"
             app:cardBackgroundColor="@color/color8">
             <ImageView
                 android:id="@+id/productImgVw"
@@ -26,9 +26,9 @@
             android:text="Smartphones &amp; devices"
             android:singleLine="true"
             android:fontFamily="@font/poppins"
-            android:textSize="@dimen/sp_11"
+            android:textSize="@dimen/sp_12"
             android:textColor="@color/black"
             android:textFontWeight="600"
-            android:layout_marginTop="@dimen/dp_7"/>
+            android:layout_marginTop="@dimen/dp_8"/>
     </LinearLayout>
 </layout>
