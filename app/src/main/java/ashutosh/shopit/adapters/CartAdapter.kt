@@ -1,5 +1,6 @@
 package ashutosh.shopit.adapters
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
@@ -25,7 +26,7 @@ class CartAdapter: ListAdapter<CartItem, CartAdapter.ViewHolder>(DiffUtil()) {
 
         private fun decreaseQuantity(){
             var quantity = Integer.parseInt(binding.quantityTxtVw.text.toString())
-            if(quantity >= 0){
+            if(quantity > 0){
                 quantity--
                 binding.quantityTxtVw.text = quantity.toString()
             }
@@ -33,7 +34,7 @@ class CartAdapter: ListAdapter<CartItem, CartAdapter.ViewHolder>(DiffUtil()) {
 
         private fun increaseQuantity(){
             var quantity = Integer.parseInt(binding.quantityTxtVw.text.toString())
-            quantity--
+            quantity++
             binding.quantityTxtVw.text = quantity.toString()
         }
     }
@@ -50,11 +51,11 @@ class CartAdapter: ListAdapter<CartItem, CartAdapter.ViewHolder>(DiffUtil()) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+        return ViewHolder(CartItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(getItem(position))
     }
 
 }

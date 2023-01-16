@@ -28,9 +28,10 @@
 
         <TextView
             android:id="@+id/quantityTxtVw"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_18"
             android:layout_height="wrap_content"
             android:text="01"
+            android:gravity="center"
             android:fontFamily="@font/poppins"
             android:letterSpacing="0.05"
             android:textSize="@dimen/dp_12"
