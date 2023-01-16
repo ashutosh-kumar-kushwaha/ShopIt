@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ShopIt" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.ShopIt" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -13,9 +13,11 @@
         <item name="android:statusBarColor">#999999</item>
         <item name="android:letterSpacing">0.05</item>
 
-        <!-- Customize your theme here. -->
-        <item name="android:letterSpacing">0.05</item>
-
+    </style>
+    <style name="BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:textColor">#999999</item>
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textFontWeight">600</item>
     </style>
     <style name="SearchViewTheme" parent="Widget.AppCompat.SearchView">
         <item name="android:textColor">#999999</item>
@@ -23,7 +25,7 @@
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:iconifiedByDefault">false</item>
     </style>
-    <style name="ChipTheme" parent="Widget.MaterialComponents.Chip.Entry">
+    <style name="ChipTheme" parent="Widget.Material3.Chip.Input.Icon">
         <item name="android:fontFamily">@font/chip_font</item>
         <item name="android:textSize">@dimen/sp_16</item>
     </style>

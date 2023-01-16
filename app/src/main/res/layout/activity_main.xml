@@ -22,10 +22,16 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_56"
+            app:itemPaddingTop="@dimen/dp_8"
+            android:paddingBottom="0dp"
             android:background="@color/white"
             app:menu="@menu/bottom_navigation_menu"
             app:labelVisibilityMode="labeled"
+            app:itemTextAppearanceInactive="@style/BottomNavigationView"
+            app:itemTextAppearanceActive="@style/BottomNavigationView"
+            app:itemRippleColor="@null"
+            app:itemActiveIndicatorStyle="@null"
             app:itemHorizontalTranslationEnabled="false"
             app:itemIconTint="@drawable/bottom_navigation_selector"
             app:itemTextColor="@drawable/bottom_navigation_selector" />

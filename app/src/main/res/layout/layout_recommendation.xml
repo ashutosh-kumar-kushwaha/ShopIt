@@ -10,6 +10,7 @@
             android:layout_width="@dimen/dp_120"
             android:layout_height="@dimen/dp_104"
             app:cardCornerRadius="@dimen/dp_8"
+            app:strokeWidth="0dp"
             app:cardBackgroundColor="@color/color8">
             <ImageView
                 android:id="@+id/productImgVw"
