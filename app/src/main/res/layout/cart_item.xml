@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_98">
+
+        <ImageView
+            android:id="@+id/productImgVw"
+            android:layout_width="@dimen/dp_64"
+            android:layout_height="@dimen/dp_64"
+            android:src="@drawable/iphone"
+            android:adjustViewBounds="true"
+            android:layout_marginStart="@dimen/dp_12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/plusBtn"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:src="@drawable/plus"
+            android:layout_marginEnd="@dimen/dp_19"
+            android:layout_marginBottom="@dimen/dp_19"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/quantityTxtVw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="01"
+            android:fontFamily="@font/poppins"
+            android:letterSpacing="0.05"
+            android:textSize="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_8"
+            app:layout_constraintEnd_toStartOf="@id/plusBtn"
+            app:layout_constraintTop_toTopOf="@id/plusBtn"
+            app:layout_constraintBottom_toBottomOf="@id/plusBtn" />
+
+        <ImageView
+            android:id="@+id/minusBtn"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:src="@drawable/minus"
+            app:layout_constraintEnd_toStartOf="@id/quantityTxtVw"
+            app:layout_constraintBottom_toBottomOf="@id/quantityTxtVw"
+            app:layout_constraintTop_toTopOf="@id/quantityTxtVw" />
+
+        <TextView
+            android:id="@+id/productTitleTxtVw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginEnd="@dimen/dp_24"
+            android:text="Corsair S50 Stereo"
+            android:textSize="@dimen/sp_12"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/black"
+            android:textFontWeight="600"
+            android:letterSpacing="0.05"
+            android:singleLine="true"
+            app:layout_constraintStart_toEndOf="@+id/productImgVw"
+            app:layout_constraintTop_toTopOf="@id/productImgVw"
+            app:layout_constraintEnd_toStartOf="@id/minusBtn" />
+
+        <TextView
+            android:id="@+id/stockTxtVw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="In Stock"
+            android:layout_marginTop="@dimen/dp_4"
+            android:fontFamily="@font/poppins"
+            android:textSize="@dimen/sp_8"
+            android:textColor="@color/color12"
+            android:letterSpacing="0.05"
+            app:layout_constraintTop_toBottomOf="@id/productTitleTxtVw"
+            app:layout_constraintStart_toStartOf="@id/productTitleTxtVw"
+            app:layout_constraintEnd_toEndOf="@id/productTitleTxtVw" />
+
+        <TextView
+            android:id="@+id/priceTxtVw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="₹2,999"
+            android:layout_marginTop="@dimen/dp_8"
+            android:fontFamily="@font/poppins"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/black"
+            android:letterSpacing="0.05"
+            android:textFontWeight="700"
+            app:layout_constraintTop_toBottomOf="@id/stockTxtVw"
+            app:layout_constraintStart_toStartOf="@id/productTitleTxtVw"
+            app:layout_constraintEnd_toEndOf="@id/productTitleTxtVw" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
