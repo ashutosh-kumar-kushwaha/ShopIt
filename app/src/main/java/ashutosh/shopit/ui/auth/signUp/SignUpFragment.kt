@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -17,11 +18,16 @@ import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentSignUpBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.datastore.DataStoreManager
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.LogInInfo
+import ashutosh.shopit.repository.SignUpRepository
 import ashutosh.shopit.ui.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import kotlin.math.sign
 
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private var _binding : FragmentSignUpBinding? = null
@@ -31,12 +37,7 @@ class SignUpFragment : Fragment() {
     private var _progressBarBinding : ProgressBarBinding? = null
     private val progressBarBinding get() = _progressBarBinding!!
 
-    private var _signUpViewModel : SignUpViewModel? = null
-    private val signUpViewModel : SignUpViewModel get() = _signUpViewModel!!
-
-    private var email = ""
-    private var otp = ""
-
+    private val signUpViewModel by viewModels<SignUpViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,14 +46,12 @@ class SignUpFragment : Fragment() {
 
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
 
-        if(arguments?.getString("email")!=null){
-            email = arguments?.getString("email")!!
+        if(arguments?.getString("email")!=null && signUpViewModel.email.isEmpty()){
+            signUpViewModel.email = arguments?.getString("email")!!
         }
-        if(arguments?.getString("otp")!=null){
-            otp = arguments?.getString("otp")!!
+        if(arguments?.getString("otp")!=null && signUpViewModel.otp.isEmpty()){
+            signUpViewModel.otp = arguments?.getString("otp")!!
         }
-
-        _signUpViewModel = ViewModelProvider(viewModelStore, SignUpViewModelFactory(email, otp))[SignUpViewModel::class.java]
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = signUpViewModel

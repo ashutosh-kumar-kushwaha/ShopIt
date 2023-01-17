@@ -9,18 +9,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.lifecycle.lifecycleScope
-import ashutosh.shopit.R
-import ashutosh.shopit.databinding.FragmentLoginBinding
 import ashutosh.shopit.databinding.FragmentResetPasswordBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
-import ashutosh.shopit.di.NetworkResult
-import ashutosh.shopit.ui.auth.forgotPasswordOtpVerification.ForgotPasswordOtpVerificationViewModel
+import ashutosh.shopit.api.NetworkResult
+import ashutosh.shopit.repository.ResetPasswordRepository
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ResetPasswordFragment : Fragment() {
 
     private var _binding : FragmentResetPasswordBinding? = null
@@ -30,11 +31,7 @@ class ResetPasswordFragment : Fragment() {
     private var _progressBarBinding : ProgressBarBinding? = null
     private val progressBarBinding get() = _progressBarBinding!!
 
-    private var _resetPasswordViewModel : ResetPasswordViewModel? = null
-    private val resetPasswordViewModel : ResetPasswordViewModel get() = _resetPasswordViewModel!!
-
-    private var email = ""
-    private var otp = ""
+    private val resetPasswordViewModel by viewModels<ResetPasswordViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,14 +41,12 @@ class ResetPasswordFragment : Fragment() {
         _binding = FragmentResetPasswordBinding.inflate(inflater, container, false)
 
 
-        if(arguments?.getString("email") != null){
-            email = arguments?.getString("email")!!
+        if(arguments?.getString("email") != null && resetPasswordViewModel.email.isEmpty()){
+            resetPasswordViewModel.email = arguments?.getString("email")!!
         }
-        if(arguments?.getString("otp") != null){
-            otp = arguments?.getString("otp")!!
+        if(arguments?.getString("otp") != null && resetPasswordViewModel.email.isEmpty()){
+            resetPasswordViewModel.otp = arguments?.getString("otp")!!
         }
-
-        _resetPasswordViewModel = ViewModelProvider(viewModelStore, ResetPasswordViewModelFactory(email, otp))[ResetPasswordViewModel::class.java]
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = resetPasswordViewModel

@@ -3,13 +3,14 @@ package ashutosh.shopit.repository
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
 import ashutosh.shopit.api.ServiceBuilder
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.AdvertisementResponse
 import ashutosh.shopit.models.CategoryResponse
 import ashutosh.shopit.models.ProductsResponse
+import javax.inject.Inject
 
-class HomePageRepository {
-    private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
+class HomePageRepository @Inject constructor(private val retrofitAPI: RetrofitAPI) {
+
     val getProductsResponseLiveData = SingleLiveEvent<NetworkResult<ProductsResponse>>()
     val getCategoriesResponseLiveData = SingleLiveEvent<NetworkResult<CategoryResponse>>()
     val getAdvertisementResponseLiveData = SingleLiveEvent<NetworkResult<AdvertisementResponse>>()

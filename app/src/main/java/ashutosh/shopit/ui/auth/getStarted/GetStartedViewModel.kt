@@ -5,10 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.repository.GetStartedRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class GetStartedViewModel : ViewModel() {
-
-    private val getStartedRepository = GetStartedRepository()
+@HiltViewModel
+class GetStartedViewModel @Inject constructor(private val getStartedRepository : GetStartedRepository) : ViewModel() {
 
     val signUpEmailResponseLiveData get() = getStartedRepository.signUpEmailResponseLiveData
 

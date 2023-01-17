@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -17,24 +18,23 @@ import ashutosh.shopit.GenericTextWatcher
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentForgotPasswordOtpVerificationBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
+import ashutosh.shopit.repository.ForgotPasswordOtpVerificationRepository
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ForgotPasswordOtpVerificationFragment : Fragment() {
 
     private var _binding : FragmentForgotPasswordOtpVerificationBinding? = null
     private val binding : FragmentForgotPasswordOtpVerificationBinding get() = _binding!!
 
-//    private val forgotPasswordOtpVerificationViewModel by viewModels<ForgotPasswordOtpVerificationViewModel>()
-    private var _forgotPasswordOtpVerificationViewModel : ForgotPasswordOtpVerificationViewModel? = null
-    private val forgotPasswordOtpVerificationViewModel : ForgotPasswordOtpVerificationViewModel get() = _forgotPasswordOtpVerificationViewModel!!
-
+    private val forgotPasswordOtpVerificationViewModel by viewModels<ForgotPasswordOtpVerificationViewModel>()
 
     private lateinit var progressBar: Dialog
     private var _progressBarBinding : ProgressBarBinding? = null
     private val progressBarBinding get() = _progressBarBinding!!
-
-    private var email = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,11 +43,9 @@ class ForgotPasswordOtpVerificationFragment : Fragment() {
 
         _binding = FragmentForgotPasswordOtpVerificationBinding.inflate(inflater, container, false)
 
-        if(arguments?.getString("email") != null){
-            email = arguments?.getString("email")!!
+        if(arguments?.getString("email") != null && forgotPasswordOtpVerificationViewModel.email.isEmpty()){
+            forgotPasswordOtpVerificationViewModel.email = arguments?.getString("email")!!
         }
-
-        _forgotPasswordOtpVerificationViewModel = ViewModelProvider(viewModelStore, FPOtpVerifyViewModelFactory(email))[ForgotPasswordOtpVerificationViewModel::class.java]
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = forgotPasswordOtpVerificationViewModel

@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -22,16 +23,25 @@ import ashutosh.shopit.adapters.OffersAdapter
 import ashutosh.shopit.adapters.ProductSpacingItemDecoration
 import ashutosh.shopit.adapters.ProductsAdapter
 import ashutosh.shopit.databinding.FragmentHomeBinding
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
+import ashutosh.shopit.repository.HomePageRepository
 import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.reflect.Field
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(), ProductClickListener {
 
     private var _binding : FragmentHomeBinding? = null
     private val binding : FragmentHomeBinding get() = _binding!!
 
     private val homeViewModel by viewModels<HomeViewModel>()
+
+//    private lateinit var homeViewModel: HomeViewModel
+
+//    @Inject
+//    lateinit var homePageRepository: HomePageRepository
 
     private val productsAdapter = ProductsAdapter(this)
 
@@ -47,6 +57,9 @@ class HomeFragment : Fragment(), ProductClickListener {
     ): View? {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+//        homeViewModel = ViewModelProvider(viewModelStore, HomeViewModelFactory(homePageRepository))[HomeViewModel::class.java]
+
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = homeViewModel

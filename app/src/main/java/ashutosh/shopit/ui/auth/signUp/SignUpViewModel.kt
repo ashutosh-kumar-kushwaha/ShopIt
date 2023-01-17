@@ -5,9 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.repository.SignUpRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SignUpViewModel(val email: String, val otp: String) : ViewModel() {
-    private val signUpRepository = SignUpRepository()
+@HiltViewModel
+class SignUpViewModel @Inject constructor(private val signUpRepository : SignUpRepository) : ViewModel() {
+
+    var email = ""
+    var otp = ""
     var gender: String? = null
     val firstNameLiveData = MutableLiveData<String>("")
     val lastNameLiveData = MutableLiveData<String>("")

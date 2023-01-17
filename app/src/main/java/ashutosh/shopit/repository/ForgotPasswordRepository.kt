@@ -3,12 +3,12 @@ package ashutosh.shopit.repository
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
 import ashutosh.shopit.api.ServiceBuilder
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.Email
 import ashutosh.shopit.models.DefaultResponse
+import javax.inject.Inject
 
-class ForgotPasswordRepository {
-    private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
+class ForgotPasswordRepository @Inject constructor(private val retrofitAPI: RetrofitAPI)  {
 
     val forgotPasswordResponseLiveData =
         SingleLiveEvent<NetworkResult<DefaultResponse>>()
