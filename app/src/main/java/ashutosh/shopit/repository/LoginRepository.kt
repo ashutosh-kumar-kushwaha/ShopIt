@@ -3,12 +3,12 @@ package ashutosh.shopit.repository
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
 import ashutosh.shopit.api.ServiceBuilder
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.LoginRequest
 import ashutosh.shopit.models.LoginResponse
+import javax.inject.Inject
 
-class LoginRepository {
-    private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
+class LoginRepository @Inject constructor(private val retrofitAPI: RetrofitAPI) {
 
     val loginResponseLiveData =
         SingleLiveEvent<NetworkResult<LoginResponse>>()

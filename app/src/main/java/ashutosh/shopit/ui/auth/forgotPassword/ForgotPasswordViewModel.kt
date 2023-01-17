@@ -6,10 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.repository.ForgotPasswordRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ForgotPasswordViewModel : ViewModel() {
-
-    private val forgotPasswordRepository = ForgotPasswordRepository()
+@HiltViewModel
+class ForgotPasswordViewModel @Inject constructor(private val forgotPasswordRepository: ForgotPasswordRepository)  : ViewModel(){
 
     val forgotPasswordResponseLiveData get() = forgotPasswordRepository.forgotPasswordResponseLiveData
 

@@ -4,14 +4,13 @@ import android.util.Log
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
 import ashutosh.shopit.api.ServiceBuilder
-import ashutosh.shopit.di.NetworkResult
-import ashutosh.shopit.models.DefaultResponse
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.LoginRequest
 import ashutosh.shopit.models.LoginResponse
 import ashutosh.shopit.models.SignUpRequest
+import javax.inject.Inject
 
-class SignUpRepository {
-    private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
+class SignUpRepository @Inject constructor(private val retrofitAPI: RetrofitAPI) {
 
     val signUpResponseLiveData = SingleLiveEvent<NetworkResult<LoginResponse>>()
 

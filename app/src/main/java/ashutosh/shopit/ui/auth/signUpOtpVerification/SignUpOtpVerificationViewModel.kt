@@ -5,13 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.repository.SignUpOtpVerificationRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlin.math.sign
 
-class SignUpOtpVerificationViewModel(var email: String) : ViewModel() {
-    private val signUpOtpVerificationRepository = SignUpOtpVerificationRepository()
+@HiltViewModel
+class SignUpOtpVerificationViewModel @Inject constructor(private val signUpOtpVerificationRepository: SignUpOtpVerificationRepository) : ViewModel() {
 
     val responseLiveData get() = signUpOtpVerificationRepository.responseLiveData
     val resendOtpResponseLiveData get() = signUpOtpVerificationRepository.resendOtpResponseLiveData
+
+    var email = ""
 
     val errorMessage = SingleLiveEvent<String>()
 

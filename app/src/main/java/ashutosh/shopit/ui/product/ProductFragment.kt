@@ -17,9 +17,11 @@ import ashutosh.shopit.adapters.ProductImageAdapter
 import ashutosh.shopit.adapters.QuestionsAnswersAdapter
 import ashutosh.shopit.adapters.SpecsParentAdapter
 import ashutosh.shopit.databinding.FragmentProductBinding
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 
+@AndroidEntryPoint
 class ProductFragment : Fragment() {
 
     private var _binding : FragmentProductBinding? = null

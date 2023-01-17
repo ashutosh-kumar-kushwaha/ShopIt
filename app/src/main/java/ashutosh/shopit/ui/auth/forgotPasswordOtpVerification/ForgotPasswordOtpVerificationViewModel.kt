@@ -5,10 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.repository.ForgotPasswordOtpVerificationRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ForgotPasswordOtpVerificationViewModel(val email : String) : ViewModel() {
+@HiltViewModel
+class ForgotPasswordOtpVerificationViewModel @Inject constructor(private val forgotPasswordOtpVerificationRepository: ForgotPasswordOtpVerificationRepository) : ViewModel() {
 
-    private val forgotPasswordOtpVerificationRepository = ForgotPasswordOtpVerificationRepository()
+    var email = ""
 
     val otpVerifyResponseLiveData get() = forgotPasswordOtpVerificationRepository.otpVerifyResponseLiveData
     val resendOtpResponseLiveData get() = forgotPasswordOtpVerificationRepository.resendOtpResponseLiveData

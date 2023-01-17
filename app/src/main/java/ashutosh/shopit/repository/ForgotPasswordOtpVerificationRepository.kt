@@ -1,16 +1,15 @@
 package ashutosh.shopit.repository
 
-import androidx.lifecycle.MutableLiveData
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
 import ashutosh.shopit.api.ServiceBuilder
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.DefaultResponse
 import ashutosh.shopit.models.Email
 import ashutosh.shopit.models.VerifyOtpRequest
+import javax.inject.Inject
 
-class ForgotPasswordOtpVerificationRepository {
-    private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
+class ForgotPasswordOtpVerificationRepository @Inject constructor(private val retrofitAPI: RetrofitAPI) {
 
     val otpVerifyResponseLiveData = SingleLiveEvent<NetworkResult<DefaultResponse>>()
 

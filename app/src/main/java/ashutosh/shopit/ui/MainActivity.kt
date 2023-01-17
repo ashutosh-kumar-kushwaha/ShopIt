@@ -8,7 +8,9 @@ import androidx.navigation.ui.setupWithNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.ActivityMainBinding
 import ashutosh.shopit.ui.product.ProductFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var _binding : ActivityMainBinding? = null

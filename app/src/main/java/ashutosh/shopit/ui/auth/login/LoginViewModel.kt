@@ -4,13 +4,14 @@ import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ashutosh.shopit.SingleLiveEvent
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.LoginResponse
 import ashutosh.shopit.repository.LoginRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
-
-    private val loginRepository = LoginRepository()
+@HiltViewModel
+class LoginViewModel @Inject constructor(private val loginRepository : LoginRepository) : ViewModel() {
 
      val loginResponseLiveData : SingleLiveEvent<NetworkResult<LoginResponse>> get() = loginRepository.loginResponseLiveData
 
