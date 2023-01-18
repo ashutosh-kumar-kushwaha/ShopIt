@@ -32,6 +32,9 @@ interface RetrofitAPI {
     @POST("api/auth/signGoogle")
     suspend fun signGoogle(@Query("TokenG") token : String) : Response<LoginResponse>
 
+    @GET("api/auth/regenerateToken")
+    suspend fun regenerateAccessToken(@Query("token") refreshToken: String) : Response<LoginResponse>
+
     //Product
 
     @GET("products/getProductsByCategory/{categoryId}")

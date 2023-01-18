@@ -49,4 +49,10 @@ class DataStoreManager(private val context : Context) {
             it[accessToken] = aToken
         }
     }
+
+    suspend fun deleteAccessToken(){
+        context.dataStore.edit {
+            it[accessToken] = ""
+        }
+    }
 }
