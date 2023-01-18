@@ -1,5 +1,6 @@
 package ashutosh.shopit.api
 
+import android.util.Log
 import ashutosh.shopit.datastore.DataStoreManager
 import ashutosh.shopit.models.LoginResponse
 import kotlinx.coroutines.runBlocking
@@ -12,11 +13,8 @@ import javax.inject.Inject
 class AuthAuthenticator @Inject constructor(private val dataStoreManager: DataStoreManager) :
     Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? {
-        var refreshToken: String = ""
-        runBlocking {
-            dataStoreManager.getLogInInfo().collect {
-                refreshToken = it.refreshToken!!
-            }
+        var refreshToken = runBlocking {
+            dataStoreManager.getRefreshToken()
         }
         return runBlocking {
             val apiResponse = regenerateAccessToken(refreshToken)
@@ -41,12 +39,13 @@ class AuthAuthenticator @Inject constructor(private val dataStoreManager: DataSt
         val okHttpClient = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
 
         val retrofit = Retrofit.Builder().
-            baseUrl("https://www.shopitanywhere.live/")
+            baseUrl("https://shopitanywhere.up.railway.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
 
         val retrofitAPI = retrofit.create(RetrofitAPI::class.java)
+        Log.d("Ashu", "Access Token Generated")
         return retrofitAPI.regenerateAccessToken(refreshToken)
     }
 }

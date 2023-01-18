@@ -44,6 +44,22 @@ class DataStoreManager(private val context : Context) {
         )
     }
 
+    suspend fun getAccessToken() : String {
+        var token = ""
+        context.dataStore.data.map {
+            token = it[accessToken].toString()
+        }
+        return token
+    }
+
+    suspend fun getRefreshToken() : String {
+        var token = ""
+        context.dataStore.data.map {
+            token = it[refreshToken].toString()
+        }
+        return token
+    }
+
     suspend fun saveAccessToken(aToken : String){
         context.dataStore.edit {
             it[accessToken] = aToken

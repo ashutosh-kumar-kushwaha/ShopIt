@@ -1,5 +1,6 @@
 package ashutosh.shopit.repository
 
+import android.util.Log
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
 import ashutosh.shopit.api.ServiceBuilder
@@ -58,6 +59,8 @@ class HomePageRepository @Inject constructor(private val retrofitAPI: RetrofitAP
     }
 
     suspend fun getAllProducts(){
+        Log.d("Ashu", "Products")
+
         getProductsResponseLiveData.value = NetworkResult.Loading()
         try{
             val response = retrofitAPI.getAllProducts()
