@@ -14,7 +14,6 @@ private val Context.dataStore : DataStore<Preferences> by preferencesDataStore("
 class DataStoreManager(val context : Context) {
 
     companion object PreferenceKey{
-
         val accessToken = stringPreferencesKey("accessToken")
         val refreshToken = stringPreferencesKey("refreshToken")
         val logInState = booleanPreferencesKey("logInState")
@@ -43,5 +42,11 @@ class DataStoreManager(val context : Context) {
             lastName = it[lastName]?:"",
             role = it[role]?:""
         )
+    }
+
+    suspend fun saveAccessToken(aToken : String){
+        context.dataStore.edit {
+            it[accessToken] = aToken
+        }
     }
 }
