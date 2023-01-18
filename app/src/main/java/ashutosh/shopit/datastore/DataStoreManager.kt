@@ -11,7 +11,7 @@ import ashutosh.shopit.models.LogInInfo
 import kotlinx.coroutines.flow.map
 private val Context.dataStore : DataStore<Preferences> by preferencesDataStore("dataStore")
 
-class DataStoreManager(val context : Context) {
+class DataStoreManager(private val context : Context) {
 
     companion object PreferenceKey{
         val accessToken = stringPreferencesKey("accessToken")
