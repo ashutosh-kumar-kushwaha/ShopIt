@@ -13,9 +13,13 @@ class AuthInterceptor @Inject constructor(private val dataStoreManager: DataStor
             dataStoreManager.getAccessToken()
         }
 
-        val request = chain.request().newBuilder()
-        request.addHeader("Authorization", "Bearer $token")
-        Log.d("Ashu", token)
-        return chain.proceed(request.build())
+        val request = chain.request()
+        val requestBuilder = request.newBuilder().removeHeader("isAuthorized")
+        val shouldAddToken = request.headers["isAuthorized"]=="true"
+        if(shouldAddToken){
+            requestBuilder.addHeader("Authorization", "Bearer $token")
+        }
+
+        return chain.proceed(requestBuilder.build())
     }
 }

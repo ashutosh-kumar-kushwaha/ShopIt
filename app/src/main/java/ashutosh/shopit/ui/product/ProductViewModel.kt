@@ -6,9 +6,11 @@ import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.ProductDetailsResponse
 import ashutosh.shopit.repository.ProductRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ProductViewModel @Inject constructor(private val productRepository: ProductRepository) : ViewModel() {
 
     var productId = -1

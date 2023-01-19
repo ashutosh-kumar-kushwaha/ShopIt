@@ -13,7 +13,7 @@ import javax.inject.Inject
 class AuthAuthenticator @Inject constructor(private val dataStoreManager: DataStoreManager) :
     Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? {
-        var refreshToken = runBlocking {
+        val refreshToken = runBlocking {
             dataStoreManager.getRefreshToken()
         }
         return runBlocking {
