@@ -19,20 +19,24 @@ class AuthAuthenticator @Inject constructor(private val dataStoreManager: DataSt
             dataStoreManager.getLogInInfo().first()
         }.refreshToken
 
-        return runBlocking {
+        var accessToken = ""
+
+        runBlocking {
             val apiResponse = regenerateAccessToken(refreshToken.toString())
 
             if(!apiResponse.isSuccessful || apiResponse.body()==null){
                 dataStoreManager.deleteAccessToken()
             }
-
-            apiResponse.body()?.let {
-                dataStoreManager.saveAccessToken(it.accessToken)
-                response.request.newBuilder()
-                    .header("Authorization", "Bearer ${it.accessToken}")
-                    .build()
+            else{
+                accessToken = apiResponse.body()!!.accessToken
+                dataStoreManager.saveAccessToken(accessToken)
             }
-
+        }
+        return if(accessToken == ""){
+            response.request
+        }
+        else{
+            response.request.newBuilder().addHeader("Authorization", "Bearer $accessToken").build()
         }
     }
 

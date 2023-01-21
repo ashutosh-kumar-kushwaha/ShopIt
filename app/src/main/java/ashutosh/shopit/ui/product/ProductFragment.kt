@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -142,6 +143,7 @@ class ProductFragment : Fragment() {
                 is NetworkResult.Error -> {
                     progressBar.dismiss()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    Log.d("Ashu", it.message.toString())
                 }
                 is NetworkResult.Loading -> {
                     progressBar.show()
