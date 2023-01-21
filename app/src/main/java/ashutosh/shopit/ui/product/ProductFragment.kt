@@ -1,5 +1,8 @@
 package ashutosh.shopit.ui.product
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,6 +21,7 @@ import ashutosh.shopit.adapters.QuestionsAnswersAdapter
 import ashutosh.shopit.adapters.SpecsParentAdapter
 import ashutosh.shopit.databinding.FragmentProductBinding
 import ashutosh.shopit.api.NetworkResult
+import ashutosh.shopit.databinding.ProgressBarBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 
@@ -32,6 +36,10 @@ class ProductFragment : Fragment() {
     private var circles = mutableListOf<ImageView>()
     private var circleNumber = 0
 
+    private lateinit var progressBar: Dialog
+    private var _progressBarBinding : ProgressBarBinding? = null
+    private val progressBarBinding get() = _progressBarBinding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +48,12 @@ class ProductFragment : Fragment() {
 
         binding.viewModel = productViewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        _progressBarBinding = ProgressBarBinding.inflate(layoutInflater)
+        progressBar = Dialog(binding.root.context)
+        progressBar.setContentView(progressBarBinding.root)
+        progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressBar.setCanceledOnTouchOutside(false)
 
         if(arguments?.getInt("productId") != null){
             productViewModel.productId = arguments?.getInt("productId")!!
@@ -70,6 +84,10 @@ class ProductFragment : Fragment() {
             }
         })
 
+        binding.addToCartBtn.setOnClickListener {
+            productViewModel.addToCart()
+        }
+
         return binding.root
     }
 
@@ -99,18 +117,34 @@ class ProductFragment : Fragment() {
                     }
 
                     binding.productNameTxtVw.text = product.productName
-                    val currentPrice = "₹${(product.originalPrice-(product.offerPercentage/100)*product.originalPrice).roundToInt()}"
+                    val currentPrice = "₹${price((product.originalPrice-(product.offerPercentage/100)*product.originalPrice).roundToInt())}"
                     binding.currentPriceTxtVw.text = currentPrice
-                    binding.originalPriceTxtVw.text = product.originalPrice.toString()
+                    val originalPrice = "₹${price(product.originalPrice.roundToInt())}"
+                    binding.originalPriceTxtVw.text = originalPrice
                     binding.ratingTxtVw.text = product.rating.toString()
                     binding.descriptionRecyclerView.adapter = DescriptionAdapter(product.description)
                     binding.descriptionRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     binding.specificationRecyclerView.adapter = SpecsParentAdapter(product.specification)
                     binding.specificationRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     binding.warrantyDetailsTxtVw.text = product.warranty
-                    binding.questionsAnswerRecyclerView.adapter = QuestionsAnswersAdapter(product.questions)
                     binding.questionsAnswerRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     selectItem(0)
+                }
+            }
+        }
+
+        productViewModel.addToCartResponse.observe(viewLifecycleOwner){
+            when(it){
+                is NetworkResult.Success -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.data!!.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Error -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> {
+                    progressBar.show()
                 }
             }
         }
@@ -133,12 +167,17 @@ class ProductFragment : Fragment() {
     }
 
     private fun price(p : Int): String{
-        val str = StringBuilder(p.toString())
-        str.reverse()
-        for(i in str.indices){
-            if((i-1)%3 == 0){
+        val str = StringBuilder(p.toString().reversed())
+        var count = 0
+        var i = 1
+        while(i < str.length){
+            if(count == 2){
                 str.insert(i, ',')
+                i++
+                count = 0
             }
+            i++
+            count++
         }
         return str.reverse().toString()
     }
