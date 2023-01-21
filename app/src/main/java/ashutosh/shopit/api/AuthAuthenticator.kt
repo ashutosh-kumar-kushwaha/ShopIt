@@ -19,25 +19,26 @@ class AuthAuthenticator @Inject constructor(private val dataStoreManager: DataSt
             dataStoreManager.getLogInInfo().first()
         }.refreshToken
 
-        var accessToken = ""
-
-        runBlocking {
+        val newAccessToken = runBlocking {
             val apiResponse = regenerateAccessToken(refreshToken.toString())
 
-            if(!apiResponse.isSuccessful || apiResponse.body()==null){
+            if (!apiResponse.isSuccessful || apiResponse.body() == null) {
                 dataStoreManager.deleteAccessToken()
             }
-            else{
-                accessToken = apiResponse.body()!!.accessToken
-                dataStoreManager.saveAccessToken(accessToken)
+
+            apiResponse.body()?.let {
+                dataStoreManager.saveAccessToken(it.accessToken)
+
+                it.accessToken
             }
+
         }
-        return if(accessToken == ""){
-            response.request
-        }
-        else{
-            response.request.newBuilder().addHeader("Authorization", "Bearer $accessToken").build()
-        }
+
+        return response.request
+            .newBuilder()
+            .header("Authorization", "Bearer $newAccessToken")
+            .build()
+
     }
 
     private suspend fun regenerateAccessToken(refreshToken: String): retrofit2.Response<LoginResponse> {
