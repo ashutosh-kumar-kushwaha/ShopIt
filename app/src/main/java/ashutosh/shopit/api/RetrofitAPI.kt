@@ -60,7 +60,7 @@ interface RetrofitAPI {
     suspend fun getProductDetails(@Path ("productId") productId : Int) : Response<ProductDetailsResponse>
 
     @Headers("isAuthorized: true")
-    @GET("products/addToCart/{productId}")
+    @POST("products/addToCart/{productId}")
     suspend fun addToCart(@Path("productId") productId: Int) : Response<DefaultResponse>
 
     //Category
