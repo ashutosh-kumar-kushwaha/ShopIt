@@ -1,6 +1,7 @@
 package ashutosh.shopit.datastore
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -8,7 +9,10 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import ashutosh.shopit.models.LogInInfo
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
+
 private val Context.dataStore : DataStore<Preferences> by preferencesDataStore("dataStore")
 
 class DataStoreManager(private val context : Context) {
@@ -44,20 +48,35 @@ class DataStoreManager(private val context : Context) {
         )
     }
 
+    suspend fun getAccessTokenFlow() = context.dataStore.data.map {
+        it[accessToken]?:""
+    }
+
+    suspend fun getRefreshTokenFlow() = context.dataStore.data.map {
+        it[refreshToken]?:""
+    }
+
+
     suspend fun getAccessToken() : String {
-        var token = ""
-        context.dataStore.data.map {
-            token = it[accessToken].toString()
+        var token : String? = null
+        return runBlocking {
+            val flow = getAccessTokenFlow()
+            flow.collect{
+                token = it
+            }
+            token.toString()
         }
-        return token
     }
 
     suspend fun getRefreshToken() : String {
-        var token = ""
-        context.dataStore.data.map {
-            token = it[refreshToken].toString()
+        var token : String? = null
+        return runBlocking {
+            val flow = getRefreshTokenFlow()
+            flow.collect{
+                token = it
+            }
+            token.toString()
         }
-        return token
     }
 
     suspend fun saveAccessToken(aToken : String){
@@ -69,6 +88,7 @@ class DataStoreManager(private val context : Context) {
     suspend fun deleteAccessToken(){
         context.dataStore.edit {
             it[accessToken] = ""
+            Log.d("AccessToken", "Access Token deleted")
         }
     }
 }

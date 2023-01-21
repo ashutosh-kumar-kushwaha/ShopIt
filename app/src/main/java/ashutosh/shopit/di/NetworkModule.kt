@@ -22,7 +22,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun providesRetrofit(): Retrofit.Builder = Retrofit.Builder().baseUrl("https://www.shopitanywhere.live/").addConverterFactory(GsonConverterFactory.create())
+    fun providesRetrofit(): Retrofit.Builder = Retrofit.Builder().baseUrl("https://www.shopitanywhere.live").addConverterFactory(GsonConverterFactory.create())
 
 
     @Singleton
