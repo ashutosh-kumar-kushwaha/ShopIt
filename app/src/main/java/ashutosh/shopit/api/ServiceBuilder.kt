@@ -1,11 +1,13 @@
 package ashutosh.shopit.api
 
+import ashutosh.shopit.Constants
+import ashutosh.shopit.Constants.baseUrl
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ServiceBuilder {
-    private const val URL = "https://shopitanywhere.up.railway.app/"
+    private const val URL = baseUrl
 
     private val okHttp = OkHttpClient.Builder()
 
