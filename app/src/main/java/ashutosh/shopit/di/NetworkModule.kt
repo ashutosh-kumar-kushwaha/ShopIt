@@ -1,6 +1,7 @@
 package ashutosh.shopit.di
 
 import android.content.Context
+import ashutosh.shopit.Constants
 import ashutosh.shopit.api.AuthAuthenticator
 import ashutosh.shopit.api.AuthInterceptor
 import ashutosh.shopit.api.RetrofitAPI
@@ -22,7 +23,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun providesRetrofit(): Retrofit.Builder = Retrofit.Builder().baseUrl("https://www.shopitanywhere.live/").addConverterFactory(GsonConverterFactory.create())
+    fun providesRetrofit(): Retrofit.Builder = Retrofit.Builder().baseUrl(Constants.baseUrl).addConverterFactory(GsonConverterFactory.create())
 
 
     @Singleton

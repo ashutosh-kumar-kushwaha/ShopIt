@@ -1,8 +1,10 @@
 package ashutosh.shopit.api
 
 import android.util.Log
+import ashutosh.shopit.Constants
 import ashutosh.shopit.datastore.DataStoreManager
 import ashutosh.shopit.models.LoginResponse
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,10 +16,11 @@ class AuthAuthenticator @Inject constructor(private val dataStoreManager: DataSt
     Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? {
         val refreshToken = runBlocking {
-            dataStoreManager.getRefreshToken()
-        }
+            dataStoreManager.getLogInInfo().first()
+        }.refreshToken
+
         return runBlocking {
-            val apiResponse = regenerateAccessToken(refreshToken)
+            val apiResponse = regenerateAccessToken(refreshToken.toString())
 
             if(!apiResponse.isSuccessful || apiResponse.body()==null){
                 dataStoreManager.deleteAccessToken()
@@ -39,7 +42,7 @@ class AuthAuthenticator @Inject constructor(private val dataStoreManager: DataSt
         val okHttpClient = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
 
         val retrofit = Retrofit.Builder().
-            baseUrl("https://shopitanywhere.up.railway.app/")
+            baseUrl(Constants.baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
