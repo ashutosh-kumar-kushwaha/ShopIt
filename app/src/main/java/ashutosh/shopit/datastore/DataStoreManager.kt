@@ -44,4 +44,8 @@ class DataStoreManager(val context : Context) {
             role = it[role]?:""
         )
     }
+
+    suspend fun deleteLogInInfo(){
+        storeLogInInfo(LogInInfo("", "", false, "", "", ""))
+    }
 }

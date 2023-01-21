@@ -18,20 +18,34 @@
             android:layout_height="wrap_content"
             android:background="@color/white">
 
+
             <TextView
                 android:id="@+id/goodDayTxtVw"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
                 android:fontFamily="@font/poppins"
                 android:letterSpacing="0.05"
                 android:text="Good Day"
                 android:textColor="@color/color2"
                 android:textSize="@dimen/sp_14"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/logOutBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
+                android:fontFamily="@font/poppins"
+                android:letterSpacing="0.05"
+                android:text="Log Out"
+                android:textFontWeight="600"
+                android:textColor="@color/color12"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
