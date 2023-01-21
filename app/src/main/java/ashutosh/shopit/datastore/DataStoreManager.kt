@@ -1,7 +1,6 @@
 package ashutosh.shopit.datastore
 
 import android.content.Context
-import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -90,5 +89,9 @@ class DataStoreManager(private val context : Context) {
             it[accessToken] = ""
             Log.d("AccessToken", "Access Token deleted")
         }
+    }
+
+    suspend fun deleteLogInInfo(){
+        storeLogInInfo(LogInInfo("", "", false, "", "", ""))
     }
 }
