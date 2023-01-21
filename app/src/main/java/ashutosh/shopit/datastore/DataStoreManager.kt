@@ -87,7 +87,6 @@ class DataStoreManager(private val context : Context) {
     suspend fun deleteAccessToken(){
         context.dataStore.edit {
             it[accessToken] = ""
-            Log.d("AccessToken", "Access Token deleted")
         }
     }
 
