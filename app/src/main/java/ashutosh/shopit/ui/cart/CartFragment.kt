@@ -16,11 +16,12 @@ import ashutosh.shopit.adapters.CartAdapter
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.FragmentCartBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
+import ashutosh.shopit.interfaces.ChangeProductQuantity
 import ashutosh.shopit.models.CartItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CartFragment : Fragment() {
+class CartFragment : Fragment() , ChangeProductQuantity{
 
     private var _binding: FragmentCartBinding? = null
     private val binding: FragmentCartBinding get() = _binding!!
@@ -31,7 +32,7 @@ class CartFragment : Fragment() {
     private var _progressBarBinding : ProgressBarBinding? = null
     private val progressBarBinding get() = _progressBarBinding!!
 
-    private val cartAdapter = CartAdapter()
+    private val cartAdapter = CartAdapter(this@CartFragment)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,5 +82,10 @@ class CartFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        _progressBarBinding = null
+    }
+
+    override fun increaseProductQuantity(productId: Int) {
+        cartViewModel.increaseProductQuantity(productId)
     }
 }

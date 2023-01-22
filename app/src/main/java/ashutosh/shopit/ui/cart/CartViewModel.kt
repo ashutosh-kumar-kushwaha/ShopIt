@@ -14,10 +14,17 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(private val cartRepository: CartRepository) : ViewModel() {
 
     val getCartProductsResponse get() = cartRepository.getCartProductsResponse
+    val changeProductQuantity get() = cartRepository.changeProductQuantity
 
     fun getCartProducts(){
         viewModelScope.launch {
             cartRepository.getCartProducts()
+        }
+    }
+
+    fun increaseProductQuantity(productId: Int){
+        viewModelScope.launch {
+            cartRepository.increaseProductQuantity(productId)
         }
     }
 

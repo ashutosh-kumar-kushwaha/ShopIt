@@ -1,18 +1,20 @@
 package ashutosh.shopit.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ashutosh.shopit.databinding.CartItemBinding
+import ashutosh.shopit.interfaces.ChangeProductQuantity
 import ashutosh.shopit.models.CartContent
 import ashutosh.shopit.models.CartItem
 import coil.load
 
-class CartAdapter: ListAdapter<CartContent, CartAdapter.ViewHolder>(DiffUtil()) {
+class CartAdapter(val changeProductQuantity: ChangeProductQuantity): ListAdapter<CartContent, CartAdapter.ViewHolder>(DiffUtil()) {
 
-    class ViewHolder(val binding: CartItemBinding): RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(val binding: CartItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(cartContent: CartContent){
             binding.productImgVw.load(cartContent.product.imageUrls.imageUrl)
             binding.productTitleTxtVw.text = cartContent.product.productName
@@ -25,7 +27,7 @@ class CartAdapter: ListAdapter<CartContent, CartAdapter.ViewHolder>(DiffUtil()) 
             binding.quantityTxtVw.text = cartContent.noOfProducts.toString()
             binding.priceTxtVw.text = cartContent.product.originalPrice.toString()
             binding.plusBtn.setOnClickListener {
-                increaseQuantity()
+                changeProductQuantity.increaseProductQuantity(cartContent.product.productId)
             }
             binding.minusBtn.setOnClickListener {
                 decreaseQuantity()
@@ -40,11 +42,6 @@ class CartAdapter: ListAdapter<CartContent, CartAdapter.ViewHolder>(DiffUtil()) 
             }
         }
 
-        private fun increaseQuantity(){
-            var quantity = Integer.parseInt(binding.quantityTxtVw.text.toString())
-            quantity++
-            binding.quantityTxtVw.text = quantity.toString()
-        }
     }
 
     class DiffUtil: ItemCallback<CartContent>(){
