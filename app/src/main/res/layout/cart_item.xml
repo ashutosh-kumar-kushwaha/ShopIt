@@ -4,7 +4,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_98"
-        android:background="@drawable/cart_bg">
+        android:background="@drawable/cart_bg"
+        android:layout_marginBottom="@dimen/dp_12">
 
         <ImageView
             android:id="@+id/productImgVw"
