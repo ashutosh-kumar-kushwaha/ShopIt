@@ -19,6 +19,7 @@ import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.interfaces.ChangeProductQuantity
 import ashutosh.shopit.models.CartItem
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class CartFragment : Fragment() , ChangeProductQuantity{
@@ -64,7 +65,18 @@ class CartFragment : Fragment() , ChangeProductQuantity{
             when (it){
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
-                    cartAdapter.submitList(it.data!!.content)
+                    val list = it.data!!.content
+                    cartAdapter.submitList(list)
+                    var total = 0
+                    for(item in list){
+                        total += item.noOfProducts*(item.product.originalPrice-(item.product.offerPercentage/100)*item.product.originalPrice).roundToInt()
+                    }
+                    var price = "₹$total"
+                    binding.priceTxtVw.text = price
+                    total += 30
+                    price = "₹$total"
+                    binding.totalPriceTxtVw.text = price
+
                 }
 
                 is NetworkResult.Error -> {
