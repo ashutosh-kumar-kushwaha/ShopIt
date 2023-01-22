@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.R
 import ashutosh.shopit.adapters.CartAdapter
@@ -53,6 +54,11 @@ class CartFragment : Fragment() , ChangeProductQuantity{
         binding.productsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         cartViewModel.getCartProducts()
+
+        binding.checkoutBtn.setOnClickListener { 
+            findNavController().navigate(R.id.action_cartFragment_to_orderFragment)
+        }
+
 
 //        cartAdapter.submitList(listOf(CartItem(1, "ABCD", "In stock", 3000, R.drawable.iphone), CartItem(2, "ABCD", "In stock", 3000, R.drawable.iphone)))
         return binding.root

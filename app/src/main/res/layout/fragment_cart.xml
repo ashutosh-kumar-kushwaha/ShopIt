@@ -170,6 +170,7 @@
                     android:textSize="@dimen/sp_14" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/checkoutBtn"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_54"
                     android:layout_below="@id/subtotal2TxtVw"

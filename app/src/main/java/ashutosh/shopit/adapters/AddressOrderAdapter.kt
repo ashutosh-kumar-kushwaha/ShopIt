@@ -26,7 +26,6 @@ class AddressOrderAdapter : ListAdapter<Address, AddressOrderAdapter.ViewHolder>
         override fun areContentsTheSame(oldItem: Address, newItem: Address): Boolean {
             return oldItem == newItem
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -33,10 +33,19 @@
         android:id="@+id/cartFragment"
         android:name="ashutosh.shopit.ui.cart.CartFragment"
         android:label="Cart Fragment"
-        tools:layout="@layout/fragment_cart"/>
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_orderFragment"
+            app:destination="@id/orderFragment" />
+    </fragment>
     <fragment
         android:id="@+id/productFragment"
         android:name="ashutosh.shopit.ui.product.ProductFragment"
         android:label="ProductFragment"
         tools:layout="@layout/fragment_product"/>
+    <fragment
+        android:id="@+id/orderFragment"
+        android:name="ashutosh.shopit.ui.order.OrderFragment"
+        android:label="OrderFragment"
+        tools:layout="@layout/fragment_order"/>
 </navigation>
