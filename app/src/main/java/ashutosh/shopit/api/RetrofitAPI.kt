@@ -75,4 +75,10 @@ interface RetrofitAPI {
     @Headers("isAuthorized: false")
     @GET("sponsor/get/1")
     suspend fun getAdvertisements() : Response<AdvertisementResponse>
+
+    //Cart
+
+    @Headers("isAuthorized: true")
+    @GET("products/cart/get?pageNumber=0&pageSize=100&sortBy=Id&sortDir=asc")
+    suspend fun getCartProducts() : Response<CartProductsResponse>
 }

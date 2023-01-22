@@ -2,7 +2,6 @@ package ashutosh.shopit.repository
 
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
-import ashutosh.shopit.api.ServiceBuilder
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.DefaultResponse
 import ashutosh.shopit.models.ResetPasswordRequest

@@ -1,5 +1,5 @@
 package ashutosh.shopit
 
 object Constants {
-    const val baseUrl = "https://shopitanywhere.up.railway.app/"
+    const val baseUrl = "https://www.shopitanywhere.live/"
 }

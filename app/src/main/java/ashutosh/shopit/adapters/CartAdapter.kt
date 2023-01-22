@@ -6,16 +6,24 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ashutosh.shopit.databinding.CartItemBinding
+import ashutosh.shopit.models.CartContent
 import ashutosh.shopit.models.CartItem
+import coil.load
 
-class CartAdapter: ListAdapter<CartItem, CartAdapter.ViewHolder>(DiffUtil()) {
+class CartAdapter: ListAdapter<CartContent, CartAdapter.ViewHolder>(DiffUtil()) {
 
     class ViewHolder(val binding: CartItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(cartItem: CartItem){
-            binding.productImgVw.setImageResource(cartItem.productImage)
-            binding.productTitleTxtVw.text = cartItem.productName
-            binding.stockTxtVw.text = cartItem.stockDetails
-            binding.priceTxtVw.text = cartItem.price.toString()
+        fun bind(cartContent: CartContent){
+            binding.productImgVw.load(cartContent.product.imageUrls.imageUrl)
+            binding.productTitleTxtVw.text = cartContent.product.productName
+            if(cartContent.available){
+                binding.stockTxtVw.text = "In Stock"
+            }
+            else{
+                binding.stockTxtVw.text = "Out of stock"
+            }
+            binding.quantityTxtVw.text = cartContent.noOfProducts.toString()
+            binding.priceTxtVw.text = cartContent.product.originalPrice.toString()
             binding.plusBtn.setOnClickListener {
                 increaseQuantity()
             }
@@ -39,12 +47,12 @@ class CartAdapter: ListAdapter<CartItem, CartAdapter.ViewHolder>(DiffUtil()) {
         }
     }
 
-    class DiffUtil: ItemCallback<CartItem>(){
-        override fun areItemsTheSame(oldItem: CartItem, newItem: CartItem): Boolean {
+    class DiffUtil: ItemCallback<CartContent>(){
+        override fun areItemsTheSame(oldItem: CartContent, newItem: CartContent): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: CartItem, newItem: CartItem): Boolean {
+        override fun areContentsTheSame(oldItem: CartContent, newItem: CartContent): Boolean {
             return oldItem == newItem
         }
 
