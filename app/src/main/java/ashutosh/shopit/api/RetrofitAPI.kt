@@ -74,5 +74,5 @@ interface RetrofitAPI {
 
     @Headers("isAuthorized: false")
     @GET("sponsor/get/1")
-    suspend fun getAdvertisements(@Header("Authorization") token: String) : Response<AdvertisementResponse>
+    suspend fun getAdvertisements() : Response<AdvertisementResponse>
 }

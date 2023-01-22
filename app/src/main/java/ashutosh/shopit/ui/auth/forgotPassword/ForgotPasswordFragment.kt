@@ -48,17 +48,19 @@ class ForgotPasswordFragment : Fragment() {
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
 
-        binding.continueBtn.setOnClickListener {
-            lifecycleScope.launch {
-                forgotPasswordViewModel.forgotPassword()
-            }
-        }
+
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.continueBtn.setOnClickListener {
+            lifecycleScope.launch {
+                forgotPasswordViewModel.forgotPassword()
+            }
+        }
 
         forgotPasswordViewModel.forgotPasswordResponseLiveData.observe(viewLifecycleOwner, Observer {
             when(it){

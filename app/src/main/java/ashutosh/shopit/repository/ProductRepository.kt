@@ -1,9 +1,7 @@
 package ashutosh.shopit.repository
 
-import android.net.Network
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
-import ashutosh.shopit.api.ServiceBuilder
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.DefaultResponse
 import ashutosh.shopit.models.ProductDetailsResponse
@@ -21,19 +19,19 @@ class ProductRepository @Inject constructor(private val retrofitAPI: RetrofitAPI
             when(response.code()){
                 200 -> {
                     if (response.body() != null){
-                        productDetailsResponse.value = NetworkResult.Success(response.body()!!)
+                        productDetailsResponse.value = NetworkResult.Success(200, response.body()!!)
                     }
                     else{
-                        productDetailsResponse.value = NetworkResult.Error("Something went wrong!\nError: Response is null}")
+                        productDetailsResponse.value = NetworkResult.Error(200, "Something went wrong!\nError: Response is null}")
                     }
                 }
                 else -> {
-                    productDetailsResponse.value = NetworkResult.Error("Something went wrong!\nError code: ${response.code()}")
+                    productDetailsResponse.value = NetworkResult.Error(response.code(), "Something went wrong!\nError code: ${response.code()}")
                 }
             }
         }
         catch (e: Exception){
-            productDetailsResponse.value = NetworkResult.Error(e.message)
+            productDetailsResponse.value = NetworkResult.Error(-1, e.message)
         }
     }
 
@@ -44,22 +42,22 @@ class ProductRepository @Inject constructor(private val retrofitAPI: RetrofitAPI
             when(response.code()){
                 200 -> {
                     if (response.body() != null) {
-                        addToCartResponse.value = NetworkResult.Success(response.body()!!)
+                        addToCartResponse.value = NetworkResult.Success(200, response.body()!!)
                     }
                     else{
-                        addToCartResponse.value = NetworkResult.Error("Something went wrong!\nError: Response is null}")
+                        addToCartResponse.value = NetworkResult.Error(200, "Something went wrong!\nError: Response is null}")
                     }
                 }
                 409 -> {
-                    addToCartResponse.value = NetworkResult.Error("Product already exist in the cart")
+                    addToCartResponse.value = NetworkResult.Error(409, "Product already exist in the cart")
                 }
                 else -> {
-                    addToCartResponse.value = NetworkResult.Error("Something went wrong!\nError code: ${response.code()}")
+                    addToCartResponse.value = NetworkResult.Error(response.code(),"Something went wrong!\nError code: ${response.code()}")
                 }
             }
         }
         catch (e: Exception){
-            addToCartResponse.value = NetworkResult.Error(e.message)
+            addToCartResponse.value = NetworkResult.Error(-1, e.message)
         }
     }
 
