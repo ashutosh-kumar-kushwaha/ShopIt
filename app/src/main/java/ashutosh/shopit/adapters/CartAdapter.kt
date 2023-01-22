@@ -1,5 +1,6 @@
 package ashutosh.shopit.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +31,7 @@ class CartAdapter(val changeProductQuantity: ChangeProductQuantity): ListAdapter
                 changeProductQuantity.increaseProductQuantity(cartContent.product.productId)
             }
             binding.minusBtn.setOnClickListener {
-                decreaseQuantity()
+                changeProductQuantity.decreaseProductQuantity(cartContent.product.productId)
             }
         }
 

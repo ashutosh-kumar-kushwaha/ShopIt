@@ -28,4 +28,10 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
         }
     }
 
+    fun decreaseProductQuantity(productId: Int){
+        viewModelScope.launch {
+            cartRepository.decreaseProductQuantity(productId)
+        }
+    }
+
 }

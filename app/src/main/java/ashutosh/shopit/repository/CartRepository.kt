@@ -39,7 +39,7 @@ class CartRepository @Inject constructor(private val retrofitAPI: RetrofitAPI) {
     }
 
     suspend fun increaseProductQuantity(productId: Int){
-        changeProductQuantity.value = NetworkResult.Loading()
+//        changeProductQuantity.value = NetworkResult.Loading()
         try {
             val response = retrofitAPI.increaseProductQuantity(productId)
             when(response.code()){
@@ -47,9 +47,25 @@ class CartRepository @Inject constructor(private val retrofitAPI: RetrofitAPI) {
                     changeProductQuantity.value = NetworkResult.Success(200, DefaultResponse("", true))
                     getCartProducts()
                 }
-                else -> {
-                    changeProductQuantity.value = NetworkResult.Error(response.code(), "Something went wrong!\nError code: ${response.code()}")
+                405 -> changeProductQuantity.value = NetworkResult.Error(405, "Product has reached its maximum quantity")
+                else -> changeProductQuantity.value = NetworkResult.Error(response.code(), "Something went wrong!\nError code: ${response.code()}")
+            }
+        }
+        catch (e: Exception){
+            changeProductQuantity.value = NetworkResult.Error(-1, e.message)
+        }
+    }
+
+    suspend fun decreaseProductQuantity(productId: Int){
+//        changeProductQuantity.value = NetworkResult.Loading()
+        try {
+            val response = retrofitAPI.decreaseProductQuantity(productId)
+            when(response.code()){
+                200 -> {
+                    changeProductQuantity.value = NetworkResult.Success(200, DefaultResponse("", true))
+                    getCartProducts()
                 }
+                else -> changeProductQuantity.value = NetworkResult.Error(response.code(), "Something went wrong!\nError code: ${response.code()}")
             }
         }
         catch (e: Exception){

@@ -85,4 +85,8 @@ interface RetrofitAPI {
     @Headers("isAuthorized: true")
     @PUT("products/cart/increase/{productId}")
     suspend fun increaseProductQuantity(@Path("productId") productId: Int) : Response<DefaultResponse>
+
+    @Headers("isAuthorized: true")
+    @PUT("products/cart/decrease/{productId}")
+    suspend fun decreaseProductQuantity(@Path("productId") productId: Int) : Response<DefaultResponse>
 }

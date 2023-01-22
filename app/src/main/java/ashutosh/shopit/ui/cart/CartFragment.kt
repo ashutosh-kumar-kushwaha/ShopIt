@@ -76,6 +76,17 @@ class CartFragment : Fragment() , ChangeProductQuantity{
                     progressBar.show()
                 }
             }
+
+            cartViewModel.changeProductQuantity.observe(viewLifecycleOwner){ it ->
+                when(it){
+                    is NetworkResult.Success -> progressBar.dismiss()
+                    is NetworkResult.Error -> {
+                        progressBar.dismiss()
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+                    is NetworkResult.Loading -> progressBar.show()
+                }
+            }
         }
     }
 
@@ -87,5 +98,9 @@ class CartFragment : Fragment() , ChangeProductQuantity{
 
     override fun increaseProductQuantity(productId: Int) {
         cartViewModel.increaseProductQuantity(productId)
+    }
+
+    override fun decreaseProductQuantity(productId: Int) {
+        cartViewModel.decreaseProductQuantity(productId)
     }
 }
