@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/dp_106"
+       android:background="@color/white">
+
+      <View
+          android:layout_width="0dp"
+          android:layout_height="@dimen/dp_1"
+          android:background="@color/color8"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+          android:id="@+id/nameTxtVw"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/dp_16"
+          android:layout_marginTop="@dimen/dp_16"
+          android:singleLine="true"
+          android:layout_marginEnd="@dimen/dp_40"
+          android:text="Name"
+          android:fontFamily="@font/poppins"
+          android:textFontWeight="600"
+          android:textColor="@color/black"
+          app:layout_constraintEnd_toStartOf="@id/crossBtn"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+          android:id="@+id/addressTxtVw"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginEnd="@dimen/dp_40"
+          android:layout_marginStart="@dimen/dp_16"
+          android:layout_marginTop="@dimen/dp_8"
+          android:layout_marginBottom="@dimen/dp_16"
+          android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ullamcorper cursus turpis, quis feugiat n"
+          android:fontFamily="@font/montserrat"
+          android:textFontWeight="600"
+          android:textSize="@dimen/sp_12"
+          android:textColor="@color/color2"
+          app:layout_constraintTop_toBottomOf="@id/nameTxtVw"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toStartOf="@id/crossBtn" />
+
+      <ImageView
+          android:id="@+id/crossBtn"
+          android:layout_width="@dimen/dp_26"
+          android:layout_height="@dimen/dp_26"
+          android:src="@drawable/ic_cross"
+          android:padding="@dimen/dp_5"
+          android:layout_marginTop="@dimen/dp_6"
+          android:layout_marginEnd="@dimen/dp_16"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <androidx.appcompat.widget.AppCompatRadioButton
+          android:layout_width="@dimen/dp_20"
+          android:layout_height="@dimen/dp_20"
+          android:button="@null"
+          android:background="@drawable/radio_selector"
+          android:layout_marginEnd="@dimen/dp_19"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent" />
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/dp_1"
+          android:background="@color/color8"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent" />
+
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
