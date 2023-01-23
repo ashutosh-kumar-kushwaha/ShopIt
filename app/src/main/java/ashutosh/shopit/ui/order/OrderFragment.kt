@@ -1,5 +1,10 @@
 package ashutosh.shopit.ui.order
 
+import android.app.Activity
+import android.app.Dialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,12 +14,19 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import ashutosh.shopit.Constants
 import ashutosh.shopit.R
 import ashutosh.shopit.adapters.AddressOrderAdapter
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.FragmentOrderBinding
+import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.interfaces.AddressClickListener
+import ashutosh.shopit.ui.payment.PaymentActivity
+import com.google.gson.Gson
+import com.razorpay.Checkout
+import com.razorpay.PaymentResultListener
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 
 @AndroidEntryPoint
 class OrderFragment() : Fragment() {
@@ -26,6 +38,10 @@ class OrderFragment() : Fragment() {
 
     private val orderViewModel by viewModels<OrderViewModel>()
 
+    private lateinit var progressBar: Dialog
+    private var _progressBarBinding : ProgressBarBinding? = null
+    private val progressBarBinding get() = _progressBarBinding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +51,12 @@ class OrderFragment() : Fragment() {
         binding.viewModel = orderViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        orderViewModel.getAddresses()
+        _progressBarBinding = ProgressBarBinding.inflate(layoutInflater)
+        progressBar = Dialog(binding.root.context)
+        progressBar.setContentView(progressBarBinding.root)
+        progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressBar.setCanceledOnTouchOutside(false)
+
 
         binding.addressRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
@@ -57,6 +78,9 @@ class OrderFragment() : Fragment() {
             orderViewModel.placeOrderByCart(orderViewModel.addressResponse.value!!.data!![addressOrderAdapter.selectedPosition].id)
         }
 
+        orderViewModel.getAddresses()
+
+
         return binding.root
     }
 
@@ -66,13 +90,14 @@ class OrderFragment() : Fragment() {
         orderViewModel.addressResponse.observe(viewLifecycleOwner){
             when (it){
                 is NetworkResult.Success -> {
+                    progressBar.dismiss()
                     addressOrderAdapter.submitList(it.data)
                 }
                 is NetworkResult.Error -> {
-
+                    progressBar.dismiss()
                 }
                 is NetworkResult.Loading -> {
-
+                    progressBar.show()
                 }
             }
         }
@@ -80,24 +105,29 @@ class OrderFragment() : Fragment() {
         orderViewModel.placeOrderResponse.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Success -> {
-                    Toast.makeText(requireContext(), it.data.toString(), Toast.LENGTH_SHORT).show()
+                    progressBar.dismiss()
+                    val intent = Intent(requireContext(), PaymentActivity::class.java)
+                    val jsonString = Gson().toJson(it.data)
+                    intent.putExtra("data", jsonString)
+                    startActivity(intent)
                 }
                 is NetworkResult.Error -> {
+                    progressBar.dismiss()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
                 is NetworkResult.Loading -> {
-
+                    progressBar.show()
                 }
             }
         }
     }
+
+
+
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 
-//    override fun onAddressClick(addressId: Int) {
-//        Toast.makeText(requireContext(), addressId.toString(), Toast.LENGTH_SHORT).show()
-//    }
 }
