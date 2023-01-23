@@ -101,4 +101,8 @@ interface RetrofitAPI {
     @Headers("isAuthorized: true")
     @POST("payment/cart/createOrder/{addressId}")
     suspend fun placeOrderByCart(@Path("addressId") addressId: Int) : Response<OrderResponse>
+
+    @Headers("isAuthorized: true")
+    @POST("payment/update_order")
+    suspend fun updateOrder(@Body updateOrderRequest: UpdateOrderRequest) : Response<UpdateOrderResponse>
 }

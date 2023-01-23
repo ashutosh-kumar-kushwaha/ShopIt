@@ -3,21 +3,27 @@ package ashutosh.shopit.ui.payment
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import ashutosh.shopit.Constants
 import ashutosh.shopit.R
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.OrderResponse
+import ashutosh.shopit.models.UpdateOrderRequest
 import com.google.gson.Gson
 import com.razorpay.Checkout
 import com.razorpay.PaymentData
-import com.razorpay.PaymentResultListener
 import com.razorpay.PaymentResultWithDataListener
+import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 
+
+@AndroidEntryPoint
 class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener {
 
-    lateinit var dataObj: OrderResponse
+    private lateinit var dataObj: OrderResponse
+
+    private val paymentViewModel by viewModels<PaymentViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +32,20 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener {
         dataObj = Gson().fromJson(data, OrderResponse::class.java)
         Checkout.preload(applicationContext)
         startPayment(dataObj)
+
+        paymentViewModel.updateOrderResponse.observe(this){
+            when(it){
+                is NetworkResult.Success -> {
+                    Toast.makeText(this, "Payment Successful", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                is NetworkResult.Error -> {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                is NetworkResult.Loading -> {}
+            }
+        }
     }
 
     private fun startPayment(data: OrderResponse) {
@@ -42,19 +62,19 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener {
             options.put("description","Demoing Charges")
             //You can omit the image option to fetch the image from the dashboard
             options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.jpg")
-            options.put("theme.color", "#3399cc");
-            options.put("currency","INR");
-            options.put("order_id", data.id);
-            options.put("amount",1)//pass amount in currency subunits
+            options.put("theme.color", "#3399cc")
+            options.put("currency","INR")
+            options.put("order_id", data.id)
+            options.put("amount",data.amount)//pass amount in currency subunits
 
-            val retryObj = JSONObject();
-            retryObj.put("enabled", true);
-            retryObj.put("max_count", 4);
-            options.put("retry", retryObj);
+            val retryObj = JSONObject()
+            retryObj.put("enabled", true)
+            retryObj.put("max_count", 4)
+            options.put("retry", retryObj)
 
             val prefill = JSONObject()
-            prefill.put("email","gaurav.kumar@example.com")
-            prefill.put("contact","9876543210")
+            prefill.put("email","shopitanything@gmail.com")
+            prefill.put("contact","8287027446")
 
             options.put("prefill",prefill)
             co.open(activity,options)
@@ -65,10 +85,16 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener {
     }
 
     override fun onPaymentSuccess(p0: String?, p1: PaymentData?) {
-        
+        if (p1 != null) {
+            paymentViewModel.updateOrder(UpdateOrderRequest(p1.paymentId, p1.orderId, p1.signature))
+        }
+        else{
+            Toast.makeText(this, "Something went wrong!\nPlease try again!", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onPaymentError(p0: Int, p1: String?, p2: PaymentData?) {
         Toast.makeText(this, p1, Toast.LENGTH_SHORT).show()
+        finish()
     }
 }
