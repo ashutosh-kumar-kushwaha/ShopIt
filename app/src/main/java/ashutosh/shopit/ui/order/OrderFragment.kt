@@ -75,7 +75,12 @@ class OrderFragment() : Fragment() {
         binding.addressRecyclerView.adapter = addressOrderAdapter
 
         binding.checkoutBtn.setOnClickListener{
-            orderViewModel.placeOrderByCart(orderViewModel.addressResponse.value!!.data!![addressOrderAdapter.selectedPosition].id)
+            if(addressOrderAdapter.selectedPosition!=-1){
+                orderViewModel.placeOrderByCart(orderViewModel.addressResponse.value!!.data!![addressOrderAdapter.selectedPosition].id)
+            }
+            else{
+                Toast.makeText(requireContext(), "Please select an address", Toast.LENGTH_SHORT).show()
+            }
         }
 
         orderViewModel.getAddresses()
