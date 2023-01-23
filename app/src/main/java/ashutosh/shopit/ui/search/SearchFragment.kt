@@ -1,7 +1,6 @@
 package ashutosh.shopit.ui.search
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -13,16 +12,14 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.FragmentManager.TAG
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import ashutosh.shopit.R
-import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.adapters.ProductSpacingItemDecoration
 import ashutosh.shopit.adapters.ProductsAdapter
 import ashutosh.shopit.api.NetworkResult
@@ -58,8 +55,10 @@ class SearchFragment : Fragment() {
         val searchText = binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
         val font = ResourcesCompat.getFont(requireContext(), R.font.montserrat)
         searchText.typeface = font
+        searchText.letterSpacing = 0.05F
         searchText.setTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
         searchText.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
+
 
         if(Build.VERSION.SDK_INT >= 29){
             searchText.textCursorDrawable = AppCompatResources.getDrawable(requireContext(), R.drawable.cursor_2)
@@ -107,6 +106,8 @@ class SearchFragment : Fragment() {
 
         }
 
+        binding.searchView.requestFocus()
+
         sortByBottomSheetFragment = SortByBottomSheetFragment(buttonClickListener)
 
         productsAdapter = ProductsAdapter(productClickListener)
@@ -119,6 +120,10 @@ class SearchFragment : Fragment() {
         binding.sortByBtn.setOnClickListener {
             sortByBottomSheetFragment.show(parentFragmentManager, "SortByBottomSheet")
         }
+
+//        binding.backBtn.setOnClickListener{
+//            back()
+//        }
 
         return binding.root
     }

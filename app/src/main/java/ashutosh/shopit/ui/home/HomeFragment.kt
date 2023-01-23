@@ -66,26 +66,30 @@ class HomeFragment : Fragment(), ProductClickListener {
 
         categories = listOf(binding.categoryAllChip, binding.categoryChip1, binding.categoryChip2, binding.categoryChip3, binding.categoryChip4, binding.categoryChip5)
 
-        val searchText = binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
-        val font = ResourcesCompat.getFont(requireContext(), R.font.montserrat)
-        searchText.typeface = font
-        searchText.setTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
-        searchText.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
+//        val searchText = binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+//        val font = ResourcesCompat.getFont(requireContext(), R.font.montserrat)
+//        searchText.typeface = font
+//        searchText.setTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
+//        searchText.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
+//
+//        searchText.setOnClickListener{
+//            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+//        }
+//
+//        if(Build.VERSION.SDK_INT >= 29){
+//            searchText.textCursorDrawable = AppCompatResources.getDrawable(requireContext(), R.drawable.cursor_2)
+//        }
+//        else{
+//            try{
+//                val f: Field = TextView::class.java.getDeclaredField("mCursorDrawableRes")
+//                f.isAccessible = true
+//                f.set(searchText, R.drawable.cursor_2)
+//            }
+//            catch (_: Exception){}
+//        }
 
-        if(Build.VERSION.SDK_INT >= 29){
-            searchText.textCursorDrawable = AppCompatResources.getDrawable(requireContext(), R.drawable.cursor_2)
-        }
-        else{
-            try{
-                val f: Field = TextView::class.java.getDeclaredField("mCursorDrawableRes")
-                f.isAccessible = true
-                f.set(searchText, R.drawable.cursor_2)
-            }
-            catch (_: Exception){}
-        }
-
-        val icon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
-        icon.setImageResource(R.drawable.ic_search_icon)
+//        val icon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
+//        icon.setImageResource(R.drawable.ic_search_icon)
 
         binding.itemRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
