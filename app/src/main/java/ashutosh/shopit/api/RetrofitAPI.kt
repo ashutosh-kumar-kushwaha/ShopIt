@@ -94,6 +94,6 @@ interface RetrofitAPI {
 
     @Headers("isAuthorized: false")
     @GET("products/search/{keyword}")
-    suspend fun search(@Path("keyword") keyword: String): Response<ProductsResponse>
+    suspend fun search(@Path("keyword") keyword: String, @Query("sortBy") sortBy: String, @Query("sortDir") sortDir: String): Response<ProductsResponse>
 
 }

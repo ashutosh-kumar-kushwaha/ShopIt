@@ -11,10 +11,10 @@ import javax.inject.Inject
 class SearchRepository @Inject constructor(private val retrofitAPI: RetrofitAPI) {
     val searchResponse = SingleLiveEvent<NetworkResult<ProductsResponse>>()
 
-    suspend fun search(keyword: String){
+    suspend fun search(keyword: String, sortBy: String, sortDir: String){
         searchResponse.value = NetworkResult.Loading()
         try {
-            val response = retrofitAPI.search(keyword)
+            val response = retrofitAPI.search(keyword, sortBy, sortDir)
             when(response.code()){
                 200 -> {
                     if(response.body() != null){

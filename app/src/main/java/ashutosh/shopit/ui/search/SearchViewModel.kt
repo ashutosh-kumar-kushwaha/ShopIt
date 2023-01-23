@@ -15,10 +15,13 @@ class SearchViewModel @Inject constructor(private val searchRepository: SearchRe
 
 //    val keywordLiveData = MutableLiveData<String>()
 
+    var sortBy = "productId"
+    var sortDir = "des"
+
     fun search(keyword: String?){
         if(!keyword.isNullOrEmpty()){
             viewModelScope.launch {
-                searchRepository.search(keyword)
+                searchRepository.search(keyword, sortBy, sortDir)
             }
         }
     }

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort by"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/black"
+            android:paddingStart="@dimen/dp_3"
+            android:paddingEnd="@dimen/dp_3"
+            android:fontFamily="@font/montserrat"
+            android:textFontWeight="600"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingBottom="@dimen/dp_6"
+            app:drawableStartCompat="@drawable/sortby"
+            android:letterSpacing="0.05"
+            android:drawablePadding="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_7"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"/>
+
+        <RadioButton
+            android:id="@+id/priceAsc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:text="Price - Low to High"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/black"
+            android:textFontWeight="600"
+            android:button="@null"
+            android:drawableEnd="@android:drawable/btn_radio"
+            android:letterSpacing="0.05"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"/>
+
+        <RadioButton
+            android:id="@+id/priceDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:textFontWeight="600"
+            android:text="Price - High to Low"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/black"
+            android:button="@null"
+            android:drawableEnd="@android:drawable/btn_radio"
+            android:letterSpacing="0.05"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"/>
+
+        <RadioButton
+            android:id="@+id/ratingAsc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:textFontWeight="600"
+            android:text="Rating - Low to High"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/black"
+            android:button="@null"
+            android:drawableEnd="@android:drawable/btn_radio"
+            android:letterSpacing="0.05"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"/>
+
+        <RadioButton
+            android:id="@+id/ratingDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:textFontWeight="600"
+            android:text="Rating - High to Low"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/black"
+            android:button="@null"
+            android:drawableEnd="@android:drawable/btn_radio"
+            android:letterSpacing="0.05"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"/>
+
+        <RadioButton
+            android:id="@+id/offerAsc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:text="Offer - Low to High"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/black"
+            android:textFontWeight="600"
+            android:button="@null"
+            android:drawableEnd="@android:drawable/btn_radio"
+            android:letterSpacing="0.05"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"/>
+
+        <RadioButton
+            android:id="@+id/offerDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:textFontWeight="600"
+            android:text="Offer - High to Low"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/black"
+            android:button="@null"
+            android:drawableEnd="@android:drawable/btn_radio"
+            android:letterSpacing="0.05"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"/>
+
+        <RadioButton
+            android:id="@+id/nameAsc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:textFontWeight="600"
+            android:text="Name - Ascending"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/black"
+            android:button="@null"
+            android:drawableEnd="@android:drawable/btn_radio"
+            android:letterSpacing="0.05"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"/>
+
+        <RadioButton
+            android:id="@+id/nameDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:textFontWeight="600"
+            android:text="Name - Descending"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/black"
+            android:button="@null"
+            android:drawableEnd="@android:drawable/btn_radio"
+            android:letterSpacing="0.05"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"/>
+    </LinearLayout>
+</layout>

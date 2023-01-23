@@ -1,22 +1,36 @@
 package ashutosh.shopit.ui.search
 
+import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.FragmentManager.TAG
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import ashutosh.shopit.R
+import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.adapters.ProductSpacingItemDecoration
 import ashutosh.shopit.adapters.ProductsAdapter
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.FragmentSearchBinding
+import ashutosh.shopit.interfaces.ButtonClickListener
 import ashutosh.shopit.interfaces.ProductClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.reflect.Field
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
@@ -28,6 +42,10 @@ class SearchFragment : Fragment() {
 
     private lateinit var productsAdapter : ProductsAdapter
 
+    private lateinit var sortByBottomSheetFragment: SortByBottomSheetFragment
+
+
+    @SuppressLint("DiscouragedPrivateApi")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +55,28 @@ class SearchFragment : Fragment() {
         binding.viewModel = searchViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        val searchText = binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+        val font = ResourcesCompat.getFont(requireContext(), R.font.montserrat)
+        searchText.typeface = font
+        searchText.setTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
+        searchText.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
+
+        if(Build.VERSION.SDK_INT >= 29){
+            searchText.textCursorDrawable = AppCompatResources.getDrawable(requireContext(), R.drawable.cursor_2)
+        }
+        else{
+            try{
+                val f: Field = TextView::class.java.getDeclaredField("mCursorDrawableRes")
+                f.isAccessible = true
+                f.set(searchText, R.drawable.cursor_2)
+            }
+            catch (_: Exception){}
+        }
+
+        val icon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
+        icon.setImageResource(R.drawable.ic_search_icon)
+
+
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchViewModel.search(query)
@@ -45,7 +85,6 @@ class SearchFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 searchViewModel.search(newText)
-                Log.d("Ashu", newText.toString())
                 return true
             }
 
@@ -57,6 +96,19 @@ class SearchFragment : Fragment() {
             }
         }
 
+        val buttonClickListener = object : ButtonClickListener{
+            override fun onButtonClick(sortBy: String, sortDir: String) {
+                Log.d("Ashu", "$sortBy $sortDir")
+                searchViewModel.sortBy = sortBy
+                searchViewModel.sortDir = sortDir
+                searchViewModel.search(binding.searchView.query.toString())
+//                sortByBottomSheetFragment.dismiss()
+            }
+
+        }
+
+        sortByBottomSheetFragment = SortByBottomSheetFragment(buttonClickListener)
+
         productsAdapter = ProductsAdapter(productClickListener)
         binding.productsRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
@@ -64,6 +116,9 @@ class SearchFragment : Fragment() {
 
         binding.productsRecyclerView.addItemDecoration(ProductSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.dp_24), resources.getDimensionPixelSize(R.dimen.dp_9)))
 
+        binding.sortByBtn.setOnClickListener {
+            sortByBottomSheetFragment.show(parentFragmentManager, "SortByBottomSheet")
+        }
 
         return binding.root
     }
