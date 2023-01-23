@@ -60,10 +60,12 @@
           app:layout_constraintTop_toTopOf="parent" />
 
       <androidx.appcompat.widget.AppCompatRadioButton
-          android:layout_width="@dimen/dp_20"
-          android:layout_height="@dimen/dp_20"
-          android:button="@null"
-          android:background="@drawable/radio_selector"
+          android:id="@+id/radioBtn"
+          android:layout_width="@dimen/dp_24"
+          android:layout_height="@dimen/dp_18"
+          android:minHeight="0dp"
+          android:minWidth="0dp"
+          android:buttonTint="@color/black"
           android:layout_marginEnd="@dimen/dp_19"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="parent"

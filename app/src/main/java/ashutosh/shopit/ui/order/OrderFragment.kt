@@ -5,21 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.R
 import ashutosh.shopit.adapters.AddressOrderAdapter
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.FragmentOrderBinding
+import ashutosh.shopit.interfaces.AddressClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OrderFragment : Fragment() {
+class OrderFragment() : Fragment() {
 
     private var _binding : FragmentOrderBinding? = null
     private val binding: FragmentOrderBinding get() = _binding!!
 
-    private val addressOrderAdapter = AddressOrderAdapter()
+    private lateinit var addressOrderAdapter : AddressOrderAdapter
 
     private val orderViewModel by viewModels<OrderViewModel>()
 
@@ -35,6 +37,19 @@ class OrderFragment : Fragment() {
         orderViewModel.getAddresses()
 
         binding.addressRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+
+        val addressClickListener = object : AddressClickListener {
+//            override fun onAddressClick(addressId: Int) {
+//                binding.addressRecyclerView.post(addressOrderAdapter::notifyDataSetChanged)
+//            }
+
+            override fun onAddressClick(addressId: Int) {
+                binding.addressRecyclerView.post(addressOrderAdapter::notifyDataSetChanged)
+            }
+        }
+
+        addressOrderAdapter = AddressOrderAdapter(addressClickListener)
         binding.addressRecyclerView.adapter = addressOrderAdapter
 
         return binding.root
@@ -62,4 +77,8 @@ class OrderFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
+
+//    override fun onAddressClick(addressId: Int) {
+//        Toast.makeText(requireContext(), addressId.toString(), Toast.LENGTH_SHORT).show()
+//    }
 }
