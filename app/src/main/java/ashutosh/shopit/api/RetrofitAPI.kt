@@ -105,4 +105,11 @@ interface RetrofitAPI {
     @Headers("isAuthorized: true")
     @POST("payment/update_order")
     suspend fun updateOrder(@Body updateOrderRequest: UpdateOrderRequest) : Response<UpdateOrderResponse>
+
+    //Search
+
+    @Headers("isAuthorized: false")
+    @GET("products/search/{keyword}")
+    suspend fun search(@Path("keyword") keyword: String, @Query("sortBy") sortBy: String, @Query("sortDir") sortDir: String): Response<ProductsResponse>
+
 }
