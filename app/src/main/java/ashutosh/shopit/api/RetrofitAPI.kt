@@ -95,4 +95,10 @@ interface RetrofitAPI {
     @Headers("isAuthorized: true")
     @GET("api/profile/address/get")
     suspend fun getAddresses() : Response<List<Address>>
+
+    //Payment
+
+    @Headers("isAuthorized: true")
+    @POST("payment/cart/createOrder/{addressId}")
+    suspend fun placeOrderByCart(@Path("addressId") addressId: Int) : Response<OrderResponse>
 }

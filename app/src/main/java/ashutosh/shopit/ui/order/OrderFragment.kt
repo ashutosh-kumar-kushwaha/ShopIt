@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,6 +53,10 @@ class OrderFragment() : Fragment() {
         addressOrderAdapter = AddressOrderAdapter(addressClickListener)
         binding.addressRecyclerView.adapter = addressOrderAdapter
 
+        binding.checkoutBtn.setOnClickListener{
+            orderViewModel.placeOrderByCart(orderViewModel.addressResponse.value!!.data!![addressOrderAdapter.selectedPosition].id)
+        }
+
         return binding.root
     }
 
@@ -65,6 +70,20 @@ class OrderFragment() : Fragment() {
                 }
                 is NetworkResult.Error -> {
 
+                }
+                is NetworkResult.Loading -> {
+
+                }
+            }
+        }
+
+        orderViewModel.placeOrderResponse.observe(viewLifecycleOwner){
+            when(it){
+                is NetworkResult.Success -> {
+                    Toast.makeText(requireContext(), it.data.toString(), Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
                 is NetworkResult.Loading -> {
 

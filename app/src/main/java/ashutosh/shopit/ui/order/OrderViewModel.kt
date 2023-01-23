@@ -11,10 +11,17 @@ import javax.inject.Inject
 class OrderViewModel @Inject constructor(private val orderRepository: OrderRepository) : ViewModel() {
 
     val addressResponse get() = orderRepository.addressResponse
+    val placeOrderResponse get() = orderRepository.placeOrderResponse
 
     fun getAddresses(){
         viewModelScope.launch {
             orderRepository.getAddresses()
+        }
+    }
+
+    fun placeOrderByCart(addressId: Int){
+        viewModelScope.launch {
+            orderRepository.placeOrderByCart(addressId)
         }
     }
 
