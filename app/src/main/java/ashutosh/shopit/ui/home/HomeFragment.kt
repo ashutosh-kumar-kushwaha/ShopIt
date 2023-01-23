@@ -93,6 +93,10 @@ class HomeFragment : Fragment(), ProductClickListener {
 
         binding.itemRecyclerView.addItemDecoration(ProductSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.dp_24), resources.getDimensionPixelSize(R.dimen.dp_9)))
 
+        binding.searchView.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
+
         binding.offersViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageScrollStateChanged(state: Int) {
                 super.onPageScrollStateChanged(state)

@@ -89,4 +89,11 @@ interface RetrofitAPI {
     @Headers("isAuthorized: true")
     @PUT("products/cart/decrease/{productId}")
     suspend fun decreaseProductQuantity(@Path("productId") productId: Int) : Response<DefaultResponse>
+
+    //Search
+
+    @Headers("isAuthorized: false")
+    @GET("products/search/{keyword}")
+    suspend fun search(@Path("keyword") keyword: String): Response<ProductsResponse>
+
 }
