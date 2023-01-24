@@ -37,16 +37,6 @@ class DataStoreManager(private val context : Context) {
         }
     }
 
-    suspend fun storeEmail(e: String){
-        context.dataStore.edit {
-            it[email] = e
-        }
-    }
-
-    suspend fun getEmail() = context.dataStore.data.map {
-        it[email]?:""
-    }
-
     suspend fun getLogInInfo() = context.dataStore.data.map {
         LogInInfo(
             accessToken = it[accessToken]?:"",

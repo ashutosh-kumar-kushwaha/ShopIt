@@ -24,6 +24,5 @@ class ProfileViewModel @Inject constructor(private val profileRepository: Profil
         viewModelScope.launch {
             profileRepository.updateProfile(updateProfileRequest)
         }
-        Log.d("Ashu", updateProfileRequest.toString())
     }
 }

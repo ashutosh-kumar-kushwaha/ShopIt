@@ -5,12 +5,15 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="ashutosh.shopit.ui.account.AccountViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".ui.account.AccountFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,13 +40,13 @@
                 android:id="@+id/logOutBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_16"
                 android:fontFamily="@font/poppins"
                 android:letterSpacing="0.05"
                 android:text="Log Out"
-                android:textFontWeight="600"
                 android:textColor="@color/color13"
+                android:textFontWeight="600"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -67,13 +70,13 @@
                 android:id="@+id/profileDetailsLL"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="@dimen/dp_8"
-                android:layout_marginTop="@dimen/dp_8"
                 android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_8"
                 android:layout_marginEnd="@dimen/dp_16"
                 android:background="@drawable/profile_details_bg"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nameTxtVw">
@@ -81,15 +84,16 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/dp_8">
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/profilePicCardVw"
                         android:layout_width="@dimen/dp_96"
                         android:layout_height="@dimen/dp_96"
-                        app:cardCornerRadius="@dimen/dp_96"
-                        android:layout_centerInParent="true">
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        app:cardCornerRadius="@dimen/dp_96">
 
                         <ImageView
                             android:id="@+id/profilePicImgVw"
@@ -98,199 +102,222 @@
                             android:src="@drawable/dd" />
                     </androidx.cardview.widget.CardView>
 
-                    <ImageView
-                        android:id="@+id/changeProfileBtn"
-                        android:layout_width="@dimen/dp_18"
-                        android:layout_height="@dimen/dp_18"
-                        android:layout_alignParentEnd="false"
-                        android:layout_alignParentBottom="true"
-                        android:layout_gravity="bottom"
-                        android:layout_toEndOf="@id/profilePicCardVw"
-                        android:baselineAlignBottom="false"
-                        android:src="@drawable/change_profile_pic" />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/profilePicCardVwShimmer"
+                        android:layout_width="@dimen/dp_96"
+                        android:layout_height="@dimen/dp_96"
+                        android:layout_centerInParent="true"
+                        app:cardCornerRadius="@dimen/dp_96">
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/profilePicShimmer"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/shimmer_color" />
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/changeProfileBtn"-->
+                    <!--                        android:layout_width="@dimen/dp_18"-->
+                    <!--                        android:layout_height="@dimen/dp_18"-->
+                    <!--                        android:layout_alignParentEnd="false"-->
+                    <!--                        android:layout_alignParentBottom="true"-->
+                    <!--                        android:layout_gravity="bottom"-->
+                    <!--                        android:layout_toEndOf="@id/profilePicCardVw"-->
+                    <!--                        android:baselineAlignBottom="false"-->
+                    <!--                        android:src="@drawable/change_profile_pic" />-->
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/nameTxtVw2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Murdock"
-                    android:textFontWeight="600"
                     android:layout_marginTop="@dimen/dp_8"
                     android:fontFamily="@font/poppins"
                     android:letterSpacing="0.05"
-                    android:textSize="@dimen/sp_18"
-                    android:textColor="@color/black" />
+                    android:text="Name"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_18" />
 
                 <TextView
+                    android:id="@+id/emailTxtVw"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="mattmurdock@gmail.com"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
                     android:fontFamily="@font/poppins"
                     android:letterSpacing="0.05"
-                    android:textSize="@dimen/sp_14"
+                    android:singleLine="true"
+                    android:text="Email"
+                    android:textColor="@color/color2"
                     android:textFontWeight="600"
-                    android:textColor="@color/color2" />
+                    android:textSize="@dimen/sp_14" />
             </LinearLayout>
 
             <GridLayout
                 android:id="@+id/optionsGL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:rowCount="2"
-                android:columnCount="2"
                 android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_12"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:columnCount="2"
+                android:rowCount="2"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profileDetailsLL">
 
                 <LinearLayout
                     android:id="@+id/ordersLL"
                     android:layout_width="@dimen/dp_152"
                     android:layout_height="@dimen/dp_64"
-                    android:gravity="center"
                     android:layout_gravity="start"
-                    android:padding="@dimen/dp_10"
-                    android:background="@drawable/profile_details_bg">
+                    android:background="@drawable/profile_details_bg"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10">
 
                     <ImageView
                         android:id="@+id/ordersImgVW"
                         android:layout_width="@dimen/dp_24"
                         android:layout_height="@dimen/dp_24"
-                        android:src="@drawable/ic_orders"
-                        android:layout_marginEnd="@dimen/dp_6" />
+                        android:layout_marginEnd="@dimen/dp_6"
+                        android:src="@drawable/ic_orders" />
 
                     <TextView
                         android:id="@+id/ordersTxtVw"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Orders"
                         android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:letterSpacing="0.05"
+                        android:text="Orders"
                         android:textColor="@color/black"
                         android:textFontWeight="600"
-                        android:letterSpacing="0.05"
-                        android:textSize="@dimen/sp_16"
-                        android:gravity="center" />
+                        android:textSize="@dimen/sp_16" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/wishlistLL"
                     android:layout_width="@dimen/dp_152"
                     android:layout_height="@dimen/dp_64"
-                    android:gravity="center"
                     android:layout_gravity="end"
-                    android:padding="@dimen/dp_10"
-                    android:background="@drawable/profile_details_bg">
+                    android:background="@drawable/profile_details_bg"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10">
 
                     <ImageView
                         android:id="@+id/wishlistImgVW"
                         android:layout_width="@dimen/dp_24"
                         android:layout_height="@dimen/dp_24"
-                        android:src="@drawable/heart"
-                        android:layout_marginEnd="@dimen/dp_6" />
+                        android:layout_marginEnd="@dimen/dp_6"
+                        android:src="@drawable/heart" />
 
                     <TextView
                         android:id="@+id/wishlistTxtVw"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Wishlist"
                         android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:letterSpacing="0.05"
+                        android:text="Wishlist"
                         android:textColor="@color/black"
                         android:textFontWeight="600"
-                        android:letterSpacing="0.05"
-                        android:textSize="@dimen/sp_16"
-                        android:gravity="center" />
+                        android:textSize="@dimen/sp_16" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/profileLL"
                     android:layout_width="@dimen/dp_152"
                     android:layout_height="@dimen/dp_64"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/dp_16"
                     android:layout_gravity="start"
-                    android:padding="@dimen/dp_10"
-                    android:background="@drawable/profile_details_bg">
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:background="@drawable/profile_details_bg"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10">
 
                     <ImageView
                         android:id="@+id/profileImgVW"
                         android:layout_width="@dimen/dp_24"
                         android:layout_height="@dimen/dp_24"
-                        android:src="@drawable/user"
-                        android:layout_marginEnd="@dimen/dp_6" />
+                        android:layout_marginEnd="@dimen/dp_6"
+                        android:src="@drawable/user" />
 
                     <TextView
                         android:id="@+id/profileTxtVw"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Profile"
                         android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:letterSpacing="0.05"
+                        android:text="Profile"
                         android:textColor="@color/black"
                         android:textFontWeight="600"
-                        android:letterSpacing="0.05"
-                        android:textSize="@dimen/sp_16"
-                        android:gravity="center" />
+                        android:textSize="@dimen/sp_16" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/customerCareLL"
                     android:layout_width="@dimen/dp_152"
                     android:layout_height="@dimen/dp_64"
-                    android:gravity="center"
                     android:layout_gravity="end"
                     android:layout_marginTop="@dimen/dp_16"
-                    android:padding="@dimen/dp_10"
-                    android:background="@drawable/profile_details_bg">
+                    android:background="@drawable/profile_details_bg"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10">
 
                     <ImageView
                         android:id="@+id/customerCareImgVW"
                         android:layout_width="@dimen/dp_24"
                         android:layout_height="@dimen/dp_24"
-                        android:src="@drawable/customer_care"
-                        android:layout_marginEnd="@dimen/dp_6" />
+                        android:layout_marginEnd="@dimen/dp_6"
+                        android:src="@drawable/customer_care" />
 
                     <TextView
                         android:id="@+id/customerCareTxtVw"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Customer Care"
                         android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:letterSpacing="0.05"
+                        android:text="Customer Care"
                         android:textColor="@color/black"
                         android:textFontWeight="600"
-                        android:letterSpacing="0.05"
-                        android:textSize="@dimen/sp_14"
-                        android:gravity="center" />
+                        android:textSize="@dimen/sp_14" />
                 </LinearLayout>
 
             </GridLayout>
 
-            <TextView
-                android:id="@+id/keepShoppingTxtVw"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Keep Shopping for"
-                android:fontFamily="@font/montserrat"
-                android:textFontWeight="600"
-                android:textSize="@dimen/sp_16"
-                android:textColor="@color/black"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                android:layout_marginTop="@dimen/dp_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/optionsGL" />
+<!--            <TextView-->
+<!--                android:id="@+id/keepShoppingTxtVw"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/dp_16"-->
+<!--                android:layout_marginTop="@dimen/dp_16"-->
+<!--                android:layout_marginEnd="@dimen/dp_16"-->
+<!--                android:fontFamily="@font/montserrat"-->
+<!--                android:text="Keep Shopping for"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textFontWeight="600"-->
+<!--                android:textSize="@dimen/sp_16"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/optionsGL" />-->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recommendationRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginTop="@dimen/dp_12"
-                android:layout_marginBottom="@dimen/dp_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/keepShoppingTxtVw" />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/recommendationRecyclerView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/dp_16"-->
+<!--                android:layout_marginTop="@dimen/dp_12"-->
+<!--                android:layout_marginBottom="@dimen/dp_16"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/keepShoppingTxtVw" />-->
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
