@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.Constants
 import ashutosh.shopit.R
@@ -84,6 +85,12 @@ class OrderFragment() : Fragment() {
         }
 
         orderViewModel.getAddresses()
+
+        binding.addAddressBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_orderFragment_to_addAddressFragment)
+        }
+
+
 
 
         return binding.root

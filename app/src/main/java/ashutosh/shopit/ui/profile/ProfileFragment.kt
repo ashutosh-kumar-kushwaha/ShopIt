@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.DialogEditDetailsBinding
@@ -57,6 +58,10 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.getProfile()
 
+        binding.addAddressBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_addAddressFragment)
+        }
+
         return binding.root
     }
 
@@ -97,6 +102,8 @@ class ProfileFragment : Fragment() {
             }
             profileViewModel.updateProfile(UpdateProfileRequest(editDetailsBinding.firstNameETxt.text.toString(), editDetailsBinding.lastNameETxt.text.toString(), gender))
         }
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -357,6 +357,7 @@
                     app:layout_constraintTop_toBottomOf="@id/addressTxtVw" />
 
                 <TextView
+                    android:id="@+id/addAddressBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_5"

@@ -122,4 +122,8 @@ interface RetrofitAPI {
     @PUT("api/profile/updateProfile")
     suspend fun updateProfile(@Body updateProfileRequest: UpdateProfileRequest) : Response<Profile>
 
+    @Headers("isAuthorized: true")
+    @POST("api/profile/addAddress")
+    suspend fun addAddress(@Body addAddressRequest: AddAddressRequest): Response<List<Address>>
+
 }
