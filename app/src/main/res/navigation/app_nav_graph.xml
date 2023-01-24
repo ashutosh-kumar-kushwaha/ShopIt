@@ -26,7 +26,11 @@
         android:id="@+id/accountFragment"
         android:name="ashutosh.shopit.ui.account.AccountFragment"
         android:label="Account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationFragment"
         android:name="ashutosh.shopit.ui.notification.NotificationFragment"
@@ -56,4 +60,9 @@
         android:name="ashutosh.shopit.ui.order.OrderFragment"
         android:label="OrderFragment"
         tools:layout="@layout/fragment_order"/>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="ashutosh.shopit.ui.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
 </navigation>

@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.profile.ProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.profile.ProfileFragment">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -32,335 +38,339 @@
                 android:layout_marginStart="@dimen/dp_28" />
 
         </androidx.appcompat.widget.Toolbar>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1"
-        android:background="@color/color8" />
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/color8" />
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/profilePicCardVw"
-                android:layout_width="@dimen/dp_96"
-                android:layout_height="@dimen/dp_96"
-                android:layout_centerInParent="true"
-                app:cardCornerRadius="@dimen/dp_96"
-                android:layout_marginTop="@dimen/dp_38"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/profilePicImgVw"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/dd" />
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/changePhotoBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:letterSpacing="0.05"
-                android:text="Change Photo"
-                android:textColor="@color/black"
-                android:textFontWeight="600"
-                android:textSize="@dimen/sp_10"
-                android:layout_marginTop="@dimen/dp_8"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profilePicCardVw"/>
-
-            <View
-                android:id="@+id/line2"
-                android:layout_height="@dimen/dp_1"
-                android:layout_width="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/changePhotoBtn"
-                android:layout_marginTop="@dimen/dp_16"/>
-
-            <TextView
-                android:id="@+id/personalDetailsTxtVw"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:letterSpacing="0.05"
-                android:text="Personal Details"
-                android:textColor="@color/color2"
-                android:textFontWeight="400"
-                android:textSize="@dimen/sp_12"
-                android:layout_marginTop="@dimen/dp_12"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line2" />
-
-            <TextView
-                android:id="@+id/firstNameHeadingTxtVw"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:letterSpacing="0.05"
-                android:text="First Name"
-                android:textColor="@color/black"
-                android:textFontWeight="400"
-                android:textSize="@dimen/sp_12"
-                android:layout_marginTop="@dimen/dp_12"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/personalDetailsTxtVw" />
-
-            <TextView
-                android:id="@+id/firstNameTxtVw"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:letterSpacing="0.05"
-                android:text="First Name"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_12"
-                android:layout_marginTop="@dimen/dp_8"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/firstNameHeadingTxtVw" />
-
-            <View
-                android:id="@+id/line3"
-                android:layout_height="@dimen/dp_1"
-                android:layout_width="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/firstNameTxtVw"
-                android:layout_marginTop="@dimen/dp_8"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"/>
-
-            <TextView
-                android:id="@+id/lastNameHeadingTxtVw"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:letterSpacing="0.05"
-                android:text="Last Name"
-                android:textColor="@color/black"
-                android:textFontWeight="400"
-                android:textSize="@dimen/sp_12"
-                android:layout_marginTop="@dimen/dp_16"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line3" />
-
-            <TextView
-                android:id="@+id/lastNameTxtVw"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:letterSpacing="0.05"
-                android:text="Last Name"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_12"
-                android:layout_marginTop="@dimen/dp_8"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lastNameHeadingTxtVw" />
-
-            <View
-                android:id="@+id/line4"
-                android:layout_height="@dimen/dp_1"
-                android:layout_width="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lastNameTxtVw"
-                android:layout_marginTop="@dimen/dp_8"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"/>
-
-            <TextView
-                android:id="@+id/genderHeadingTxtVw"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:letterSpacing="0.05"
-                android:text="Gender"
-                android:textColor="@color/black"
-                android:textFontWeight="400"
-                android:textSize="@dimen/sp_12"
-                android:layout_marginTop="@dimen/dp_16"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line4" />
-
-            <TextView
-                android:id="@+id/genderTxtVw"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:letterSpacing="0.05"
-                android:text="Gender"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_12"
-                android:layout_marginTop="@dimen/dp_8"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/genderHeadingTxtVw" />
-
-            <View
-                android:id="@+id/line5"
-                android:layout_height="@dimen/dp_1"
-                android:layout_width="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/genderTxtVw"
-                android:layout_marginTop="@dimen/dp_8"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"/>
-
-            <TextView
-                android:id="@+id/editDetailsBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_16"
-                android:letterSpacing="0.05"
-                android:textColor="@color/black"
-                android:text="Edit Details"
-                android:textFontWeight="700"
-                android:fontFamily="@font/montserrat"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line5"/>
-
-            <TextView
-                android:id="@+id/emailHeadingTxtVw"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:letterSpacing="0.05"
-                android:text="Email"
-                android:textColor="@color/color2"
-                android:textFontWeight="400"
-                android:textSize="@dimen/sp_12"
-                android:layout_marginTop="@dimen/dp_19"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editDetailsBtn" />
-
-            <TextView
-                android:id="@+id/updateEmailBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat"
-                android:letterSpacing="0.05"
-                android:text="Update"
-                android:textFontWeight="700"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_12"
-                android:layout_marginTop="@dimen/dp_8"
-                android:layout_marginEnd="@dimen/dp_16"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/emailHeadingTxtVw"/>
-
-            <TextView
-                android:id="@+id/emailTxtVw"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:letterSpacing="0.05"
-                android:text="email"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_12"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/updateEmailBtn"
-                app:layout_constraintTop_toTopOf="@id/updateEmailBtn"
-                app:layout_constraintBottom_toBottomOf="@id/updateEmailBtn"/>
-
-            <View
-                android:id="@+id/line6"
-                android:layout_height="@dimen/dp_1"
-                android:layout_width="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/emailTxtVw"
-                android:layout_marginTop="@dimen/dp_8"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"/>
-
-            <TextView
-                android:id="@+id/addressTxtVw"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:letterSpacing="0.05"
-                android:text="Address"
-                android:textColor="@color/color2"
-                android:textFontWeight="600"
-                android:textSize="@dimen/sp_12"
-                android:layout_marginTop="@dimen/dp_32"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line6" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/addressRecyclerView"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_16"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginEnd="@dimen/dp_16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addressTxtVw" />
+                android:background="@color/white">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dp_5"
-                android:text="Add Address"
-                android:textFontWeight="600"
-                android:layout_marginTop="@dimen/dp_8"
-                android:layout_marginBottom="@dimen/dp_16"
-                android:textSize="@dimen/sp_12"
-                android:letterSpacing="0.05"
-                android:textColor="@color/color2"
-                android:drawablePadding="@dimen/dp_11"
-                android:fontFamily="@font/montserrat"
-                android:drawableStart="@drawable/ic_plus"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addressRecyclerView"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/profilePicCardVw"
+                    android:layout_width="@dimen/dp_96"
+                    android:layout_height="@dimen/dp_96"
+                    android:layout_centerInParent="true"
+                    app:cardCornerRadius="@dimen/dp_96"
+                    android:layout_marginTop="@dimen/dp_38"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+                    <ImageView
+                        android:id="@+id/profilePicImgVw"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/dd" />
+                </androidx.cardview.widget.CardView>
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/changePhotoBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:letterSpacing="0.05"
+                    android:text="Change Photo"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_10"
+                    android:layout_marginTop="@dimen/dp_8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profilePicCardVw" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/changePhotoBtn"
+                    android:layout_marginTop="@dimen/dp_16" />
+
+                <TextView
+                    android:id="@+id/personalDetailsTxtVw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:letterSpacing="0.05"
+                    android:text="Personal Details"
+                    android:textColor="@color/color2"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line2" />
+
+                <TextView
+                    android:id="@+id/firstNameHeadingTxtVw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:letterSpacing="0.05"
+                    android:text="First Name"
+                    android:textColor="@color/black"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/personalDetailsTxtVw" />
+
+                <TextView
+                    android:id="@+id/firstNameTxtVw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:letterSpacing="0.05"
+                    android:text="First Name"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/firstNameHeadingTxtVw" />
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/firstNameTxtVw"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16" />
+
+                <TextView
+                    android:id="@+id/lastNameHeadingTxtVw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:letterSpacing="0.05"
+                    android:text="Last Name"
+                    android:textColor="@color/black"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line3" />
+
+                <TextView
+                    android:id="@+id/lastNameTxtVw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:letterSpacing="0.05"
+                    android:text="Last Name"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lastNameHeadingTxtVw" />
+
+                <View
+                    android:id="@+id/line4"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lastNameTxtVw"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16" />
+
+                <TextView
+                    android:id="@+id/genderHeadingTxtVw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:letterSpacing="0.05"
+                    android:text="Gender"
+                    android:textColor="@color/black"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line4" />
+
+                <TextView
+                    android:id="@+id/genderTxtVw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:letterSpacing="0.05"
+                    android:text="Gender"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/genderHeadingTxtVw" />
+
+                <View
+                    android:id="@+id/line5"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/genderTxtVw"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16" />
+
+                <TextView
+                    android:id="@+id/editDetailsBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:letterSpacing="0.05"
+                    android:textColor="@color/black"
+                    android:text="Edit Details"
+                    android:textFontWeight="700"
+                    android:fontFamily="@font/montserrat"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line5" />
+
+                <TextView
+                    android:id="@+id/emailHeadingTxtVw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:letterSpacing="0.05"
+                    android:text="Email"
+                    android:textColor="@color/color2"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_19"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/editDetailsBtn" />
+
+                <TextView
+                    android:id="@+id/updateEmailBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:letterSpacing="0.05"
+                    android:text="Update"
+                    android:textFontWeight="700"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/emailHeadingTxtVw" />
+
+                <TextView
+                    android:id="@+id/emailTxtVw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:letterSpacing="0.05"
+                    android:text="email"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/updateEmailBtn"
+                    app:layout_constraintTop_toTopOf="@id/updateEmailBtn"
+                    app:layout_constraintBottom_toBottomOf="@id/updateEmailBtn" />
+
+                <View
+                    android:id="@+id/line6"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/emailTxtVw"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16" />
+
+                <TextView
+                    android:id="@+id/addressTxtVw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:letterSpacing="0.05"
+                    android:text="Address"
+                    android:textColor="@color/color2"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginTop="@dimen/dp_32"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line6" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/addressRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addressTxtVw" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_5"
+                    android:text="Add Address"
+                    android:textFontWeight="600"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginBottom="@dimen/dp_16"
+                    android:textSize="@dimen/sp_12"
+                    android:letterSpacing="0.05"
+                    android:textColor="@color/color2"
+                    android:drawablePadding="@dimen/dp_11"
+                    android:fontFamily="@font/montserrat"
+                    android:drawableStart="@drawable/ic_plus"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addressRecyclerView"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+</layout>

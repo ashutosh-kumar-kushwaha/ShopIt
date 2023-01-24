@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.R
 import ashutosh.shopit.adapters.RecommendationAdapter
@@ -33,6 +34,10 @@ class AccountFragment : Fragment() {
         binding.recommendationRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.logOutBtn.setOnClickListener {
             logOut()
+        }
+
+        binding.profileTxtVw.setOnClickListener {
+            findNavController().navigate(R.id.action_accountFragment_to_profileFragment)
         }
 
 
