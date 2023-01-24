@@ -91,6 +91,12 @@ class ProductFragment : Fragment() {
         binding.addToCartBtn.setOnClickListener {
             productViewModel.addToCart()
         }
+        binding.quantityPlusBtn.setOnClickListener{
+            productViewModel.increaseQuantity()
+        }
+        binding.quantityMinusBtn.setOnClickListener{
+            productViewModel.decreaseQuantity()
+        }
 
         return binding.root
     }
@@ -152,6 +158,10 @@ class ProductFragment : Fragment() {
                     progressBar.show()
                 }
             }
+        }
+
+        productViewModel.toastMsg.observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
     }
 

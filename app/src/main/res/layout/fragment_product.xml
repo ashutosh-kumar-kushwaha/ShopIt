@@ -189,7 +189,7 @@
                     app:layout_constraintTop_toTopOf="@id/quantityTxtVw">
 
                     <ImageView
-                        android:id="@+id/quantityPlusMinus"
+                        android:id="@+id/quantityMinusBtn"
                         android:layout_width="@dimen/dp_14"
                         android:layout_height="@dimen/dp_14"
                         android:src="@drawable/ic_minus" />
@@ -201,7 +201,7 @@
                         android:layout_marginStart="@dimen/dp_16"
                         android:layout_marginEnd="@dimen/dp_16"
                         android:fontFamily="@font/montserrat"
-                        android:text="1"
+                        android:text="@={viewModel.quantity}"
                         android:textColor="@color/black"
                         android:textFontWeight="600" />
 
