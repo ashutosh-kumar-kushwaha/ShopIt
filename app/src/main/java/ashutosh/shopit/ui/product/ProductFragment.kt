@@ -23,6 +23,7 @@ import ashutosh.shopit.adapters.SpecsParentAdapter
 import ashutosh.shopit.databinding.FragmentProductBinding
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.ProgressBarBinding
+import ashutosh.shopit.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 
@@ -55,6 +56,8 @@ class ProductFragment : Fragment() {
         progressBar.setContentView(progressBarBinding.root)
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
+
+//        (activity as MainActivity).hideBottomNavBar()
 
         if(arguments?.getInt("productId") != null){
             productViewModel.productId = arguments?.getInt("productId")!!
