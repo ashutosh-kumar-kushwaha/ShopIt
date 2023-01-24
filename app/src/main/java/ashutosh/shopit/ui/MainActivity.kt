@@ -2,6 +2,7 @@ package ashutosh.shopit.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -25,5 +26,13 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         binding.bottomNavigationBar.setupWithNavController(navController)
 
+    }
+
+    fun showBottomNavBar(){
+        binding.bottomNavigationBar.visibility = View.VISIBLE
+    }
+
+    fun hideBottomNavBar(){
+        binding.bottomNavigationBar.visibility = View.GONE
     }
 }

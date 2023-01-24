@@ -18,6 +18,7 @@ import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.DialogEditDetailsBinding
 import ashutosh.shopit.databinding.FragmentProfileBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
+import ashutosh.shopit.models.UpdateProfileRequest
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -67,8 +68,9 @@ class ProfileFragment : Fragment() {
         editDetailsBinding.root.minimumWidth = displayRectangle.width()
         editDetailsDialog.setCanceledOnTouchOutside(false)
         editDetailsDialog.setContentView(editDetailsBinding.root)
-        editDetailsBinding.firstNameETxt.text = binding.firstNameTxtVw.editableText
-        editDetailsBinding.lastNameTxtVw.text = binding.lastNameTxtVw.editableText
+        editDetailsDialog.show()
+        editDetailsBinding.firstNameETxt.setText(binding.firstNameTxtVw.getText().toString())
+        editDetailsBinding.lastNameETxt.setText(binding.lastNameTxtVw.getText().toString())
         val dropDownAdapter = ArrayAdapter(requireContext(), R.layout.gender_spinner_item, resources.getStringArray(R.array.genders))
         editDetailsBinding.genderSpinner.adapter = dropDownAdapter
         if(binding.genderTxtVw.text == "male"){
@@ -77,7 +79,24 @@ class ProfileFragment : Fragment() {
         else{
             editDetailsBinding.genderSpinner.setSelection(1)
         }
-        editDetailsDialog.show()
+        editDetailsBinding.cancelBtn.setOnClickListener{
+            editDetailsDialog.dismiss()
+            _editDetailsBinding = null
+        }
+        editDetailsBinding.backBtn.setOnClickListener{
+            editDetailsDialog.dismiss()
+            _editDetailsBinding = null
+        }
+
+        editDetailsBinding.continueBtn.setOnClickListener{
+            val gender = if(editDetailsBinding.genderSpinner.selectedItem.toString() == "Male"){
+                "m"
+            }
+            else{
+                "f"
+            }
+            profileViewModel.updateProfile(UpdateProfileRequest(editDetailsBinding.firstNameETxt.text.toString(), editDetailsBinding.lastNameETxt.text.toString(), gender))
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,6 +111,29 @@ class ProfileFragment : Fragment() {
                     binding.lastNameTxtVw.text = it.data?.lastname
                     binding.genderTxtVw.text = it.data?.gender
                     binding.emailTxtVw.text = it.data?.email
+                }
+                is NetworkResult.Error -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> {
+                    progressBar.show()
+                }
+            }
+        }
+
+        profileViewModel.updateProfileResponse.observe(viewLifecycleOwner){
+            when(it){
+                is NetworkResult.Success -> {
+                    progressBar.dismiss()
+                    binding.profilePicImgVw.load(it.data?.profilePhoto)
+                    binding.firstNameTxtVw.text = it.data?.firstname
+                    binding.lastNameTxtVw.text = it.data?.lastname
+                    binding.genderTxtVw.text = it.data?.gender
+                    binding.emailTxtVw.text = it.data?.email
+                    Toast.makeText(requireContext(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show()
+                    editDetailsDialog.dismiss()
+                    _editDetailsBinding = null
                 }
                 is NetworkResult.Error -> {
                     progressBar.dismiss()

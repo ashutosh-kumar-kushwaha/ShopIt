@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/white"
         tools:context=".ui.profile.ProfileFragment">
 
         <androidx.appcompat.widget.Toolbar
@@ -91,6 +92,7 @@
                     android:id="@+id/line2"
                     android:layout_height="@dimen/dp_1"
                     android:layout_width="0dp"
+                    android:background="@color/color8"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/changePhotoBtn"
@@ -151,6 +153,7 @@
                     android:id="@+id/line3"
                     android:layout_height="@dimen/dp_1"
                     android:layout_width="0dp"
+                    android:background="@color/color8"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/firstNameTxtVw"
@@ -196,6 +199,7 @@
                     android:id="@+id/line4"
                     android:layout_height="@dimen/dp_1"
                     android:layout_width="0dp"
+                    android:background="@color/color8"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/lastNameTxtVw"
@@ -241,6 +245,7 @@
                     android:id="@+id/line5"
                     android:layout_height="@dimen/dp_1"
                     android:layout_width="0dp"
+                    android:background="@color/color8"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/genderTxtVw"
@@ -315,6 +320,7 @@
                     android:id="@+id/line6"
                     android:layout_height="@dimen/dp_1"
                     android:layout_width="0dp"
+                    android:background="@color/color8"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/emailTxtVw"

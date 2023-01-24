@@ -118,4 +118,8 @@ interface RetrofitAPI {
     @GET("api/profile/getProfile")
     suspend fun getProfile() : Response<Profile>
 
+    @Headers("isAuthorized: true")
+    @PUT("api/profile/updateProfile")
+    suspend fun updateProfile(@Body updateProfileRequest: UpdateProfileRequest) : Response<Profile>
+
 }

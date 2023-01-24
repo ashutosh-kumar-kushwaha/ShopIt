@@ -28,6 +28,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
+                        android:id="@+id/backBtn"
                         android:layout_width="@dimen/dp_26"
                         android:layout_height="@dimen/dp_24"
                         android:padding="@dimen/dp_5"
@@ -103,7 +104,7 @@
                     app:layout_constraintTop_toBottomOf="@id/firstNameETxt" />
 
                 <EditText
-                    android:id="@+id/lastNameTxtVw"
+                    android:id="@+id/lastNameETxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_16"
