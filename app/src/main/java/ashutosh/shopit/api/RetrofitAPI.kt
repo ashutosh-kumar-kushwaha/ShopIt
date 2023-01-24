@@ -112,4 +112,10 @@ interface RetrofitAPI {
     @GET("products/search/{keyword}")
     suspend fun search(@Path("keyword") keyword: String, @Query("sortBy") sortBy: String, @Query("sortDir") sortDir: String): Response<ProductsResponse>
 
+    //profile
+
+    @Headers("isAuthorized: true")
+    @GET("api/profile/getProfile")
+    suspend fun getProfile() : Response<Profile>
+
 }
