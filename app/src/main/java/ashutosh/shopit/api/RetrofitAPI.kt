@@ -48,7 +48,7 @@ interface RetrofitAPI {
     //Product
 
     @Headers("isAuthorized: false")
-    @GET("products/getProductsByCategory/{categoryId}")
+    @GET("products/getProductsByCategory/{categoryId}?pageNumber=0&pageSize=100&sortBy=productId&sortDir=asc")
     suspend fun getProductsByCategory(@Path("categoryId") categoryId : Int) : Response<ProductsResponse>
 
     @Headers("isAuthorized: false")

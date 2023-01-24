@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import ashutosh.shopit.R
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.FragmentAddAddressBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddAddressFragment : Fragment() {
 
     private var _binding: FragmentAddAddressBinding? = null
@@ -24,6 +26,7 @@ class AddAddressFragment : Fragment() {
     ): View? {
         _binding = FragmentAddAddressBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = addAddressViewModel
 
         binding.addAddressBtn.setOnClickListener {
             addAddressViewModel.addAddress()

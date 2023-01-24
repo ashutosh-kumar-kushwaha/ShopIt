@@ -12,10 +12,17 @@ class OrderViewModel @Inject constructor(private val orderRepository: OrderRepos
 
     val addressResponse get() = orderRepository.addressResponse
     val placeOrderResponse get() = orderRepository.placeOrderResponse
+    val getCartProductsResponse get() = orderRepository.getCartProductsResponse
 
     fun getAddresses(){
         viewModelScope.launch {
             orderRepository.getAddresses()
+        }
+    }
+
+    fun getCartProducts(){
+        viewModelScope.launch {
+            orderRepository.getCartProducts()
         }
     }
 

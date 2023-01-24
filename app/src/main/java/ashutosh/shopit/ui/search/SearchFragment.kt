@@ -18,6 +18,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import ashutosh.shopit.R
 import ashutosh.shopit.adapters.ProductSpacingItemDecoration
@@ -91,7 +92,9 @@ class SearchFragment : Fragment() {
 
         val productClickListener = object : ProductClickListener {
             override fun onProductClick(productId: Int) {
-                Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+                val bundle = Bundle()
+                bundle.putInt("productId", productId)
+                findNavController().navigate(R.id.action_searchFragment_to_productFragment, bundle)
             }
         }
 

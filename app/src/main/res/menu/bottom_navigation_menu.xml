@@ -4,10 +4,10 @@
         android:id="@+id/homeFragment"
         android:title="Home"
         android:icon="@drawable/ic_home"/>
-    <item
-        android:id="@+id/categoriesFragment"
-        android:title="Categories"
-        android:icon="@drawable/ic_categories"/>
+<!--    <item-->
+<!--        android:id="@+id/categoriesFragment"-->
+<!--        android:title="Categories"-->
+<!--        android:icon="@drawable/ic_categories"/>-->
     <item
         android:id="@+id/notificationFragment"
         android:title="Notifications"

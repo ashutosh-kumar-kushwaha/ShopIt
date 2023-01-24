@@ -28,6 +28,7 @@ import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class OrderFragment() : Fragment() {
@@ -85,7 +86,7 @@ class OrderFragment() : Fragment() {
         }
 
         orderViewModel.getAddresses()
-
+        orderViewModel.getCartProducts()
         binding.addAddressBtn.setOnClickListener {
             findNavController().navigate(R.id.action_orderFragment_to_addAddressFragment)
         }
@@ -127,6 +128,34 @@ class OrderFragment() : Fragment() {
                     progressBar.dismiss()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
+                is NetworkResult.Loading -> {
+                    progressBar.show()
+                }
+            }
+        }
+
+        orderViewModel.getCartProductsResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkResult.Success -> {
+                    progressBar.dismiss()
+                    val list = it.data!!.content
+                    var total = 0
+                    for (item in list) {
+                        total += item.noOfProducts * (item.product.originalPrice - (item.product.offerPercentage / 100) * item.product.originalPrice).roundToInt()
+                    }
+                    var price = "₹$total"
+                    binding.priceTxtVw.text = price
+                    total += 30
+                    price = "₹$total"
+                    binding.totalPriceTxtVw.text = price
+
+                }
+
+                is NetworkResult.Error -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+
                 is NetworkResult.Loading -> {
                     progressBar.show()
                 }

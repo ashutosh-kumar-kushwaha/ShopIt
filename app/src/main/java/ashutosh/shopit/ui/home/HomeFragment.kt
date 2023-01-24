@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -231,6 +232,7 @@ class HomeFragment : Fragment(), ProductClickListener {
                     binding.itemRecyclerView.visibility = View.VISIBLE
                     binding.itemRecyclerVwShimmer.visibility = View.GONE
                     productsAdapter.submitList(it.data?.content)
+                    Log.d("Ashu", it.data?.content.toString())
                 }
 
                 is NetworkResult.Loading -> {

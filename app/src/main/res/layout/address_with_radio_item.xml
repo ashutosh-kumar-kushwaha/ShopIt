@@ -50,6 +50,7 @@
 
       <ImageView
           android:id="@+id/crossBtn"
+          android:visibility="invisible"
           android:layout_width="@dimen/dp_26"
           android:layout_height="@dimen/dp_26"
           android:src="@drawable/ic_cross"
