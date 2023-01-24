@@ -23,6 +23,7 @@ class DataStoreManager(private val context : Context) {
         val firstName = stringPreferencesKey("firstName")
         val lastName = stringPreferencesKey("lastName")
         val role = stringPreferencesKey("role")
+        val email = stringPreferencesKey("email")
     }
 
     suspend fun storeLogInInfo(logInInfo: LogInInfo){
@@ -34,6 +35,16 @@ class DataStoreManager(private val context : Context) {
             it[lastName] = logInInfo.lastName!!
             it[role] = logInInfo.role!!
         }
+    }
+
+    suspend fun storeEmail(e: String){
+        context.dataStore.edit {
+            it[email] = e
+        }
+    }
+
+    suspend fun getEmail() = context.dataStore.data.map {
+        it[email]?:""
     }
 
     suspend fun getLogInInfo() = context.dataStore.data.map {
