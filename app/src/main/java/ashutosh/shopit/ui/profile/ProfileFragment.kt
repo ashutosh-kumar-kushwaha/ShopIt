@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import ashutosh.shopit.R
 import ashutosh.shopit.databinding.DialogEditDetailsBinding
 import ashutosh.shopit.databinding.FragmentProfileBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
@@ -57,6 +59,8 @@ class ProfileFragment : Fragment() {
         editDetailsDialog.setContentView(editDetailsBinding.root)
         editDetailsBinding.firstNameETxt.text = binding.firstNameTxtVw.editableText
         editDetailsBinding.lastNameTxtVw.text = binding.lastNameTxtVw.editableText
+        val dropDownAdapter = ArrayAdapter(requireContext(), R.layout.gender_spinner_item, resources.getStringArray(R.array.genders))
+        editDetailsBinding.genderSpinner.adapter = dropDownAdapter
         editDetailsDialog.show()
     }
 
