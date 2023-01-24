@@ -18,6 +18,9 @@ class AddAddressRepository @Inject constructor(private val retrofitAPI: Retrofit
                 200 -> {
                     addAddressResponse.value = NetworkResult.Success(200, response.body()!!)
                 }
+                400 -> {
+                    addAddressResponse.value = NetworkResult.Error(400, "Wrong format")
+                }
                 401 -> {
                     addAddressResponse.value = NetworkResult.Error(401, "Token expired")
                 }

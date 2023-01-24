@@ -11,6 +11,6 @@ data class AddAddressRequest(
     val addressLine: String,
     val city: String,
     val state: String,
-    val landmark: String,
-    @SerializedName("mobile_alternative") val mobileAlternative: String,
+    var landmark: String?,
+    @SerializedName("mobile_alternative") var mobileAlternative: String?,
 )

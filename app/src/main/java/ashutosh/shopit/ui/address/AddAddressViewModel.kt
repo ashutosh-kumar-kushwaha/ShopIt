@@ -3,7 +3,6 @@ package ashutosh.shopit.ui.address
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.models.AddAddressRequest
 import ashutosh.shopit.repository.AddAddressRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,8 +25,15 @@ class AddAddressViewModel @Inject constructor(private val addAddressRepository: 
     val mobile2 = MutableLiveData("")
 
     fun addAddress(){
+        val addAddressRequest = AddAddressRequest(type.value!!, name.value!!, mobile.value!!, pinCode.value!!, locality.value!!, addressLine.value!!, city.value!!, state.value!!, landmark.value!!, mobile2.value!!)
+        if(mobile2.value!!.isEmpty()){
+            addAddressRequest.mobileAlternative = null
+        }
+        if(landmark.value!!.isEmpty()){
+            addAddressRequest.landmark = null
+        }
         viewModelScope.launch {
-            addAddressRepository.addAddress(AddAddressRequest(type.value!!, name.value!!, mobile.value!!, pinCode.value!!, locality.value!!, addressLine.value!!, city.value!!, state.value!!, landmark.value!!, mobile2.value!!))
+            addAddressRepository.addAddress(addAddressRequest)
         }
     }
 }
