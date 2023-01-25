@@ -23,6 +23,7 @@ import ashutosh.shopit.adapters.SpecsParentAdapter
 import ashutosh.shopit.databinding.FragmentProductBinding
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.ProgressBarBinding
+import ashutosh.shopit.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 
@@ -56,6 +57,8 @@ class ProductFragment : Fragment() {
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
 
+//        (activity as MainActivity).hideBottomNavBar()
+
         if(arguments?.getInt("productId") != null){
             productViewModel.productId = arguments?.getInt("productId")!!
 //            Toast.makeText(requireContext(), productViewModel.productId, Toast.LENGTH_SHORT).show()
@@ -88,6 +91,12 @@ class ProductFragment : Fragment() {
         binding.addToCartBtn.setOnClickListener {
             productViewModel.addToCart()
         }
+        binding.quantityPlusBtn.setOnClickListener{
+            productViewModel.increaseQuantity()
+        }
+        binding.quantityMinusBtn.setOnClickListener{
+            productViewModel.decreaseQuantity()
+        }
 
         return binding.root
     }
@@ -98,12 +107,14 @@ class ProductFragment : Fragment() {
         productViewModel.productDetailsResponse.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Loading -> {
-
+                    progressBar.show()
                 }
                 is NetworkResult.Error -> {
+                    progressBar.hide()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
                 is NetworkResult.Success -> {
+                    progressBar.hide()
                     val product = it.data!!
                     binding.photosViewPager.adapter = ProductImageAdapter(product.imageUrls)
                     circleNumber = product.imageUrls.size
@@ -149,6 +160,10 @@ class ProductFragment : Fragment() {
                     progressBar.show()
                 }
             }
+        }
+
+        productViewModel.toastMsg.observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
     }
 

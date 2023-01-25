@@ -35,10 +35,10 @@ class ProductRepository @Inject constructor(private val retrofitAPI: RetrofitAPI
         }
     }
 
-    suspend fun addToCart(productId: Int){
+    suspend fun addToCart(productId: Int, quantity: Int){
         addToCartResponse.value = NetworkResult.Loading()
         try{
-            val response = retrofitAPI.addToCart(productId)
+            val response = retrofitAPI.addToCart(productId, quantity)
             when(response.code()){
                 200 -> {
                     if (response.body() != null) {
