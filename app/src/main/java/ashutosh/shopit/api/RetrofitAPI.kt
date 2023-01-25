@@ -126,4 +126,12 @@ interface RetrofitAPI {
     @POST("api/profile/addAddress")
     suspend fun addAddress(@Body addAddressRequest: AddAddressRequest): Response<List<Address>>
 
+    @Headers("isAuthorized: true")
+    @POST("api/profile/sendEmailOTP")
+    suspend fun updateEmail(@Body email: Email) : Response<DefaultResponse>
+
+    @Headers("isAuthorized: true")
+    @PATCH("api/profile/resetEmailID")
+    suspend fun resetEmail(@Body resetEmailRequest: ResetEmailRequest) : Response<DefaultResponse>
+
 }

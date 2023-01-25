@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="ashutosh.shopit.ui.profile.ProfileViewModel" />
     </data>
 
     <LinearLayout
@@ -299,16 +301,19 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/emailHeadingTxtVw" />
 
-                <TextView
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailTxtVw"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
                     android:letterSpacing="0.05"
-                    android:text="email"
+                    android:text="@={viewModel.email}"
+                    android:gravity="center_vertical"
                     android:singleLine="true"
                     android:textColor="@color/black"
+                    android:background="@color/white"
                     android:textSize="@dimen/sp_12"
+                    android:padding="0dp"
                     android:layout_marginStart="@dimen/dp_16"
                     android:layout_marginEnd="@dimen/dp_16"
                     app:layout_constraintStart_toStartOf="parent"
