@@ -3,16 +3,17 @@ package ashutosh.shopit.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ashutosh.shopit.SingleLiveEvent
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.AdvertisementResponse
 import ashutosh.shopit.models.CategoryResponse
 import ashutosh.shopit.models.ProductsResponse
 import ashutosh.shopit.repository.HomePageRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
-
-    private val homePageRepository = HomePageRepository()
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val homePageRepository: HomePageRepository) : ViewModel() {
 
     val productsLiveData : SingleLiveEvent<NetworkResult<ProductsResponse>> get() = homePageRepository.getProductsResponseLiveData
 

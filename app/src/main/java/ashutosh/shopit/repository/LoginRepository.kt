@@ -2,13 +2,12 @@ package ashutosh.shopit.repository
 
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
-import ashutosh.shopit.api.ServiceBuilder
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.LoginRequest
 import ashutosh.shopit.models.LoginResponse
+import javax.inject.Inject
 
-class LoginRepository {
-    private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
+class LoginRepository @Inject constructor(private val retrofitAPI: RetrofitAPI) {
 
     val loginResponseLiveData =
         SingleLiveEvent<NetworkResult<LoginResponse>>()
@@ -20,19 +19,22 @@ class LoginRepository {
             when (response.code()) {
                 200 -> {
                     if(response.body()!=null){
-                        loginResponseLiveData.postValue(NetworkResult.Success(response.body()!!))
+                        loginResponseLiveData.postValue(NetworkResult.Success(200, response.body()!!))
+                    }
+                    else{
+                        loginResponseLiveData.postValue(NetworkResult.Error(200, "Something went wrong\nError: Response is null"))
                     }
                 }
-                404 -> loginResponseLiveData.postValue(NetworkResult.Error("User does not exist"))
+                404 -> loginResponseLiveData.postValue(NetworkResult.Error(404, "User does not exist"))
 
-                400 -> loginResponseLiveData.postValue(NetworkResult.Error("Invalid Format of email or password"))
+                400 -> loginResponseLiveData.postValue(NetworkResult.Error(400, "Invalid Format of email or password"))
 
-                401 -> loginResponseLiveData.postValue(NetworkResult.Error("Wrong Password"))
+                401 -> loginResponseLiveData.postValue(NetworkResult.Error(401, "Wrong Password"))
 
-                else -> loginResponseLiveData.postValue(NetworkResult.Error("Something went wrong\nError code : ${response.code()}"))
+                else -> loginResponseLiveData.postValue(NetworkResult.Error(response.code(), "Something went wrong\nError code : ${response.code()}"))
             }
         } catch (e: Exception) {
-            loginResponseLiveData.value = NetworkResult.Error(e.message)
+            loginResponseLiveData.value = NetworkResult.Error(-1, e.message)
         }
     }
 
@@ -43,16 +45,19 @@ class LoginRepository {
             when(response.code()){
                 200 -> {
                     if(response.body() != null){
-                        loginResponseLiveData.value = NetworkResult.Success(response.body()!!)
+                        loginResponseLiveData.value = NetworkResult.Success(200, response.body()!!)
+                    }
+                    else{
+                        loginResponseLiveData.value = NetworkResult.Error(200, "Something went wrong\nError : Response is null")
                     }
                 }
-                400 -> loginResponseLiveData.value = NetworkResult.Error("Invalid token")
-                403 -> loginResponseLiveData.value = NetworkResult.Error("Either the token is expired or the token is not authorized")
-                else -> loginResponseLiveData.value = NetworkResult.Error("Something went wrong\nError code : ${response.code()}")
+                400 -> loginResponseLiveData.value = NetworkResult.Error(400, "Invalid token")
+                403 -> loginResponseLiveData.value = NetworkResult.Error(403, "Either the token is expired or the token is not authorized")
+                else -> loginResponseLiveData.value = NetworkResult.Error(response.code(), "Something went wrong\nError code : ${response.code()}")
             }
         }
         catch (e: Exception){
-            loginResponseLiveData.value = NetworkResult.Error(e.message)
+            loginResponseLiveData.value = NetworkResult.Error(-1, e.message)
         }
     }
 }

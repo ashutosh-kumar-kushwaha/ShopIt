@@ -7,7 +7,9 @@ import androidx.fragment.app.FragmentTransaction
 import ashutosh.shopit.R
 import ashutosh.shopit.ui.auth.forgotPasswordOtpVerification.ForgotPasswordOtpVerificationFragment
 import ashutosh.shopit.ui.auth.login.LoginFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthenticationActivity : AppCompatActivity() {
 
     var email = ""

@@ -9,33 +9,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import ashutosh.shopit.GenericTextWatcher
 import ashutosh.shopit.R
-import ashutosh.shopit.databinding.FragmentForgotPasswordOtpVerificationBinding
 import ashutosh.shopit.databinding.FragmentSignUpOtpVerificationBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
-import ashutosh.shopit.di.NetworkResult
-import ashutosh.shopit.ui.auth.forgotPasswordOtpVerification.ForgotPasswordOtpVerificationViewModel
+import ashutosh.shopit.api.NetworkResult
+import ashutosh.shopit.repository.SignUpOtpVerificationRepository
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlin.math.sign
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SignUpOtpVerificationFragment : Fragment() {
 
     private var _binding : FragmentSignUpOtpVerificationBinding? = null
     private val binding : FragmentSignUpOtpVerificationBinding get() = _binding!!
 
-    private var _signUpOtpVerificationViewModel : SignUpOtpVerificationViewModel? = null
-    private val signUpOtpVerificationViewModel : SignUpOtpVerificationViewModel get() = _signUpOtpVerificationViewModel!!
+    private val signUpOtpVerificationViewModel by viewModels<SignUpOtpVerificationViewModel>()
 
     private lateinit var progressBar: Dialog
     private var _progressBarBinding : ProgressBarBinding? = null
     private val progressBarBinding get() = _progressBarBinding!!
-
-    private var email = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,11 +43,9 @@ class SignUpOtpVerificationFragment : Fragment() {
 
         _binding = FragmentSignUpOtpVerificationBinding.inflate(inflater, container, false)
 
-        if(arguments?.getString("email") != null){
-            email = arguments?.getString("email")!!
+        if(arguments?.getString("email") != null && signUpOtpVerificationViewModel.email.isEmpty()){
+            signUpOtpVerificationViewModel.email = arguments?.getString("email")!!
         }
-
-        _signUpOtpVerificationViewModel = ViewModelProvider(viewModelStore, SignUpOtpVerificationViewModelFactory(email))[SignUpOtpVerificationViewModel::class.java]
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = signUpOtpVerificationViewModel

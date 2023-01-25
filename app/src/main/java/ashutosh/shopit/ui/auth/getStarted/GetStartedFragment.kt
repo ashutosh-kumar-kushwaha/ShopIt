@@ -19,15 +19,17 @@ import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentGetStartedBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.datastore.DataStoreManager
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.LogInInfo
 import ashutosh.shopit.ui.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class GetStartedFragment : Fragment() {
 
     private var _binding : FragmentGetStartedBinding? = null

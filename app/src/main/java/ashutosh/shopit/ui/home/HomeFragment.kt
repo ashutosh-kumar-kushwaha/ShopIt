@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -22,16 +24,25 @@ import ashutosh.shopit.adapters.OffersAdapter
 import ashutosh.shopit.adapters.ProductSpacingItemDecoration
 import ashutosh.shopit.adapters.ProductsAdapter
 import ashutosh.shopit.databinding.FragmentHomeBinding
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
+import ashutosh.shopit.repository.HomePageRepository
 import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.reflect.Field
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(), ProductClickListener {
 
     private var _binding : FragmentHomeBinding? = null
     private val binding : FragmentHomeBinding get() = _binding!!
 
     private val homeViewModel by viewModels<HomeViewModel>()
+
+//    private lateinit var homeViewModel: HomeViewModel
+
+//    @Inject
+//    lateinit var homePageRepository: HomePageRepository
 
     private val productsAdapter = ProductsAdapter(this)
 
@@ -48,37 +59,48 @@ class HomeFragment : Fragment(), ProductClickListener {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+//        homeViewModel = ViewModelProvider(viewModelStore, HomeViewModelFactory(homePageRepository))[HomeViewModel::class.java]
+
+
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = homeViewModel
 
         categories = listOf(binding.categoryAllChip, binding.categoryChip1, binding.categoryChip2, binding.categoryChip3, binding.categoryChip4, binding.categoryChip5)
 
-        val searchText = binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
-        val font = ResourcesCompat.getFont(requireContext(), R.font.montserrat)
-        searchText.typeface = font
-        searchText.setTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
-        searchText.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
+//        val searchText = binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+//        val font = ResourcesCompat.getFont(requireContext(), R.font.montserrat)
+//        searchText.typeface = font
+//        searchText.setTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
+//        searchText.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
+//
+//        searchText.setOnClickListener{
+//            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+//        }
+//
+//        if(Build.VERSION.SDK_INT >= 29){
+//            searchText.textCursorDrawable = AppCompatResources.getDrawable(requireContext(), R.drawable.cursor_2)
+//        }
+//        else{
+//            try{
+//                val f: Field = TextView::class.java.getDeclaredField("mCursorDrawableRes")
+//                f.isAccessible = true
+//                f.set(searchText, R.drawable.cursor_2)
+//            }
+//            catch (_: Exception){}
+//        }
 
-        if(Build.VERSION.SDK_INT >= 29){
-            searchText.textCursorDrawable = AppCompatResources.getDrawable(requireContext(), R.drawable.cursor_2)
-        }
-        else{
-            try{
-                val f: Field = TextView::class.java.getDeclaredField("mCursorDrawableRes")
-                f.isAccessible = true
-                f.set(searchText, R.drawable.cursor_2)
-            }
-            catch (_: Exception){}
-        }
-
-        val icon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
-        icon.setImageResource(R.drawable.ic_search_icon)
+//        val icon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
+//        icon.setImageResource(R.drawable.ic_search_icon)
 
         binding.itemRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         binding.itemRecyclerView.adapter = productsAdapter
 
         binding.itemRecyclerView.addItemDecoration(ProductSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.dp_24), resources.getDimensionPixelSize(R.dimen.dp_9)))
+
+        binding.searchView.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
 
         binding.offersViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageScrollStateChanged(state: Int) {
@@ -210,6 +232,7 @@ class HomeFragment : Fragment(), ProductClickListener {
                     binding.itemRecyclerView.visibility = View.VISIBLE
                     binding.itemRecyclerVwShimmer.visibility = View.GONE
                     productsAdapter.submitList(it.data?.content)
+                    Log.d("Ashu", it.data?.content.toString())
                 }
 
                 is NetworkResult.Loading -> {

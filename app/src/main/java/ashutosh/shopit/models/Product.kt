@@ -1,11 +1,11 @@
 package ashutosh.shopit.models
 
 data class Product (
-    val id : Int,
-    val image : Int,
-    val name : String,
-    val rating : String,
-    val sold : Int,
-    val discountedPrice : String,
-    val originalPrice : String
+    val productId: Int,
+    val imageUrls: Image,
+    val productName: String,
+    val originalPrice: Double,
+    val offerPercentage: Double,
+    val rating: Int,
+    val noOfOrders: Int
 )

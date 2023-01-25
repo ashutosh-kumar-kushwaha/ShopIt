@@ -2,13 +2,12 @@ package ashutosh.shopit.repository
 
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
-import ashutosh.shopit.api.ServiceBuilder
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.Email
 import ashutosh.shopit.models.DefaultResponse
+import javax.inject.Inject
 
-class ForgotPasswordRepository {
-    private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
+class ForgotPasswordRepository @Inject constructor(private val retrofitAPI: RetrofitAPI)  {
 
     val forgotPasswordResponseLiveData =
         SingleLiveEvent<NetworkResult<DefaultResponse>>()
@@ -20,16 +19,19 @@ class ForgotPasswordRepository {
             when(response.code()){
                 200 -> {
                     if(response.body() != null){
-                        forgotPasswordResponseLiveData.value = NetworkResult.Success(response.body()!!)
+                        forgotPasswordResponseLiveData.value = NetworkResult.Success(200, response.body()!!)
+                    }
+                    else{
+                        forgotPasswordResponseLiveData.value = NetworkResult.Error(200, "Something went wrong\nError: Response is null")
                     }
                 }
-                400 -> forgotPasswordResponseLiveData.value = NetworkResult.Error("Invalid Action")
-                404 -> forgotPasswordResponseLiveData.value = NetworkResult.Error("No user with this email is found")
-                else -> forgotPasswordResponseLiveData.value = NetworkResult.Error("Something went wrong\nError code : ${response.code()}")
+                400 -> forgotPasswordResponseLiveData.value = NetworkResult.Error(400, "Invalid Action")
+                404 -> forgotPasswordResponseLiveData.value = NetworkResult.Error(404, "No user with this email is found")
+                else -> forgotPasswordResponseLiveData.value = NetworkResult.Error(response.code(),"Something went wrong\nError code : ${response.code()}")
             }
         }
         catch (e : Exception){
-            forgotPasswordResponseLiveData.value = NetworkResult.Error(e.message)
+            forgotPasswordResponseLiveData.value = NetworkResult.Error(-1, e.message)
         }
     }
 

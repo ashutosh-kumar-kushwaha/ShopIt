@@ -1,6 +1,5 @@
 package ashutosh.shopit.ui.auth.forgotPassword
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,8 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -19,10 +16,11 @@ import androidx.navigation.fragment.findNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.FragmentForgotPasswordBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
-import ashutosh.shopit.di.NetworkResult
-import ashutosh.shopit.ui.auth.AuthenticationActivity
+import ashutosh.shopit.api.NetworkResult
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ForgotPasswordFragment : Fragment() {
 
     private var _binding : FragmentForgotPasswordBinding? = null
@@ -50,17 +48,19 @@ class ForgotPasswordFragment : Fragment() {
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
 
-        binding.continueBtn.setOnClickListener {
-            lifecycleScope.launch {
-                forgotPasswordViewModel.forgotPassword()
-            }
-        }
+
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.continueBtn.setOnClickListener {
+            lifecycleScope.launch {
+                forgotPasswordViewModel.forgotPassword()
+            }
+        }
 
         forgotPasswordViewModel.forgotPasswordResponseLiveData.observe(viewLifecycleOwner, Observer {
             when(it){

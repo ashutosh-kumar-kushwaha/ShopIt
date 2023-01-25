@@ -189,7 +189,7 @@
                     app:layout_constraintTop_toTopOf="@id/quantityTxtVw">
 
                     <ImageView
-                        android:id="@+id/quantityPlusMinus"
+                        android:id="@+id/quantityMinusBtn"
                         android:layout_width="@dimen/dp_14"
                         android:layout_height="@dimen/dp_14"
                         android:src="@drawable/ic_minus" />
@@ -201,7 +201,7 @@
                         android:layout_marginStart="@dimen/dp_16"
                         android:layout_marginEnd="@dimen/dp_16"
                         android:fontFamily="@font/montserrat"
-                        android:text="1"
+                        android:text="@={viewModel.quantity}"
                         android:textColor="@color/black"
                         android:textFontWeight="600" />
 
@@ -405,40 +405,40 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/questionsAnswersTxtVw" />
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/dp_16"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/questionsAnswerRecyclerView">-->
-<!--                    <com.google.android.material.button.MaterialButton-->
-<!--                        android:id="@+id/addToCartBtn"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="@dimen/dp_54"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:textAllCaps="false"-->
-<!--                        android:fontFamily="@font/montserrat"-->
-<!--                        android:textSize="@dimen/sp_12"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        app:backgroundTint="@null"-->
-<!--                        android:background="@color/color10"-->
-<!--                        android:text="Add to cart"/>-->
-<!--                    <com.google.android.material.button.MaterialButton-->
-<!--                        android:id="@+id/buyNowBtn"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:text="Buy Now"-->
-<!--                        android:fontFamily="@font/montserrat"-->
-<!--                        android:textSize="@dimen/sp_12"-->
-<!--                        app:backgroundTint="@null"-->
-<!--                        android:textColor="@color/white"-->
-<!--                        android:textAllCaps="false"-->
-<!--                        android:background="@color/color11"-->
-<!--                        android:layout_height="@dimen/dp_54"/>-->
-<!--                </LinearLayout>-->
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/questionsAnswerRecyclerView">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addToCartBtn"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_54"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/black"
+                app:backgroundTint="@null"
+                android:background="@color/color10"
+                android:text="Add to cart"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buyNowBtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="Buy Now"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/sp_12"
+                app:backgroundTint="@null"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:background="@color/color11"
+                android:layout_height="@dimen/dp_54"/>
+        </LinearLayout>
     </LinearLayout>
 </layout>

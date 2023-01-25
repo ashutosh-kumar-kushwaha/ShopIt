@@ -1,16 +1,14 @@
 package ashutosh.shopit.repository
 
-import androidx.lifecycle.MutableLiveData
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
-import ashutosh.shopit.api.ServiceBuilder
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.DefaultResponse
 import ashutosh.shopit.models.Email
 import ashutosh.shopit.models.VerifyOtpRequest
+import javax.inject.Inject
 
-class ForgotPasswordOtpVerificationRepository {
-    private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
+class ForgotPasswordOtpVerificationRepository @Inject constructor(private val retrofitAPI: RetrofitAPI) {
 
     val otpVerifyResponseLiveData = SingleLiveEvent<NetworkResult<DefaultResponse>>()
 
@@ -23,17 +21,20 @@ class ForgotPasswordOtpVerificationRepository {
             when(response.code()){
                 200 -> {
                     if(response.body() != null){
-                        otpVerifyResponseLiveData.value = NetworkResult.Success(response.body()!!)
+                        otpVerifyResponseLiveData.value = NetworkResult.Success(200, response.body()!!)
+                    }
+                    else{
+                        otpVerifyResponseLiveData.value = NetworkResult.Error(response.code(), "Something went wrong\nError: Response is null")
                     }
                 }
-                400 -> otpVerifyResponseLiveData.value = NetworkResult.Error("Invalid Action")
-                406 -> otpVerifyResponseLiveData.value = NetworkResult.Error("Wrong OTP")
-                408 -> otpVerifyResponseLiveData.value = NetworkResult.Error("Session Time-out\nPlease Try Again")
-                else -> otpVerifyResponseLiveData.value = NetworkResult.Error("Something went wrong\nError code: ${response.code()}")
+                400 -> otpVerifyResponseLiveData.value = NetworkResult.Error(400, "Invalid Action")
+                406 -> otpVerifyResponseLiveData.value = NetworkResult.Error(406, "Wrong OTP")
+                408 -> otpVerifyResponseLiveData.value = NetworkResult.Error(408, "Session Time-out\nPlease Try Again")
+                else -> otpVerifyResponseLiveData.value = NetworkResult.Error(response.code(), "Something went wrong\nError code: ${response.code()}")
             }
         }
         catch (e : Exception){
-            otpVerifyResponseLiveData.value = NetworkResult.Error(e.message)
+            otpVerifyResponseLiveData.value = NetworkResult.Error(-1, e.message)
         }
     }
 
@@ -44,16 +45,19 @@ class ForgotPasswordOtpVerificationRepository {
             when(response.code()){
                 200 -> {
                     if(response.body() != null){
-                        resendOtpResponseLiveData.value = NetworkResult.Success(response.body()!!)
+                        resendOtpResponseLiveData.value = NetworkResult.Success(200, response.body()!!)
+                    }
+                    else{
+                        resendOtpResponseLiveData.value = NetworkResult.Error(200, "Something went wrong\nError : response is null")
                     }
                 }
-                400 -> resendOtpResponseLiveData.value = NetworkResult.Error("Invalid Action")
-                404 -> resendOtpResponseLiveData.value = NetworkResult.Error("No user with this email is found")
-                else -> resendOtpResponseLiveData.value = NetworkResult.Error("Something went wrong\nError code : ${response.code()}")
+                400 -> resendOtpResponseLiveData.value = NetworkResult.Error(400, "Invalid Action")
+                404 -> resendOtpResponseLiveData.value = NetworkResult.Error(404, "No user with this email is found")
+                else -> resendOtpResponseLiveData.value = NetworkResult.Error(response.code(), "Something went wrong\nError code : ${response.code()}")
             }
         }
         catch (e : Exception){
-            resendOtpResponseLiveData.value = NetworkResult.Error(e.message)
+            resendOtpResponseLiveData.value = NetworkResult.Error(-1, e.message)
         }
     }
 }

@@ -8,18 +8,18 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ashutosh.shopit.interfaces.ProductClickListener
 import ashutosh.shopit.databinding.ItemCardBinding
-import ashutosh.shopit.models.ProductsContent
+import ashutosh.shopit.models.Product
 import coil.load
 import kotlin.math.roundToInt
 
-class ProductsAdapter(val productClickListener: ProductClickListener) : ListAdapter<ProductsContent, ProductsAdapter.ViewHolder>(DiffUtil()) {
+class ProductsAdapter(val productClickListener: ProductClickListener) : ListAdapter<Product, ProductsAdapter.ViewHolder>(DiffUtil()) {
     inner class ViewHolder(private val binding : ItemCardBinding): RecyclerView.ViewHolder(binding.root), View.OnClickListener{
 
         init {
             binding.root.setOnClickListener(this)
         }
 
-        fun bind(product: ProductsContent){
+        fun bind(product: Product){
             binding.productImgVw.load(product.imageUrls.imageUrl)
             val discountedPrice = "₹${(product.originalPrice-(product.offerPercentage/100)*product.originalPrice).roundToInt()}"
             binding.discountedPriceTxtVw.text = discountedPrice
@@ -39,12 +39,12 @@ class ProductsAdapter(val productClickListener: ProductClickListener) : ListAdap
         }
     }
 
-    class DiffUtil: ItemCallback<ProductsContent>(){
-        override fun areItemsTheSame(oldItem: ProductsContent, newItem: ProductsContent): Boolean {
+    class DiffUtil: ItemCallback<Product>(){
+        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem.productId == newItem.productId
         }
 
-        override fun areContentsTheSame(oldItem: ProductsContent, newItem: ProductsContent): Boolean {
+        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem == newItem
         }
     }

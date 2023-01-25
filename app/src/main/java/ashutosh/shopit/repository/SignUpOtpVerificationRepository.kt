@@ -2,14 +2,13 @@ package ashutosh.shopit.repository
 
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
-import ashutosh.shopit.api.ServiceBuilder
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.models.DefaultResponse
 import ashutosh.shopit.models.Email
 import ashutosh.shopit.models.VerifyOtpRequest
+import javax.inject.Inject
 
-class SignUpOtpVerificationRepository {
-    private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
+class SignUpOtpVerificationRepository @Inject constructor(private val retrofitAPI: RetrofitAPI) {
 
     val responseLiveData =
         SingleLiveEvent<NetworkResult<DefaultResponse>>()
@@ -23,16 +22,19 @@ class SignUpOtpVerificationRepository {
             when(response.code()){
                 200 -> {
                     if(response.body() != null){
-                        responseLiveData.value = NetworkResult.Success(response.body()!!)
+                        responseLiveData.value = NetworkResult.Success(200, response.body()!!)
+                    }
+                    else{
+                        responseLiveData.value = NetworkResult.Error(200, "Something went wrong\nError: Response is null")
                     }
                 }
-                406 -> responseLiveData.value = NetworkResult.Error("Wrong OTP")
-                403 -> responseLiveData.value = NetworkResult.Error("Session Time-out\nPlease Try Again")
-                else -> responseLiveData.value = NetworkResult.Error("Something went wrong\nError code: ${response.code()}")
+                406 -> responseLiveData.value = NetworkResult.Error(406, "Wrong OTP")
+                403 -> responseLiveData.value = NetworkResult.Error(403, "Session Time-out\nPlease Try Again")
+                else -> responseLiveData.value = NetworkResult.Error(response.code(), "Something went wrong\nError code: ${response.code()}")
             }
         }
         catch (e : Exception){
-            responseLiveData.value = NetworkResult.Error(e.message)
+            responseLiveData.value = NetworkResult.Error(-1, e.message)
         }
     }
 
@@ -43,17 +45,20 @@ class SignUpOtpVerificationRepository {
             when(response.code()){
                 200 -> {
                     if(response.body()!=null){
-                        resendOtpResponseLiveData.value = NetworkResult.Success(response.body()!!)
+                        resendOtpResponseLiveData.value = NetworkResult.Success(200, response.body()!!)
+                    }
+                    else{
+                        resendOtpResponseLiveData.value = NetworkResult.Error(200, "Something went wrong\nError: Response is null")
                     }
                 }
-                400 -> resendOtpResponseLiveData.value = NetworkResult.Error("Email a valid email")
-                409 -> resendOtpResponseLiveData.value = NetworkResult.Error("User Already Exist")
-                503 -> resendOtpResponseLiveData.value = NetworkResult.Error("Unable to make your request")
-                else -> resendOtpResponseLiveData.value = NetworkResult.Error("Something went wrong\nError code: ${response.code()}")
+                400 -> resendOtpResponseLiveData.value = NetworkResult.Error(400, "Email a valid email")
+                409 -> resendOtpResponseLiveData.value = NetworkResult.Error(409, "User Already Exist")
+                503 -> resendOtpResponseLiveData.value = NetworkResult.Error(503, "Unable to make your request")
+                else -> resendOtpResponseLiveData.value = NetworkResult.Error(response.code(), "Something went wrong\nError code: ${response.code()}")
             }
         }
         catch (e : Exception){
-            resendOtpResponseLiveData.value = NetworkResult.Error(e.message)
+            resendOtpResponseLiveData.value = NetworkResult.Error(-1, e.message)
         }
     }
 }

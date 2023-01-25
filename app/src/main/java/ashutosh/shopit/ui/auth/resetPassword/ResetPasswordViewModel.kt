@@ -5,9 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.repository.ResetPasswordRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ResetPasswordViewModel(val email : String, val otp : String) : ViewModel() {
-    private var resetPasswordRepository = ResetPasswordRepository()
+@HiltViewModel
+class ResetPasswordViewModel @Inject constructor(private var resetPasswordRepository : ResetPasswordRepository) : ViewModel() {
+
+    var email = ""
+    var otp = ""
 
     val resetPasswordResponseLiveData get() = resetPasswordRepository.resetPasswordResponseLiveData
 

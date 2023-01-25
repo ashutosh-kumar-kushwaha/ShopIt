@@ -2,14 +2,15 @@ package ashutosh.shopit.repository
 
 import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.RetrofitAPI
-import ashutosh.shopit.api.ServiceBuilder
-import ashutosh.shopit.di.NetworkResult
+import ashutosh.shopit.api.NetworkResult
+import ashutosh.shopit.models.DefaultResponse
 import ashutosh.shopit.models.ProductDetailsResponse
+import javax.inject.Inject
 
-class ProductRepository {
-    private val retrofitAPI = ServiceBuilder.buildService(RetrofitAPI::class.java)
+class ProductRepository @Inject constructor(private val retrofitAPI: RetrofitAPI) {
 
     val productDetailsResponse = SingleLiveEvent<NetworkResult<ProductDetailsResponse>>()
+    val addToCartResponse = SingleLiveEvent<NetworkResult<DefaultResponse>>()
 
     suspend fun getProductDetails(productId : Int){
         productDetailsResponse.value = NetworkResult.Loading()
@@ -18,19 +19,45 @@ class ProductRepository {
             when(response.code()){
                 200 -> {
                     if (response.body() != null){
-                        productDetailsResponse.value = NetworkResult.Success(response.body()!!)
+                        productDetailsResponse.value = NetworkResult.Success(200, response.body()!!)
                     }
                     else{
-                        productDetailsResponse.value = NetworkResult.Error("Something went wrong!\nError: Response is null}")
+                        productDetailsResponse.value = NetworkResult.Error(200, "Something went wrong!\nError: Response is null}")
                     }
                 }
                 else -> {
-                    productDetailsResponse.value = NetworkResult.Error("Something went wrong!\nError code: ${response.code()}")
+                    productDetailsResponse.value = NetworkResult.Error(response.code(), "Something went wrong!\nError code: ${response.code()}")
                 }
             }
         }
         catch (e: Exception){
-            productDetailsResponse.value = NetworkResult.Error(e.message)
+            productDetailsResponse.value = NetworkResult.Error(-1, e.message)
+        }
+    }
+
+    suspend fun addToCart(productId: Int, quantity: Int){
+        addToCartResponse.value = NetworkResult.Loading()
+        try{
+            val response = retrofitAPI.addToCart(productId, quantity)
+            when(response.code()){
+                200 -> {
+                    if (response.body() != null) {
+                        addToCartResponse.value = NetworkResult.Success(200, response.body()!!)
+                    }
+                    else{
+                        addToCartResponse.value = NetworkResult.Error(200, "Something went wrong!\nError: Response is null}")
+                    }
+                }
+                409 -> {
+                    addToCartResponse.value = NetworkResult.Error(409, "Product already exist in the cart")
+                }
+                else -> {
+                    addToCartResponse.value = NetworkResult.Error(response.code(),"Something went wrong!\nError code: ${response.code()}")
+                }
+            }
+        }
+        catch (e: Exception){
+            addToCartResponse.value = NetworkResult.Error(-1, e.message)
         }
     }
 

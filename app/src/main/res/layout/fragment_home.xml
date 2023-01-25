@@ -25,17 +25,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.SearchView
+            <TextView
                 android:id="@+id/searchView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textColor="@color/color2"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/dp_11"
+                android:paddingEnd="@dimen/dp_11"
+                android:drawablePadding="@dimen/dp_12"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/sp_16"
+                android:text="Search Here"
                 android:background="@drawable/search_view_bg"
-                android:backgroundTint="@null"
-                android:foregroundTint="@null"
-                android:searchIcon="@drawable/ic_search_icon"
-                app:defaultQueryHint="Search Here"
-                app:iconifiedByDefault="false" />
+                app:drawableStartCompat="@drawable/ic_search_icon" />
 
             <ImageView
                 android:layout_width="@dimen/dp_18"
