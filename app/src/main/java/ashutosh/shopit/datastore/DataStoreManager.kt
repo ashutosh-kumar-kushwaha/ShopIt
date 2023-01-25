@@ -34,6 +34,7 @@ class DataStoreManager(private val context : Context) {
             it[firstName] = logInInfo.firstName!!
             it[lastName] = logInInfo.lastName!!
             it[role] = logInInfo.role!!
+            it[email] = logInInfo.email!!
         }
     }
 
@@ -44,7 +45,8 @@ class DataStoreManager(private val context : Context) {
             logInState = it[logInState]?:false,
             firstName = it[firstName]?:"",
             lastName = it[lastName]?:"",
-            role = it[role]?:""
+            role = it[role]?:"",
+            email = it[email]?:""
         )
     }
 
@@ -92,6 +94,6 @@ class DataStoreManager(private val context : Context) {
     }
 
     suspend fun deleteLogInInfo(){
-        storeLogInInfo(LogInInfo("", "", false, "", "", ""))
+        storeLogInInfo(LogInInfo("", "", false, "", "", "", ""))
     }
 }
