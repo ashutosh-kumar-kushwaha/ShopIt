@@ -5,5 +5,6 @@ data class LoginResponse(
     val refreshToken: String,
     val firstname: String,
     val lastname: String,
-    val roles: List<Role>
+    val roles: List<Role>,
+    val email: String
 )

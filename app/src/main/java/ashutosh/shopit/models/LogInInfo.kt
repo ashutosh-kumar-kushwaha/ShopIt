@@ -6,5 +6,6 @@ data class LogInInfo (
     val logInState : Boolean,
     val firstName : String?,
     val lastName : String?,
-    val role : String?
+    val role : String?,
+    val email: String?
 )
