@@ -107,12 +107,14 @@ class ProductFragment : Fragment() {
         productViewModel.productDetailsResponse.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Loading -> {
-
+                    progressBar.show()
                 }
                 is NetworkResult.Error -> {
+                    progressBar.hide()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
                 is NetworkResult.Success -> {
+                    progressBar.hide()
                     val product = it.data!!
                     binding.photosViewPager.adapter = ProductImageAdapter(product.imageUrls)
                     circleNumber = product.imageUrls.size
