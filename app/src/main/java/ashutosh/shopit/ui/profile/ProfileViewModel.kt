@@ -11,6 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(private val profileRepository: ProfileRepository) : ViewModel() {
+    val addressResponse get() = profileRepository.addressResponse
     val profileResponse get() = profileRepository.profileResponse
     val updateProfileResponse get() = profileRepository.updateProfileResponse
 
@@ -23,6 +24,12 @@ class ProfileViewModel @Inject constructor(private val profileRepository: Profil
     fun updateProfile(updateProfileRequest: UpdateProfileRequest){
         viewModelScope.launch {
             profileRepository.updateProfile(updateProfileRequest)
+        }
+    }
+
+    fun getAddresses(){
+        viewModelScope.launch {
+            profileRepository.getAddresses()
         }
     }
 }

@@ -64,10 +64,6 @@ class OrderFragment() : Fragment() {
 
 
         val addressClickListener = object : AddressClickListener {
-//            override fun onAddressClick(addressId: Int) {
-//                binding.addressRecyclerView.post(addressOrderAdapter::notifyDataSetChanged)
-//            }
-
             override fun onAddressClick(addressId: Int) {
                 binding.addressRecyclerView.post(addressOrderAdapter::notifyDataSetChanged)
             }

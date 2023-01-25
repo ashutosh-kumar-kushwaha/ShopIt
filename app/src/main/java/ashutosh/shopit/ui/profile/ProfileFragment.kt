@@ -14,11 +14,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.R
+import ashutosh.shopit.adapters.AddressOrderAdapter
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.DialogEditDetailsBinding
 import ashutosh.shopit.databinding.FragmentProfileBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
+import ashutosh.shopit.interfaces.AddressClickListener
 import ashutosh.shopit.models.UpdateProfileRequest
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +42,8 @@ class ProfileFragment : Fragment() {
 
     private val profileViewModel by viewModels<ProfileViewModel>()
 
+    private lateinit var addressOrderAdapter : AddressOrderAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,11 +57,22 @@ class ProfileFragment : Fragment() {
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
 
+        val addressClickListener = object : AddressClickListener {
+            override fun onAddressClick(addressId: Int) {
+                binding.addressRecyclerView.post(addressOrderAdapter::notifyDataSetChanged)
+            }
+        }
+
+        binding.addressRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        addressOrderAdapter = AddressOrderAdapter(addressClickListener)
+        binding.addressRecyclerView.adapter = addressOrderAdapter
+
         binding.editDetailsBtn.setOnClickListener {
             showEditDetailsDialogue()
         }
 
         profileViewModel.getProfile()
+        profileViewModel.getAddresses()
 
         binding.addAddressBtn.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_addAddressFragment)
@@ -151,6 +167,19 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+
+        profileViewModel.addressResponse.observe(viewLifecycleOwner){
+            when (it){
+                is NetworkResult.Success -> {
+                    addressOrderAdapter.submitList(it.data)
+                }
+                is NetworkResult.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> {}
+            }
+        }
+
     }
 
     override fun onDestroyView() {

@@ -49,7 +49,7 @@ class AccountFragment : Fragment() {
                 val name = "${it.firstName}!"
                 binding.nameTxtVw.text = name
                 binding.nameTxtVw2.text = it.firstName
-//                binding.emailTxtVw.text = it.email
+                binding.emailTxtVw.text = it.email
             }
         }
 
@@ -90,7 +90,6 @@ class AccountFragment : Fragment() {
                     binding.profilePicCardVw.visibility = View.VISIBLE
                     binding.profilePicCardVwShimmer.visibility = View.GONE
                     binding.profilePicImgVw.load(it.data?.profilePhoto)
-                    binding.emailTxtVw.text = it.data?.email
                 }
                 is NetworkResult.Error -> {
                     binding.profilePicShimmer.stopShimmerAnimation()
