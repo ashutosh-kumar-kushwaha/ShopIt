@@ -158,24 +158,27 @@
                     android:textSize="@dimen/sp_14" />
             </LinearLayout>
 
-            <GridLayout
-                android:id="@+id/optionsGL"
+            <LinearLayout
+                android:id="@+id/optionsLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_12"
                 android:layout_marginEnd="@dimen/dp_16"
-                android:columnCount="2"
-                android:rowCount="2"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profileDetailsLL">
 
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <LinearLayout
                     android:id="@+id/ordersLL"
-                    android:layout_width="@dimen/dp_152"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/dp_64"
                     android:layout_gravity="start"
+                    android:layout_weight="1"
                     android:background="@drawable/profile_details_bg"
                     android:gravity="center"
                     android:padding="@dimen/dp_10">
@@ -202,9 +205,11 @@
 
                 <LinearLayout
                     android:id="@+id/wishlistLL"
-                    android:layout_width="@dimen/dp_152"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/dp_64"
                     android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/dp_24"
                     android:background="@drawable/profile_details_bg"
                     android:gravity="center"
                     android:padding="@dimen/dp_10">
@@ -228,13 +233,17 @@
                         android:textFontWeight="600"
                         android:textSize="@dimen/sp_16" />
                 </LinearLayout>
-
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_16">
                 <LinearLayout
                     android:id="@+id/profileLL"
-                    android:layout_width="@dimen/dp_152"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/dp_64"
                     android:layout_gravity="start"
-                    android:layout_marginTop="@dimen/dp_16"
+                    android:layout_weight="1"
                     android:background="@drawable/profile_details_bg"
                     android:gravity="center"
                     android:padding="@dimen/dp_10">
@@ -261,10 +270,11 @@
 
                 <LinearLayout
                     android:id="@+id/customerCareLL"
-                    android:layout_width="@dimen/dp_152"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/dp_64"
                     android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/dp_16"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/dp_24"
                     android:background="@drawable/profile_details_bg"
                     android:gravity="center"
                     android:padding="@dimen/dp_10">
@@ -288,8 +298,9 @@
                         android:textFontWeight="600"
                         android:textSize="@dimen/sp_14" />
                 </LinearLayout>
+                </LinearLayout>
 
-            </GridLayout>
+            </LinearLayout>
 
 <!--            <TextView-->
 <!--                android:id="@+id/keepShoppingTxtVw"-->
