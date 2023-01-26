@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import ashutosh.shopit.GenericTextWatcher
 import ashutosh.shopit.R
 import ashutosh.shopit.adapters.AddressOrderAdapter
 import ashutosh.shopit.api.NetworkResult
@@ -32,6 +33,7 @@ import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -112,6 +114,12 @@ class ProfileFragment : Fragment() {
         updateEmailBinding.root.minimumWidth = displayRectangle.width()
         updateEmailDialog.setCanceledOnTouchOutside(false)
         updateEmailDialog.setContentView(updateEmailBinding.root)
+        updateEmailBinding.otpETxt1.addTextChangedListener(GenericTextWatcher(updateEmailBinding.otpETxt1, null, updateEmailBinding.otpETxt2))
+        updateEmailBinding.otpETxt2.addTextChangedListener(GenericTextWatcher(updateEmailBinding.otpETxt2, updateEmailBinding.otpETxt1, updateEmailBinding.otpETxt3))
+        updateEmailBinding.otpETxt3.addTextChangedListener(GenericTextWatcher(updateEmailBinding.otpETxt3, updateEmailBinding.otpETxt2, updateEmailBinding.otpETxt4))
+        updateEmailBinding.otpETxt4.addTextChangedListener(GenericTextWatcher(updateEmailBinding.otpETxt4, updateEmailBinding.otpETxt3, updateEmailBinding.otpETxt5))
+        updateEmailBinding.otpETxt5.addTextChangedListener(GenericTextWatcher(updateEmailBinding.otpETxt5, updateEmailBinding.otpETxt4, updateEmailBinding.otpETxt6))
+        updateEmailBinding.otpETxt6.addTextChangedListener(GenericTextWatcher(updateEmailBinding.otpETxt6, updateEmailBinding.otpETxt5, null))
         updateEmailDialog.show()
         profileViewModel.timeLiveData.value = "60"
         profileViewModel.canResend.value = false
@@ -123,6 +131,10 @@ class ProfileFragment : Fragment() {
         }
         updateEmailBinding.resendOtpTxtVw.setOnClickListener {
             profileViewModel.resendOtp()
+        }
+        updateEmailBinding.backBtn.setOnClickListener {
+            updateEmailDialog.dismiss()
+            _updateEmailBinding = null
         }
     }
 
@@ -279,14 +291,14 @@ class ProfileFragment : Fragment() {
             when(it){
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
-                    val job = lifecycleScope.launch {
-                        val dataStoreManager = DataStoreManager(requireContext())
-                        dataStoreManager.storeLogInInfo(LogInInfo(it.data?.accessToken, it.data?.refreshToken, true, it.data?.firstname, it.data?.lastname, it.data?.roles?.get(0)?.name, it.data?.email))
+                    runBlocking {
+                        storeLogInInfo(LogInInfo(it.data?.accessToken, it.data?.refreshToken, true, it.data?.firstname, it.data?.lastname, it.data?.roles?.get(0)?.name, it.data?.email))
                     }
+                    profileViewModel.originalEmail = it.data?.email!!
                     Toast.makeText(requireContext(), "Email changed successfully", Toast.LENGTH_SHORT).show()
                     profileViewModel.canResend.value = false
-                    _updateEmailBinding = null
                     updateEmailDialog.dismiss()
+                    _updateEmailBinding = null
                 }
                 is NetworkResult.Error -> {
                     progressBar.dismiss()
@@ -319,6 +331,13 @@ class ProfileFragment : Fragment() {
             }
         }
 
+    }
+
+    private suspend fun storeLogInInfo(logInInfo: LogInInfo) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val dataStoreManager = DataStoreManager(requireContext())
+            dataStoreManager.storeLogInInfo(logInInfo)
+        }
     }
 
     override fun onDestroyView() {

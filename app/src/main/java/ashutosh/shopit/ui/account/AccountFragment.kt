@@ -1,9 +1,6 @@
 package ashutosh.shopit.ui.account
 
-import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,18 +10,14 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.R
-import ashutosh.shopit.adapters.RecommendationAdapter
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.FragmentAccountBinding
-import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.datastore.DataStoreManager
-import ashutosh.shopit.models.Recommendation
 import ashutosh.shopit.ui.auth.AuthenticationActivity
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -43,13 +36,18 @@ class AccountFragment : Fragment() {
         binding.viewModel = accountViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             val dataStoreManager = DataStoreManager(requireContext())
             dataStoreManager.getLogInInfo().collect{
                 val name = "${it.firstName}!"
-                binding.nameTxtVw.text = name
-                binding.nameTxtVw2.text = it.firstName
-                binding.emailTxtVw.text = it.email
+                try {
+                    binding.nameTxtVw.text = name
+                    binding.nameTxtVw2.text = it.firstName
+                    binding.emailTxtVw.text = it.email
+                }
+                catch (e: Exception){
+                    e.printStackTrace()
+                }
             }
         }
 
