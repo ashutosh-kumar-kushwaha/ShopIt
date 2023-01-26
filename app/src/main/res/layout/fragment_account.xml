@@ -214,7 +214,7 @@
                         android:layout_width="@dimen/dp_24"
                         android:layout_height="@dimen/dp_24"
                         android:layout_marginEnd="@dimen/dp_6"
-                        android:src="@drawable/heart" />
+                        android:src="@drawable/ic_heart" />
 
                     <TextView
                         android:id="@+id/wishlistTxtVw"
@@ -242,9 +242,9 @@
                     <ImageView
                         android:id="@+id/profileImgVW"
                         android:layout_width="@dimen/dp_24"
-                        android:layout_height="@dimen/dp_24"
+                        android:layout_height="25dp"
                         android:layout_marginEnd="@dimen/dp_6"
-                        android:src="@drawable/user" />
+                        android:src="@drawable/ic_user" />
 
                     <TextView
                         android:id="@+id/profileTxtVw"
