@@ -11,7 +11,8 @@ class ProfileRepository @Inject constructor(private val retrofitAPI: RetrofitAPI
     val updateProfileResponse = SingleLiveEvent<NetworkResult<Profile>>()
     val addressResponse = SingleLiveEvent<NetworkResult<List<Address>>>()
     val updateEmailResponse = SingleLiveEvent<NetworkResult<DefaultResponse>>()
-    val resetEmailResponse = SingleLiveEvent<NetworkResult<DefaultResponse>>()
+    val resetEmailResponse = SingleLiveEvent<NetworkResult<LoginResponse>>()
+    val resendOtpResponse = SingleLiveEvent<NetworkResult<DefaultResponse>>()
 
     suspend fun getProfile(){
         profileResponse.value = NetworkResult.Loading()
@@ -94,7 +95,7 @@ class ProfileRepository @Inject constructor(private val retrofitAPI: RetrofitAPI
             val response = retrofitAPI.updateEmail(email)
             when(response.code()){
                 200 -> {
-                    updateEmailResponse.value = NetworkResult.Success(200, response.body()!!)
+                    updateEmailResponse.value = NetworkResult.Success(200, DefaultResponse("OTP sent successfully", true))
                 }
                 401 -> {
                     updateEmailResponse.value = NetworkResult.Error(401, "Session expired")
@@ -118,8 +119,12 @@ class ProfileRepository @Inject constructor(private val retrofitAPI: RetrofitAPI
             val response = retrofitAPI.resetEmail(resetEmailRequest)
             when(response.code()){
                 200 -> {
-                    resetEmailResponse.value = NetworkResult.Success(200, response.body()!!)
-                }
+                    if(response.body() != null){
+                        resetEmailResponse.value = NetworkResult.Success(200, response.body()!!)
+                    }
+                    else{
+                        resetEmailResponse.value = NetworkResult.Error(200, "Something went wrong\nError: Response is null")
+                    }                }
                 401 -> {
                     resetEmailResponse.value = NetworkResult.Error(401, "Session expired")
                 }
@@ -133,6 +138,30 @@ class ProfileRepository @Inject constructor(private val retrofitAPI: RetrofitAPI
         }
         catch (e: Exception){
             resetEmailResponse.value = NetworkResult.Error(-1, e.message)
+        }
+    }
+
+    suspend fun resendOtp(email : Email){
+        resendOtpResponse.value = NetworkResult.Loading()
+        try{
+            val response = retrofitAPI.updateEmail(email)
+            when(response.code()){
+                200 -> {
+                    updateEmailResponse.value = NetworkResult.Success(200, DefaultResponse("OTP sent successfully", true))
+                }
+                401 -> {
+                    updateEmailResponse.value = NetworkResult.Error(401, "Session expired")
+                }
+                406 -> {
+                    updateEmailResponse.value = NetworkResult.Error(406, "Email already exist")
+                }
+                else -> {
+                    updateEmailResponse.value = NetworkResult.Error(response.code(), "Something went wrong\nError code: ${response.code()}")
+                }
+            }
+        }
+        catch (e : Exception){
+            resendOtpResponse.value = NetworkResult.Error(-1, e.message)
         }
     }
 }

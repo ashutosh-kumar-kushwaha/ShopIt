@@ -87,6 +87,12 @@ class DataStoreManager(private val context : Context) {
         }
     }
 
+    suspend fun saveEmail(e: String){
+        context.dataStore.edit {
+            it[email] = e
+        }
+    }
+
     suspend fun deleteAccessToken(){
         context.dataStore.edit {
             it[accessToken] = ""

@@ -10,10 +10,10 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:fillViewport="true">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -38,7 +38,7 @@
 
                 <TextView
                     android:id="@+id/otpSentTxtVw"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="Enter OTP sent to example@gmail.com"
@@ -47,14 +47,11 @@
                     android:textSize="@dimen/sp_16"
                     android:layout_marginTop="@dimen/dp_16"
                     android:layout_marginStart="@dimen/dp_12"
-                    android:layout_marginEnd="@dimen/dp_12"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+                    android:layout_marginEnd="@dimen/dp_12"/>
 
                 <TextView
                     android:id="@+id/otpTxtVw"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
                     android:fontFamily="@font/montserrat"
@@ -63,21 +60,15 @@
                     android:layout_marginStart="@dimen/dp_12"
                     android:layout_marginEnd="@dimen/dp_12"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16"
-                    app:layout_constraintTop_toBottomOf="@id/otpSentTxtVw"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    android:textSize="@dimen/sp_16"/>
 
                 <LinearLayout
                     android:id="@+id/otpLL"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_48"
                     android:layout_marginStart="@dimen/dp_12"
                     android:layout_marginEnd="@dimen/dp_12"
-                    android:layout_marginTop="@dimen/dp_12"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/otpTxtVw">
+                    android:layout_marginTop="@dimen/dp_12">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/otpETxt1"
@@ -93,10 +84,7 @@
                         android:maxLines="1"
                         android:longClickable="false"
                         android:inputType="number"
-                        android:textCursorDrawable="@drawable/cursor_black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/otpSentTxtVw" />
+                        android:textCursorDrawable="@drawable/cursor_black"/>
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/otpETxt2"
@@ -113,10 +101,7 @@
                         android:maxLines="1"
                         android:longClickable="false"
                         android:inputType="number"
-                        android:textCursorDrawable="@drawable/cursor_black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/otpSentTxtVw" />
+                        android:textCursorDrawable="@drawable/cursor_black"/>
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/otpETxt3"
@@ -133,10 +118,7 @@
                         android:maxLines="1"
                         android:longClickable="false"
                         android:inputType="number"
-                        android:textCursorDrawable="@drawable/cursor_black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/otpSentTxtVw" />
+                        android:textCursorDrawable="@drawable/cursor_black"/>
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/otpETxt4"
@@ -153,10 +135,7 @@
                         android:maxLines="1"
                         android:longClickable="false"
                         android:inputType="number"
-                        android:textCursorDrawable="@drawable/cursor_black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/otpSentTxtVw" />
+                        android:textCursorDrawable="@drawable/cursor_black"/>
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/otpETxt5"
@@ -173,10 +152,7 @@
                         android:maxLines="1"
                         android:longClickable="false"
                         android:inputType="number"
-                        android:textCursorDrawable="@drawable/cursor_black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/otpSentTxtVw" />
+                        android:textCursorDrawable="@drawable/cursor_black"/>
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/otpETxt6"
@@ -193,10 +169,7 @@
                         android:maxLines="1"
                         android:longClickable="false"
                         android:inputType="number"
-                        android:textCursorDrawable="@drawable/cursor_black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/otpSentTxtVw" />
+                        android:textCursorDrawable="@drawable/cursor_black"/>
 
                 </LinearLayout>
 
@@ -205,14 +178,11 @@
 
                 <LinearLayout
                     android:id="@+id/resendOtpLL"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="@dimen/dp_24"
                     android:layout_marginStart="@dimen/dp_12"
-                    android:layout_marginEnd="@dimen/dp_12"
-                    app:layout_constraintTop_toBottomOf="@id/otpLL">
+                    android:layout_marginEnd="@dimen/dp_12">
 
                     <TextView
                         android:id="@+id/resendOtpTxtVw"
@@ -222,10 +192,7 @@
                         android:text="Resend OTP in"
                         android:textFontWeight="400"
                         android:fontFamily="@font/montserrat"
-                        android:textSize="@dimen/sp_16"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/otpVerificationTxtVw"/>
+                        android:textSize="@dimen/sp_16"/>
 
                     <TextView
                         android:id="@+id/resendOtpTimeTxtVw"
@@ -236,10 +203,7 @@
                         android:textFontWeight="600"
                         android:fontFamily="@font/montserrat"
                         android:textSize="@dimen/sp_16"
-                        android:layout_marginStart="@dimen/dp_8"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/otpVerificationTxtVw"/>
+                        android:layout_marginStart="@dimen/dp_8"/>
 
                     <TextView
                         android:id="@+id/secondsTxtVw"
@@ -250,21 +214,19 @@
                         android:textFontWeight="400"
                         android:fontFamily="@font/montserrat"
                         android:textSize="@dimen/sp_16"
-                        android:layout_marginStart="@dimen/dp_8"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/otpVerificationTxtVw"/>
+                        android:layout_marginStart="@dimen/dp_8"/>
 
                 </LinearLayout>
 
 
                 <Button
                     android:id="@+id/continueBtn"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_54"
                     android:layout_marginStart="@dimen/dp_12"
                     android:layout_marginTop="@dimen/dp_24"
                     android:layout_marginEnd="@dimen/dp_12"
+                    android:layout_marginBottom="@dimen/dp_16"
                     android:background="@drawable/button_background"
                     android:fontFamily="@font/montserrat"
                     android:text="Continue"
@@ -272,12 +234,9 @@
                     android:textColor="@color/white"
                     android:textFontWeight="600"
                     android:textSize="@dimen/sp_14"
-                    app:backgroundTint="@null"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/resendOtpLL" />
+                    app:backgroundTint="@null"/>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.cardview.widget.CardView>
 </layout>

@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.R
@@ -21,10 +23,15 @@ import ashutosh.shopit.databinding.DialogEditDetailsBinding
 import ashutosh.shopit.databinding.DialogUpdateEmailBinding
 import ashutosh.shopit.databinding.FragmentProfileBinding
 import ashutosh.shopit.databinding.ProgressBarBinding
+import ashutosh.shopit.datastore.DataStoreManager
 import ashutosh.shopit.interfaces.AddressClickListener
+import ashutosh.shopit.models.LogInInfo
+import ashutosh.shopit.models.ResetEmailRequest
 import ashutosh.shopit.models.UpdateProfileRequest
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -54,6 +61,8 @@ class ProfileFragment : Fragment() {
     ): View? {
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        binding.viewModel = profileViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         _progressBarBinding = ProgressBarBinding.inflate(layoutInflater)
         progressBar = Dialog(binding.root.context)
@@ -89,6 +98,7 @@ class ProfileFragment : Fragment() {
             else{
                 Toast.makeText(requireContext(), "This is already your current email", Toast.LENGTH_SHORT).show()
             }
+            Log.d("Ashu", profileViewModel.originalEmail.toString() + " | " + profileViewModel.email.value)
         }
 
         return binding.root
@@ -99,17 +109,24 @@ class ProfileFragment : Fragment() {
         requireActivity().window.decorView.getWindowVisibleDisplayFrame(displayRectangle)
         _updateEmailBinding = DialogUpdateEmailBinding.inflate(layoutInflater)
         updateEmailDialog = Dialog(updateEmailBinding.root.context)
+        updateEmailBinding.root.minimumWidth = displayRectangle.width()
         updateEmailDialog.setCanceledOnTouchOutside(false)
         updateEmailDialog.setContentView(updateEmailBinding.root)
         updateEmailDialog.show()
-        val otpSentTxt = "Enter OTP sent to ${profileViewModel.email}"
+        profileViewModel.timeLiveData.value = "60"
+        profileViewModel.canResend.value = false
+        profileViewModel.timer.start()
+        val otpSentTxt = "Enter OTP sent to ${profileViewModel.email.value}"
         updateEmailBinding.otpSentTxtVw.text = otpSentTxt
         updateEmailBinding.continueBtn.setOnClickListener {
-            submitEmailOtp()
+            resetEmail()
+        }
+        updateEmailBinding.resendOtpTxtVw.setOnClickListener {
+            profileViewModel.resendOtp()
         }
     }
 
-    private fun submitEmailOtp(){
+    private fun resetEmail(){
         val otp1 = updateEmailBinding.otpETxt1.text
         val otp2 = updateEmailBinding.otpETxt2.text
         val otp3 = updateEmailBinding.otpETxt3.text
@@ -120,7 +137,7 @@ class ProfileFragment : Fragment() {
             Toast.makeText(requireContext(), "Enter a valid otp", Toast.LENGTH_SHORT).show()
         }
         else{
-
+            profileViewModel.resetEmail(ResetEmailRequest(profileViewModel.email.value!!, "$otp1$otp2$otp3$otp4$otp5$otp6"))
         }
     }
 
@@ -240,11 +257,34 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        profileViewModel.resendOtpResponse.observe(viewLifecycleOwner){
+            when(it){
+                is NetworkResult.Success -> {
+                    progressBar.dismiss()
+                    profileViewModel.timer.start()
+                    profileViewModel.canResend.value = false
+                    Toast.makeText(requireContext(), "OTP sent successfully", Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Error -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> {
+                    progressBar.show()
+                }
+            }
+        }
+
         profileViewModel.resetEmailResponse.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
+                    val job = lifecycleScope.launch {
+                        val dataStoreManager = DataStoreManager(requireContext())
+                        dataStoreManager.storeLogInInfo(LogInInfo(it.data?.accessToken, it.data?.refreshToken, true, it.data?.firstname, it.data?.lastname, it.data?.roles?.get(0)?.name, it.data?.email))
+                    }
                     Toast.makeText(requireContext(), "Email changed successfully", Toast.LENGTH_SHORT).show()
+                    profileViewModel.canResend.value = false
                     _updateEmailBinding = null
                     updateEmailDialog.dismiss()
                 }
@@ -255,6 +295,27 @@ class ProfileFragment : Fragment() {
                 is NetworkResult.Loading -> {
                     progressBar.show()
                 }
+            }
+        }
+
+        profileViewModel.canResend.observe(viewLifecycleOwner){
+            if(_updateEmailBinding != null){
+                if(it){
+                    updateEmailBinding.resendOtpTxtVw.text = "Resend OTP"
+                    updateEmailBinding.resendOtpTimeTxtVw.visibility = View.GONE
+                    updateEmailBinding.secondsTxtVw.visibility = View.GONE
+                }
+                else{
+                    updateEmailBinding.resendOtpTxtVw.text = "Resend OTP in"
+                    updateEmailBinding.resendOtpTimeTxtVw.visibility = View.VISIBLE
+                    updateEmailBinding.secondsTxtVw.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        profileViewModel.timeLiveData.observe(viewLifecycleOwner){
+            if(_updateEmailBinding!=null){
+                updateEmailBinding.resendOtpTimeTxtVw.text = it
             }
         }
 

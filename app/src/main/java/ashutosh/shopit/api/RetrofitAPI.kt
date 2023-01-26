@@ -132,6 +132,6 @@ interface RetrofitAPI {
 
     @Headers("isAuthorized: true")
     @PATCH("api/profile/resetEmailID")
-    suspend fun resetEmail(@Body resetEmailRequest: ResetEmailRequest) : Response<DefaultResponse>
+    suspend fun resetEmail(@Body resetEmailRequest: ResetEmailRequest) : Response<LoginResponse>
 
 }
