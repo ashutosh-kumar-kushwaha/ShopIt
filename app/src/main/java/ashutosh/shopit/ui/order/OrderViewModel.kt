@@ -13,6 +13,7 @@ class OrderViewModel @Inject constructor(private val orderRepository: OrderRepos
     val addressResponse get() = orderRepository.addressResponse
     val placeOrderResponse get() = orderRepository.placeOrderResponse
     val getCartProductsResponse get() = orderRepository.getCartProductsResponse
+    val deleteAddressResponse get() = orderRepository.deleteAddressResponse
 
     fun getAddresses(){
         viewModelScope.launch {
@@ -32,4 +33,9 @@ class OrderViewModel @Inject constructor(private val orderRepository: OrderRepos
         }
     }
 
+    fun deleteAddress(addressId: Int){
+        viewModelScope.launch {
+            orderRepository.deleteAddress(addressId)
+        }
+    }
 }

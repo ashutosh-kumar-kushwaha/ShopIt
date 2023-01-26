@@ -67,6 +67,10 @@ class OrderFragment() : Fragment() {
             override fun onAddressClick(addressId: Int) {
                 binding.addressRecyclerView.post(addressOrderAdapter::notifyDataSetChanged)
             }
+
+            override fun onDeleteClick(addressId: Int) {
+                orderViewModel.deleteAddress(addressId)
+            }
         }
 
         addressOrderAdapter = AddressOrderAdapter(addressClickListener)
@@ -152,6 +156,23 @@ class OrderFragment() : Fragment() {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
 
+                is NetworkResult.Loading -> {
+                    progressBar.show()
+                }
+            }
+        }
+
+        orderViewModel.deleteAddressResponse.observe(viewLifecycleOwner){
+            when (it){
+                is NetworkResult.Success -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), "Deleted", Toast.LENGTH_SHORT).show()
+                    orderViewModel.getAddresses()
+                }
+                is NetworkResult.Error -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
                 is NetworkResult.Loading -> {
                     progressBar.show()
                 }

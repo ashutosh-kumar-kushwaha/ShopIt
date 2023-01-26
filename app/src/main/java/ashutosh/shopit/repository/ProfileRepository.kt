@@ -13,6 +13,7 @@ class ProfileRepository @Inject constructor(private val retrofitAPI: RetrofitAPI
     val updateEmailResponse = SingleLiveEvent<NetworkResult<DefaultResponse>>()
     val resetEmailResponse = SingleLiveEvent<NetworkResult<LoginResponse>>()
     val resendOtpResponse = SingleLiveEvent<NetworkResult<DefaultResponse>>()
+    val deleteAddressResponse = SingleLiveEvent<NetworkResult<DefaultResponse>>()
 
     suspend fun getProfile(){
         profileResponse.value = NetworkResult.Loading()
@@ -162,6 +163,30 @@ class ProfileRepository @Inject constructor(private val retrofitAPI: RetrofitAPI
         }
         catch (e : Exception){
             resendOtpResponse.value = NetworkResult.Error(-1, e.message)
+        }
+    }
+
+    suspend fun deleteAddress(addressId: Int){
+        deleteAddressResponse.value = NetworkResult.Loading()
+        try {
+            val response = retrofitAPI.deleteAddress(addressId)
+            when(response.code()){
+                200 -> {
+                    deleteAddressResponse.value = NetworkResult.Success(200, DefaultResponse("Deleted", true))
+                }
+                401 -> {
+                    deleteAddressResponse.value = NetworkResult.Error(401, "Session expired")
+                }
+                403 -> {
+                    deleteAddressResponse.value = NetworkResult.Error(403, "User not allowed to perform this action")
+                }
+                else -> {
+                    deleteAddressResponse.value = NetworkResult.Error(response.code(), "Something went wrong\nError code: ${response.code()}")
+                }
+            }
+        }
+        catch (e: Exception){
+            deleteAddressResponse.value = NetworkResult.Error(-1, e.message)
         }
     }
 }

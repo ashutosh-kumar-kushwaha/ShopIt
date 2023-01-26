@@ -20,6 +20,7 @@ class ProfileViewModel @Inject constructor(private val profileRepository: Profil
     val updateEmailResponse get() = profileRepository.updateEmailResponse
     val resetEmailResponse get() = profileRepository.resetEmailResponse
     val resendOtpResponse get() = profileRepository.resendOtpResponse
+    val deleteAddressResponse get() = profileRepository.deleteAddressResponse
 
     var originalEmail = ""
 
@@ -81,6 +82,12 @@ class ProfileViewModel @Inject constructor(private val profileRepository: Profil
             viewModelScope.launch {
                 profileRepository.resendOtp(Email(email.value!!))
             }
+        }
+    }
+
+    fun deleteAddress(addressId: Int){
+        viewModelScope.launch {
+            profileRepository.deleteAddress(addressId)
         }
     }
 }

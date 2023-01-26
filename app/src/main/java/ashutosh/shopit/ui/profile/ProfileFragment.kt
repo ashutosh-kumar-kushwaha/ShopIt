@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.GenericTextWatcher
 import ashutosh.shopit.R
 import ashutosh.shopit.adapters.AddressOrderAdapter
+import ashutosh.shopit.adapters.AddressProfileAdapter
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.DialogEditDetailsBinding
 import ashutosh.shopit.databinding.DialogUpdateEmailBinding
@@ -55,7 +56,7 @@ class ProfileFragment : Fragment() {
 
     private val profileViewModel by viewModels<ProfileViewModel>()
 
-    private lateinit var addressOrderAdapter : AddressOrderAdapter
+    private lateinit var addressOrderAdapter : AddressProfileAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,10 +77,14 @@ class ProfileFragment : Fragment() {
             override fun onAddressClick(addressId: Int) {
                 binding.addressRecyclerView.post(addressOrderAdapter::notifyDataSetChanged)
             }
+
+            override fun onDeleteClick(addressId: Int) {
+                profileViewModel.deleteAddress(addressId)
+            }
         }
 
         binding.addressRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        addressOrderAdapter = AddressOrderAdapter(addressClickListener)
+        addressOrderAdapter = AddressProfileAdapter(addressClickListener)
         binding.addressRecyclerView.adapter = addressOrderAdapter
 
         binding.editDetailsBtn.setOnClickListener {
@@ -328,6 +333,23 @@ class ProfileFragment : Fragment() {
         profileViewModel.timeLiveData.observe(viewLifecycleOwner){
             if(_updateEmailBinding!=null){
                 updateEmailBinding.resendOtpTimeTxtVw.text = it
+            }
+        }
+
+        profileViewModel.deleteAddressResponse.observe(viewLifecycleOwner){
+            when (it){
+                is NetworkResult.Success -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), "Deleted", Toast.LENGTH_SHORT).show()
+                    profileViewModel.getAddresses()
+                }
+                is NetworkResult.Error -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> {
+                    progressBar.show()
+                }
             }
         }
 

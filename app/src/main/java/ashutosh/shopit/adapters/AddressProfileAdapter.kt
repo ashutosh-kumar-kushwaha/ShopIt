@@ -1,19 +1,18 @@
 package ashutosh.shopit.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ashutosh.shopit.databinding.AddressWithRadioItemBinding
+import ashutosh.shopit.databinding.AddressItemBinding
 import ashutosh.shopit.interfaces.AddressClickListener
 import ashutosh.shopit.models.Address
 
-class AddressOrderAdapter(private val addressClickListener: AddressClickListener, var selectedPosition : Int = -1) : ListAdapter<Address, AddressOrderAdapter.ViewHolder>(DiffUtil()) {
+class AddressProfileAdapter(private val addressClickListener: AddressClickListener) : ListAdapter<Address, AddressProfileAdapter.ViewHolder>(DiffUtil()) {
 
-    inner class ViewHolder(private val binding: AddressWithRadioItemBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener{
+    inner class ViewHolder(private val binding: AddressItemBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener{
 
         init {
             binding.root.setOnClickListener(this)
@@ -23,27 +22,12 @@ class AddressOrderAdapter(private val addressClickListener: AddressClickListener
             binding.nameTxtVw.text = address.name
             val addressTxt = "${address.addressLine}, ${address.locality}, ${address.city}, ${address.state}"
             binding.addressTxtVw.text = addressTxt
-            binding.radioBtn.isChecked = adapterPosition == selectedPosition
-            binding.radioBtn.setOnCheckedChangeListener { _, isChecked ->
-                if(isChecked){
-                    selectedPosition = adapterPosition
-                    addressClickListener.onAddressClick(getItem(adapterPosition).id)
-                }
-            }
             binding.crossBtn.setOnClickListener {
                 addressClickListener.onDeleteClick(address.id)
-                Log.d("Ashu", "Cross clicked")
             }
         }
 
-        override fun onClick(v: View?) {
-            val position = adapterPosition
-            if(adapterPosition != RecyclerView.NO_POSITION){
-                selectedPosition = adapterPosition
-                addressClickListener.onAddressClick(getItem(position).id)
-            }
-            Log.d("Ashu", "Clicked")
-        }
+        override fun onClick(v: View?){}
     }
 
     class DiffUtil : ItemCallback<Address>(){
@@ -57,7 +41,7 @@ class AddressOrderAdapter(private val addressClickListener: AddressClickListener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(AddressWithRadioItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(AddressItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

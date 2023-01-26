@@ -96,6 +96,14 @@ interface RetrofitAPI {
     @GET("api/profile/address/get")
     suspend fun getAddresses() : Response<List<Address>>
 
+    @Headers("isAuthorized: true")
+    @POST("api/profile/addAddress")
+    suspend fun addAddress(@Body addAddressRequest: AddAddressRequest): Response<List<Address>>
+
+    @Headers("isAuthorized: true")
+    @DELETE("api/profile/removeAddress/{addressId}")
+    suspend fun deleteAddress(@Path ("addressId") addressId: Int) : Response<DefaultResponse>
+
     //Payment
 
     @Headers("isAuthorized: true")
@@ -121,10 +129,6 @@ interface RetrofitAPI {
     @Headers("isAuthorized: true")
     @PUT("api/profile/updateProfile")
     suspend fun updateProfile(@Body updateProfileRequest: UpdateProfileRequest) : Response<Profile>
-
-    @Headers("isAuthorized: true")
-    @POST("api/profile/addAddress")
-    suspend fun addAddress(@Body addAddressRequest: AddAddressRequest): Response<List<Address>>
 
     @Headers("isAuthorized: true")
     @POST("api/profile/sendEmailOTP")
