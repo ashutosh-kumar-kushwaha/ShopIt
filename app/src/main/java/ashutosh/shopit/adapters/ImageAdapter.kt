@@ -1,6 +1,7 @@
 package ashutosh.shopit.adapters
 
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
@@ -32,5 +33,6 @@ class ImageAdapter : ListAdapter<Uri, ImageAdapter.ViewHolder>(DiffUtil()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
+        Log.d("Ashu", "Checked")
     }
 }

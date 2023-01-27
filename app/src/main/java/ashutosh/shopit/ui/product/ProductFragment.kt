@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import ashutosh.shopit.R
@@ -96,6 +97,9 @@ class ProductFragment : Fragment() {
         }
         binding.quantityMinusBtn.setOnClickListener{
             productViewModel.decreaseQuantity()
+        }
+        binding.rateProductBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_productFragment_to_reviewFragment)
         }
 
         return binding.root

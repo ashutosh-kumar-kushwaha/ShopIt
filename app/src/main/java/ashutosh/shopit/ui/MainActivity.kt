@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.ActivityMainBinding
 import ashutosh.shopit.ui.product.ProductFragment
+import ashutosh.shopit.ui.review.ReviewFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,6 +36,11 @@ class MainActivity : AppCompatActivity() {
                 binding.bottomNavigationBar.visibility = View.VISIBLE
             }
         }
+
+        val fm = supportFragmentManager
+        val ft = fm.beginTransaction()
+        ft.add(R.id.navHostFragment, ReviewFragment())
+        ft.commit()
 
     }
 

@@ -49,7 +49,11 @@
         android:id="@+id/productFragment"
         android:name="ashutosh.shopit.ui.product.ProductFragment"
         android:label="ProductFragment"
-        tools:layout="@layout/fragment_product"/>
+        tools:layout="@layout/fragment_product">
+        <action
+            android:id="@+id/action_productFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="ashutosh.shopit.ui.search.SearchFragment"
@@ -82,4 +86,9 @@
         android:name="ashutosh.shopit.ui.address.AddAddressFragment"
         android:label="AddAddressFragment"
         tools:layout="@layout/fragment_add_address"/>
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="ashutosh.shopit.ui.review.ReviewFragment"
+        android:label="ReviewFragment"
+        tools:layout="@layout/fragment_review"/>
 </navigation>
