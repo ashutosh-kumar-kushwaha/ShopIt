@@ -2,6 +2,7 @@ package ashutosh.shopit.api
 
 import ashutosh.shopit.models.*
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 import retrofit2.http.Body
@@ -65,9 +66,9 @@ interface RetrofitAPI {
     suspend fun addToCart(@Path("productId") productId: Int, @Path("quantity") quantity: Int) : Response<DefaultResponse>
 
     @Multipart
-    @Headers("isAuthorized: true")
+    @Headers("isAuthorized: true", "Content-Type:application/json", "Accept:application/json")
     @POST("products/review/add/{productId}")
-    suspend fun addReview(@Path("productId") productId: Int, @Part images: List<MultipartBody.Part>, @Part review: MultipartBody.Part) : Response<AddReviewResponse>
+    suspend fun addReview(@Path("productId") productId: Int, @Part images: List<MultipartBody.Part>, @Part("reviewDto") review: RequestBody) : Response<AddReviewResponse>
 
     //Category
 

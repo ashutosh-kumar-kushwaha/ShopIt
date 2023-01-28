@@ -6,6 +6,7 @@ import ashutosh.shopit.repository.ReviewRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,7 +18,7 @@ class ReviewViewModel @Inject constructor(private val reviewRepository: ReviewRe
 
     val addReviewResponse get() =  reviewRepository.addReviewResponse
 
-    fun addReview(images: List<MultipartBody.Part>, review: MultipartBody.Part){
+    fun addReview(images: List<MultipartBody.Part>, review: RequestBody){
         viewModelScope.launch {
             reviewRepository.addReview(productId, images, review)
         }

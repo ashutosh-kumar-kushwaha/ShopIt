@@ -37,11 +37,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val fm = supportFragmentManager
-        val ft = fm.beginTransaction()
-        ft.add(R.id.navHostFragment, ReviewFragment())
-        ft.commit()
-
     }
 
 }

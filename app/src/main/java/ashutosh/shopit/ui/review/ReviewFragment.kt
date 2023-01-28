@@ -6,6 +6,7 @@ import android.net.Network
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import ashutosh.shopit.databinding.FragmentReviewBinding
 import ashutosh.shopit.models.AddReviewRequest
 import coil.load
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -62,6 +64,11 @@ class ReviewFragment : Fragment() {
             startActivityForResult(intent, 200)
         }
 
+        binding.submitBtn.setOnClickListener{
+            upload()
+        }
+
+
         binding.imagesRecyclerView.adapter = imageAdapter
         binding.imagesRecyclerView.layoutManager = GridLayoutManager(requireContext(), 5)
 
@@ -71,18 +78,27 @@ class ReviewFragment : Fragment() {
     private fun upload(){
         val uriPathHelper = URIPathHelper()
         val images = mutableListOf<MultipartBody.Part>()
-        imageList.forEach{
-            val body = uriPathHelper.getPath(requireContext(), it)?.let { it1 ->
-                val file = File(it1)
-                val requestBody = RequestBody.create("images/*".toMediaTypeOrNull(), file)
-                images.add(MultipartBody.Part.createFormData("images", file.name, requestBody))
-            }
+        imageList.forEachIndexed { index, uri ->
+            val path = uriPathHelper.getPath(requireContext(), uri)
+            Log.d("Ashu", path!!)
+            val file = File(path!!)
+            val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+            Log.d("Ashu", file.name)
+            images.add(MultipartBody.Part.createFormData("images$index", file.name, requestBody))
         }
-        val addReviewRequest = AddReviewRequest("5", "Nice product")
-        val review = Gson().toJson(addReviewRequest)
-        val reviewRequest = RequestBody.create("text/plain".toMediaTypeOrNull(), review)
-        val reviewBody = MultipartBody.Part.createFormData("reviewDto", "reviewDto", reviewRequest)
-        reviewViewModel.addReview(images, reviewBody)
+        Log.d("Ashu", images.toString())
+        val requestBody = JsonObject()
+        requestBody.addProperty("rating", "5")
+        requestBody.addProperty("description", "Nice Product")
+//        Log.d("Ashu", reviewViewModel.productId.toString())
+//        val addReviewRequest = AddReviewRequest("5", "Nice product")
+//        val review = Gson().toJson(addReviewRequest)
+
+        val reviewRequest = RequestBody.create("text/plain".toMediaTypeOrNull(), requestBody.toString())
+        Log.d("Ashu", requestBody.toString())
+
+//        val reviewBody = MultipartBody.Part.createFormData("reviewDto", "reviewDto", reviewRequest)
+        reviewViewModel.addReview(images, reviewRequest)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

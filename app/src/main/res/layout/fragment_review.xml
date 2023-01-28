@@ -350,6 +350,7 @@
                     app:layout_constraintTop_toBottomOf="@id/reviewETxt" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/submitBtn"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_54"
                     android:layout_marginStart="@dimen/dp_16"
