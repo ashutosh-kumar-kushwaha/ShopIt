@@ -17,4 +17,10 @@ class PaymentViewModel @Inject constructor(private val paymentRepository: Paymen
             paymentRepository.updateOrder(updateOrderRequest)
         }
     }
+
+    fun updateDirectOrder(productId: Int, quantity: Int, updateOrderRequest: UpdateOrderRequest){
+        viewModelScope.launch {
+            paymentRepository.updateDirectOrder(productId, quantity, updateOrderRequest)
+        }
+    }
 }

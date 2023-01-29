@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="ashutosh.shopit.ui.directOrder.DirectOrderViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        tools:context=".ui.directOrder.DirectOrderFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_51"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_24"
+                android:padding="@dimen/dp_5"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order Summary"
+                android:fontFamily="@font/poppins"
+                android:textSize="@dimen/sp_18"
+                android:textFontWeight="600"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/dp_20" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/color2" />
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/deliverToTxtVw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Deliver to:"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/addressRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/deliverToTxtVw" />
+
+                <TextView
+                    android:id="@+id/addAddressBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_5"
+                    android:text="Add Address"
+                    android:textFontWeight="600"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/color2"
+                    android:drawablePadding="@dimen/dp_11"
+                    android:fontFamily="@font/montserrat"
+                    android:drawableStart="@drawable/ic_plus"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addressRecyclerView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rotation="180"
+            card_view:cardElevation="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:strokeWidth="0dp"
+            style="@style/CustomCardView">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:rotation="180"
+                android:background="@color/white"
+                android:paddingStart="@dimen/dp_16"
+                android:paddingTop="@dimen/dp_32"
+                android:paddingEnd="@dimen/dp_16"
+                android:paddingBottom="@dimen/dp_25">
+
+                <TextView
+                    android:id="@+id/subtotalTxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:fontFamily="@font/poppins"
+                    android:text="Subtotal"
+                    android:textColor="@color/grey"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/deliveryTxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/subtotalTxtVw"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:fontFamily="@font/poppins"
+                    android:text="Delivery &amp; Handling"
+                    android:textColor="@color/grey"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/priceTxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:text="-"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/deliveryPriceTxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/priceTxtVw"
+                    android:fontFamily="@font/poppins"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:text="-"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_14" />
+
+                <View
+                    android:id="@+id/dottedLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_2"
+                    android:layout_below="@id/deliveryTxtVw"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:background="@drawable/dotted_line" />
+
+                <TextView
+                    android:id="@+id/subtotal2TxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dottedLine"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:fontFamily="@font/poppins"
+                    android:text="Subtotal"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/totalPriceTxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dottedLine"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:text="-"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_14" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/checkoutBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_54"
+                    android:layout_below="@id/subtotal2TxtVw"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:background="@drawable/button_background"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Checkout"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_16"
+                    app:backgroundTint="@null" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</layout>

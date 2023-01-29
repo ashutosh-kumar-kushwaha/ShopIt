@@ -3,6 +3,7 @@ package ashutosh.shopit.ui.payment
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import ashutosh.shopit.Constants
@@ -16,12 +17,16 @@ import com.razorpay.PaymentData
 import com.razorpay.PaymentResultWithDataListener
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
+import kotlin.properties.Delegates
 
 
 @AndroidEntryPoint
 class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener {
 
     private lateinit var dataObj: OrderResponse
+    private var paymentType = 0
+    private var productId: Int = -1
+    private var quantity: Int = -1
 
     private val paymentViewModel by viewModels<PaymentViewModel>()
 
@@ -29,6 +34,9 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
         val data = intent.getStringExtra("data")
+        paymentType = intent.getIntExtra("paymentType", 0)
+        productId = intent.getIntExtra("productId", -1)
+        quantity = intent.getIntExtra("quantity", -1)
         dataObj = Gson().fromJson(data, OrderResponse::class.java)
         Checkout.preload(applicationContext)
         startPayment(dataObj)
@@ -65,7 +73,7 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener {
             options.put("theme.color", "#3399cc")
             options.put("currency","INR")
             options.put("order_id", data.id)
-            options.put("amount",data.amount)//pass amount in currency subunits
+            options.put("amount",data.amountDue)//pass amount in currency subunits
 
             val retryObj = JSONObject()
             retryObj.put("enabled", true)
@@ -86,7 +94,17 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener {
 
     override fun onPaymentSuccess(p0: String?, p1: PaymentData?) {
         if (p1 != null) {
-            paymentViewModel.updateOrder(UpdateOrderRequest(p1.paymentId, p1.orderId, p1.signature))
+            when (paymentType) {
+                1 -> {
+                    paymentViewModel.updateOrder(UpdateOrderRequest(p1.paymentId, p1.orderId, p1.signature))
+                }
+                2 -> {
+                    paymentViewModel.updateDirectOrder(productId, quantity, UpdateOrderRequest(p1.paymentId, p1.orderId, p1.signature))
+                }
+                else -> {
+                    Toast.makeText(this, "Something went wrong\nPlease try again!", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
         else{
             Toast.makeText(this, "Something went wrong!\nPlease try again!", Toast.LENGTH_SHORT).show()
@@ -94,7 +112,7 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener {
     }
 
     override fun onPaymentError(p0: Int, p1: String?, p2: PaymentData?) {
-        Toast.makeText(this, p1, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Payment Failed", Toast.LENGTH_SHORT).show()
         finish()
     }
 }

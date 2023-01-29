@@ -19,6 +19,7 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
 
     val productDetailsResponse : SingleLiveEvent<NetworkResult<ProductDetailsResponse>> get() = productRepository.productDetailsResponse
     val addToCartResponse : SingleLiveEvent<NetworkResult<DefaultResponse>> get() = productRepository.addToCartResponse
+    var currentPrice = 0
 
     val toastMsg = SingleLiveEvent<String>()
 
