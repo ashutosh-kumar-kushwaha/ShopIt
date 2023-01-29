@@ -52,7 +52,7 @@ interface RetrofitAPI {
     suspend fun getProductsByCategory(@Path("categoryId") categoryId : Int, @Query("sortBy") sortBy: String = "productId", @Query("sortDir") sortDir: String = "dsc") : Response<ProductsResponse>
 
     @Headers("isAuthorized: false")
-    @GET("products/get")
+    @GET("products/get?pageNumber=0&pageSize=100")
     suspend fun getAllProducts() : Response<ProductsResponse>
 
     @Headers("isAuthorized: false")
