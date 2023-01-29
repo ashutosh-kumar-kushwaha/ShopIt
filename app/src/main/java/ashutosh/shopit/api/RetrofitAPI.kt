@@ -111,8 +111,16 @@ interface RetrofitAPI {
     suspend fun placeOrderByCart(@Path("addressId") addressId: Int) : Response<OrderResponse>
 
     @Headers("isAuthorized: true")
+    @POST("payment/createOrder/{productId}/quantity/{quantity}/address/{addressId}")
+    suspend fun directPlaceOrder(@Path("productId") productId: Int, @Path("quantity") quantity: Int, @Path("addressId") addressId: Int) : Response<OrderResponse>
+
+    @Headers("isAuthorized: true")
     @POST("payment/update_order")
     suspend fun updateOrder(@Body updateOrderRequest: UpdateOrderRequest) : Response<UpdateOrderResponse>
+
+    @Headers("isAuthorized: true")
+    @POST("payment/update_single_order/product/{productId}/quantity/{quantity}")
+    suspend fun updateDirectOrder(@Path("productId") productId: Int, @Path("quantity") quantity: Int, @Body updateOrderRequest: UpdateOrderRequest) : Response<UpdateOrderResponse>
 
     //Search
 

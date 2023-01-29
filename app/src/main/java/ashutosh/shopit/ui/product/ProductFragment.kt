@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import ashutosh.shopit.R
@@ -98,6 +99,15 @@ class ProductFragment : Fragment() {
             productViewModel.decreaseQuantity()
         }
 
+        binding.buyNowBtn.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("productId", productViewModel.productId)
+            bundle.putInt("quantity", Integer.parseInt(productViewModel.quantity.value!!))
+            bundle.putString("price", binding.currentPriceTxtVw.text.toString())
+            bundle.putString("totalPrice", "₹${productViewModel.currentPrice+30}")
+            findNavController().navigate(R.id.action_productFragment_to_directOrderFragment, bundle)
+        }
+
         return binding.root
     }
 
@@ -110,14 +120,14 @@ class ProductFragment : Fragment() {
                     progressBar.show()
                 }
                 is NetworkResult.Error -> {
-                    progressBar.hide()
+                    progressBar.dismiss()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
                 is NetworkResult.Success -> {
-                    progressBar.hide()
                     val product = it.data!!
                     binding.photosViewPager.adapter = ProductImageAdapter(product.imageUrls)
                     circleNumber = product.imageUrls.size
+                    circles = mutableListOf()
                     for(i in 0 until circleNumber) {
                         val imageView = ImageView(requireContext())
                         val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_6), resources.getDimensionPixelSize(R.dimen.dp_6))
@@ -129,7 +139,8 @@ class ProductFragment : Fragment() {
                     }
 
                     binding.productNameTxtVw.text = product.productName
-                    val currentPrice = "₹${price((product.originalPrice-(product.offerPercentage/100)*product.originalPrice).roundToInt())}"
+                    productViewModel.currentPrice = (product.originalPrice-(product.offerPercentage/100)*product.originalPrice).roundToInt()
+                    val currentPrice = "₹${price(productViewModel.currentPrice)}"
                     binding.currentPriceTxtVw.text = currentPrice
                     val originalPrice = "₹${price(product.originalPrice.roundToInt())}"
                     binding.originalPriceTxtVw.text = originalPrice
@@ -141,6 +152,7 @@ class ProductFragment : Fragment() {
                     binding.warrantyDetailsTxtVw.text = product.warranty
                     binding.questionsAnswerRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     selectItem(0)
+                    progressBar.dismiss()
                 }
             }
         }

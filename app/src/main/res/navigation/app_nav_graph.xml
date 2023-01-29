@@ -56,7 +56,11 @@
         android:id="@+id/productFragment"
         android:name="ashutosh.shopit.ui.product.ProductFragment"
         android:label="ProductFragment"
-        tools:layout="@layout/fragment_product"/>
+        tools:layout="@layout/fragment_product">
+        <action
+            android:id="@+id/action_productFragment_to_directOrderFragment"
+            app:destination="@id/directOrderFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="ashutosh.shopit.ui.search.SearchFragment"
@@ -98,4 +102,14 @@
             android:id="@+id/action_categoryProductsFragment_to_productFragment"
             app:destination="@id/productFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/directOrderFragment"
+        android:name="ashutosh.shopit.ui.directOrder.DirectOrderFragment"
+        android:label="DirectOrderFragment"
+        tools:layout="@layout/fragment_direct_order">
+        <action
+            android:id="@+id/action_directOrderFragment_to_addAddressFragment"
+            app:destination="@id/addAddressFragment" />
+    </fragment>
+
 </navigation>

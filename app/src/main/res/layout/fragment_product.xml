@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_16"
                     android:fontFamily="@font/poppins"
-                    android:text="Apple Iphone 13"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textFontWeight="600"
                     android:textSize="@dimen/sp_16"
@@ -108,7 +108,7 @@
                             android:layout_gravity="start"
                             android:fontFamily="@font/poppins"
                             android:singleLine="true"
-                            android:text="₹49,997"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textFontWeight="700"
                             android:textSize="@dimen/sp_16" />
@@ -122,7 +122,7 @@
                             android:background="@drawable/strike_through"
                             android:fontFamily="@font/poppins"
                             android:singleLine="true"
-                            android:text="₹58,997"
+                            android:text=""
                             android:textColor="@color/color2"
                             android:textSize="@dimen/sp_16" />
                     </LinearLayout>
