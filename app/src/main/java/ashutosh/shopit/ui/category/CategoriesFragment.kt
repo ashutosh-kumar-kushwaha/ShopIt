@@ -66,14 +66,13 @@ class CategoriesFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putInt("categoryId", categoryId)
                 bundle.putString("categoryName", categoryName)
-//                findNavController(R.id.)
+                findNavController().navigate(R.id.action_categoriesFragment_to_categoryProductsFragment, bundle)
             }
 
         }
 
         categoriesAdapter = CategoryAdapter(resources.getStringArray(R.array.colors).toList(), categoryClickListener)
 
-//        categoriesAdapter.submitList(listOf(Category(1, "Mobile"), Category(2, "Mobile"), Category(3, "Mobile"), Category(4, "Mobile"), Category(5, "Mobile")))
         binding.categoriesRecyclerView.adapter = categoriesAdapter
         binding.categoriesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 

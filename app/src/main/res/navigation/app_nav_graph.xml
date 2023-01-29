@@ -21,7 +21,11 @@
         android:id="@+id/categoriesFragment"
         android:name="ashutosh.shopit.ui.category.CategoriesFragment"
         android:label="Categories"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_categoryProductsFragment"
+            app:destination="@id/categoryProductsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="ashutosh.shopit.ui.account.AccountFragment"
@@ -82,4 +86,13 @@
         android:name="ashutosh.shopit.ui.address.AddAddressFragment"
         android:label="AddAddressFragment"
         tools:layout="@layout/fragment_add_address"/>
+    <fragment
+        android:id="@+id/categoryProductsFragment"
+        android:name="ashutosh.shopit.ui.categoryProducts.CategoryProductsFragment"
+        android:label="CategoryProductsFragment"
+        tools:layout="@layout/fragment_category_products">
+        <action
+            android:id="@+id/action_categoryProductsFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+    </fragment>
 </navigation>
