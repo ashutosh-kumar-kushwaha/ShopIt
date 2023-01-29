@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_64"
-        android:id="@+id/categoriesTxtVw"
+        android:id="@+id/categoryBtn"
         android:text="Category"
         android:fontFamily="@font/montserrat"
         android:textSize="@dimen/sp_16"
         android:textColor="@color/black"
         android:layout_gravity="center"
         android:gravity="center"
-        android:background="@drawable/category_bg"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:cornerRadius="@dimen/dp_8"
         android:layout_marginBottom="@dimen/dp_16"/>
 </layout>

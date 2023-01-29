@@ -8,4 +8,15 @@
         <item>Female</item>
     </string-array>
 
+    <string-array name="colors">
+        <item>#F8D777</item>
+        <item>#FA4552</item>
+        <item>#F46F39</item>
+        <item>#6B3EBC</item>
+        <item>#62EDD4</item>
+        <item>#FFBAD2</item>
+        <item>#A58DC3</item>
+        <item>#463C70</item>
+    </string-array>
+
 </resources>

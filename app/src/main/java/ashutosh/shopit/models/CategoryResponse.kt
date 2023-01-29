@@ -1,7 +1,7 @@
 package ashutosh.shopit.models
 
 data class CategoryResponse(
-    val content: List<CategoryContent>,
+    val content: List<Category>,
     val pageNumber: Int,
     val pageSize: Int,
     val totalPage: Int,

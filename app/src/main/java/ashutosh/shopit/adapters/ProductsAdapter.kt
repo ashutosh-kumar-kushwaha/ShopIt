@@ -32,8 +32,7 @@ class ProductsAdapter(val productClickListener: ProductClickListener) : ListAdap
         }
 
         override fun onClick(v: View?) {
-            val position = adapterPosition
-            if(position != RecyclerView.NO_POSITION){
+            if(adapterPosition != RecyclerView.NO_POSITION){
                 productClickListener.onProductClick(getItem(adapterPosition).productId)
             }
         }
