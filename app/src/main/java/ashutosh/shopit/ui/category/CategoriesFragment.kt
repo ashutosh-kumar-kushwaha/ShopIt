@@ -12,11 +12,13 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.R
 import ashutosh.shopit.adapters.CategoryAdapter
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.FragmentCategoriesBinding
+import ashutosh.shopit.interfaces.CategoryClickListener
 import ashutosh.shopit.models.Category
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.reflect.Field
@@ -58,7 +60,18 @@ class CategoriesFragment : Fragment() {
 
         val icon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
         icon.setImageResource(R.drawable.ic_search_icon)
-        categoriesAdapter = CategoryAdapter(resources.getStringArray(R.array.colors).toList())
+
+        val categoryClickListener = object : CategoryClickListener{
+            override fun onCategoryClick(categoryId: Int, categoryName: String) {
+                val bundle = Bundle()
+                bundle.putInt("categoryId", categoryId)
+                bundle.putString("categoryName", categoryName)
+//                findNavController(R.id.)
+            }
+
+        }
+
+        categoriesAdapter = CategoryAdapter(resources.getStringArray(R.array.colors).toList(), categoryClickListener)
 
 //        categoriesAdapter.submitList(listOf(Category(1, "Mobile"), Category(2, "Mobile"), Category(3, "Mobile"), Category(4, "Mobile"), Category(5, "Mobile")))
         binding.categoriesRecyclerView.adapter = categoriesAdapter

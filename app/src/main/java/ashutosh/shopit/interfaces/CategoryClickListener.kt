@@ -1,5 +1,5 @@
 package ashutosh.shopit.interfaces
 
 interface CategoryClickListener {
-    fun onCategoryClick(categoryId: Int)
+    fun onCategoryClick(categoryId: Int, categoryName: String)
 }

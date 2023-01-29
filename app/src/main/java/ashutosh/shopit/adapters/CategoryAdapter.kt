@@ -15,6 +15,11 @@ import kotlin.random.Random
 
 class CategoryAdapter(private val bgArray: List<String>, private val categoryClickListener: CategoryClickListener) : ListAdapter<Category, CategoryAdapter.ViewHolder>(DiffUtil()) {
     inner class ViewHolder(private val binding : CategoryItemBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
+        init {
+            binding.root.setOnClickListener(this)
+        }
+
         fun bind(category: Category){
             binding.categoryBtn.text = category.categoryName
             binding.categoryBtn.backgroundTintList = ColorStateList.valueOf(Color.parseColor(bgArray[Random.nextInt(8)]))
@@ -22,7 +27,7 @@ class CategoryAdapter(private val bgArray: List<String>, private val categoryCli
 
         override fun onClick(v: View?) {
             if(adapterPosition != RecyclerView.NO_POSITION){
-                categoryClickListener.onCategoryClick(getItem(adapterPosition).categoryId)
+                categoryClickListener.onCategoryClick(getItem(adapterPosition).categoryId, getItem(adapterPosition).categoryName)
             }
         }
     }
