@@ -125,6 +125,9 @@ class HomeFragment : Fragment(), ProductClickListener {
 
         binding.categoryAllChip.setOnClickListener {
             homeViewModel.getAllProducts()
+            unselectAllCategories()
+            (it as Chip).setChipBackgroundColorResource(R.color.black)
+            it.setTextColor(Color.WHITE)
         }
         binding.categoryChip1.setOnClickListener {
             homeViewModel.categoriesLiveData.value?.data?.content?.get(0)?.categoryId?.let { it1 ->
@@ -161,10 +164,15 @@ class HomeFragment : Fragment(), ProductClickListener {
                 selectCategory(it as Chip)
             }
         }
+        binding.seeAllTxtVw.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_categoriesFragment)
+        }
 
         homeViewModel.getCategories()
         homeViewModel.getAllProducts()
         homeViewModel.getAdvertisements()
+
+        Log.d("Ashu", "1$circles")
 
         return binding.root
     }
@@ -175,6 +183,7 @@ class HomeFragment : Fragment(), ProductClickListener {
         val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_18), resources.getDimensionPixelSize(R.dimen.dp_6))
         lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
         imageView.layoutParams = lp
+        Log.d("Ashu", "Yo${index%circleNumber}")
     }
 
     private fun unselectItem(index: Int){
@@ -183,6 +192,7 @@ class HomeFragment : Fragment(), ProductClickListener {
         val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_6), resources.getDimensionPixelSize(R.dimen.dp_6))
         lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
         imageView.layoutParams = lp
+        Log.d("Ashu", "Hey${index%circleNumber}")
     }
 
     private fun unselectAllCategories(){
@@ -259,6 +269,7 @@ class HomeFragment : Fragment(), ProductClickListener {
                     circleNumber = it.data.images.size
                     binding.viewpagerDetails.visibility = View.VISIBLE
                     binding.viewpagerDetailsShimmer.visibility = View.GONE
+                    circles = mutableListOf()
                     for(i in 0 until circleNumber) {
                         val imageView = ImageView(requireContext())
                         val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_6), resources.getDimensionPixelSize(R.dimen.dp_6))
@@ -270,6 +281,7 @@ class HomeFragment : Fragment(), ProductClickListener {
                     }
                     binding.offersViewPager.setCurrentItem(circleNumber, false)
                     selectItem(0)
+                    Log.d("Ashu", "1$circles")
                 }
                 is NetworkResult.Loading -> {
                     binding.offersShimmer.visibility = View.VISIBLE
