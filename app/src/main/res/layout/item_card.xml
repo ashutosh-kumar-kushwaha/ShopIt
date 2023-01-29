@@ -69,7 +69,7 @@
             <TextView
                 android:id="@+id/soldTxtVw"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/dp_12"
                 android:text="1,335 sold"
                 android:fontFamily="@font/montserrat"
@@ -77,9 +77,9 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="@dimen/dp_4"
-                android:textColor="@color/color2"
+                android:textColor="@color/white"
                 android:letterSpacing="0.05"
-                android:background="@drawable/search_view_bg" />
+                android:background="@drawable/sold_items_bg" />
         </LinearLayout>
 
         <LinearLayout
