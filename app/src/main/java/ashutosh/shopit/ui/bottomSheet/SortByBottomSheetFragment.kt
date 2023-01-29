@@ -1,4 +1,4 @@
-package ashutosh.shopit.ui.search
+package ashutosh.shopit.ui.bottomSheet
 
 import android.os.Bundle
 import android.util.Log
@@ -27,9 +27,9 @@ class SortByBottomSheetFragment(val buttonClickListener: ButtonClickListener) : 
     ): View? {
         _binding = LayoutSortbyBinding.inflate(inflater, container, false)
 
-        radioBtns = listOf(binding.priceAsc, binding.priceDesc, binding.ratingAsc, binding.ratingDesc, binding.offerAsc, binding.offerDesc, binding.nameAsc, binding.nameDesc)
+        radioBtns = listOf(binding.priceAsc, binding.priceDesc, binding.ratingAsc, binding.ratingDesc, binding.offerAsc, binding.offerDesc)
 
-        val sortDetails = listOf(listOf("originalPrice", "asc"), listOf("originalPrice", "des"), listOf("rating", "asc"), listOf("rating", "des"), listOf("offerPercentage", "asc"), listOf("offerPercentage", "des"), listOf("productName", "asc"), listOf("productName", "des"))
+        val sortDetails = listOf(listOf("originalPrice", "asc"), listOf("originalPrice", "dsc"), listOf("rating", "asc"), listOf("rating", "dsc"), listOf("offerPercentage", "asc"), listOf("offerPercentage", "dsc"))
 
         count = 0
         for(btn in radioBtns){

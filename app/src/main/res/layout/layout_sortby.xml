@@ -134,40 +134,5 @@
             android:layout_marginEnd="@dimen/dp_16"
             android:layout_marginStart="@dimen/dp_16"/>
 
-        <RadioButton
-            android:id="@+id/nameAsc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textFontWeight="600"
-            android:text="Name - Ascending"
-            android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/sp_12"
-            android:textColor="@color/black"
-            android:button="@null"
-            android:drawableEnd="@android:drawable/btn_radio"
-            android:letterSpacing="0.05"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_16"
-            android:layout_marginStart="@dimen/dp_16"/>
-
-        <RadioButton
-            android:id="@+id/nameDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textFontWeight="600"
-            android:text="Name - Descending"
-            android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/sp_12"
-            android:textColor="@color/black"
-            android:button="@null"
-            android:drawableEnd="@android:drawable/btn_radio"
-            android:letterSpacing="0.05"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_16"
-            android:layout_marginStart="@dimen/dp_16"/>
     </LinearLayout>
 </layout>

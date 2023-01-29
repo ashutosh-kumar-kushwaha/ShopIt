@@ -10,13 +10,14 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.R
 import ashutosh.shopit.adapters.ProductSpacingItemDecoration
 import ashutosh.shopit.adapters.ProductsAdapter
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.FragmentCategoryProductsBinding
+import ashutosh.shopit.interfaces.ButtonClickListener
 import ashutosh.shopit.interfaces.ProductClickListener
+import ashutosh.shopit.ui.bottomSheet.SortByBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,6 +29,8 @@ class CategoryProductsFragment : Fragment() {
     private lateinit var productsAdapter : ProductsAdapter
 
     private val categoryProductsViewModel by viewModels<CategoryProductsViewModel>()
+
+    private lateinit var sortByBottomSheetFragment: SortByBottomSheetFragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +63,24 @@ class CategoryProductsFragment : Fragment() {
         binding.productsRecyclerView.adapter = productsAdapter
         binding.productsRecyclerView.addItemDecoration(ProductSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.dp_24), resources.getDimensionPixelSize(R.dimen.dp_9)))
 
+
+        val buttonClickListener = object : ButtonClickListener {
+            override fun onButtonClick(sortBy: String, sortDir: String) {
+                Log.d("Ashu", "$sortBy $sortDir")
+                categoryProductsViewModel.sortBy = sortBy
+                categoryProductsViewModel.sortDir = sortDir
+                categoryProductsViewModel.getProductsByCategory()
+            }
+        }
+
+        sortByBottomSheetFragment = SortByBottomSheetFragment(buttonClickListener)
+
         categoryProductsViewModel.getProductsByCategory()
+
+        binding.sortByBtn.setOnClickListener {
+            sortByBottomSheetFragment.show(parentFragmentManager, "SortByBottomSheet")
+        }
+
 
         return binding.root
     }

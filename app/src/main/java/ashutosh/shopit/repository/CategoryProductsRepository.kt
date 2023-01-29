@@ -11,10 +11,10 @@ class CategoryProductsRepository @Inject constructor(private val retrofitAPI: Re
 
     val getProductsResponseLiveData = SingleLiveEvent<NetworkResult<ProductsResponse>>()
 
-    suspend fun getProductsByCategory(categoryId : Int){
+    suspend fun getProductsByCategory(categoryId : Int, sortBy: String, sortDir: String){
         getProductsResponseLiveData.value = NetworkResult.Loading()
         try{
-            val response = retrofitAPI.getProductsByCategory(categoryId)
+            val response = retrofitAPI.getProductsByCategory(categoryId, sortBy, sortDir)
             Log.d("Ashu", response.body().toString())
             when(response.code()){
                 200 -> {

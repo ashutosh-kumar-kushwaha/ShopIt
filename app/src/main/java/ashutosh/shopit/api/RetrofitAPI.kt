@@ -48,8 +48,8 @@ interface RetrofitAPI {
     //Product
 
     @Headers("isAuthorized: false")
-    @GET("products/getProductsByCategory/{categoryId}?pageNumber=0&pageSize=100&sortBy=productId&sortDir=asc")
-    suspend fun getProductsByCategory(@Path("categoryId") categoryId : Int) : Response<ProductsResponse>
+    @GET("products/getProductsByCategory/{categoryId}?pageNumber=0&pageSize=100")
+    suspend fun getProductsByCategory(@Path("categoryId") categoryId : Int, @Query("sortBy") sortBy: String = "productId", @Query("sortDir") sortDir: String = "dsc") : Response<ProductsResponse>
 
     @Headers("isAuthorized: false")
     @GET("products/get")
@@ -117,7 +117,7 @@ interface RetrofitAPI {
     //Search
 
     @Headers("isAuthorized: false")
-    @GET("products/search/{keyword}")
+    @GET("products/search/{keyword}?pageNumber=0&pageSize=100")
     suspend fun search(@Path("keyword") keyword: String, @Query("sortBy") sortBy: String, @Query("sortDir") sortDir: String): Response<ProductsResponse>
 
     //profile

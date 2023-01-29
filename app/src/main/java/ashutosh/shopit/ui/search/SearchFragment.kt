@@ -12,7 +12,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
@@ -27,6 +26,7 @@ import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.FragmentSearchBinding
 import ashutosh.shopit.interfaces.ButtonClickListener
 import ashutosh.shopit.interfaces.ProductClickListener
+import ashutosh.shopit.ui.bottomSheet.SortByBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.reflect.Field
 
@@ -104,9 +104,7 @@ class SearchFragment : Fragment() {
                 searchViewModel.sortBy = sortBy
                 searchViewModel.sortDir = sortDir
                 searchViewModel.search(binding.searchView.query.toString())
-//                sortByBottomSheetFragment.dismiss()
             }
-
         }
 
         binding.searchView.requestFocus()

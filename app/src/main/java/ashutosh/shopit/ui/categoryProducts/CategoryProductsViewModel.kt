@@ -17,10 +17,12 @@ class CategoryProductsViewModel @Inject constructor(private val categoryProducts
 
     var categoryId = -1
     var categoryName = ""
+    var sortBy = "productId"
+    var sortDir = "dsc"
 
     fun getProductsByCategory(){
         viewModelScope.launch {
-            categoryProductsRepository.getProductsByCategory(categoryId)
+            categoryProductsRepository.getProductsByCategory(categoryId, sortBy, sortDir)
         }
     }
 
