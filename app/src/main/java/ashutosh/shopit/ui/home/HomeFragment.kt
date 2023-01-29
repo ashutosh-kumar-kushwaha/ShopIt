@@ -183,7 +183,6 @@ class HomeFragment : Fragment(), ProductClickListener {
         val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_18), resources.getDimensionPixelSize(R.dimen.dp_6))
         lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
         imageView.layoutParams = lp
-        Log.d("Ashu", "Yo${index%circleNumber}")
     }
 
     private fun unselectItem(index: Int){
@@ -192,7 +191,6 @@ class HomeFragment : Fragment(), ProductClickListener {
         val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_6), resources.getDimensionPixelSize(R.dimen.dp_6))
         lp.marginStart = resources.getDimensionPixelSize(R.dimen.dp_2)
         imageView.layoutParams = lp
-        Log.d("Ashu", "Hey${index%circleNumber}")
     }
 
     private fun unselectAllCategories(){
