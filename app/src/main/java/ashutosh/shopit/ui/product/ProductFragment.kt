@@ -118,6 +118,7 @@ class ProductFragment : Fragment() {
                     val product = it.data!!
                     binding.photosViewPager.adapter = ProductImageAdapter(product.imageUrls)
                     circleNumber = product.imageUrls.size
+                    circles = mutableListOf()
                     for(i in 0 until circleNumber) {
                         val imageView = ImageView(requireContext())
                         val lp = LinearLayout.LayoutParams(resources.getDimensionPixelSize(R.dimen.dp_6), resources.getDimensionPixelSize(R.dimen.dp_6))
