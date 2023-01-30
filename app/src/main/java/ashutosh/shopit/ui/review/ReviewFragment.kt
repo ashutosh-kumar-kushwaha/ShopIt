@@ -82,7 +82,7 @@ class ReviewFragment : Fragment() {
             val path = uriPathHelper.getPath(requireContext(), uri)
             Log.d("Ashu", path!!)
             val file = File(path!!)
-            val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+            val requestBody = RequestBody.create("image/jpeg".toMediaTypeOrNull(), file)
             Log.d("Ashu", file.name)
             images.add(MultipartBody.Part.createFormData("images$index", file.name, requestBody))
         }
