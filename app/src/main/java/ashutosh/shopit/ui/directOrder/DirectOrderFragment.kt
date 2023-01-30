@@ -77,6 +77,10 @@ class DirectOrderFragment : Fragment() {
             override fun onAddressClick(addressId: Int) {
                 binding.addressRecyclerView.post(addressOrderAdapter::notifyDataSetChanged)
             }
+
+            override fun onDeleteClick(addressId: Int) {
+                directOrderViewModel.deleteAddress(addressId)
+            }
         }
 
         addressOrderAdapter = AddressOrderAdapter(addressClickListener)
@@ -129,6 +133,23 @@ class DirectOrderFragment : Fragment() {
                     intent.putExtra("productId", directOrderViewModel.productId)
                     intent.putExtra("quantity", directOrderViewModel.quantity)
                     startActivity(intent)
+                }
+                is NetworkResult.Error -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> {
+                    progressBar.show()
+                }
+            }
+        }
+
+        directOrderViewModel.deleteAddressResponse.observe(viewLifecycleOwner){
+            when (it){
+                is NetworkResult.Success -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), "Deleted", Toast.LENGTH_SHORT).show()
+                    directOrderViewModel.getAddresses()
                 }
                 is NetworkResult.Error -> {
                     progressBar.dismiss()

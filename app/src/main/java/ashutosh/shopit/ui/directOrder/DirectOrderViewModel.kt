@@ -12,6 +12,7 @@ class DirectOrderViewModel @Inject constructor(private val directOrderRepository
 
     val addressResponse get() = directOrderRepository.addressResponse
     val placeOrderResponse get() = directOrderRepository.placeOrderResponse
+    val deleteAddressResponse get() = directOrderRepository.deleteAddressResponse
 
     var productId = -1
     var quantity = -1
@@ -28,4 +29,9 @@ class DirectOrderViewModel @Inject constructor(private val directOrderRepository
         }
     }
 
+    fun deleteAddress(addressId: Int){
+        viewModelScope.launch {
+            directOrderRepository.deleteAddress(addressId)
+        }
+    }
 }
