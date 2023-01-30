@@ -41,14 +41,14 @@
                 android:background="@drawable/search_view_bg"
                 app:drawableStartCompat="@drawable/ic_search_icon" />
 
-            <ImageView
-                android:layout_width="@dimen/dp_18"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/dp_12"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_hamburger" />
+<!--            <ImageView-->
+<!--                android:layout_width="@dimen/dp_18"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="@dimen/dp_12"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:src="@drawable/ic_hamburger" />-->
         </LinearLayout>
 
         <View

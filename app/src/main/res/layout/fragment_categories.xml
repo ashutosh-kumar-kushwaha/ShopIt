@@ -35,14 +35,14 @@
                 app:defaultQueryHint="Search Here"
                 app:iconifiedByDefault="false" />
 
-            <ImageView
-                android:layout_width="@dimen/dp_18"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/dp_8"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_hamburger" />
+<!--            <ImageView-->
+<!--                android:layout_width="@dimen/dp_18"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="@dimen/dp_8"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:src="@drawable/ic_hamburger" />-->
         </LinearLayout>
 
         <View

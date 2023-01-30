@@ -51,15 +51,15 @@
                 app:defaultQueryHint="Search Here"
                 app:iconifiedByDefault="false" />
 
-            <ImageView
-                android:layout_width="@dimen/dp_28"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="@dimen/dp_5"
-                android:layout_marginStart="@dimen/dp_3"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_hamburger" />
+<!--            <ImageView-->
+<!--                android:layout_width="@dimen/dp_28"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:padding="@dimen/dp_5"-->
+<!--                android:layout_marginStart="@dimen/dp_3"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:src="@drawable/ic_hamburger" />-->
         </LinearLayout>
 
         <View
