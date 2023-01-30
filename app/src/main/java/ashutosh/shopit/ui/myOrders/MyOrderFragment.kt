@@ -1,6 +1,7 @@
 package ashutosh.shopit.ui.myOrders
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,9 @@ import ashutosh.shopit.R
 import ashutosh.shopit.adapters.MyOrderAdapter
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.FragmentMyOrderBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyOrderFragment : Fragment() {
 
     private var _binding: FragmentMyOrderBinding? = null
@@ -44,7 +47,7 @@ class MyOrderFragment : Fragment() {
         myOrderViewModel.myOrdersResponse.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Success -> {
-                    myOrderAdapter.submitList(it.data?.myOrderContent)
+                    myOrderAdapter.submitList(it.data?.content)
                 }
                 is NetworkResult.Error -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()

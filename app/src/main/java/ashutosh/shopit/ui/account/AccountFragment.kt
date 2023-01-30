@@ -59,8 +59,12 @@ class AccountFragment : Fragment() {
             logOut()
         }
 
-        binding.profileTxtVw.setOnClickListener {
+        binding.profileLL.setOnClickListener {
             findNavController().navigate(R.id.action_accountFragment_to_profileFragment)
+        }
+
+        binding.ordersLL.setOnClickListener{
+            findNavController().navigate(R.id.action_accountFragment_to_myOrderFragment)
         }
 
         accountViewModel.getProfile()

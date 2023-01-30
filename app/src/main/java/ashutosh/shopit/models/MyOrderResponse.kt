@@ -1,7 +1,7 @@
 package ashutosh.shopit.models
 
 data class MyOrderResponse(
-    val myOrderContent: List<MyOrderContent>,
+    val content: List<MyOrderContent>,
     val pageNumber: Int,
     val pageSize: Int,
     val totalPage: Int,

@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_accountFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_myOrderFragment"
+            app:destination="@id/myOrderFragment" />
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
@@ -111,5 +114,10 @@
             android:id="@+id/action_directOrderFragment_to_addAddressFragment"
             app:destination="@id/addAddressFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/myOrderFragment"
+        android:name="ashutosh.shopit.ui.myOrders.MyOrderFragment"
+        android:label="MyOrderFragment"
+        tools:layout="@layout/fragment_my_order">
+    </fragment>
 </navigation>
