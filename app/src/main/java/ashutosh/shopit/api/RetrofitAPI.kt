@@ -146,4 +146,8 @@ interface RetrofitAPI {
     @PATCH("api/profile/resetEmailID")
     suspend fun resetEmail(@Body resetEmailRequest: ResetEmailRequest) : Response<LoginResponse>
 
+    @Headers("isAuthorized: true")
+    @GET("payment/getAllOrders?pageNumber=0&pageSize=100")
+    suspend fun getAllOrders() : Response<MyOrderResponse>
+
 }
