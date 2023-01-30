@@ -63,6 +63,10 @@ interface RetrofitAPI {
     @POST("products/addToCart/{productId}/quantity/{quantity}")
     suspend fun addToCart(@Path("productId") productId: Int, @Path("quantity") quantity: Int) : Response<DefaultResponse>
 
+    @Headers("isAuthorized: true")
+    @GET("products/getReview/{productId}")
+    suspend fun getReviews(@Path("productId") productId: Int): Response<ReviewResponse>
+
     //Category
 
     @Headers("isAuthorized: false")

@@ -1,37 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/nameTxtVw"
-            android:layout_width="wrap_content"
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name"
-            android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/sp_12"
-            android:textFontWeight="600"
-            android:textColor="@color/color2"
-            android:layout_marginTop="@dimen/dp_5" />
+            android:layout_marginTop="@dimen/dp_5"
+            app:alignItems="center"
+            app:flexDirection="row"
+            app:justifyContent="flex_start">
+
+            <TextView
+                android:id="@+id/nameTxtVw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="Name"
+                android:textColor="@color/color2"
+                android:textFontWeight="600"
+                android:textSize="@dimen/sp_12" />
+
+
+            <RatingBar
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:numStars="5"
+                android:progressTint="@color/black"
+                android:scaleX="0.95"
+                android:scaleY="0.95" />
+
+        </com.google.android.flexbox.FlexboxLayout>
 
         <TextView
             android:id="@+id/messageTxtVw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dp_12"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ullamcorper cursus turpis, quis feugiat nibh hendrerit sed. Curabitur risus tellus, cursus a "
             android:layout_marginTop="@dimen/dp_4"
+            android:fontFamily="@font/montserrat"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ullamcorper cursus turpis, quis feugiat nibh hendrerit sed. Curabitur risus tellus, cursus a "
             android:textColor="@color/color2"
-            android:fontFamily="@font/montserrat" />
+            android:textSize="@dimen/dp_12" />
 
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/imageLayout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/imageRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_8"
-            app:flexWrap="wrap" />
+            android:layout_marginTop="@dimen/dp_8" />
     </LinearLayout>
 </layout>

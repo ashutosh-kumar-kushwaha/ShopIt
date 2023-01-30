@@ -17,10 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import ashutosh.shopit.R
-import ashutosh.shopit.adapters.DescriptionAdapter
-import ashutosh.shopit.adapters.ProductImageAdapter
-import ashutosh.shopit.adapters.QuestionsAnswersAdapter
-import ashutosh.shopit.adapters.SpecsParentAdapter
+import ashutosh.shopit.adapters.*
 import ashutosh.shopit.databinding.FragmentProductBinding
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.ProgressBarBinding
@@ -42,6 +39,7 @@ class ProductFragment : Fragment() {
     private lateinit var progressBar: Dialog
     private var _progressBarBinding : ProgressBarBinding? = null
     private val progressBarBinding get() = _progressBarBinding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -176,6 +174,19 @@ class ProductFragment : Fragment() {
 
         productViewModel.toastMsg.observe(viewLifecycleOwner){
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
+
+        productViewModel.reviewResponse.observe(viewLifecycleOwner){
+            when(it){
+                is NetworkResult.Loading -> {}
+                is NetworkResult.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Success -> {
+                    binding.reviewsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                    binding.reviewsRecyclerView.adapter = ReviewsAdapter(it.data.content)
+                }
+            }
         }
     }
 
