@@ -67,6 +67,10 @@ class AccountFragment : Fragment() {
             findNavController().navigate(R.id.action_accountFragment_to_myOrderFragment)
         }
 
+        binding.wishlistLL.setOnClickListener {
+            findNavController().navigate(R.id.action_accountFragment_to_wishlistFragment)
+        }
+
         accountViewModel.getProfile()
 
         return binding.root

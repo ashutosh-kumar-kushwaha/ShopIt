@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_accountFragment_to_myOrderFragment"
             app:destination="@id/myOrderFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_wishlistFragment"
+            app:destination="@id/wishlistFragment" />
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
@@ -118,6 +121,14 @@
         android:id="@+id/myOrderFragment"
         android:name="ashutosh.shopit.ui.myOrders.MyOrderFragment"
         android:label="MyOrderFragment"
-        tools:layout="@layout/fragment_my_order">
+        tools:layout="@layout/fragment_my_order"/>
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="ashutosh.shopit.ui.wishlist.WishlistFragment"
+        android:label="WishlistFragment"
+        tools:layout="@layout/fragment_wishlist">
+        <action
+            android:id="@+id/action_wishlistFragment_to_productFragment"
+            app:destination="@id/productFragment" />
     </fragment>
 </navigation>

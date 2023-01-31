@@ -158,4 +158,8 @@ interface RetrofitAPI {
     @GET("payment/getAllOrders?pageNumber=0&pageSize=100")
     suspend fun getAllOrders() : Response<MyOrderResponse>
 
+    @Headers("isAuthorized: true")
+    @GET("products/wishlist/get")
+    suspend fun getWishlist() : Response<ProductsResponse>
+
 }
