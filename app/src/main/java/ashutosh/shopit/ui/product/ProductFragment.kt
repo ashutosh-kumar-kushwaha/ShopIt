@@ -64,6 +64,7 @@ class ProductFragment : Fragment() {
         }
 //        Toast.makeText(requireContext(), productViewModel.productId, Toast.LENGTH_SHORT).show()
         productViewModel.getProductDetails()
+        productViewModel.getReviews()
 
         binding.photosViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageScrollStateChanged(state: Int) {
@@ -105,6 +106,8 @@ class ProductFragment : Fragment() {
             bundle.putString("totalPrice", "₹${productViewModel.currentPrice+30}")
             findNavController().navigate(R.id.action_productFragment_to_directOrderFragment, bundle)
         }
+
+
 
         return binding.root
     }
@@ -184,7 +187,7 @@ class ProductFragment : Fragment() {
                 }
                 is NetworkResult.Success -> {
                     binding.reviewsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                    binding.reviewsRecyclerView.adapter = ReviewsAdapter(it.data.content)
+                    binding.reviewsRecyclerView.adapter = ReviewsAdapter(it.data?.content!!)
                 }
             }
         }

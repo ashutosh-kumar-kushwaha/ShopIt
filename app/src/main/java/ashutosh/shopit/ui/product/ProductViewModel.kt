@@ -54,4 +54,10 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
             productRepository.addToCart(productId, Integer.parseInt(quantity.value!!))
         }
     }
+
+    fun getReviews(){
+        viewModelScope.launch {
+            productRepository.getReviews(productId)
+        }
+    }
 }

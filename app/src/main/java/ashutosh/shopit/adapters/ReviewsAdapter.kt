@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ashutosh.shopit.R
 import ashutosh.shopit.databinding.ReviewItemBinding
@@ -13,17 +14,12 @@ import coil.load
 class ReviewsAdapter(private val reviews: List<Review>) : RecyclerView.Adapter<ReviewsAdapter.ViewHolder>() {
     class ViewHolder(val binding: ReviewItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(review: Review){
-            binding.nameTxtVw.text = review.name
-            binding.messageTxtVw.text = review.message
-            for(image in review.images){
-                val imageView = ImageView(binding.root.context)
-                imageView.load(image.imageUrl)
-                val lp = LinearLayout.LayoutParams(binding.root.resources.getDimensionPixelSize(R.dimen.dp_35), binding.root.resources.getDimensionPixelSize(R.dimen.dp_35))
-                lp.bottomMargin = binding.root.resources.getDimensionPixelSize(R.dimen.dp_11)
-                lp.marginEnd = binding.root.resources.getDimensionPixelSize(R.dimen.dp_11)
-                imageView.layoutParams = lp
-                binding.imageLayout.addView(imageView)
-            }
+            val name = "${review.user.firstname} ${review.user.lastname}"
+            binding.nameTxtVw.text = name
+            binding.messageTxtVw.text = review.description
+            binding.imageRecyclerView.layoutManager = GridLayoutManager(binding.root.context, 6, GridLayoutManager.VERTICAL, false)
+            binding.imageRecyclerView.adapter = ReviewImageAdapter(review.images)
+            binding.ratingBar.rating = review.rating.toFloat()
         }
     }
 
