@@ -67,6 +67,10 @@ interface RetrofitAPI {
     @GET("products/getReview/{productId}")
     suspend fun getReviews(@Path("productId") productId: Int): Response<ReviewResponse>
 
+    @Headers("isAuthorized: true")
+    @PATCH("products/wishlist/add/{productId}")
+    suspend fun addToWishlist(@Path("productId") productId: Int): Response<DefaultResponse>
+
     //Category
 
     @Headers("isAuthorized: false")

@@ -13,6 +13,7 @@ class ProductRepository @Inject constructor(private val retrofitAPI: RetrofitAPI
     val productDetailsResponse = SingleLiveEvent<NetworkResult<ProductDetailsResponse>>()
     val addToCartResponse = SingleLiveEvent<NetworkResult<DefaultResponse>>()
     val reviewResponse = SingleLiveEvent<NetworkResult<ReviewResponse>>()
+    val addToWishlistResponse = SingleLiveEvent<NetworkResult<DefaultResponse>>()
 
     suspend fun getProductDetails(productId : Int){
         productDetailsResponse.value = NetworkResult.Loading()
@@ -92,6 +93,35 @@ class ProductRepository @Inject constructor(private val retrofitAPI: RetrofitAPI
         }
         catch (e: Exception){
             reviewResponse.value = NetworkResult.Error(-1, e.message)
+        }
+    }
+
+    suspend fun addToWishlist(productId: Int){
+        addToWishlistResponse.value = NetworkResult.Loading()
+        try{
+            val response = retrofitAPI.addToWishlist(productId)
+            when(response.code()){
+                200 -> {
+                    if (response.body() != null) {
+                        addToWishlistResponse.value = NetworkResult.Success(200, response.body()!!)
+                    }
+                    else{
+                        addToWishlistResponse.value = NetworkResult.Error(200, "Something went wrong!\nError: Response is null}")
+                    }
+                }
+                401 -> {
+                    addToWishlistResponse.value = NetworkResult.Error(401, "Session Expired")
+                }
+                409 -> {
+                    addToWishlistResponse.value = NetworkResult.Error(409, "Product already exist in the cart")
+                }
+                else -> {
+                    addToWishlistResponse.value = NetworkResult.Error(response.code(),"Something went wrong!\nError code: ${response.code()}")
+                }
+            }
+        }
+        catch (e: Exception){
+            addToWishlistResponse.value = NetworkResult.Error(-1, e.message)
         }
     }
 

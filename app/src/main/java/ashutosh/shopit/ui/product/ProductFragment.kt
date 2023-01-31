@@ -113,6 +113,10 @@ class ProductFragment : Fragment() {
             offersBottomSheet.show(parentFragmentManager, "Offer Bottom Sheet")
         }
 
+        binding.likeBtn.setOnClickListener {
+            productViewModel.addToWishlist()
+        }
+
 
 
         return binding.root
@@ -173,7 +177,6 @@ class ProductFragment : Fragment() {
                 is NetworkResult.Error -> {
                     progressBar.dismiss()
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                    Log.d("Ashu", it.message.toString())
                 }
                 is NetworkResult.Loading -> {
                     progressBar.show()
@@ -194,6 +197,22 @@ class ProductFragment : Fragment() {
                 is NetworkResult.Success -> {
                     binding.reviewsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     binding.reviewsRecyclerView.adapter = ReviewsAdapter(it.data?.content!!)
+                }
+            }
+        }
+
+        productViewModel.addToWishlistResponse.observe(viewLifecycleOwner){
+            when(it){
+                is NetworkResult.Loading -> {
+                    progressBar.show()
+                }
+                is NetworkResult.Error -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Success -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

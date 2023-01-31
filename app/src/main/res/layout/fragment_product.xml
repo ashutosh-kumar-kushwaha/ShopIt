@@ -62,11 +62,12 @@
 
                 </LinearLayout>
 
-                <ImageView
+                <Button
                     android:id="@+id/likeBtn"
                     android:layout_width="@dimen/dp_24"
                     android:layout_height="@dimen/dp_24"
-                    android:src="@drawable/heart"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/heart"
                     app:layout_constraintBottom_toBottomOf="@id/productNameTxtVw"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/productNameTxtVw" />
