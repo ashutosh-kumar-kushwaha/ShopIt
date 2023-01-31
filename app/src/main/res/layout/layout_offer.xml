@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/offerHeadTxtVw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_24"
+            android:fontFamily="@font/poppins"
+            android:letterSpacing="0.05"
+            android:text="Bank Offer"
+            android:textColor="@color/black"
+            android:textFontWeight="600"
+            android:textSize="@dimen/sp_14" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/offerBodyTxtVw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:drawableStart="@drawable/offer"
+            android:drawablePadding="@dimen/dp_10"
+            android:fontFamily="@font/montserrat"
+            android:letterSpacing="0.05"
+            android:padding="@dimen/dp_16"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ullamcorper cursus turpis, quis feugiat nibh hendrerit sed. "
+            android:textColor="@color/color2"
+            android:textFontWeight="600"
+            android:textSize="@dimen/sp_12" />
+
+    </LinearLayout>
+</layout>

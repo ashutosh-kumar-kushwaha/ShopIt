@@ -11,7 +11,7 @@ import ashutosh.shopit.databinding.LayoutSortbyBinding
 import ashutosh.shopit.interfaces.ButtonClickListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class SortByBottomSheetFragment(val buttonClickListener: ButtonClickListener) : BottomSheetDialogFragment(){
+class SortByBottomSheetFragment(private val buttonClickListener: ButtonClickListener) : BottomSheetDialogFragment(){
 
     private var _binding: LayoutSortbyBinding? = null
     private val binding: LayoutSortbyBinding get() = _binding!!
@@ -52,7 +52,7 @@ class SortByBottomSheetFragment(val buttonClickListener: ButtonClickListener) : 
         return binding.root
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         super.onDestroy()
         _binding = null
     }
