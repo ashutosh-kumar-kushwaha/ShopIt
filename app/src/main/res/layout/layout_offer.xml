@@ -3,7 +3,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -31,7 +31,8 @@
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ullamcorper cursus turpis, quis feugiat nibh hendrerit sed. "
             android:textColor="@color/color2"
             android:textFontWeight="600"
-            android:textSize="@dimen/sp_12" />
+            android:textSize="@dimen/sp_12"
+            android:background="@drawable/offer_item_bg"/>
 
     </LinearLayout>
 </layout>

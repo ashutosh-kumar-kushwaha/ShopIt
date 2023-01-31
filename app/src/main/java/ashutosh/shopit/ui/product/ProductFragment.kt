@@ -22,6 +22,7 @@ import ashutosh.shopit.databinding.FragmentProductBinding
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.ProgressBarBinding
 import ashutosh.shopit.ui.MainActivity
+import ashutosh.shopit.ui.bottomSheet.OffersBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 
@@ -40,6 +41,7 @@ class ProductFragment : Fragment() {
     private var _progressBarBinding : ProgressBarBinding? = null
     private val progressBarBinding get() = _progressBarBinding!!
 
+    private var offersBottomSheet = OffersBottomSheetFragment(listOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -107,6 +109,10 @@ class ProductFragment : Fragment() {
             findNavController().navigate(R.id.action_productFragment_to_directOrderFragment, bundle)
         }
 
+        binding.offersTxtVw.setOnClickListener {
+            offersBottomSheet.show(parentFragmentManager, "Offer Bottom Sheet")
+        }
+
 
 
         return binding.root
@@ -138,7 +144,7 @@ class ProductFragment : Fragment() {
                         binding.photosViewPagerIndicator.addView(imageView)
                         circles.add(imageView)
                     }
-
+                    offersBottomSheet = OffersBottomSheetFragment(it.data.offers)
                     binding.productNameTxtVw.text = product.productName
                     productViewModel.currentPrice = (product.originalPrice-(product.offerPercentage/100)*product.originalPrice).roundToInt()
                     val currentPrice = "₹${price(productViewModel.currentPrice)}"
