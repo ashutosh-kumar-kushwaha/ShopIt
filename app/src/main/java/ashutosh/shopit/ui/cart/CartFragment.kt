@@ -67,7 +67,7 @@ class CartFragment : Fragment() , ChangeProductQuantity{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        cartViewModel.getCartProductsResponse.observe(viewLifecycleOwner){
+        cartViewModel.getCartProductsResponse.observe(viewLifecycleOwner){ it ->
             when (it){
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
@@ -95,7 +95,7 @@ class CartFragment : Fragment() , ChangeProductQuantity{
                 }
             }
 
-            cartViewModel.changeProductQuantity.observe(viewLifecycleOwner){ it ->
+            cartViewModel.changeProductQuantity.observe(viewLifecycleOwner){
                 when(it){
                     is NetworkResult.Success -> progressBar.dismiss()
                     is NetworkResult.Error -> {

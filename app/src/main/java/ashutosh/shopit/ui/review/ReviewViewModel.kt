@@ -1,7 +1,10 @@
 package ashutosh.shopit.ui.review
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ashutosh.shopit.SingleLiveEvent
+import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.repository.ReviewRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,6 +18,7 @@ class ReviewViewModel @Inject constructor(private val reviewRepository: ReviewRe
     var productId = -1
     var productName = ""
     var productImage = ""
+    val message= MutableLiveData("")
 
     val addReviewResponse get() =  reviewRepository.addReviewResponse
 

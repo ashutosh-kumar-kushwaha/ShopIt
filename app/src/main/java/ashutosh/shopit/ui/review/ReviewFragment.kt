@@ -94,19 +94,36 @@ class ReviewFragment : Fragment() {
     }
 
     private fun upload(){
+        val rating: String
+        if(binding.fiveRBtn.isChecked){
+            rating = "5"
+        }
+        else if(binding.fourRBtn.isChecked){
+            rating = "4"
+        }
+        else if(binding.threeRBtn.isChecked){
+            rating = "3"
+        }
+        else if(binding.twoRBtn.isChecked){
+            rating = "2"
+        }
+        else if(binding.oneRBtn.isChecked){
+            rating ="1"
+        }
+        else{
+            Toast.makeText(requireContext(), "Please rate the product", Toast.LENGTH_SHORT).show()
+            return
+        }
         val uriPathHelper = URIPathHelper()
         val images = mutableListOf<MultipartBody.Part>()
-        imageList.forEachIndexed { index, uri ->
+        imageList.forEach { uri ->
             val path = uriPathHelper.getPath(requireContext(), uri)
             val file = File(path!!)
             val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val imageMultipart = MultipartBody.Part.createFormData("images", file.name, requestBody)
             images.add(imageMultipart)
         }
-        val requestBody = JsonObject()
-        requestBody.addProperty("rating", "1")
-        requestBody.addProperty("description", "Nice Product")
-
+        val requestBody = Gson().toJson(AddReviewRequest(rating, reviewViewModel.message.value!!))
         val reviewRequest = requestBody.toString().toRequestBody("application/json".toMediaTypeOrNull())
         reviewViewModel.addReview(images, reviewRequest)
     }
