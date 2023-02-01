@@ -66,8 +66,6 @@
         <action
             android:id="@+id/action_productFragment_to_directOrderFragment"
             app:destination="@id/directOrderFragment" />
-    </fragment>
-        tools:layout="@layout/fragment_product">
         <action
             android:id="@+id/action_productFragment_to_reviewFragment"
             app:destination="@id/reviewFragment" />
