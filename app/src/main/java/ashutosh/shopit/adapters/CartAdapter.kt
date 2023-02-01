@@ -12,6 +12,7 @@ import ashutosh.shopit.interfaces.ChangeProductQuantity
 import ashutosh.shopit.models.CartContent
 import ashutosh.shopit.models.CartItem
 import coil.load
+import kotlin.math.roundToInt
 
 class CartAdapter(val changeProductQuantity: ChangeProductQuantity): ListAdapter<CartContent, CartAdapter.ViewHolder>(DiffUtil()) {
 
@@ -26,7 +27,8 @@ class CartAdapter(val changeProductQuantity: ChangeProductQuantity): ListAdapter
                 binding.stockTxtVw.text = "Out of stock"
             }
             binding.quantityTxtVw.text = cartContent.noOfProducts.toString()
-            binding.priceTxtVw.text = cartContent.product.originalPrice.toString()
+            val discountPrice = "₹${price((cartContent.product.originalPrice-(cartContent.product.offerPercentage/100)*cartContent.product.originalPrice).roundToInt())}"
+            binding.priceTxtVw.text = discountPrice
             binding.plusBtn.setOnClickListener {
                 changeProductQuantity.increaseProductQuantity(cartContent.product.productId)
             }
@@ -35,12 +37,20 @@ class CartAdapter(val changeProductQuantity: ChangeProductQuantity): ListAdapter
             }
         }
 
-        private fun decreaseQuantity(){
-            var quantity = Integer.parseInt(binding.quantityTxtVw.text.toString())
-            if(quantity > 0){
-                quantity--
-                binding.quantityTxtVw.text = quantity.toString()
+        private fun price(p : Int): String{
+            val str = StringBuilder(p.toString().reversed())
+            var count = 0
+            var i = 1
+            while(i < str.length){
+                if(count == 2){
+                    str.insert(i, ',')
+                    i++
+                    count = 0
+                }
+                i++
+                count++
             }
+            return str.reverse().toString()
         }
 
     }
