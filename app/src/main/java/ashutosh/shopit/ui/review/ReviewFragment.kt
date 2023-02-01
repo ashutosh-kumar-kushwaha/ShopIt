@@ -1,5 +1,6 @@
 package ashutosh.shopit.ui.review
 
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.net.Network
@@ -12,6 +13,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import ashutosh.shopit.URIPathHelper
@@ -26,6 +31,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 @AndroidEntryPoint
@@ -35,8 +42,9 @@ class ReviewFragment : Fragment() {
     private val binding: FragmentReviewBinding get() = _binding!!
     private val imageAdapter = ImageAdapter()
     private val imageList = mutableListOf<Uri>()
+    private lateinit var startForResult : ActivityResultLauncher<Intent>
 
-    private val reviewViewModel by viewModels<ReviewViewModel>()
+        private val reviewViewModel by viewModels<ReviewViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +69,17 @@ class ReviewFragment : Fragment() {
         binding.addPhotoBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            startActivityForResult(intent, 200)
+            startForResult = registerForActivityResult(
+                ActivityResultContracts.StartActivityForResult()
+            ) { result: ActivityResult ->
+                if (result.resultCode == RESULT_OK) {
+                    val imageUri = result.data?.data
+                    imageList.add(imageUri!!)
+                    imageAdapter.submitList(imageList + listOf())
+                }
+            }
+            startForResult.launch(intent)
+//            startActivityForResult(intent, 200)
         }
 
         binding.submitBtn.setOnClickListener{
@@ -80,24 +98,16 @@ class ReviewFragment : Fragment() {
         val images = mutableListOf<MultipartBody.Part>()
         imageList.forEachIndexed { index, uri ->
             val path = uriPathHelper.getPath(requireContext(), uri)
-            Log.d("Ashu", path!!)
             val file = File(path!!)
-            val requestBody = RequestBody.create("image/jpeg".toMediaTypeOrNull(), file)
-            Log.d("Ashu", file.name)
-            images.add(MultipartBody.Part.createFormData("images$index", file.name, requestBody))
+            val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val imageMultipart = MultipartBody.Part.createFormData("images", file.name, requestBody)
+            images.add(imageMultipart)
         }
-        Log.d("Ashu", images.toString())
         val requestBody = JsonObject()
         requestBody.addProperty("rating", "5")
         requestBody.addProperty("description", "Nice Product")
-//        Log.d("Ashu", reviewViewModel.productId.toString())
-//        val addReviewRequest = AddReviewRequest("5", "Nice product")
-//        val review = Gson().toJson(addReviewRequest)
 
-        val reviewRequest = RequestBody.create("text/plain".toMediaTypeOrNull(), requestBody.toString())
-        Log.d("Ashu", requestBody.toString())
-
-//        val reviewBody = MultipartBody.Part.createFormData("reviewDto", "reviewDto", reviewRequest)
+        val reviewRequest = requestBody.toString().toRequestBody("application/json".toMediaTypeOrNull())
         reviewViewModel.addReview(images, reviewRequest)
     }
 
@@ -117,15 +127,15 @@ class ReviewFragment : Fragment() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if(requestCode == 200 && resultCode == RESULT_OK){
-            val imageUri = data?.data
-            imageList.add(imageUri!!)
-            imageAdapter.submitList(imageList + listOf())
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if(requestCode == 200 && resultCode == RESULT_OK){
+//            val imageUri = data?.data
+//            imageList.add(imageUri!!)
+//            imageAdapter.submitList(imageList + listOf())
+//        }
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
