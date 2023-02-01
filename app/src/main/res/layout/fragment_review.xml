@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="ashutosh.shopit.ui.review.ReviewViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".ui.review.ReviewFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_51">
+
+            <ImageView
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_24"
+                android:padding="@dimen/dp_5"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_28"
+                android:fontFamily="@font/poppins"
+                android:letterSpacing="0.05"
+                android:text="Review Product"
+                android:textColor="@color/black"
+                android:textFontWeight="600"
+                android:textSize="@dimen/sp_18" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/productImgVw"
+                    android:layout_width="@dimen/dp_64"
+                    android:layout_height="@dimen/dp_64"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/productTitleTxtVw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:fontFamily="@font/montserrat"
+                    android:letterSpacing="0.05"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/productImgVw"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:background="@color/color8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/productImgVw" />
+
+                <TextView
+                    android:id="@+id/addPhotoVideoTxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/montserrat"
+                    android:letterSpacing="0.05"
+                    android:text="Add Photo"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:fontFamily="@font/montserrat"
+                    android:letterSpacing="0.05"
+                    android:text="(Optional)"
+                    android:textColor="@color/color2"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintBottom_toBottomOf="@id/addPhotoVideoTxtVw"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/addPhotoVideoTxtVw"
+                    app:layout_constraintTop_toTopOf="@id/addPhotoVideoTxtVw" />
+
+
+                <LinearLayout
+                    android:id="@+id/addPhotosVideosBtnLL"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addPhotoVideoTxtVw">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/addPhotoBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_40"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:paddingStart="@dimen/dp_12"
+                        android:paddingEnd="@dimen/dp_12"
+                        android:singleLine="true"
+                        android:text="Add Photo"
+                        android:textColor="@color/black"
+                        android:textFontWeight="600"
+                        android:textSize="@dimen/sp_12"
+                        app:backgroundTint="@color/white"
+                        app:cornerRadius="@dimen/dp_4"
+                        app:icon="@drawable/camera"
+                        app:iconSize="0dp"
+                        app:iconTint="@color/black"
+                        app:strokeColor="@color/color8"
+                        app:strokeWidth="@dimen/dp_1" />
+
+<!--                    <com.google.android.material.button.MaterialButton-->
+<!--                        android:id="@+id/addVideoBtn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="@dimen/dp_40"-->
+<!--                        android:layout_marginStart="@dimen/dp_16"-->
+<!--                        android:fontFamily="@font/montserrat"-->
+<!--                        android:gravity="center"-->
+<!--                        android:insetTop="0dp"-->
+<!--                        android:insetBottom="0dp"-->
+<!--                        android:paddingStart="@dimen/dp_12"-->
+<!--                        android:paddingEnd="@dimen/dp_12"-->
+<!--                        android:singleLine="true"-->
+<!--                        android:text="Add Video"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textFontWeight="600"-->
+<!--                        android:textSize="@dimen/sp_12"-->
+<!--                        app:backgroundTint="@color/white"-->
+<!--                        app:cornerRadius="@dimen/dp_4"-->
+<!--                        app:icon="@drawable/video"-->
+<!--                        app:iconSize="0dp"-->
+<!--                        app:iconTint="@color/black"-->
+<!--                        app:strokeColor="@color/color8"-->
+<!--                        app:strokeWidth="@dimen/dp_1" />-->
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/shareRatingTxtVw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_32"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:fontFamily="@font/montserrat"
+                    android:letterSpacing="0.05"
+                    android:singleLine="true"
+                    android:text="Share your Valuable Rating"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addPhotosVideosBtnLL" />
+
+                <RadioGroup
+                    android:id="@+id/ratingBtns"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/shareRatingTxtVw">
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/oneRBtn"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/dp_24"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/montserrat"
+                            android:background="@drawable/review_radio"
+                            android:gravity="center"
+                            android:button="@null"
+                            android:padding="0dp"
+                            android:text="1"
+                            android:textColor="@drawable/review_text"
+                            android:textFontWeight="600"
+                            android:textSize="@dimen/sp_12"/>
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/twoRBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat"
+                        android:background="@drawable/review_radio"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:padding="0dp"
+                        android:text="2"
+                        android:textColor="@drawable/review_text"
+                        android:textFontWeight="600"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginStart="@dimen/dp_12"/>
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/threeRBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat"
+                        android:background="@drawable/review_radio"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:padding="0dp"
+                        android:text="3"
+                        android:textColor="@drawable/review_text"
+                        android:textFontWeight="600"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginStart="@dimen/dp_12"/>
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/fourRBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat"
+                        android:background="@drawable/review_radio"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:padding="0dp"
+                        android:text="4"
+                        android:textColor="@drawable/review_text"
+                        android:textFontWeight="600"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginStart="@dimen/dp_12"/>
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/fiveRBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat"
+                        android:background="@drawable/review_radio"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:padding="0dp"
+                        android:text="5"
+                        android:textColor="@drawable/review_text"
+                        android:textFontWeight="600"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginStart="@dimen/dp_12"/>
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/writeReviewTxtVw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_32"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:fontFamily="@font/montserrat"
+                    android:letterSpacing="0.05"
+                    android:text="Write a Review"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ratingBtns" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:fontFamily="@font/montserrat"
+                    android:letterSpacing="0.05"
+                    android:text="(Optional)"
+                    android:textColor="@color/color2"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintBottom_toBottomOf="@id/writeReviewTxtVw"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/writeReviewTxtVw"
+                    app:layout_constraintTop_toTopOf="@id/writeReviewTxtVw" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reviewETxt"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_136"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:text="@={viewModel.message}"
+                    android:background="@drawable/review_textbox_bg"
+                    android:fontFamily="@font/montserrat"
+                    android:gravity="start"
+                    android:letterSpacing="0.05"
+                    android:padding="@dimen/dp_16"
+                    android:textColor="@color/color2"
+                    android:textFontWeight="400"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/writeReviewTxtVw" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/imagesRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reviewETxt" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/submitBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_54"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:layout_marginBottom="@dimen/dp_16"
+                    android:fontFamily="@font/montserrat"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:letterSpacing="0.05"
+                    android:text="Submit"
+                    android:textColor="@color/black"
+                    android:textFontWeight="600"
+                    android:textSize="@dimen/sp_16"
+                    app:backgroundTint="@color/white"
+                    app:cornerRadius="@dimen/dp_5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imagesRecyclerView"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="@dimen/dp_1" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+</layout>

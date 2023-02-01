@@ -67,6 +67,11 @@
             android:id="@+id/action_productFragment_to_directOrderFragment"
             app:destination="@id/directOrderFragment" />
     </fragment>
+        tools:layout="@layout/fragment_product">
+        <action
+            android:id="@+id/action_productFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="ashutosh.shopit.ui.search.SearchFragment"
@@ -131,4 +136,9 @@
             android:id="@+id/action_wishlistFragment_to_productFragment"
             app:destination="@id/productFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="ashutosh.shopit.ui.review.ReviewFragment"
+        android:label="ReviewFragment"
+        tools:layout="@layout/fragment_review"/>
 </navigation>

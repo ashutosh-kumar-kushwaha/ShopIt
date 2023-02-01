@@ -99,6 +99,15 @@ class ProductFragment : Fragment() {
         binding.quantityMinusBtn.setOnClickListener{
             productViewModel.decreaseQuantity()
         }
+        binding.rateProductBtn.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("productId", productViewModel.productId)
+            bundle.putString("productName", productViewModel.productDetailsResponse.value?.data?.productName)
+            bundle.putString("productImage",
+                productViewModel.productDetailsResponse.value?.data?.imageUrls?.get(0)?.imageUrl
+            )
+            findNavController().navigate(R.id.action_productFragment_to_reviewFragment, bundle)
+        }
 
         binding.buyNowBtn.setOnClickListener {
             val bundle = Bundle()
