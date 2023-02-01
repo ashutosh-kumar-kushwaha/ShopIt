@@ -42,7 +42,17 @@ class ReviewFragment : Fragment() {
     private val binding: FragmentReviewBinding get() = _binding!!
     private val imageAdapter = ImageAdapter()
     private val imageList = mutableListOf<Uri>()
-    private lateinit var startForResult : ActivityResultLauncher<Intent>
+
+
+    private var startForResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == RESULT_OK) {
+            val imageUri = result.data?.data
+            imageList.add(imageUri!!)
+            imageAdapter.submitList(imageList + listOf())
+        }
+    }
 
         private val reviewViewModel by viewModels<ReviewViewModel>()
 
@@ -69,17 +79,7 @@ class ReviewFragment : Fragment() {
         binding.addPhotoBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            startForResult = registerForActivityResult(
-                ActivityResultContracts.StartActivityForResult()
-            ) { result: ActivityResult ->
-                if (result.resultCode == RESULT_OK) {
-                    val imageUri = result.data?.data
-                    imageList.add(imageUri!!)
-                    imageAdapter.submitList(imageList + listOf())
-                }
-            }
             startForResult.launch(intent)
-//            startActivityForResult(intent, 200)
         }
 
         binding.submitBtn.setOnClickListener{
@@ -99,12 +99,12 @@ class ReviewFragment : Fragment() {
         imageList.forEachIndexed { index, uri ->
             val path = uriPathHelper.getPath(requireContext(), uri)
             val file = File(path!!)
-            val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
             val imageMultipart = MultipartBody.Part.createFormData("images", file.name, requestBody)
             images.add(imageMultipart)
         }
         val requestBody = JsonObject()
-        requestBody.addProperty("rating", "5")
+        requestBody.addProperty("rating", "1")
         requestBody.addProperty("description", "Nice Product")
 
         val reviewRequest = requestBody.toString().toRequestBody("application/json".toMediaTypeOrNull())
