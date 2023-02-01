@@ -99,7 +99,7 @@ class ReviewFragment : Fragment() {
         imageList.forEachIndexed { index, uri ->
             val path = uriPathHelper.getPath(requireContext(), uri)
             val file = File(path!!)
-            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+            val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val imageMultipart = MultipartBody.Part.createFormData("images", file.name, requestBody)
             images.add(imageMultipart)
         }
