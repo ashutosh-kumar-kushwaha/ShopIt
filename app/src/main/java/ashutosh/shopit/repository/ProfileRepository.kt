@@ -4,6 +4,7 @@ import ashutosh.shopit.SingleLiveEvent
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.api.RetrofitAPI
 import ashutosh.shopit.models.*
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 class ProfileRepository @Inject constructor(private val retrofitAPI: RetrofitAPI) {
@@ -14,6 +15,7 @@ class ProfileRepository @Inject constructor(private val retrofitAPI: RetrofitAPI
     val resetEmailResponse = SingleLiveEvent<NetworkResult<LoginResponse>>()
     val resendOtpResponse = SingleLiveEvent<NetworkResult<DefaultResponse>>()
     val deleteAddressResponse = SingleLiveEvent<NetworkResult<DefaultResponse>>()
+    val changeProfilePicResponse = SingleLiveEvent<NetworkResult<ChangeProfilePicResponse>>()
 
     suspend fun getProfile(){
         profileResponse.value = NetworkResult.Loading()
@@ -187,6 +189,32 @@ class ProfileRepository @Inject constructor(private val retrofitAPI: RetrofitAPI
         }
         catch (e: Exception){
             deleteAddressResponse.value = NetworkResult.Error(-1, e.message)
+        }
+    }
+
+    suspend fun changeProfilePic(image: MultipartBody.Part){
+        changeProfilePicResponse.value = NetworkResult.Loading()
+        try {
+            val response = retrofitAPI.changeProfilePic(image)
+            when(response.code()){
+                200 -> {
+                    if(response.body()!=null){
+                        changeProfilePicResponse.value = NetworkResult.Success(200, response.body()!!)
+                    }
+                    else{
+                        changeProfilePicResponse.value = NetworkResult.Error(200, "Something went wrong\nError: Response is null")
+                    }
+                }
+                401 -> {
+                    changeProfilePicResponse.value = NetworkResult.Error(401, "Session expired")
+                }
+                else -> {
+                    changeProfilePicResponse.value = NetworkResult.Error(response.code(), "Something went wrong\nError code: ${response.code()}")
+                }
+            }
+        }
+        catch (e: Exception){
+            changeProfilePicResponse.value = NetworkResult.Error(-1, e.message)
         }
     }
 }

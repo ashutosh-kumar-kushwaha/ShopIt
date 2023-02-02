@@ -1,16 +1,21 @@
 package ashutosh.shopit.ui.profile
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -18,6 +23,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.GenericTextWatcher
 import ashutosh.shopit.R
+import ashutosh.shopit.URIPathHelper
 import ashutosh.shopit.adapters.AddressOrderAdapter
 import ashutosh.shopit.adapters.AddressProfileAdapter
 import ashutosh.shopit.api.NetworkResult
@@ -35,6 +41,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -57,6 +67,19 @@ class ProfileFragment : Fragment() {
     private val profileViewModel by viewModels<ProfileViewModel>()
 
     private lateinit var addressOrderAdapter : AddressProfileAdapter
+
+    private var startForResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val imageUri = result.data?.data
+            val path = URIPathHelper().getPath(requireContext(), imageUri!!)
+            val file = File(path!!)
+            val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val imageMultipart = MultipartBody.Part.createFormData("photo", file.name, requestBody)
+            profileViewModel.changeProfilePic(imageMultipart)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -106,6 +129,12 @@ class ProfileFragment : Fragment() {
                 Toast.makeText(requireContext(), "This is already your current email", Toast.LENGTH_SHORT).show()
             }
             Log.d("Ashu", profileViewModel.originalEmail.toString() + " | " + profileViewModel.email.value)
+        }
+
+        binding.changePhotoBtn.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            startForResult.launch(intent)
         }
 
         return binding.root
@@ -342,6 +371,21 @@ class ProfileFragment : Fragment() {
                     progressBar.dismiss()
                     Toast.makeText(requireContext(), "Deleted", Toast.LENGTH_SHORT).show()
                     profileViewModel.getAddresses()
+                }
+                is NetworkResult.Error -> {
+                    progressBar.dismiss()
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> {
+                    progressBar.show()
+                }
+            }
+        }
+
+        profileViewModel.changeProfilePicResponse.observe(viewLifecycleOwner){
+            when(it){
+                is NetworkResult.Success -> {
+                    progressBar.dismiss()
                 }
                 is NetworkResult.Error -> {
                     progressBar.dismiss()

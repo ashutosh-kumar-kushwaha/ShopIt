@@ -10,6 +10,7 @@ import ashutosh.shopit.models.UpdateProfileRequest
 import ashutosh.shopit.repository.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,6 +22,7 @@ class ProfileViewModel @Inject constructor(private val profileRepository: Profil
     val resetEmailResponse get() = profileRepository.resetEmailResponse
     val resendOtpResponse get() = profileRepository.resendOtpResponse
     val deleteAddressResponse get() = profileRepository.deleteAddressResponse
+    val changeProfilePicResponse get() = profileRepository.changeProfilePicResponse
 
     var originalEmail = ""
 
@@ -88,6 +90,12 @@ class ProfileViewModel @Inject constructor(private val profileRepository: Profil
     fun deleteAddress(addressId: Int){
         viewModelScope.launch {
             profileRepository.deleteAddress(addressId)
+        }
+    }
+
+    fun changeProfilePic(image: MultipartBody.Part){
+        viewModelScope.launch {
+            profileRepository.changeProfilePic(image)
         }
     }
 }
