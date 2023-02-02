@@ -44,7 +44,7 @@ class ResetPasswordFragment : Fragment() {
         if(arguments?.getString("email") != null && resetPasswordViewModel.email.isEmpty()){
             resetPasswordViewModel.email = arguments?.getString("email")!!
         }
-        if(arguments?.getString("otp") != null && resetPasswordViewModel.email.isEmpty()){
+        if(arguments?.getString("otp") != null && resetPasswordViewModel.otp.isEmpty()){
             resetPasswordViewModel.otp = arguments?.getString("otp")!!
         }
 

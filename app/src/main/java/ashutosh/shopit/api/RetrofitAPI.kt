@@ -169,6 +169,7 @@ interface RetrofitAPI {
     @GET("products/wishlist/get")
     suspend fun getWishlist() : Response<ProductsResponse>
 
+    @Multipart
     @Headers("isAuthorized: true")
     @PATCH("api/profile/updateProfilePhoto")
     suspend fun changeProfilePic(@Part image: MultipartBody.Part) : Response<ChangeProfilePicResponse>

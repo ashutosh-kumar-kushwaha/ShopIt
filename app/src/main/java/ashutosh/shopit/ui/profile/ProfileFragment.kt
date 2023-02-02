@@ -24,7 +24,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ashutosh.shopit.GenericTextWatcher
 import ashutosh.shopit.R
 import ashutosh.shopit.URIPathHelper
-import ashutosh.shopit.adapters.AddressOrderAdapter
 import ashutosh.shopit.adapters.AddressProfileAdapter
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.DialogEditDetailsBinding
@@ -385,6 +384,7 @@ class ProfileFragment : Fragment() {
         profileViewModel.changeProfilePicResponse.observe(viewLifecycleOwner){
             when(it){
                 is NetworkResult.Success -> {
+                    binding.profilePicImgVw.load(it.data?.profilePhoto)
                     progressBar.dismiss()
                 }
                 is NetworkResult.Error -> {
