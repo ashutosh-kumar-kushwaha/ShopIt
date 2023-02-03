@@ -100,6 +100,10 @@ class DirectOrderFragment : Fragment() {
             findNavController().navigate(R.id.action_directOrderFragment_to_addAddressFragment)
         }
 
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
 
         return binding.root
     }

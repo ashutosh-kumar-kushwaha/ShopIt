@@ -126,6 +126,10 @@ class ProductFragment : Fragment() {
             productViewModel.addToWishlist()
         }
 
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
 
 
         return binding.root

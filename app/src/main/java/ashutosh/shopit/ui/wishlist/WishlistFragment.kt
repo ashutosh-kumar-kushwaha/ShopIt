@@ -49,6 +49,11 @@ class WishlistFragment : Fragment() {
 
         wishlistViewModel.getWishlist()
 
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+
 
         return binding.root
     }

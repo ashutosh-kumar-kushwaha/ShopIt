@@ -31,6 +31,7 @@
             android:textSize="@dimen/sp_10"
             android:layout_marginTop="@dimen/dp_8"
             android:layout_marginStart="@dimen/dp_8"
+            android:maxLines="2"
             android:layout_marginEnd="@dimen/dp_8"
             android:textColor="@color/black"
             android:text="Apple Iphone 14 128GB (Product) RED" />

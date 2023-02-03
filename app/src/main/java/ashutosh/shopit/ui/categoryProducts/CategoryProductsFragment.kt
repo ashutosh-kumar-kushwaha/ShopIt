@@ -81,6 +81,10 @@ class CategoryProductsFragment : Fragment() {
             sortByBottomSheetFragment.show(parentFragmentManager, "SortByBottomSheet")
         }
 
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
 
         return binding.root
     }

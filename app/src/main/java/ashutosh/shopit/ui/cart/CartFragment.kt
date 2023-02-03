@@ -59,6 +59,10 @@ class CartFragment : Fragment() , ChangeProductQuantity{
             findNavController().navigate(R.id.action_cartFragment_to_orderFragment)
         }
 
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
 
 //        cartAdapter.submitList(listOf(CartItem(1, "ABCD", "In stock", 3000, R.drawable.iphone), CartItem(2, "ABCD", "In stock", 3000, R.drawable.iphone)))
         return binding.root

@@ -91,6 +91,10 @@ class OrderFragment() : Fragment() {
             findNavController().navigate(R.id.action_orderFragment_to_addAddressFragment)
         }
 
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
 
 
 

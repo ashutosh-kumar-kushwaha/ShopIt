@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import ashutosh.shopit.R
 import ashutosh.shopit.api.NetworkResult
 import ashutosh.shopit.databinding.FragmentAddAddressBinding
@@ -70,6 +71,10 @@ class AddAddressFragment : Fragment() {
             if(checkName && checkType && checkMobile && checkPinCode && checkLocality && checkAddressLine && checkCity && checkState && checkMobile2){
                 addAddressViewModel.addAddress()
             }
+        }
+
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
         }
 
 

@@ -18,6 +18,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import ashutosh.shopit.URIPathHelper
 import ashutosh.shopit.adapters.ImageAdapter
@@ -86,6 +87,9 @@ class ReviewFragment : Fragment() {
             upload()
         }
 
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         binding.imagesRecyclerView.adapter = imageAdapter
         binding.imagesRecyclerView.layoutManager = GridLayoutManager(requireContext(), 5)

@@ -122,6 +122,10 @@ class SearchFragment : Fragment() {
             sortByBottomSheetFragment.show(parentFragmentManager, "SortByBottomSheet")
         }
 
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
 //        binding.backBtn.setOnClickListener{
 //            back()
 //        }

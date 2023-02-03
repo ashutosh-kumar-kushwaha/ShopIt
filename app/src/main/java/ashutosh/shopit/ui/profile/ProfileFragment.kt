@@ -136,6 +136,10 @@ class ProfileFragment : Fragment() {
             startForResult.launch(intent)
         }
 
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         return binding.root
     }
 

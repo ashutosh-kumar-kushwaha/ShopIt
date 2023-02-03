@@ -40,26 +40,26 @@ class CategoriesFragment : Fragment() {
     ): View? {
         _binding = FragmentCategoriesBinding.inflate(inflater, container, false)
 
-        val searchText = binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
-        val font = ResourcesCompat.getFont(requireContext(), R.font.montserrat)
-        searchText.typeface = font
-        searchText.setTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
-        searchText.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
-
-        if(Build.VERSION.SDK_INT >= 29){
-            searchText.textCursorDrawable = AppCompatResources.getDrawable(requireContext(), R.drawable.cursor_2)
-        }
-        else{
-            try{
-                val f: Field = TextView::class.java.getDeclaredField("mCursorDrawableRes")
-                f.isAccessible = true
-                f.set(searchText, R.drawable.cursor_2)
-            }
-            catch (_: Exception){}
-        }
-
-        val icon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
-        icon.setImageResource(R.drawable.ic_search_icon)
+//        val searchText = binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+//        val font = ResourcesCompat.getFont(requireContext(), R.font.montserrat)
+//        searchText.typeface = font
+//        searchText.setTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
+//        searchText.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.color2))
+//
+//        if(Build.VERSION.SDK_INT >= 29){
+//            searchText.textCursorDrawable = AppCompatResources.getDrawable(requireContext(), R.drawable.cursor_2)
+//        }
+//        else{
+//            try{
+//                val f: Field = TextView::class.java.getDeclaredField("mCursorDrawableRes")
+//                f.isAccessible = true
+//                f.set(searchText, R.drawable.cursor_2)
+//            }
+//            catch (_: Exception){}
+//        }
+//
+//        val icon = binding.searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
+//        icon.setImageResource(R.drawable.ic_search_icon)
 
         val categoryClickListener = object : CategoryClickListener{
             override fun onCategoryClick(categoryId: Int, categoryName: String) {
@@ -77,6 +77,12 @@ class CategoriesFragment : Fragment() {
         binding.categoriesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         categoryViewModel.getCategories()
+
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+
 
         return binding.root
     }
