@@ -54,6 +54,6 @@ class ProductsAdapter(val productClickListener: ProductClickListener) : ListAdap
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(holder.adapterPosition))
     }
 }
