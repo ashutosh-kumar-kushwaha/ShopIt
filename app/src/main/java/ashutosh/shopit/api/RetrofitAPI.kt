@@ -78,10 +78,15 @@ interface RetrofitAPI {
     @POST("products/review/add/{productId}")
     suspend fun addReview(@Path("productId") productId: Int, @Part images: List<MultipartBody.Part>, @Part("reviewDto") review: RequestBody) : Response<AddReviewResponse>
 
+
+    @Headers("isAuthorized: true")
+    @GET("products/getFAQs/{productId}?pageNumber=0&pageSize=100")
+    suspend fun getQuestionsAnswers(@Path("productId") productId: Int) : Response<QuestionAnswerResponse>
+
     //Category
 
     @Headers("isAuthorized: false")
-    @GET("category/get?pageSize=5")
+    @GET("category/get?pageSize=100")
     suspend fun getCategory() : Response<CategoryResponse>
 
 

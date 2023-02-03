@@ -67,6 +67,7 @@ class ProductFragment : Fragment() {
 //        Toast.makeText(requireContext(), productViewModel.productId, Toast.LENGTH_SHORT).show()
         productViewModel.getProductDetails()
         productViewModel.getReviews()
+        productViewModel.getQuestionAnswers()
 
         binding.photosViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageScrollStateChanged(state: Int) {
@@ -130,6 +131,8 @@ class ProductFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        binding.questionsAnswerRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.reviewsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
 
         return binding.root
@@ -174,7 +177,6 @@ class ProductFragment : Fragment() {
                     binding.specificationRecyclerView.adapter = SpecsParentAdapter(product.specification)
                     binding.specificationRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     binding.warrantyDetailsTxtVw.text = product.warranty
-                    binding.questionsAnswerRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     selectItem(0)
                     progressBar.dismiss()
                 }
@@ -205,11 +207,16 @@ class ProductFragment : Fragment() {
             when(it){
                 is NetworkResult.Loading -> {}
                 is NetworkResult.Error -> {
+                    binding.reviewsLayout.visibility = View.GONE
+                    binding.reviewsRecyclerView.visibility = View.GONE
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
                 is NetworkResult.Success -> {
-                    binding.reviewsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                    binding.reviewsRecyclerView.adapter = ReviewsAdapter(it.data?.content!!)
+                    if(it.data?.content!!.isNotEmpty()){
+                        binding.reviewsRecyclerView.visibility = View.VISIBLE
+                        binding.reviewsLayout.visibility = View.VISIBLE
+                        binding.reviewsRecyclerView.adapter = ReviewsAdapter(it.data.content)
+                    }
                 }
             }
         }
@@ -226,6 +233,24 @@ class ProductFragment : Fragment() {
                 is NetworkResult.Success -> {
                     progressBar.dismiss()
                     Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        productViewModel.questionAnswerResponse.observe(viewLifecycleOwner){
+            when(it){
+                is NetworkResult.Loading -> {}
+                is NetworkResult.Error -> {
+                    binding.questionsAnswerRecyclerView.visibility = View.GONE
+                    binding.questionsAnswersTxtVw.visibility = View.GONE
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Success -> {
+                    if(it.data?.content!!.isNotEmpty()){
+                        binding.questionsAnswerRecyclerView.adapter = QuestionsAnswersAdapter(it.data.content)
+                        binding.questionsAnswersTxtVw.visibility = View.VISIBLE
+                        binding.questionsAnswerRecyclerView.visibility = View.VISIBLE
+                    }
                 }
             }
         }

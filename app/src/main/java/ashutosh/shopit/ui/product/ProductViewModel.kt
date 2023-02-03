@@ -21,6 +21,7 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
     val addToCartResponse : SingleLiveEvent<NetworkResult<DefaultResponse>> get() = productRepository.addToCartResponse
     val reviewResponse get() = productRepository.reviewResponse
     val addToWishlistResponse get() = productRepository.addToWishlistResponse
+    val questionAnswerResponse get() = productRepository.questionAnswerResponse
     var currentPrice = 0
 
     val toastMsg = SingleLiveEvent<String>()
@@ -59,6 +60,12 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
     fun getReviews(){
         viewModelScope.launch {
             productRepository.getReviews(productId)
+        }
+    }
+
+    fun getQuestionAnswers(){
+        viewModelScope.launch {
+            productRepository.getQuestionsAnswers(productId)
         }
     }
 
