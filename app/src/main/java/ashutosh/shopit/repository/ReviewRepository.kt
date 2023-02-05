@@ -13,10 +13,10 @@ import javax.inject.Inject
 class ReviewRepository @Inject constructor(private val retrofitAPI: RetrofitAPI) {
     val addReviewResponse = SingleLiveEvent<NetworkResult<AddReviewResponse>>()
 
-    suspend fun addReview(productId: Int, images: List<MultipartBody.Part>, review: RequestBody){
+    suspend fun addReview(productId: Int, images: List<MultipartBody.Part>, rating: RequestBody, reviewMsg: RequestBody){
         addReviewResponse.value = NetworkResult.Loading()
         try {
-            val response = retrofitAPI.addReview(productId, images, review)
+            val response = retrofitAPI.addReview(productId, images, rating, reviewMsg)
             Log.d("Ashu", images.toString())
             when(response.code()){
                 200 -> {
@@ -27,9 +27,10 @@ class ReviewRepository @Inject constructor(private val retrofitAPI: RetrofitAPI)
                         addReviewResponse.value = NetworkResult.Error(200, response.errorBody().toString())
                     }
                 }
+                409 -> {
+                    addReviewResponse.value = NetworkResult.Error(409, "You can post review only once")
+                }
                 else -> {
-                    Log.d("Ashu", "M: " + response.message())
-                    Log.d("Ashu","E: " + response.errorBody().toString())
                     addReviewResponse.value = NetworkResult.Error(response.code(), "Something went wrong\nError code: ${response.code()}")
                 }
             }

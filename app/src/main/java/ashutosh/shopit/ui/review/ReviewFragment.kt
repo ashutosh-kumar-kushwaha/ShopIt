@@ -127,9 +127,11 @@ class ReviewFragment : Fragment() {
             val imageMultipart = MultipartBody.Part.createFormData("images", file.name, requestBody)
             images.add(imageMultipart)
         }
-        val requestBody = Gson().toJson(AddReviewRequest(rating, reviewViewModel.message.value!!))
-        val reviewRequest = requestBody.toString().toRequestBody("application/json".toMediaTypeOrNull())
-        reviewViewModel.addReview(images, reviewRequest)
+//        val requestBody = Gson().toJson(AddReviewRequest(rating, ))
+        val reviewMsgRequest = reviewViewModel.message.value!!.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val ratingRequest = rating.toRequestBody("text/plain".toMediaTypeOrNull())
+//        val reviewRequest = requestBody.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        reviewViewModel.addReview(images, ratingRequest, reviewMsgRequest)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

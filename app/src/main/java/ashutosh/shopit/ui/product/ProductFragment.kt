@@ -207,16 +207,14 @@ class ProductFragment : Fragment() {
             when(it){
                 is NetworkResult.Loading -> {}
                 is NetworkResult.Error -> {
-                    binding.reviewsLayout.visibility = View.GONE
-                    binding.reviewsRecyclerView.visibility = View.GONE
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 }
                 is NetworkResult.Success -> {
-                    if(it.data?.content!!.isNotEmpty()){
+
                         binding.reviewsRecyclerView.visibility = View.VISIBLE
                         binding.reviewsLayout.visibility = View.VISIBLE
-                        binding.reviewsRecyclerView.adapter = ReviewsAdapter(it.data.content)
-                    }
+                        binding.reviewsRecyclerView.adapter = ReviewsAdapter(it.data?.content!!)
+
                 }
             }
         }

@@ -22,9 +22,9 @@ class ReviewViewModel @Inject constructor(private val reviewRepository: ReviewRe
 
     val addReviewResponse get() =  reviewRepository.addReviewResponse
 
-    fun addReview(images: List<MultipartBody.Part>, review: RequestBody){
+    fun addReview(images: List<MultipartBody.Part>, rating: RequestBody, reviewMsg: RequestBody){
         viewModelScope.launch {
-            reviewRepository.addReview(productId, images, review)
+            reviewRepository.addReview(productId, images, rating, reviewMsg)
         }
     }
 }

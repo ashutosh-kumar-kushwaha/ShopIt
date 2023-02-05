@@ -100,6 +100,9 @@ class PaymentActivity : AppCompatActivity(), PaymentResultWithDataListener {
                 }
                 2 -> {
                     paymentViewModel.updateDirectOrder(productId, quantity, UpdateOrderRequest(p1.paymentId, p1.orderId, p1.signature))
+                    Log.d("Ashu", UpdateOrderRequest(p1.paymentId, p1.orderId, p1.signature).toString())
+                    Log.d("Ashu", productId.toString())
+                    Log.d("Ashu", quantity.toString())
                 }
                 else -> {
                     Toast.makeText(this, "Something went wrong\nPlease try again!", Toast.LENGTH_SHORT).show()

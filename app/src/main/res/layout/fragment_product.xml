@@ -347,7 +347,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:alignItems="center"
-                    android:visibility="gone"
                     app:flexDirection="row"
                     app:justifyContent="space_between"
                     app:layout_constraintEnd_toEndOf="parent"

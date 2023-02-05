@@ -71,6 +71,10 @@ class CategoriesFragment : Fragment() {
 
         }
 
+        binding.searchView.setOnClickListener {
+            findNavController().navigate(R.id.action_categoriesFragment_to_searchFragment)
+        }
+
         categoriesAdapter = CategoryAdapter(resources.getStringArray(R.array.colors).toList(), categoryClickListener)
 
         binding.categoriesRecyclerView.adapter = categoriesAdapter
