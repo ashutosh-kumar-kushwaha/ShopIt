@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ashutosh.shopit.databinding.OrderItemBinding
 import ashutosh.shopit.models.MyOrderContent
+import coil.load
 
 class MyOrderAdapter : ListAdapter<MyOrderContent, MyOrderAdapter.ViewHolder>(DiffUtil()) {
 
     inner class ViewHolder(private val binding: OrderItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(order: MyOrderContent){
+            binding.productImgVw.load(order.image)
             binding.orderIdTxtVw.text = order.orderId
             val p = "₹${price(order.amount)}"
             binding.amountTxtVw.text = p
