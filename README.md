@@ -1,4 +1,9 @@
-# ShopIt
+<div align="center">
+  <a href="https://github.com/pranavbisaria/ShopIT-E-Commerce-App">
+    <img src="https://github.com/ashutosh-kumar-kushwaha/ShopIt/assets/109234707/c2f7692f-7da4-430a-8270-eb2af4c1d9c4" alt="Logo" width='150px' height='150px' style='border-radius: 40px'>
+  </a>
+</div>
+<br>
 
 This e-commerce app enhances online shopping for users and merchants. It allows users to browse and purchase products online while enabling merchants to post and manage their listings. The app features a detailed product catalog, cart management with add and delete options, secure Razorpay payment integration, cash on delivery, personalized recommendations, wishlists, and robust search functionality. Merchants can efficiently manage their product listings and track sales, making this app a powerful platform for the online marketplace.
 
@@ -50,6 +55,8 @@ This e-commerce app enhances online shopping for users and merchants. It allows 
 <img src="https://github.com/ashutosh-kumar-kushwaha/ShopIt/assets/109234707/8b5968e3-d82e-40d0-91c8-b9f04e1d1a07" alt="Logo" height="500px" class="screenshot">
 <img src="https://github.com/ashutosh-kumar-kushwaha/ShopIt/assets/109234707/fa8b0983-b476-4e67-9a00-6ba930d629e2" alt="Logo" height="500px" class="screenshot">
 <img src="https://github.com/ashutosh-kumar-kushwaha/ShopIt/assets/109234707/6e75c3a2-1c69-4d7e-ba45-229f8d1d2dca" alt="Logo" height="500px" class="screenshot">
+
+Figma Designs - https://www.figma.com/file/kC4mLUxZ87Q22U6N5orkk7/E-Commerce?node-id=0%3A1
 
 ## Getting Started
 
