@@ -58,6 +58,8 @@ This e-commerce app enhances online shopping for users and merchants. It allows 
 
 Figma Designs - https://www.figma.com/file/kC4mLUxZ87Q22U6N5orkk7/E-Commerce?node-id=0%3A1
 
+Merchant Side - https://github.com/ashutosh-kumar-kushwaha/ShopIt-Merchant
+
 ## Getting Started
 
 To get started with ShopIt, follow these steps:
